@@ -1,0 +1,15 @@
+.logarea {
+    height: 80vh;
+	overflow: auto
+}
+.greedicon{
+	height: 1em;
+}
+.tooltip-inner {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+}
+.btn.disabled {
+    pointer-events: auto;
+}	
