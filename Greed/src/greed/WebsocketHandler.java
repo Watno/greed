@@ -10,12 +10,12 @@ import greed.lobby.Table;
 import org.webbitserver.BaseWebSocketHandler;
 import org.webbitserver.WebSocketConnection;
  
-public class WebSocketSampleHandler extends BaseWebSocketHandler {
+public class WebsocketHandler extends BaseWebSocketHandler {
  
 	private ArrayList<GreedConnection> connections;
 	private Lobby lobby = new Lobby();
 	 
-	public WebSocketSampleHandler(ArrayList<GreedConnection> connections){
+	public WebsocketHandler(ArrayList<GreedConnection> connections){
 		super();
 		this.connections=connections;
 	}

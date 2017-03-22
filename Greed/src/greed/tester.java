@@ -14,7 +14,7 @@ public class tester {
 	ArrayList<GreedConnection> connections = new ArrayList<GreedConnection>();
 	    WebServer webServer = WebServers.createWebServer(8080);
 	    webServer.add(new StaticFileHandler("/static-files"));
-	    WebSocketSampleHandler handler = new WebSocketSampleHandler(connections);
+	    WebsocketHandler handler = new WebsocketHandler(connections);
 	    webServer.add("/websocket-echo", handler);
 	    webServer.start();
 	    
