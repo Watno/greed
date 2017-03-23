@@ -12,7 +12,7 @@ public class SuicideMission extends Action {
 	
 	@Override
 	protected boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		return (thePlayer.payThug(theGame, this)!=null);
+		return (thePlayer.payThug(this)!=null);
 	}
 	
 	@Override

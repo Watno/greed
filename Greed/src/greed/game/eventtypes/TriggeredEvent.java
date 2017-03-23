@@ -5,17 +5,20 @@ import java.util.ArrayList;
 import greed.game.Action;
 import greed.game.GreedCard;
 import greed.game.GreedGame;
+import greed.game.GreedPlayer;
 import greed.game.Reason;
 
 public abstract class TriggeredEvent implements Comparable<TriggeredEvent>, Cloneable, Reason {
 	private ArrayList<? extends TriggeredEvent> triggeringList;
 	private int timingNumber;
 	protected GreedCard source;
+	private GreedPlayer cardOwner;
 	
 	public TriggeredEvent(ArrayList<? extends TriggeredEvent> triggeringList, int timingNumber, GreedCard source) {
 		this.triggeringList = triggeringList;
 		this.timingNumber = timingNumber;
 		this.source = source;
+		this.cardOwner = source.getOwner();
 	}
 	
 	public void activate() {

@@ -6,12 +6,16 @@ import greed.game.GreedPlayer;
 import greed.game.eventtypes.CashGainAmountModifyEvent;
 
 public class MasterPlanEvent extends CashGainAmountModifyEvent{
+	GreedGame theGame;
+	
 	public MasterPlanEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {
 		super(theGame, owner, timingNumber, source);
+		this.theGame = theGame;
 	}
 	
 	@Override
 	public int execute(int amount) {
+		theGame.getLogger().doubleAmount(amount *2, this);
 		return amount*2;
 	}
 	

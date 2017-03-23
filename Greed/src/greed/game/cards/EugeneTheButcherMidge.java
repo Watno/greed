@@ -13,7 +13,7 @@ public class EugeneTheButcherMidge extends Thug {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		return (thePlayer.payThug(theGame, this)!=null);
+		return (thePlayer.payThug(this)!=null);
 	}
 	
 	@Override

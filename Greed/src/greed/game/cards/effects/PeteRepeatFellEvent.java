@@ -15,11 +15,7 @@ public class PeteRepeatFellEvent extends AfterPlayEvent{
 	@Override
 	public void execute(GreedGame theGame, GreedCard theCard) {
 		if (theCard instanceof Action) {
-			if (theCard.getLocation()==owner.getActions()) {
-				owner.getHand().add(theCard);
-				theCard.setLocation(owner.getHand());
-				owner.getActions().remove(theCard);
-			}
+			theCard.putBackInHand(owner, theGame, this, owner.getActions());
 		}
 	}
 }

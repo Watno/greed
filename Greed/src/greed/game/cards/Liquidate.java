@@ -14,7 +14,7 @@ public class Liquidate extends Action {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		Holding theHolding = thePlayer.payHolding(theGame, this);
+		Holding theHolding = thePlayer.payHolding(this);
 		if (theHolding!=null) {
 			markers = theHolding.getMarkersBeforeRemove();
 			return true;

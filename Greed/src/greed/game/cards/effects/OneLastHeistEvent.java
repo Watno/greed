@@ -14,7 +14,7 @@ public class OneLastHeistEvent extends EndOfTurnEvent {
 	@Override
 	public void execute(GreedGame theGame) {
 		for (GreedPlayer thePlayer : theGame.getPlayers()) {
-			thePlayer.loseThug(theGame, this);
+			thePlayer.loseThug(this);
 		}
 	}
 	

@@ -17,7 +17,9 @@ public class Hideout extends Holding {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		for(Thug theThug : new ArrayList<Thug>(thePlayer.getThugs())) {
 			if (theThug.getTurnPlayed()<theGame.getTurnCounter()) {
+				theGame.getLogger().executeRules(thePlayer, theThug, this);
 				theThug.doRules(thePlayer, theGame);
+				theGame.getLogger().unindent();
 			}
 		}
 	}

@@ -14,7 +14,7 @@ public class InsuranceScamEvent extends EndOfTurnEvent {
 	@Override
 	public void execute(GreedGame theGame) {
 		for (GreedPlayer thePlayer : theGame.getPlayers()) {
-			thePlayer.loseHolding(theGame, this);
+			thePlayer.loseHolding(this);
 		}
 	}
 	

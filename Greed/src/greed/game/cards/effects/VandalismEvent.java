@@ -15,7 +15,7 @@ public class VandalismEvent extends EndOfTurnEvent {
 	public void execute(GreedGame theGame) {
 		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
 			if(otherPlayer != initiator) {
-				otherPlayer.loseHolding(theGame, this);
+				otherPlayer.loseHolding(this);
 			}
 		}
 	}

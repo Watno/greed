@@ -25,20 +25,23 @@ public class EdRubberfaceTeach extends Thug {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		if (copiedThug==null || copiedThug instanceof EdRubberfaceTeach) {
 			copiedThug = thePlayer.chooseThug(this); //due to the need there will always be a thug to copy
+			theGame.getLogger().copyCard(this, copiedThug, this);
 			//TODO:Can't choose itself, current workaround makes player pick again in this case.
 			changeGuns(copiedThug.getGuns());
 			changeCars(copiedThug.getCars());
 			changeKeys(copiedThug.getKeys());
 			//TODO: fix interaction with TedNapoleonBonham
 			timingNumber = copiedThug.getTimingNumber();
-			name = copiedThug.getName() + "(copied)";
+			name = copiedThug.getName() + " (copied)";
 			for (TriggeredEvent theEvent : copiedThug.getPermanentEffects()) {
 				TriggeredEvent copiedEffect = (TriggeredEvent) theEvent.clone();
 				copiedEffect.setSource(this);
 				addPermanentEffect(theEvent);
 			}
 		}
+		theGame.getLogger().executeRules(thePlayer, copiedThug, this);
 		copiedThug.doRules(thePlayer, theGame);
+		theGame.getLogger().unindent();
 	}
 	
 	@Override 

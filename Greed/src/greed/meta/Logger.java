@@ -106,8 +106,45 @@ public class Logger {
 		log=log.concat(thePlayer.getName() + " loses " + theCard.getName() + reasonString + ".\n");
 		indent();
 	}
+	
+	public void activateEffect(TriggeredEvent effect) {
+		addTabs();
+		log=log.concat("The effect of " +effect.getSource().getOwner().getName()+"'s " + effect.getSource().getName() +" is active this turn.\n");
+	}
 		
+	public void discardCard(GreedPlayer thePlayer, GreedCard theCard, Reason reason) {
+		String reasonString = reasonToString(reason);
+		addTabs();
+		log=log.concat(thePlayer.getName() + " discards " + theCard.getName() + reasonString + ".\n");
+	}
+	
+	public void putBackInHand(GreedPlayer thePlayer, GreedCard theCard, Reason reason) {
+		String reasonString = reasonToString(reason);
+		addTabs();
+		log=log.concat(thePlayer.getName() + " puts " + theCard.getName() + " back in their hand "+ reasonString + ".\n");
+	}
 
+	public void doubleAmount(int newamount, Reason reason) {
+		String reasonString = reasonToString(reason);
+		if (newamount!=0) {
+			addTabs();
+			log=log.concat("Amount is doubled to $"+NumberFormat.getNumberInstance(Locale.US).format(newamount)  + reasonString + ".\n");
+		}
+	}
+	
+	public void executeRules(GreedPlayer thePlayer, GreedCard theCard, Reason reason) {
+		String reasonString = reasonToString(reason);
+		addTabs();
+		log=log.concat(thePlayer.getName() + " executes the rules of " + theCard.getName() + reasonString +".\n");
+		indent();
+	}
+	
+	public void copyCard(GreedCard copyingCard, GreedCard copiedCard, Reason reason) {
+		String reasonString = reasonToString(reason);
+		addTabs();
+		log=log.concat(copyingCard.getName() + " becomes a copy of " + copiedCard.getName() + reasonString +".\n");
+	}
+	
 	public String getLog() {
 		return log;
 	}

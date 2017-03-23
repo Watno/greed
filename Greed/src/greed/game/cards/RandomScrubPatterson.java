@@ -14,7 +14,7 @@ public class RandomScrubPatterson extends Thug {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		int amount = thePlayer.getKeys();
 		for (int i=0; i<amount; i++) {
-			thePlayer.drawCard(theGame);
+			thePlayer.drawCard();
 		}
 	}
 }

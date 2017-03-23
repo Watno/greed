@@ -23,7 +23,7 @@ public class Scouting extends Action {
 			}
 		}
 		if(thePlayer.getKeys()>=1) {
-			thePlayer.drawCard(theGame);
+			thePlayer.drawCard();
 		}
 	}
 }

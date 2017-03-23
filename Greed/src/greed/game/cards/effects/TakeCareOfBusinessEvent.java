@@ -15,7 +15,7 @@ public class TakeCareOfBusinessEvent extends EndOfTurnEvent {
 	public void execute(GreedGame theGame) {
 		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
 			if(otherPlayer != initiator) {
-				otherPlayer.loseThug(theGame, this);
+				otherPlayer.loseThug(this);
 			}
 		}
 	}
