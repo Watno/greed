@@ -16,6 +16,6 @@ public class ProtectionRacket extends Action {
 		for (GreedPlayer anyPlayer: theGame.getPlayers()) {
 			mostHoldings=Math.max(mostHoldings, anyPlayer.getNumberOfHoldings());
 		}
-		thePlayer.gainCash(mostHoldings*5000, "");
+		thePlayer.gainCash(mostHoldings*5000, this);
 	}
 }

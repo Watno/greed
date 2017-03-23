@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.GenerousJennyJonesEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
+import greed.game.cards.effects.GenerousJennyJonesEvent;
 
 public class GenerousJennyJones extends Thug {
 	
@@ -13,7 +13,7 @@ public class GenerousJennyJones extends Thug {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(20000, "");
+		thePlayer.gainCash(20000, this);
 	}
 	
 	@Override

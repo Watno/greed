@@ -36,11 +36,11 @@ public abstract class Holding extends GreedCard {
 		if (wrenches>=1) {
 			amount+=thePlayer.getWrenches();
 		}
-		changeMarkers(amount, " for icons");
+		changeMarkers(amount, new IconReason());
 	}
 	
 	@Override
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getHoldings().remove(this);
 		theGame.addToDiscardPile(this);
@@ -51,7 +51,7 @@ public abstract class Holding extends GreedCard {
 		thePlayer.changeWrenches(-wrenches);
 	}
 	
-	public int changeMarkers(int amount, String reason) {
+	public int changeMarkers(int amount, Reason reason) {
 		if (-amount>=markers) {//can't lose more than you have
 			amount=-markers;
 		}

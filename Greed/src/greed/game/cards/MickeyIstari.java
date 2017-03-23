@@ -12,6 +12,6 @@ public class MickeyIstari extends Thug {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getBottles()*10000, "");
+		thePlayer.gainCash(thePlayer.getBottles()*10000, this);
 	}
 }

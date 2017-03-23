@@ -1,8 +1,18 @@
 package greed.meta;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import greed.game.DecisionMaker;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.IconReason;
+import greed.game.MoneyPaymentReason;
+import greed.game.PaymentReason;
+import greed.game.Reason;
+import greed.game.cards.Seance;
+import greed.game.eventtypes.TriggeredEvent;
 
 public class RealDecisionMaker implements DecisionMaker {
 	GreedConnection connection;
@@ -15,53 +25,83 @@ public class RealDecisionMaker implements DecisionMaker {
 		this.thePlayer = thePlayer;
 		connection.setDecider(this);
 	}
+	
+	private String reasonToString(Reason reason) {
+		if (reason instanceof TriggeredEvent) {
+			TriggeredEvent reasonAsEvent = (TriggeredEvent) reason;
+			return (" for " + reasonAsEvent.getSource().getName() + "'s effect");
+		}
+		if (reason instanceof PaymentReason) {
+			PaymentReason reasonAsPayment = (PaymentReason) reason;
+			return (" as payment for " + reasonAsPayment.getPaidCard().getName());
+		}
+		if (reason instanceof GreedCard) {
+			GreedCard cardReason = (GreedCard) reason;
+			return (" for " + cardReason.getName());
+		}
+		return "";
+	}
 
 	@Override
 	public int pickDraftIndex() {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("draftPile", false, "Pick a card to draft"));
+		return connection.requestInput(JSONGenerator.createPrompt("draftPile", false, "Pick a card to draft!"));
 	}
 
 	@Override
 	public int pickHandIndex() {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("hand", false, "Pick a card to play"));
+		return connection.requestInput(JSONGenerator.createPrompt("hand", false, "Pick a card to play!"));
 	}
 
 	@Override
-	public int pickThugIndex(String reason) {
+	public int pickThugIndex(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("thug", false, "Pick a Thug"+reason+"!"));
+		String reasonString = reasonToString(reason);
+		return connection.requestInput(JSONGenerator.createPrompt("thug", false, "Pick a Thug"+reasonString+"!"));
 	}
 
 	@Override
-	public int pickHoldingIndex(String reason) {
+	public int pickHoldingIndex(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("holding", false, "Pick a Holding"+reason+"!"));
+		String reasonString = reasonToString(reason);
+		return connection.requestInput(JSONGenerator.createPrompt("holding", false, "Pick a Holding"+reasonString+"!"));
 	}
 
 	@Override
-	public int pickHandIndexOptional(String reason) {
+	public int pickHandIndexOptional(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("hand", true, "You may pick a card from your Hand"+reason+"!"));
+		String reasonString = reasonToString(reason);
+		return connection.requestInput(JSONGenerator.createPrompt("hand", true, "You may pick a card from your Hand"+reasonString+"."));
 	}
 
 	@Override
-	public int pickThugIndexOptional(String reason) {
+	public int pickThugIndexOptional(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reason+"!"));
+		String reasonString = reasonToString(reason);
+		return connection.requestInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reasonString+"!"));
 	}
 
 	@Override
-	public int pickHoldingIndexOptional(String reason) {
+	public int pickHoldingIndexOptional(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reason+"!"));
+		String reasonString = reasonToString(reason);
+		return connection.requestInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reasonString+"!"));
 	}
 
 	@Override
-	public boolean makeYesNoChoice() {
+	public boolean makeYesNoChoice(Reason reason) {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("YesNo", true, "Do you want to or not?"))==0; //yes is 0, no is expected to be -1
+		String choice ="";
+		if (reason instanceof Seance) {
+			choice = " play another card";
+		}
+		if (reason instanceof MoneyPaymentReason) {
+			MoneyPaymentReason moneyReason = (MoneyPaymentReason) reason;
+			choice = " pay $" + NumberFormat.getNumberInstance(Locale.US).format(moneyReason.getAmount());
+			choice += " for " + moneyReason.getPaidCard().getName();
+		}
+		return connection.requestInput(JSONGenerator.createPrompt("YesNo", true, "Do you want to" +choice+ "?"))==0; //yes is 0, no is expected to be -1
 	}
 	
 	@Override

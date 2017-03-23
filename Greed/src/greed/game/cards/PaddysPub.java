@@ -12,6 +12,6 @@ public class PaddysPub extends Holding {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		changeMarkers(thePlayer.getCars(), "");
+		changeMarkers(thePlayer.getCars(), this);
 	}
 }

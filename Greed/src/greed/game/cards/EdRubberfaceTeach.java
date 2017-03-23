@@ -2,6 +2,7 @@ package greed.game.cards;
 
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.Reason;
 import greed.game.Thug;
 import greed.game.eventtypes.TriggeredEvent;
 
@@ -22,12 +23,13 @@ public class EdRubberfaceTeach extends Thug {
 
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		if (copiedThug==null) {
-			copiedThug = thePlayer.chooseThug(""); //due to the need there will always be a thug to copy
+		if (copiedThug==null || copiedThug instanceof EdRubberfaceTeach) {
+			copiedThug = thePlayer.chooseThug(this); //due to the need there will always be a thug to copy
+			//TODO:Can't choose itself, current workaround makes player pick again in this case.
 			changeGuns(copiedThug.getGuns());
 			changeCars(copiedThug.getCars());
 			changeKeys(copiedThug.getKeys());
-			//TOFO: fix interaction with TedNapoleonBonham
+			//TODO: fix interaction with TedNapoleonBonham
 			timingNumber = copiedThug.getTimingNumber();
 			name = copiedThug.getName() + "(copied)";
 			for (TriggeredEvent theEvent : copiedThug.getPermanentEffects()) {
@@ -40,7 +42,7 @@ public class EdRubberfaceTeach extends Thug {
 	}
 	
 	@Override 
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		name = "Ed \"Rubberface\" Teach";
 		timingNumber = 54;

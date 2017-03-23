@@ -14,7 +14,7 @@ public class BobbyCorduroyBrown extends Thug {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if(!thePlayer.equals(otherPlayer)) {
-				otherPlayer.changeCash(-10000, "");
+				otherPlayer.changeCash(-10000, this);
 			}
 		}
 	}

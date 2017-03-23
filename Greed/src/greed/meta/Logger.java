@@ -6,6 +6,10 @@ import java.util.Locale;
 import greed.game.GreedCard;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.IconReason;
+import greed.game.PaymentReason;
+import greed.game.Reason;
+import greed.game.eventtypes.TriggeredEvent;
 
 public class Logger {
 	private int indentation = 0;
@@ -24,6 +28,21 @@ public class Logger {
 		}
 	}
 	
+	private String reasonToString(Reason reason) {
+		if (reason instanceof TriggeredEvent) {
+			TriggeredEvent reasonAsEvent = (TriggeredEvent) reason;
+			return (" due to " + reasonAsEvent.getSource().getName() + "'s effect");
+		}
+		if (reason instanceof PaymentReason) {
+			PaymentReason reasonAsPayment = (PaymentReason) reason;
+			return (" as payment for " + reasonAsPayment.getPaidCard().getName());
+		}
+		if (reason instanceof IconReason) {
+			return (" for icons");
+		}
+		return "";
+	}
+	
 	public void turnStart(int turnCounter) {
 		log=log.concat("\nTurn " + turnCounter + " starts\n");
 		
@@ -31,11 +50,12 @@ public class Logger {
 	
 	public void playCard(GreedPlayer thePlayer, GreedCard theCard) {
 		addTabs();
-		log=log.concat(thePlayer.getName() + " plays "  + theCard.getName() + " (" + theCard.getTimingNumber() +  ").\n");
+		log=log.concat(thePlayer.getName() + " plays " + theCard.getTimingNumber() + " - "   + theCard.getName() + ".\n");
 		indent();
 	}
 	
-	public void changeCash(GreedPlayer thePlayer, int amount, String reason) {
+	public void changeCash(GreedPlayer thePlayer, int amount, Reason reason) {
+		String reasonString = reasonToString(reason);
 		String keyword = " gains ";
 		if (amount<0) {
 			keyword = " loses ";
@@ -43,7 +63,7 @@ public class Logger {
 		}
 		if (amount!=0) {
 			addTabs();
-			log=log.concat(thePlayer.getName() + keyword + "$"+NumberFormat.getNumberInstance(Locale.US).format(amount) + reason+".\n");
+			log=log.concat(thePlayer.getName() + keyword + "$"+NumberFormat.getNumberInstance(Locale.US).format(amount) + reasonString+".\n");
 		}
 	}
 	
@@ -61,7 +81,8 @@ public class Logger {
 		log=log.concat("\nEnd of Game\n");
 	}
 
-	public void placeMarkers(GreedPlayer thePlayer, int amount, Holding holding, String reason) {
+	public void placeMarkers(GreedPlayer thePlayer, int amount, Holding holding, Reason reason) {
+		String reasonString = reasonToString(reason);
 		String keyword1 = " places ";
 		String keyword2 = " on ";
 		String keyword3 = " markers";
@@ -75,13 +96,14 @@ public class Logger {
 		}
 		if (amount!=0) {
 			addTabs();
-			log=log.concat(thePlayer.getName() + keyword1 + amount + keyword3+ keyword2 + holding.getName() +reason+".\n");
+			log=log.concat(thePlayer.getName() + keyword1 + amount + keyword3+ keyword2 + holding.getName() +reasonString+".\n");
 		}
 		
 	}
-	public void loseCard(GreedPlayer thePlayer, GreedCard theCard, String reason) {
+	public void loseCard(GreedPlayer thePlayer, GreedCard theCard, Reason reason) {
+		String reasonString = reasonToString(reason);
 		addTabs();
-		log=log.concat(thePlayer.getName() + " loses " + theCard.getName() + reason + ".\n");
+		log=log.concat(thePlayer.getName() + " loses " + theCard.getName() + reasonString + ".\n");
 		indent();
 	}
 		

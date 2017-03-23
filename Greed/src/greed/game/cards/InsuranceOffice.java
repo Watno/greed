@@ -1,9 +1,10 @@
 package greed.game.cards;
 
-import greed.cards.effects.InsuranceOfficeEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.Reason;
+import greed.game.cards.effects.InsuranceOfficeEvent;
 
 public class InsuranceOffice extends Holding {	
 	public InsuranceOffice() {
@@ -11,7 +12,7 @@ public class InsuranceOffice extends Holding {
 	}
 	
 	@Override
-	public int changeMarkers(int amount, String reason) {
+	public int changeMarkers(int amount, Reason reason) {
 		return super.changeMarkers(Math.max(0, amount), reason);//can't lose markers
 	}
 	

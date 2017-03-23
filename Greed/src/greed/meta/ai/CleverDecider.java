@@ -7,6 +7,7 @@ import greed.game.DecisionMaker;
 import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.Reason;
 
 public class CleverDecider implements DecisionMaker {
 	
@@ -47,37 +48,37 @@ public class CleverDecider implements DecisionMaker {
 	}
 
 	@Override
-	public int pickThugIndex(String reason) {
+	public int pickThugIndex(Reason reason) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int pickHoldingIndex(String reason) {
+	public int pickHoldingIndex(Reason reason) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int pickHandIndexOptional(String reason) {
+	public int pickHandIndexOptional(Reason reason) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int pickThugIndexOptional(String reason) {
+	public int pickThugIndexOptional(Reason reason) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int pickHoldingIndexOptional(String reason) {
+	public int pickHoldingIndexOptional(Reason reason) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public boolean makeYesNoChoice() {
+	public boolean makeYesNoChoice(Reason reason) {
 		return true;
 	}
 

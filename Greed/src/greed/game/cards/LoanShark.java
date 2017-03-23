@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.LoanSharkEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.LoanSharkEvent;
 
 public class LoanShark extends Holding {
 	
@@ -19,7 +19,7 @@ public class LoanShark extends Holding {
 	}
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(20000, "");
+		thePlayer.gainCash(20000, this);
 	}
 	
 }

@@ -15,13 +15,13 @@ public abstract class Action extends GreedCard{
 	}
 	
 	protected void discardIfNoNextTurnEffect(GreedPlayer thePlayer, GreedGame theGame) {
-		removeFromPlay(thePlayer, theGame, "");
+		removeFromPlay(thePlayer, theGame, null);
 	}
 	//Override this with empty if setting up a next turn effect, and call discardAfterNextTurnEvent when the next turn effect is removed
 	
 	public void discardAfterNextTurnEvent(GreedGame theGame) {
 		if (getTurnPlayed() == theGame.getTurnCounter()-1 && getLocation()==owner.getActions()) {
-			removeFromPlay(owner, theGame, "");
+			removeFromPlay(owner, theGame, null);
 		}
 	}
 	
@@ -32,7 +32,7 @@ public abstract class Action extends GreedCard{
 	}
 	
 	@Override
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getActions().remove(this);
 		theGame.addToDiscardPile(this);

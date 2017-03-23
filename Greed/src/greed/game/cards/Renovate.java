@@ -13,9 +13,9 @@ public class Renovate extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		Holding theHolding = thePlayer.chooseHolding("");
+		Holding theHolding = thePlayer.chooseHolding(this);
 		if (theHolding!=null) {
-			theHolding.changeMarkers(2, "");
+			theHolding.changeMarkers(2, this);
 		}
 	}
 	

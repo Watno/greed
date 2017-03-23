@@ -2,6 +2,7 @@ package greed.game.cards;
 
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.Reason;
 import greed.game.Thug;
 
 public class HalloweenJackParis extends Thug {
@@ -10,8 +11,8 @@ public class HalloweenJackParis extends Thug {
 	}
 	
 	@Override
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
-		thePlayer.gainCash(20000, "");
+		thePlayer.gainCash(20000, this);
 	}
 }

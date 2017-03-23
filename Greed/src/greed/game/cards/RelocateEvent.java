@@ -17,7 +17,7 @@ public class RelocateEvent extends WhenPlayEvent{
 	@Override
 	public void execute(GreedGame theGame, GreedCard theCard) {
 		if (theCard instanceof Holding) {
-			((Holding) theCard).changeMarkers(markers, "");
+			((Holding) theCard).changeMarkers(markers, this);
 		}
 	}
 	

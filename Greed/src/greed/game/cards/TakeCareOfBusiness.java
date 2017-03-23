@@ -1,10 +1,10 @@
 package greed.game.cards;
 
-import greed.cards.effects.TakeCareOfBusinessEvent;
 import greed.game.Action;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.TakeCareOfBusinessEvent;
 
 public class TakeCareOfBusiness extends Action {
 
@@ -16,7 +16,7 @@ public class TakeCareOfBusiness extends Action {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) { 
 		for(Holding theHolding : thePlayer.getHoldings()) {
 			if (theHolding.getMarkers()<=1) {
-				theHolding.changeMarkers(1, "");
+				theHolding.changeMarkers(1, this);
 			}
 		}
 		theGame.addNextTurnEvent(new TakeCareOfBusinessEvent(theGame, thePlayer, timingNumber, this));

@@ -9,7 +9,7 @@ import greed.game.eventtypes.TriggeredEvent;
 import greed.game.eventtypes.WhenPlayEvent;
 
 
-public abstract class GreedCard {
+public abstract class GreedCard implements Reason{
 	protected int timingNumber;
 	protected String name;
 	private int turnPlayed=-1;
@@ -77,7 +77,7 @@ public abstract class GreedCard {
 	}
 	
 	
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		if (!(this instanceof Action)) {//this check (and the one below are not nice, needs refactoring...
 			theGame.getLogger().loseCard(thePlayer, this, reason);
 			for (RemoveFromPlayEvent anEvent : thePlayer.getRemoveFromPlayEvents()) {

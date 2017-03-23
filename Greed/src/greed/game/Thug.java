@@ -22,7 +22,7 @@ public abstract class Thug extends GreedCard {
 	}
 	
 	@Override
-	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, String reason) {
+	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getThugs().remove(this);
 		theGame.addToDiscardPile(this);

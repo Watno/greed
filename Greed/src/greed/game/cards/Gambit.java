@@ -24,7 +24,7 @@ public class Gambit extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(30000, "");
+		thePlayer.gainCash(30000, this);
 	}
 	
 	

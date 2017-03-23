@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.VandalismEvent;
 import greed.game.Action;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.cards.effects.VandalismEvent;
 
 public class Vandalism extends Action {
 

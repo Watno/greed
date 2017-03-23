@@ -1,10 +1,10 @@
 package greed.game.cards;
 
-import greed.cards.effects.InsuranceScamEvent;
 import greed.game.Action;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.InsuranceScamEvent;
 
 public class InsuranceScam extends Action {
 
@@ -23,7 +23,7 @@ public class InsuranceScam extends Action {
 		for (Holding theHolding : thePlayer.getHoldings()) {
 			mostMarkers = Math.max(mostMarkers, theHolding.getMarkers());
 		}
-		thePlayer.gainCash(mostMarkers*5000, "");
+		thePlayer.gainCash(mostMarkers*5000, this);
 		theGame.addNextTurnEvent(new InsuranceScamEvent(theGame, thePlayer, timingNumber, this));
 	}
 	

@@ -13,13 +13,13 @@ public class EstateHeist extends Action {
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		if(thePlayer.getGuns()>=1) {
-			thePlayer.gainCash(10000, "");
+			thePlayer.gainCash(10000, this);
 		}
 		if(thePlayer.getCars()>=1) {
-			thePlayer.gainCash(10000, "");
+			thePlayer.gainCash(10000, this);
 		}
 		if(thePlayer.getKeys()>=1) {
-			thePlayer.gainCash(10000, "");
+			thePlayer.gainCash(10000, this);
 		}
 	}
 }

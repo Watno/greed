@@ -13,8 +13,8 @@ public class Sting extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getCars()*10000, "");
-		thePlayer.gainCash(thePlayer.getHearts()*10000, "");	
+		thePlayer.gainCash(thePlayer.getCars()*10000, this);
+		thePlayer.gainCash(thePlayer.getHearts()*10000, this);	
 	}
 	
 }

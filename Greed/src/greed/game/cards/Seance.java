@@ -16,12 +16,12 @@ public class Seance extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(10000, "");
-		Holding theHolding = thePlayer.chooseHolding("");
+		thePlayer.gainCash(10000, this);
+		Holding theHolding = thePlayer.chooseHolding(this);
 		if (theHolding!= null) {
-			theHolding.changeMarkers(1, "");
+			theHolding.changeMarkers(1, this);
 		}
-		if (thePlayer.makeYesNoChoice()) {
+		if (thePlayer.makeYesNoChoice(this)) {
 			PlayPlan playPlan = thePlayer.makePlayPlan();
 			if (playPlan!=null) {
 				playPlan.execute(theGame);

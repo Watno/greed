@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.EugeneTheButcherMidgeEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
+import greed.game.cards.effects.EugeneTheButcherMidgeEvent;
 
 public class EugeneTheButcherMidge extends Thug {
 	

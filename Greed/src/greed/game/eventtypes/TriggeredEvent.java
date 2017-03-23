@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import greed.game.Action;
 import greed.game.GreedCard;
 import greed.game.GreedGame;
+import greed.game.Reason;
 
-public abstract class TriggeredEvent implements Comparable<TriggeredEvent>, Cloneable {
+public abstract class TriggeredEvent implements Comparable<TriggeredEvent>, Cloneable, Reason {
 	private ArrayList<? extends TriggeredEvent> triggeringList;
 	private int timingNumber;
 	protected GreedCard source;
@@ -51,5 +52,9 @@ public abstract class TriggeredEvent implements Comparable<TriggeredEvent>, Clon
 
 	public void setSource(GreedCard source) {
 		this.source = source;
+	}
+	
+	public GreedCard getSource() {
+		return source;
 	}
 }

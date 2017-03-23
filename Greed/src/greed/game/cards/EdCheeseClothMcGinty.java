@@ -12,6 +12,6 @@ public class EdCheeseClothMcGinty extends Thug {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getGuns()*5000, "");
+		thePlayer.gainCash(thePlayer.getGuns()*5000, this);
 	}
 }

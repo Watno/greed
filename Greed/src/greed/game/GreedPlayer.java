@@ -76,15 +76,18 @@ public class GreedPlayer {
 	
 	
 	public boolean payCashCost(int amount, GreedCard payedCard) {
+		Reason reason = new MoneyPaymentReason(payedCard, amount);
 		for (CashCostModifyEvent theEvent : cashCostModifyEvents) {
 			amount = theEvent.execute(amount, payedCard);
 		}
 		if (cash<amount) {
 			return false;
 		}
-		//TODO:Allow to not pay
-		changeCash(-amount, " as payment for " + payedCard.getName());
-		return true;
+		if (makeYesNoChoice(reason)) {
+			changeCash(-amount, reason);
+			return true;
+		}
+		return false;
 	}
 	
 	public void drawCard(GreedGame theGame) {
@@ -96,16 +99,17 @@ public class GreedPlayer {
 	}
 	
 	public Thug payThug(GreedGame theGame, GreedCard payedCard) {
+		Reason reason = new PaymentReason(payedCard);
 		if (!thugs.isEmpty()) {
 			int thugIndex;
 			do {
-				thugIndex = decisionMaker.pickThugIndexOptional("");
+				thugIndex = decisionMaker.pickThugIndexOptional(reason);
 			} while (thugIndex<-1 || thugIndex>=thugs.size()); 
 			if (thugIndex == -1) {
 				return null;
 			}
 			Thug payedThug = thugs.get(thugIndex);
-			payedThug.removeFromPlay(this, theGame, " as payment for " + payedCard.getName());
+			payedThug.removeFromPlay(this, theGame, reason);
 			return payedThug;
 		}
 		return null;
@@ -113,15 +117,16 @@ public class GreedPlayer {
 	
 	public Holding payHolding(GreedGame theGame, GreedCard payedCard) {
 		if (!holdings.isEmpty()) {
+			Reason reason = new PaymentReason(payedCard);
 			int holdingIndex;
 			do {
-				holdingIndex = decisionMaker.pickHoldingIndexOptional("");
+				holdingIndex = decisionMaker.pickHoldingIndexOptional(reason);
 			} while (holdingIndex<-1 || holdingIndex>=holdings.size()); 
 			if (holdingIndex == -1) {
 				return null;
 			}
 			Holding payedHolding = holdings.get(holdingIndex);
-			payedHolding.removeFromPlay(this, theGame, " as payment for " + payedCard.getName());
+			payedHolding.removeFromPlay(this, theGame, reason);
 			return payedHolding;
 		}
 		return null;
@@ -131,7 +136,7 @@ public class GreedPlayer {
 		if (!hand.isEmpty()) {
 			int handIndex;
 			do {
-				handIndex = decisionMaker.pickHandIndexOptional("");
+				handIndex = decisionMaker.pickHandIndexOptional(new PaymentReason(payedCard));
 			} while (handIndex<-1 || handIndex>=hand.size()); 
 			if (handIndex == -1) {
 				return null;
@@ -143,7 +148,7 @@ public class GreedPlayer {
 		return null;
 	}
 	
-	public Thug chooseThug(String reason) {
+	public Thug chooseThug(Reason reason) {
 		if (!thugs.isEmpty()) {
 			int thugIndex;
 			do {
@@ -154,7 +159,7 @@ public class GreedPlayer {
 		return null;
 	}
 	
-	public Holding chooseHolding(String reason) {
+	public Holding chooseHolding(Reason reason) {
 		if (!holdings.isEmpty()) {
 			int holdingIndex;
 			do {
@@ -165,15 +170,15 @@ public class GreedPlayer {
 		return null;
 	}
 	
-	public void loseThug(GreedGame theGame, String reason) {
-		Thug theThug = chooseThug("");
+	public void loseThug(GreedGame theGame, Reason reason) {
+		Thug theThug = chooseThug(reason);
 		if(theThug != null) {
 			theThug.removeFromPlay(this, theGame, reason);
 		}
 	}
 	
-	public void loseHolding(GreedGame theGame, String reason) {
-		Holding theHolding = chooseHolding("");
+	public void loseHolding(GreedGame theGame, Reason reason) {
+		Holding theHolding = chooseHolding(reason);
 		if(theHolding != null) {
 			theHolding.removeFromPlay(this, theGame, reason);
 		}
@@ -187,8 +192,8 @@ public class GreedPlayer {
 		return score;
 	}
 	
-	public boolean makeYesNoChoice() {
-		return decisionMaker.makeYesNoChoice();
+	public boolean makeYesNoChoice(Reason reason) {
+		return decisionMaker.makeYesNoChoice(reason);
 	}
 	
 	public List<GreedCard> getDraftPile() {
@@ -227,7 +232,7 @@ public class GreedPlayer {
 		return wrenches;
 	}
 	
-	public void gainCash(int amount, String reason) {
+	public void gainCash(int amount, Reason reason) {
 		for (CashGainAmountModifyEvent theEvent : cashGainAmountModifyEvents) {
 			amount = theEvent.execute(amount);
 		}
@@ -237,7 +242,7 @@ public class GreedPlayer {
 		}
 	}
 
-	public int changeCash(int amount, String reason) {
+	public int changeCash(int amount, Reason reason) {
 		if (-amount>=cash) {//can't lose more than you have
 			amount=-cash;
 		}

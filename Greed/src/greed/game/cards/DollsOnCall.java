@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.DollsOnCallEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.DollsOnCallEvent;
 
 public class DollsOnCall extends Holding {
 	

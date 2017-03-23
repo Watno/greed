@@ -2,10 +2,10 @@ package greed.game.cards;
 
 import java.util.ArrayList;
 
-import greed.cards.effects.ShakedownEvent;
 import greed.game.Action;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.cards.effects.ShakedownEvent;
 
 public class Shakedown extends Action {
 
@@ -16,7 +16,7 @@ public class Shakedown extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(10000, "");
+		thePlayer.gainCash(10000, this);
 		ArrayList<GreedPlayer> playerlist = theGame.getPlayers();
 		for (int i=0; i<playerlist.size(); i++) {
 			GreedPlayer adjacentPlayer = playerlist.get(i);

@@ -30,7 +30,7 @@ public class Liquidate extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(markers*15000, "");
+		thePlayer.gainCash(markers*15000, this);
 	}
 	
 	

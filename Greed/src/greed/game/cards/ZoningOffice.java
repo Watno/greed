@@ -1,10 +1,10 @@
 package greed.game.cards;
 
-import greed.cards.effects.ZoningOfficeCostModifyEvent;
-import greed.cards.effects.ZoningOfficeWhenPlayEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.ZoningOfficeCostModifyEvent;
+import greed.game.cards.effects.ZoningOfficeWhenPlayEvent;
 
 public class ZoningOffice extends Holding {
 	

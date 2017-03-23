@@ -17,6 +17,6 @@ public class InsiderTrading extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(45000, "");
+		thePlayer.gainCash(45000, this);
 	}
 }

@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.NataschaTheSquirrelRubinEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.NataschaTheSquirrelRubinEvent;
 
 public class NataschaTheSquirrelRubin extends Holding {
 	

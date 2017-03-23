@@ -2,10 +2,10 @@ package greed.game.cards;
 
 import java.util.ArrayList;
 
-import greed.cards.effects.HarveyBrainsRatcliffeEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
+import greed.game.cards.effects.HarveyBrainsRatcliffeEvent;
 
 public class HarveyBrainsRatcliffe extends Thug {
 	

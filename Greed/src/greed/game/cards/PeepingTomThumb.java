@@ -25,6 +25,6 @@ public class PeepingTomThumb extends Thug {
 				mostMarkers = Math.max(mostMarkers, theHolding.getMarkers());
 			}
 		}
-		thePlayer.gainCash(mostMarkers*5000, "");
+		thePlayer.gainCash(mostMarkers*5000, this);
 	}
 }

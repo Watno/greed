@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.SandysSnookerNSchnapsEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.SandysSnookerNSchnapsEvent;
 
 public class SandysSnookerNSchnaps extends Holding {
 	

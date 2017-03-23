@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.OneLastHeistEvent;
 import greed.game.Action;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
+import greed.game.cards.effects.OneLastHeistEvent;
 
 public class OneLastHeist extends Action {
 
@@ -22,7 +22,7 @@ public class OneLastHeist extends Action {
 		for (GreedPlayer anyPlayer: theGame.getPlayers()) {
 			mostThugs = Math.max(mostThugs, anyPlayer.getNumberOfThugs());
 		}
-		thePlayer.gainCash(mostThugs*5000, "");
+		thePlayer.gainCash(mostThugs*5000, this);
 		theGame.addNextTurnEvent(new OneLastHeistEvent(theGame, thePlayer, timingNumber, this));
 	}
 	

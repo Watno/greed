@@ -26,9 +26,9 @@ public class StealIdeas extends Action {
 				}
 			}		
 		}
-		Holding holdingGettingMarkers = thePlayer.chooseHolding("");
+		Holding holdingGettingMarkers = thePlayer.chooseHolding(this);
 		if (holdingGettingMarkers!=null) {
-			holdingGettingMarkers.changeMarkers(mostMarkers, "");
+			holdingGettingMarkers.changeMarkers(mostMarkers, this);
 		}
 	}
 }

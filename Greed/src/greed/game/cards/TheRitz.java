@@ -23,6 +23,6 @@ public class TheRitz extends Holding {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		changeMarkers(5, "");
+		changeMarkers(5, this);
 	}
 }

@@ -12,6 +12,6 @@ public class DickieFlushDiamond extends Thug {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(10000, "");
+		thePlayer.gainCash(10000, this);
 	}
 }

@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.TedNapoleonBonhamEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
+import greed.game.cards.effects.TedNapoleonBonhamEvent;
 
 public class TedNapoleonBonham extends Thug {
 	

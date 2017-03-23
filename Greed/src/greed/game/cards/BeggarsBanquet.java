@@ -25,7 +25,7 @@ public class BeggarsBanquet extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(25000, "");
+		thePlayer.gainCash(25000, this);
 	}
 	
 }

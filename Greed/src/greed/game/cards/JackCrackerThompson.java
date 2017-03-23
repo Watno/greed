@@ -14,7 +14,7 @@ public class JackCrackerThompson extends Thug {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
 			if (!otherPlayer.equals(thePlayer)) {
-				otherPlayer.changeCash(-otherPlayer.getNumberOfHoldings()*5000, "");
+				otherPlayer.changeCash(-otherPlayer.getNumberOfHoldings()*5000, this);
 			}
 		}
 	}

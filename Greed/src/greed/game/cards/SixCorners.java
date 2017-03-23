@@ -14,7 +14,7 @@ public class SixCorners extends Holding {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		for (Holding theHolding : thePlayer.getHoldings()) {
 			if (theHolding.getBottles()==0 && theHolding.getHearts()==0 && theHolding.getWrenches()==0) {
-				theHolding.changeMarkers(1, "");
+				theHolding.changeMarkers(1, this);
 			}
 		}
 	}

@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.StingyStanMcDowellEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
+import greed.game.cards.effects.StingyStanMcDowellEvent;
 
 public class StingyStanMcDowell extends Thug {
 	

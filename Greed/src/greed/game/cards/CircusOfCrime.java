@@ -17,6 +17,6 @@ public class CircusOfCrime extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getNumberOfThugs()*10000, "");
+		thePlayer.gainCash(thePlayer.getNumberOfThugs()*10000, this);
 	}
 }

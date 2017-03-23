@@ -16,7 +16,7 @@ public class Arson extends Action {
 		int amount = -thePlayer.getNumberOfThugs()*10000;
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if (!otherPlayer.equals(thePlayer)) {
-				otherPlayer.changeCash(amount, "");
+				otherPlayer.changeCash(amount, this);
 			}
 		}
 	}

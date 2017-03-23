@@ -1,9 +1,9 @@
 package greed.game.cards;
 
-import greed.cards.effects.SexySadiesEvent;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.SexySadiesEvent;
 
 public class SexySadies extends Holding {
 	

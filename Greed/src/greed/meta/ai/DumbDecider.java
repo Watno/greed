@@ -1,6 +1,7 @@
 package greed.meta.ai;
 
 import greed.game.DecisionMaker;
+import greed.game.Reason;
 
 public class DumbDecider implements DecisionMaker{
 
@@ -15,32 +16,32 @@ public class DumbDecider implements DecisionMaker{
 	}
 
 	@Override
-	public int pickThugIndex(String reason) {
+	public int pickThugIndex(Reason reason) {
 		return 0;
 	}
 
 	@Override
-	public int pickHoldingIndex(String reason) {
+	public int pickHoldingIndex(Reason reason) {
 		return 0;
 	}
 
 	@Override
-	public int pickHandIndexOptional(String reason) {
+	public int pickHandIndexOptional(Reason reason) {
 		return 0;
 	}
 
 	@Override
-	public int pickThugIndexOptional(String reason) {
+	public int pickThugIndexOptional(Reason reason) {
 		return 0;
 	}
 
 	@Override
-	public int pickHoldingIndexOptional(String reason) {
+	public int pickHoldingIndexOptional(Reason reason) {
 		return 0;
 	}
 
 	@Override
-	public boolean makeYesNoChoice() {
+	public boolean makeYesNoChoice(Reason reason) {
 		return true;
 	}
 	

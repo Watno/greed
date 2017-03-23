@@ -21,7 +21,7 @@ public class Raid extends Action {
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if (otherPlayer!=thePlayer) {
 				for (Holding theHolding: otherPlayer.getHoldings()) {
-					theHolding.changeMarkers(-1, "");
+					theHolding.changeMarkers(-1, this);
 				}
 			}
 		}

@@ -19,7 +19,7 @@ public class StreetWalkers extends Action {
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		for(Holding theHolding: thePlayer.getHoldings()) {
-			theHolding.changeMarkers(1, "");
+			theHolding.changeMarkers(1, this);
 		}
 	}
 }
