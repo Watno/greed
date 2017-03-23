@@ -109,7 +109,11 @@ public class Logger {
 	
 	public void activateEffect(TriggeredEvent effect) {
 		addTabs();
+<<<<<<< HEAD
 		log=log.concat("The effect of " +effect.getCardOwner().getName()+"'s " + effect.getSource().getName() +" is active this turn.\n");
+=======
+		log=log.concat("The effect of " +effect.getSource().getOwner().getName()+"'s " + effect.getSource().getName() +" is active this turn.\n");
+>>>>>>> branch 'master' of https://Watno@bitbucket.org/Watno/greed.git
 	}
 		
 	public void discardCard(GreedPlayer thePlayer, GreedCard theCard, Reason reason) {
