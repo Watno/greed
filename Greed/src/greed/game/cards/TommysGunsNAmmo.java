@@ -12,7 +12,7 @@ public class TommysGunsNAmmo extends Holding {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		return (thePlayer.payHolding(theGame, this)!=null);
+		return (thePlayer.payHolding(this)!=null);
 	}
 	
 	@Override

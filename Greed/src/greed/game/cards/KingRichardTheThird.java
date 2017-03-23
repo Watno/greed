@@ -12,10 +12,10 @@ public class KingRichardTheThird extends Thug {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		if (thePlayer.payThug(theGame, this)!=null) {
+		if (thePlayer.payThug(this)!=null) {
 			return true;
 		}
-		if (thePlayer.payHolding(theGame, this)!=null) {
+		if (thePlayer.payHolding(this)!=null) {
 			return true;
 		}
 		return thePlayer.payCashCost(10000, this);

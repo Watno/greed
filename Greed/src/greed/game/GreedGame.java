@@ -72,13 +72,14 @@ public class GreedGame {
 	}
 	
 	private void executeTurn() {
+		turnCounter++;
+		logger.turnStart(turnCounter);
 		thisTurnEvents = nextTurnEvents;
 		nextTurnEvents = new ArrayList<TriggeredEvent>();
 		for (TriggeredEvent theEvent: thisTurnEvents) {
+			logger.activateEffect(theEvent);
 			theEvent.activate();
 		}
-		turnCounter++;
-		logger.turnStart(turnCounter);
 		List<PlayPlan> playPlans = Collections.synchronizedList(new ArrayList<PlayPlan>());
 		List<Thread> threads = new ArrayList<Thread>();
 		for (GreedPlayer thePlayer: players) {

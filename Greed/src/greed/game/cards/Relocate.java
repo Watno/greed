@@ -14,14 +14,10 @@ public class Relocate extends Action {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		Holding theHolding = thePlayer.payHolding(theGame, this);
+		Holding theHolding = thePlayer.payHolding(this);
 		if (theHolding!=null) {
 			markers = theHolding.getMarkersBeforeRemove();
-			if (theHolding.getLocation()==theGame.getDiscardPile()) {
-				theGame.getDiscardPile().remove(theHolding);
-				thePlayer.getHand().add(theHolding);
-				theHolding.setLocation(thePlayer.getHand());
-			}
+			putBackInHand(thePlayer, theGame, this, theGame.getDiscardPile());
 			return true;
 		}
 		return false;

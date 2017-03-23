@@ -14,11 +14,7 @@ public class HonestWork extends Action {
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
 		thePlayer.gainCash(15000, this);
 		if (thePlayer.getCash()<50000) {
-			if (getLocation()==thePlayer.getActions()) {
-				thePlayer.getHand().add(this);
-				setLocation(thePlayer.getHand());
-				thePlayer.getActions().remove(this);
-			}
+			putBackInHand(thePlayer, theGame, this, thePlayer.getActions());
 		}
 	}
 }

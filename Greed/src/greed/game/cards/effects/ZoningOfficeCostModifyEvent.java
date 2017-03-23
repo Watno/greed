@@ -13,8 +13,8 @@ public class ZoningOfficeCostModifyEvent extends CashCostModifyEvent {
 	}
 
 	@Override
-	public int execute(int amount, GreedCard payedCard) {
-		if (payedCard instanceof Holding) {
+	public int execute(int amount, GreedCard paidCard) {
+		if (paidCard instanceof Holding) {
 			return (Math.max(amount - 5000, 0)); 
 		}
 		return amount;

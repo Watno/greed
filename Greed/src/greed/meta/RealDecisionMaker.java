@@ -7,7 +7,6 @@ import greed.game.DecisionMaker;
 import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
-import greed.game.IconReason;
 import greed.game.MoneyPaymentReason;
 import greed.game.PaymentReason;
 import greed.game.Reason;

@@ -99,6 +99,18 @@ public abstract class GreedCard implements Reason{
 		
 	}
 	
+	public void putBackInHand(GreedPlayer thePlayer, GreedGame theGame, Reason reason, List<? extends GreedCard> expectedLocation) {
+		if(location==expectedLocation) {
+			theGame.getLogger().putBackInHand(thePlayer, this, reason);
+			if (location==thePlayer.getActions() || location==thePlayer.getHoldings() || location==thePlayer.getThugs() ) {
+				removeFromPlay(thePlayer, theGame, reason);
+			}
+			theGame.getDiscardPile().remove(this);
+			thePlayer.getHand().add(this);
+			setLocation(thePlayer.getHand());
+		}
+	}
+	
 	public int getTimingNumber() {
 		return timingNumber;
 	}
@@ -126,6 +138,10 @@ public abstract class GreedCard implements Reason{
 
 	public String getName() {
 		return name;
+	}
+
+	public GreedPlayer getOwner() {
+		return owner;
 	}
 
 

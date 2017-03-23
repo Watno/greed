@@ -20,7 +20,7 @@ public abstract class CashCostModifyEvent extends TriggeredEvent {
 		Collections.sort(owner.getCashCostModifyEvents());	
 	}
 	
-	public int execute(int amount, GreedCard payedCard) {
+	public int execute(int amount, GreedCard paidCard) {
 		return amount;
 	}
 }

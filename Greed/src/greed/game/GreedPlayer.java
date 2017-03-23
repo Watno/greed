@@ -18,7 +18,7 @@ import greed.meta.ai.CleverDecider;
 
 public class GreedPlayer {
 	private DecisionMaker decisionMaker;
-	private GreedGame theGame; //TODO: replace passed references to the game with this.
+	private GreedGame theGame; 
 	private String name;
 	private int position;
 	private int cash=0;
@@ -90,7 +90,7 @@ public class GreedPlayer {
 		return false;
 	}
 	
-	public void drawCard(GreedGame theGame) {
+	public void drawCard() {
 		GreedCard theCard = theGame.draw();
 		if (theCard!=null) {
 			hand.add(theCard);
@@ -98,8 +98,8 @@ public class GreedPlayer {
 		}
 	}
 	
-	public Thug payThug(GreedGame theGame, GreedCard payedCard) {
-		Reason reason = new PaymentReason(payedCard);
+	public Thug payThug(GreedCard paidCard) {
+		Reason reason = new PaymentReason(paidCard);
 		if (!thugs.isEmpty()) {
 			int thugIndex;
 			do {
@@ -115,9 +115,9 @@ public class GreedPlayer {
 		return null;
 	}
 	
-	public Holding payHolding(GreedGame theGame, GreedCard payedCard) {
+	public Holding payHolding(GreedCard paidCard) {
 		if (!holdings.isEmpty()) {
-			Reason reason = new PaymentReason(payedCard);
+			Reason reason = new PaymentReason(paidCard);
 			int holdingIndex;
 			do {
 				holdingIndex = decisionMaker.pickHoldingIndexOptional(reason);
@@ -125,25 +125,27 @@ public class GreedPlayer {
 			if (holdingIndex == -1) {
 				return null;
 			}
-			Holding payedHolding = holdings.get(holdingIndex);
-			payedHolding.removeFromPlay(this, theGame, reason);
-			return payedHolding;
+			Holding paidHolding = holdings.get(holdingIndex);
+			paidHolding.removeFromPlay(this, theGame, reason);
+			return paidHolding;
 		}
 		return null;
 	}
 	
-	public GreedCard payHandCard(GreedGame theGame, GreedCard payedCard) {
+	public GreedCard payHandCard(GreedCard paidCard) {
+		Reason reason = new PaymentReason(paidCard);
 		if (!hand.isEmpty()) {
 			int handIndex;
 			do {
-				handIndex = decisionMaker.pickHandIndexOptional(new PaymentReason(payedCard));
+				handIndex = decisionMaker.pickHandIndexOptional(reason);
 			} while (handIndex<-1 || handIndex>=hand.size()); 
 			if (handIndex == -1) {
 				return null;
 			}
-			GreedCard CardPayedWith = hand.remove(handIndex);
-			theGame.addToDiscardPile(CardPayedWith);
-			return CardPayedWith;
+			GreedCard cardPaidWith = hand.remove(handIndex);
+			theGame.getLogger().discardCard(this, cardPaidWith, reason);
+			theGame.addToDiscardPile(cardPaidWith);
+			return cardPaidWith;
 		}
 		return null;
 	}
@@ -170,14 +172,14 @@ public class GreedPlayer {
 		return null;
 	}
 	
-	public void loseThug(GreedGame theGame, Reason reason) {
+	public void loseThug(Reason reason) {
 		Thug theThug = chooseThug(reason);
 		if(theThug != null) {
 			theThug.removeFromPlay(this, theGame, reason);
 		}
 	}
 	
-	public void loseHolding(GreedGame theGame, Reason reason) {
+	public void loseHolding(Reason reason) {
 		Holding theHolding = chooseHolding(reason);
 		if(theHolding != null) {
 			theHolding.removeFromPlay(this, theGame, reason);

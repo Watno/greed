@@ -163,7 +163,7 @@
     	  cardnames[64]='"Rotten" Johnny Simmons';
     	  cardnames[65]='"Random" Scrub Patterson';
     	  cardnames[66]='"Stingy" Stan McDowell';
-    	  cardnames[67]='Louie "Savoir" O\'Farell';
+    	  cardnames[67]='Louie "Savoir" O\'Farrell';
     	  cardnames[68]='Pete "Repeat" Fell';
     	  cardnames[69]='Natascha "The Squirrel" Rubin';
     	  cardnames[70]='"Nothing beats" Rock Benson';

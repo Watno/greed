@@ -12,7 +12,7 @@ public class StingyStanMcDowellEvent extends CashCostModifyEvent {
 	}
 
 	@Override
-	public int execute(int amount, GreedCard payedCard) {
+	public int execute(int amount, GreedCard paidCard) {
 		return (Math.max(amount - 5000, 0)); 
 	}
 }

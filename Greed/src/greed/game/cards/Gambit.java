@@ -13,7 +13,7 @@ public class Gambit extends Action {
 	
 	@Override
 	public boolean payCost(GreedPlayer thePlayer, GreedGame theGame) {
-		return (thePlayer.payHandCard(theGame, this)!=null);
+		return (thePlayer.payHandCard(this)!=null);
 	}
 	
 	@Override
