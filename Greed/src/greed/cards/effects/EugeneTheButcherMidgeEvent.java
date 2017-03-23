@@ -1,10 +1,10 @@
 package greed.cards.effects;
 
-import greed.Action;
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.eventypes.WhenPlayEvent;
+import greed.game.Action;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.eventtypes.WhenPlayEvent;
 
 public class EugeneTheButcherMidgeEvent extends WhenPlayEvent{
 	public EugeneTheButcherMidgeEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {

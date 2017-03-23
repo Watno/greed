@@ -1,9 +1,9 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.Thug;
-import greed.eventypes.TriggeredEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.Thug;
+import greed.game.eventtypes.TriggeredEvent;
 
 public class TedNapoleonBonhamEvent extends TriggeredEvent{
 	

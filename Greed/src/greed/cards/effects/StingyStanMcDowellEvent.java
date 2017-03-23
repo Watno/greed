@@ -1,9 +1,9 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.eventypes.CashCostModifyEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.eventtypes.CashCostModifyEvent;
 
 public class StingyStanMcDowellEvent extends CashCostModifyEvent {
 	

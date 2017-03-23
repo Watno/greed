@@ -1,11 +1,11 @@
 package greed.cards.effects;
 
-import greed.Action;
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.Holding;
-import greed.eventypes.AfterPlayEvent;
+import greed.game.Action;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.Holding;
+import greed.game.eventtypes.AfterPlayEvent;
 
 public class SandysSnookerNSchnapsEvent extends AfterPlayEvent{
 	public SandysSnookerNSchnapsEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {

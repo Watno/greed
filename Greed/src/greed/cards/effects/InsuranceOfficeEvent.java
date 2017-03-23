@@ -1,11 +1,11 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.Holding;
-import greed.Thug;
-import greed.eventypes.RemoveFromPlayEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.Holding;
+import greed.game.Thug;
+import greed.game.eventtypes.RemoveFromPlayEvent;
 
 public class InsuranceOfficeEvent extends RemoveFromPlayEvent{
 	

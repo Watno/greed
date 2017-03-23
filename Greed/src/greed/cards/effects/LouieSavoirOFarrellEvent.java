@@ -1,10 +1,10 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.PlayPlan;
-import greed.eventypes.AfterPlaysResolveEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.PlayPlan;
+import greed.game.eventtypes.AfterPlaysResolveEvent;
 
 public class LouieSavoirOFarrellEvent extends AfterPlaysResolveEvent{
 	public LouieSavoirOFarrellEvent(GreedGame theGame, GreedPlayer profiteer, int timingNumber, GreedCard source) {

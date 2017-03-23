@@ -1,10 +1,10 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.Thug;
-import greed.eventypes.WhenPlayEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.Thug;
+import greed.game.eventtypes.WhenPlayEvent;
 
 public class FriendlyGusCasparEvent extends WhenPlayEvent{
 	public FriendlyGusCasparEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {

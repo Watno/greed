@@ -1,9 +1,9 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.eventypes.EndOfGameEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.eventtypes.EndOfGameEvent;
 
 public class GenerousJennyJonesEvent extends EndOfGameEvent{
 	public GenerousJennyJonesEvent(GreedGame theGame, GreedPlayer profiteer, int timingNumber, GreedCard source) {

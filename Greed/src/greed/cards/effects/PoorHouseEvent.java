@@ -1,9 +1,9 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.eventypes.EachTurnEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.eventtypes.EachTurnEvent;
 
 public class PoorHouseEvent extends EachTurnEvent {
 	public PoorHouseEvent(GreedGame theGame, GreedPlayer profiteer,  int timingNumber, GreedCard source) {

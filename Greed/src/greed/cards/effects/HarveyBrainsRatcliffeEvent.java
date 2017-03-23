@@ -1,9 +1,9 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.eventypes.CashGainEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.eventtypes.CashGainEvent;
 
 public class HarveyBrainsRatcliffeEvent extends CashGainEvent{
 	private GreedPlayer profiteer;

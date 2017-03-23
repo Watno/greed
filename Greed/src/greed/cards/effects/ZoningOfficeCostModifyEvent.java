@@ -1,10 +1,10 @@
 package greed.cards.effects;
 
-import greed.GreedCard;
-import greed.GreedGame;
-import greed.GreedPlayer;
-import greed.Holding;
-import greed.eventypes.CashCostModifyEvent;
+import greed.game.GreedCard;
+import greed.game.GreedGame;
+import greed.game.GreedPlayer;
+import greed.game.Holding;
+import greed.game.eventtypes.CashCostModifyEvent;
 
 public class ZoningOfficeCostModifyEvent extends CashCostModifyEvent {
 	
