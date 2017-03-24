@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Reason;
@@ -22,7 +23,7 @@ public class EdRubberfaceTeach extends Thug {
 	}
 
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		if (copiedThug==null || copiedThug instanceof EdRubberfaceTeach) {
 			copiedThug = thePlayer.chooseThug(this); //due to the need there will always be a thug to copy
 			theGame.getLogger().copyCard(this, copiedThug, this);
@@ -38,10 +39,13 @@ public class EdRubberfaceTeach extends Thug {
 				copiedEffect.setSource(this);
 				addPermanentEffect(theEvent);
 			}
+			theGame.getLogger().executeRules(thePlayer, this, this);
+			copiedThug.doRules(thePlayer, theGame, this);
+			theGame.getLogger().unindent();
 		}
-		theGame.getLogger().executeRules(thePlayer, this, this);
-		doRules(thePlayer, theGame);
-		theGame.getLogger().unindent();
+		else {
+			copiedThug.doRules(thePlayer, theGame, this);
+		}
 	}
 	
 	@Override 

@@ -7,30 +7,47 @@
   <link rel="stylesheet" type="text/css" href="custom.css?6">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     <script src="client.js?5"></script>
+     <script src="client.js?6"></script>
    <script src="serverlocation.js"></script>
    <title>Greed</title>
   <body onload="javascript:initialize();">
      <div id="lobby" class="container" >
-					<input id="userInput" type="text">
-					<button onclick="javascript:sendMessage()">Chat</button> 
-					
+     	 <div class="row">
+	     	 <div class="col-md-2 ">
+		        <button onclick="javascript:newTable();">New Table</button>
+		     </div>
+		     <div class="col-md-6">
+		 		<button onclick="javascript:changeName()">Change name</button>
+		 		<input id="newName" type="text" onkeydown="if (event.keyCode == 13) { changeName();}">
+		 	</div>
+	 	 </div>
+	 	 <div class="row"><div id="lobbyTables" class="tables col-md-12"></div></div>
+
+	 	 <div class="row"> 
+	 	 	<div class="col-md-6">
+	 	 		<div id="lobbyChat" class="lobbychat"></div>	
+	 	 		<input id="lobbyChatMessage" type="text" onkeydown="if (event.keyCode == 13) { sendLobbyChat();}"	><button onclick="javascript:sendLobbyChat()">Chat</button>
+	 	 	</div>
+	 	 </div>
 	</div>
   
-      <div id="game" class="container">
+      <div id="game" class="container" hidden>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6" >
 					<p id="prompt"></p>
 					<p id="hand"></p>
 					<p id="draftPile"></p>
 					<div id="players"></div>
 					<!--<p id="message"></p>-->
 				</div>
-				<div id = "log" class="col-md-6 logarea">
+				<div class="col-md-6">
+					<div id = "log" class="logarea"></div>
+					<div class="gameChatarea">
+						<div id = "gameChat" class="gameChat"></div>
+						<input id="gameChatMessage" type="text" onkeydown="if (event.keyCode == 13) { sendGameChat();}"><button onclick="javascript:sendGameChat()">Chat</button>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-		</div>
 	</div>
 
   </body>

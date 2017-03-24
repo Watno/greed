@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -17,11 +18,11 @@ public class Raid extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if (otherPlayer!=thePlayer) {
 				for (Holding theHolding: otherPlayer.getHoldings()) {
-					theHolding.changeMarkers(-1, this);
+					theHolding.changeMarkers(-1, executingCard);
 				}
 			}
 		}

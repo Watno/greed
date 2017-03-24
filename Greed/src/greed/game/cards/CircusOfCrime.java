@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 
@@ -16,7 +17,7 @@ public class CircusOfCrime extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getNumberOfThugs()*10000, this);
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		thePlayer.gainCash(thePlayer.getNumberOfThugs()*10000, executingCard);
 	}
 }

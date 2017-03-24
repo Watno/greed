@@ -64,7 +64,7 @@ public abstract class GreedCard implements Reason{
 		for (WhenPlayEvent anEvent : thePlayer.getWhenPlayEvents()) {
 			anEvent.execute(theGame, this);
 		}
-		doRules(thePlayer, theGame);
+		doRules(thePlayer, theGame, this);
 		for (AfterPlayEvent anEvent : thePlayer.getAfterPlayEvents()) {
 			anEvent.execute(theGame, this);
 		}
@@ -95,7 +95,7 @@ public abstract class GreedCard implements Reason{
 		}
 	}
 	
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		
 	}
 	

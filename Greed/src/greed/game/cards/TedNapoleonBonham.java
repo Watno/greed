@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
@@ -13,7 +14,7 @@ public class TedNapoleonBonham extends Thug {
 	
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame)  {
-		theGame.addNextTurnEvent(new TedNapoleonBonhamEvent(theGame, timingNumber, this));
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard)  {
+		theGame.addNextTurnEvent(new TedNapoleonBonhamEvent(theGame, timingNumber, executingCard));
 	}
 }

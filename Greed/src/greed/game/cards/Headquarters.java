@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -16,7 +17,7 @@ public class Headquarters extends Holding {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		changeMarkers(thePlayer.getNumberOfHoldings(), this);
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		changeMarkers(thePlayer.getNumberOfHoldings(), executingCard);
 	}
 }

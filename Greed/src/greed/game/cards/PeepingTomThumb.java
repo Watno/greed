@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -18,13 +19,13 @@ public class PeepingTomThumb extends Thug {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		int mostMarkers = 0;
 		for (GreedPlayer anyPlayer : theGame.getPlayers()) {
 			for (Holding theHolding : anyPlayer.getHoldings()) {
 				mostMarkers = Math.max(mostMarkers, theHolding.getMarkers());
 			}
 		}
-		thePlayer.gainCash(mostMarkers*5000, this);
+		thePlayer.gainCash(mostMarkers*5000, executingCard);
 	}
 }

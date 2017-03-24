@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -30,8 +31,8 @@ public class Relocate extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		theGame.addNextTurnEvent(new RelocateEvent(theGame, thePlayer, timingNumber, this, markers+2));
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		theGame.addNextTurnEvent(new RelocateEvent(theGame, thePlayer, timingNumber, executingCard, markers+2));
 	}
 	
 	@Override

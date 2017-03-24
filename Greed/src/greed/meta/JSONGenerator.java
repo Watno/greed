@@ -111,7 +111,7 @@ public class JSONGenerator {
 	
 	public static void generateJSON(GreedGame theGame) {
 		JsonObject json = gameToJSONpublic(theGame);
-		int position=1;
+		int position=0;
 		for (GreedPlayer thePlayer : theGame.getPlayers()) {
 			json.add("privateInformation", privateInformation(thePlayer, position));
 			thePlayer.send(new GsonBuilder().setPrettyPrinting().create().toJson(json));

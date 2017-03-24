@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -13,7 +14,7 @@ public class TakeCareOfBusiness extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) { 
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) { 
 		for(Holding theHolding : thePlayer.getHoldings()) {
 			if (theHolding.getMarkers()<=1) {
 				theHolding.changeMarkers(1, this);

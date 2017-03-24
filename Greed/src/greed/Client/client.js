@@ -212,7 +212,19 @@
       
       function changeName(){
           var name = document.getElementById('newName').value;
+          document.getElementById('newName').value="";
     	  sendLobbyCommand('{"namechange":"'+name+'"}');
+        }
+      
+      function sendLobbyChat(){
+          var message = document.getElementById('lobbyChatMessage').value;
+          document.getElementById('lobbyChatMessage').value="";
+    	  sendLobbyCommand('{"chat":"'+message+'","location":"lobby"}');
+        }
+      function sendGameChat(){
+          var message = document.getElementById('gameChatMessage').value;
+          document.getElementById('gameChatMessage').value="";
+    	  sendLobbyCommand('{"chat":"'+message+'","location":"table"}');
         }
       
 	  function sendCommand(number){
@@ -258,7 +270,7 @@
 	    		i++;
     		}
     	}
-	    while (i<10){
+	    while (i<9){
 	    	text+="<div class=\"col-md-1\"></div>";
 	    	i++;
 	    }
@@ -386,6 +398,15 @@
 		return text;
 	}
 	  
+	function drawLobby(parsedMsg){
+  		document.getElementById('lobby').hidden=false;
+  		document.getElementById('game').hidden=true;
+  		var text="";
+  		for (var i=0; i<parsedMsg.tables.length; i++){
+ 			text+=drawTable(parsedMsg.tables[i], i, i==parsedMsg.tablenumber);
+  		}
+  		document.getElementById('lobbyTables').innerHTML=text;		
+	}
       function subscribeToWebSocket(){
         if('WebSocket' in window){
           socket = connectToServer();
@@ -462,15 +483,23 @@
 				activateButtons();
           	}
           	if (parsedMsg.type == 'lobby'){
-          		document.getElementById('lobby').hidden=false;
-          		document.getElementById('game').hidden=true;
-          		var text="";
-          		for (var i=0; i<parsedMsg.tables.length; i++){
-         			text+=drawTable(parsedMsg.tables[i], i, i==parsedMsg.tablenumber);
-          		}
-          		text+="<button onclick=\"javascript:newTable();\">New Table</button>";
-         		text+='<input id="newName" type="text"><button onclick="javascript:changeName()">Change name</button>';
-          		document.getElementById('lobby').innerHTML=text;
+          		drawLobby(parsedMsg);
+          	}
+          	if (parsedMsg.type == 'chat'){
+          		if (parsedMsg.location == 'lobby'){
+          			var lobbyChat = document.getElementById('lobbyChat');
+          			var text = lobbyChat.innerHTML;
+          			text+="<br>"+parsedMsg.sender+": "+parsedMsg.message;
+          			lobbyChat.innerHTML=text;
+    				lobbyChat.scrollTop = lobbyChat.scrollHeight - lobbyChat.clientHeight;
+          		} 
+          		if (parsedMsg.location == 'table'){
+          			var gameChat = document.getElementById('gameChat');
+          			var text = gameChat.innerHTML;
+          			text+="<br>"+parsedMsg.sender+": "+parsedMsg.message;
+          			gameChat.innerHTML=text;
+    				gameChat.scrollTop = gameChat.scrollHeight - gameChat.clientHeight;
+          		} 
           	}
 			
           };

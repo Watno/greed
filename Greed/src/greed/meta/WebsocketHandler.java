@@ -13,16 +13,19 @@ import org.webbitserver.WebSocketConnection;
 public class WebsocketHandler extends BaseWebSocketHandler {
  
 	private ArrayList<GreedConnection> connections;
-	private Lobby lobby = new Lobby();
+	private Lobby lobby;
+	private Chat chat; 
 	 
 	public WebsocketHandler(ArrayList<GreedConnection> connections){
 		super();
 		this.connections=connections;
+		lobby = new Lobby();
+		chat = new Chat(lobby);
 	}
 	
 	@Override
 	public void onOpen(WebSocketConnection connection) {
-		System.out.println("new conection");
+		System.out.println("new connection");
 		synchronized (connections){
 			GreedConnection greedConnection = new GreedConnection(connection);
 			lobby.addConnection(greedConnection);
@@ -53,6 +56,9 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 		GreedConnection greedConn = (GreedConnection) connection.data("GreedConnection");
 		try {
 			JsonObject parsedMessage = parser.parse(message).getAsJsonObject();
+			if (parsedMessage.has("chat")) {
+				chat.handleMessage(parsedMessage, greedConn);
+			}
 			if (parsedMessage.has("greedcommand")) {
 				connection.data("input", parsedMessage.get("greedcommand").getAsInt());
 				synchronized(greedConn) {
