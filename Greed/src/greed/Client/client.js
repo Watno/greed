@@ -269,7 +269,7 @@
     function drawCard(card, number, buttontype){
 		var text="";
 		text+="<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\""+cardtexts[card.timingNumber]+"\">";
-		text+="<button class =\""+buttontype+"\" onclick=\"javascript:sendCommand("+number+");\"  disabled>";
+		text+="<button class =\""+buttontype+" timingnumber" +card.timingNumber+"\" onclick=\"javascript:sendCommand("+number+");\"  disabled>";
 		text+= card.timingNumber + " - " + card.name;
 		if (card.hasOwnProperty('markers')){
 			text+=" ("+card.markers+")";
@@ -293,7 +293,7 @@
 			text+=" <img class=\"greedicon\" src=\"images/wrench.png\" alt= \"🔧\">";
 		}
 		text +=  "</button></span>";
-		console.log(text);
+//		console.log(text);
 		return text;
 	}
    
@@ -327,7 +327,15 @@
 		document.getElementById('yesbutton').hidden=!yesbutton;
 		document.getElementById('nobutton').hidden=!nobutton;	
 		document.getElementById('returnbutton').hidden=!returnbutton;	
-
+//workaround to make Rubberface unable to select himself
+		var rubberfaces = document.getElementsByClassName('timingnumber54');
+		for (var i=0; i<rubberfaces.length; i++){
+			var rubberface = rubberfaces[i];
+			var classes = rubberface.classList;
+			if (classes.contains('thugbutton')){
+				rubberface.disabled=true;
+			}
+		}
     }
 	
     
@@ -407,7 +415,6 @@
 				document.getElementById('hand').innerHTML = text;
 				var draftPile = parsedMsg.privateInformation.draftPile;
           		text = "Draftpile <br>";
-				console.log('test');
 				for (var i = 0; i < draftPile.length; i++) {
     				//text += draftPile[i].name + "<br>"; 
     				//text += "<button class =\"draftbutton\" onclick=\"javascript:sendCommand("+i+");\" disabled>"+draftPile[i].name + "</button>	";
@@ -424,9 +431,13 @@
           	}
           	if (parsedMsg.hasOwnProperty('request')) {
           		resetButtonStates();
-				showPrompt(parsedMsg.reason+"<button id=\"yesbutton\" onclick=\"javascript:sendCommand(0)\" hidden>Yes</button><button id=\"nobutton\" onclick=\"javascript:sendCommand(-1) \" hidden>No</button><button id=\"returnbutton\" onclick=\"javascript:joinLobby() \" hidden>Return to Lobby</button>");
+          		var text=parsedMsg.reason;
+         		for (var i = 1; i<=80; i++){
+          			text = text.replace(RegExp(cardnames[i], "g"), "<span data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\""+cardtexts[i]+"\">"+cardnames[i]+"</span>");
+          		}
+				showPrompt(text+"<button id=\"yesbutton\" onclick=\"javascript:sendCommand(0)\" hidden>Yes</button><button id=\"nobutton\" onclick=\"javascript:sendCommand(-1) \" hidden>No</button><button id=\"returnbutton\" onclick=\"javascript:joinLobby() \" hidden>Return to Lobby</button>");
 				var requesttype = parsedMsg.request;
-				console.log(requesttype);
+//				console.log(requesttype);
 				if (requesttype == 'hand'){
 					handbuttons=true;
 				}

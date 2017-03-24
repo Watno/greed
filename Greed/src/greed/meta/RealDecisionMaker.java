@@ -78,14 +78,14 @@ public class RealDecisionMaker implements DecisionMaker {
 	public int pickThugIndexOptional(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reasonString+"!"));
+		return connection.requestInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reasonString+"."));
 	}
 
 	@Override
 	public int pickHoldingIndexOptional(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reasonString+"!"));
+		return connection.requestInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reasonString+"."));
 	}
 
 	@Override
