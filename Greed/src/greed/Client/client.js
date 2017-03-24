@@ -268,7 +268,7 @@
 	
     function drawCard(card, number, buttontype){
 		var text="";
-		text+="<span data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\""+cardtexts[card.timingNumber]+"\">";
+		text+="<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\""+cardtexts[card.timingNumber]+"\">";
 		text+="<button class =\""+buttontype+"\" onclick=\"javascript:sendCommand("+number+");\"  disabled>";
 		text+= card.timingNumber + " - " + card.name;
 		if (card.hasOwnProperty('markers')){

@@ -5,6 +5,17 @@
 .greedicon{
 	height: 1em;
 }
+
+/* necessary for tooltips on disabled buttons in Chrome */
+.buttonwrapper {
+	display: inline-block;
+}
+
+.buttonwrapper [disabled] {
+  pointer-events: none;
+}
+/* end of necessary for tooltips on disabled buttons in Chrome*/
+
 .tooltip-inner {
     background-color: #FFFFFF;
     color: #000000;
