@@ -15,6 +15,10 @@ public class Chat {
 	
 	public void handleMessage(JsonObject receivedMessage, GreedConnection connection) {
 		JsonObject json = makeJSON(receivedMessage.get("chat").getAsString(), connection);
+<<<<<<< HEAD
+=======
+		String test=receivedMessage.get("location").getAsString();
+>>>>>>> branch 'master' of https://Watno@bitbucket.org/Watno/greed.git
 		if (receivedMessage.get("location").getAsString().equals("lobby")) {
 			sendToLobby(json);
 		}
