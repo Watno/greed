@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -18,13 +19,13 @@ public class InsuranceScam extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		int mostMarkers = 0;
 		for (Holding theHolding : thePlayer.getHoldings()) {
 			mostMarkers = Math.max(mostMarkers, theHolding.getMarkers());
 		}
-		thePlayer.gainCash(mostMarkers*5000, this);
-		theGame.addNextTurnEvent(new InsuranceScamEvent(theGame, thePlayer, timingNumber, this));
+		thePlayer.gainCash(mostMarkers*5000, executingCard);
+		theGame.addNextTurnEvent(new InsuranceScamEvent(theGame, thePlayer, timingNumber, executingCard));
 	}
 	
 	@Override

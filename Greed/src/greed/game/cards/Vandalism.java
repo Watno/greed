@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.cards.effects.VandalismEvent;
@@ -17,7 +18,7 @@ public class Vandalism extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		theGame.addNextTurnEvent(new VandalismEvent(theGame, thePlayer, timingNumber, this));
 	}
 	

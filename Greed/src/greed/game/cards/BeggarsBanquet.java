@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 
@@ -24,8 +25,8 @@ public class BeggarsBanquet extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(25000, this);
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		thePlayer.gainCash(25000, executingCard);
 	}
 	
 }

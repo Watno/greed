@@ -12,7 +12,7 @@ public class PolycephalusPatriciaJones extends Thug {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		GreedCard theCard;
 		do {
 			theCard=theGame.draw();

@@ -80,4 +80,10 @@ public class Table {
 		}
 	}
 	
+	public void sendChat(String chat) {
+		for (GreedConnection connection : players) {
+			connection.sendChat(chat);
+		}
+	}
+	
 }

@@ -1,5 +1,21 @@
 .logarea {
-    height: 80vh;
+    height: 60vh;
+	overflow: auto
+}
+
+
+.gameChat {
+	height: 30vh;
+	overflow: auto
+}
+
+.lobbychat {
+	height: 30vh;
+	overflow: auto
+}
+
+.tables {
+	height: 40vh;
 	overflow: auto
 }
 .greedicon{
@@ -24,3 +40,11 @@
 .btn.disabled {
     pointer-events: auto;
 }	
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}

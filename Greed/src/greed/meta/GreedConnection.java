@@ -48,6 +48,9 @@ public class GreedConnection {
 	public void sendLobby(String lobby) {
 		connection.send(lobby);
 	}
+	public void sendChat(String chat) {
+		connection.send(chat);
+	}
 	
 	public void allowReturnToLobby() {
 		connection.send(JSONGenerator.createPrompt("returnToLobby", false, "Game Over"));

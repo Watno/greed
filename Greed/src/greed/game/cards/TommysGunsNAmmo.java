@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -22,7 +23,7 @@ public class TommysGunsNAmmo extends Holding {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if (otherPlayer!=thePlayer) {
 				for (Holding theHolding: otherPlayer.getHoldings()) {

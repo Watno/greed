@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
@@ -11,7 +12,7 @@ public class RandomScrubPatterson extends Thug {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		int amount = thePlayer.getKeys();
 		for (int i=0; i<amount; i++) {
 			thePlayer.drawCard();

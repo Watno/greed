@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
@@ -11,7 +12,7 @@ public class EdCheeseClothMcGinty extends Thug {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(thePlayer.getGuns()*5000, this);
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		thePlayer.gainCash(thePlayer.getGuns()*5000, executingCard);
 	}
 }

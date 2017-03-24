@@ -48,6 +48,12 @@ public class Lobby {
 			connection.sendLobby(new GsonBuilder().setPrettyPrinting().create().toJson(json));
 		}
 	}
+	
+	public void sendChat(String chat) {
+		for (GreedConnection connection : connections) {
+			connection.sendChat(chat);
+		}
+	}
 
 	public ArrayList<Table> getTables() {
 		return tables;

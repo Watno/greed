@@ -1,6 +1,7 @@
 package greed.game.cards;
 
 import greed.game.Action;
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
@@ -17,7 +18,7 @@ public class StealIdeas extends Action {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
 		int mostMarkers = 0;
 		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
 			if (otherPlayer != thePlayer) {
@@ -26,9 +27,9 @@ public class StealIdeas extends Action {
 				}
 			}		
 		}
-		Holding holdingGettingMarkers = thePlayer.chooseHolding(this);
+		Holding holdingGettingMarkers = thePlayer.chooseHolding(executingCard);
 		if (holdingGettingMarkers!=null) {
-			holdingGettingMarkers.changeMarkers(mostMarkers, this);
+			holdingGettingMarkers.changeMarkers(mostMarkers, executingCard);
 		}
 	}
 }

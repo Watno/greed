@@ -1,5 +1,6 @@
 package greed.game.cards;
 
+import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Thug;
@@ -11,7 +12,7 @@ public class DickieFlushDiamond extends Thug {
 	}
 	
 	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame) {
-		thePlayer.gainCash(10000, this);
+	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+		thePlayer.gainCash(10000, executingCard);
 	}
 }
