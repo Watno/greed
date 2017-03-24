@@ -4,12 +4,19 @@ public abstract class Thug extends GreedCard {
 	private int guns;
 	private int cars;
 	private int keys;
+	//base values needed for Rubberface/Napoleon
+	private int baseCars;
+	private int baseGuns;
+	private int baseKeys;
 	 
 	public Thug(int timingNumber, String name, int  cars, int guns, int keys){
 		super(timingNumber, name);
 		this.guns=guns;
+		this.baseGuns=guns;
 		this.cars=cars;
+		this.baseCars=cars;
 		this.keys=keys;
+		this.baseKeys=keys;
 	}
 	
 	@Override
@@ -62,5 +69,17 @@ public abstract class Thug extends GreedCard {
 
 	public int getKeys() {
 		return keys;
+	}
+
+	public int getBaseCars() {
+		return baseCars;
+	}
+
+	public int getBaseGuns() {
+		return baseGuns;
+	}
+
+	public int getBaseKeys() {
+		return baseKeys;
 	}
 }

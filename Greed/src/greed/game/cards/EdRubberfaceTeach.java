@@ -27,10 +27,10 @@ public class EdRubberfaceTeach extends Thug {
 			copiedThug = thePlayer.chooseThug(this); //due to the need there will always be a thug to copy
 			theGame.getLogger().copyCard(this, copiedThug, this);
 			//TODO:Can't choose itself, current workaround makes player pick again in this case.
-			changeGuns(copiedThug.getGuns());
-			changeCars(copiedThug.getCars());
-			changeKeys(copiedThug.getKeys());
-			//TODO: fix interaction with TedNapoleonBonham
+			changeGuns(copiedThug.getBaseGuns());
+			changeCars(copiedThug.getBaseCars());
+			changeKeys(copiedThug.getBaseKeys());
+			//
 			timingNumber = copiedThug.getTimingNumber();
 			name = copiedThug.getName() + " (copied)";
 			for (TriggeredEvent theEvent : copiedThug.getPermanentEffects()) {
@@ -39,8 +39,8 @@ public class EdRubberfaceTeach extends Thug {
 				addPermanentEffect(theEvent);
 			}
 		}
-		theGame.getLogger().executeRules(thePlayer, copiedThug, this);
-		copiedThug.doRules(thePlayer, theGame);
+		theGame.getLogger().executeRules(thePlayer, this, this);
+		doRules(thePlayer, theGame);
 		theGame.getLogger().unindent();
 	}
 	
@@ -49,9 +49,9 @@ public class EdRubberfaceTeach extends Thug {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		name = "Ed \"Rubberface\" Teach";
 		timingNumber = 54;
-		changeGuns(-copiedThug.getGuns());
-		changeCars(-copiedThug.getCars());
-		changeKeys(-copiedThug.getKeys());
+		changeGuns(-getGuns());
+		changeCars(-getCars());
+		changeKeys(-getKeys());
 		copiedThug = null;
 	
 	}
