@@ -64,6 +64,7 @@ public class GreedGame {
 	}
 	
 	private void initialize(){
+		Collections.shuffle(players);
 		generateDrawPile();
 		Collections.shuffle(drawPile);
 		for (GreedPlayer thePlayer: players) {

@@ -20,7 +20,6 @@ public class GreedPlayer {
 	private DecisionMaker decisionMaker;
 	private GreedGame theGame; 
 	private String name;
-	private int position;
 	private int cash=0;
 	private int cars=0;
 	private int guns=0;
@@ -47,7 +46,6 @@ public class GreedPlayer {
 	GreedPlayer(GreedGame theGame, String name, int position){
 		this.theGame = theGame;
 		this.name = name;
-		this.position = position;
 		this.decisionMaker=new CleverDecider(this, theGame);
 	}
 	
@@ -382,9 +380,6 @@ public class GreedPlayer {
 		decisionMaker.sendGameState(gameState);
 	}
 
-	public int getPosition() {
-		return position;
-	}
 	
 	public void replaceByBot() {
 		this.decisionMaker = new CleverDecider(this, theGame);//still need to handle currently awaited decision by old decider

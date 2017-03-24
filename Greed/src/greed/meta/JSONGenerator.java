@@ -89,7 +89,7 @@ public class JSONGenerator {
 		return json;
 	}
 	
-	private static JsonObject privateInformation(GreedPlayer thePlayer) {
+	private static JsonObject privateInformation(GreedPlayer thePlayer, int position) {
 		JsonObject json = new JsonObject();
 		JsonArray hand = new JsonArray();
 		synchronized(thePlayer.getHand()){
@@ -105,15 +105,17 @@ public class JSONGenerator {
 			}
 		}
 		json.add("draftPile", draftPile);
-		json.addProperty("position", thePlayer.getPosition());
+		json.addProperty("position", position);
 		return json;
 	}
 	
 	public static void generateJSON(GreedGame theGame) {
 		JsonObject json = gameToJSONpublic(theGame);
+		int position=1;
 		for (GreedPlayer thePlayer : theGame.getPlayers()) {
-			json.add("privateInformation", privateInformation(thePlayer));
+			json.add("privateInformation", privateInformation(thePlayer, position));
 			thePlayer.send(new GsonBuilder().setPrettyPrinting().create().toJson(json));
+			position++;
 		}
 	}
 	
