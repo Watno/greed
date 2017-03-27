@@ -27,7 +27,7 @@
           cardtexts[10]="<div class='requirement'>Cost: $15,000</div><div class='permanenteffect'>Each turn: If one player has the most Holdings, that player gains $5,000.</div>";
           cardtexts[11]="<div class='requirement'>Cost: $15,000</div>Place 2 extra markers on this.";
           cardtexts[12]="<div class='requirement'>Cost: $10,000</div>This gets its normal markers at the end of the game rather than when played.";
-          cardtexts[13]="<div class='requirement'>Cost: $5,000</div>At the end of the game, if you are the one player with the fewest Thugs, gain $20,000.";
+          cardtexts[13]="<div class='requirement'>Cost: $5,000</div>At the end of the game, if you are the one player with the most Thugs, gain $20,000.";
           cardtexts[14]="<div class='requirement'>Cost: $10,000</div>";
           cardtexts[15]="Place an extra marker on this for each <img class='greedicon' src='images/car.png' alt= '🚘'> you have.";
           cardtexts[16]="<div class='requirement'>Cost: $10,000</div><div class='permanenteffect'>Each turn: If you have at most 2 Holdings and at most 2 Thugs, gain $5,000.</div>";

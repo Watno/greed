@@ -13,15 +13,15 @@ public class LamontesEscortServiceEvent extends EndOfGameEvent{
 	@Override
 	public void execute(GreedGame theGame) {
 		int numberOfThugs = profiteer.getNumberOfThugs();
-		boolean fewestThugs = true;
+		boolean mostThugs = true;
 		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
 			if (!otherPlayer.equals(profiteer)) {
-				if (otherPlayer.getNumberOfThugs()<=numberOfThugs) {
-					fewestThugs = false;
+				if (otherPlayer.getNumberOfThugs()>=numberOfThugs) {
+					mostThugs = false;
 				}
 			}
 		}
-		if (fewestThugs) {
+		if (mostThugs) {
 			profiteer.gainCash(20000, this);
 		}
 	}
