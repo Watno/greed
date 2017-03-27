@@ -176,10 +176,7 @@
     	  cardnames[77]='Jack "Cracker" Thompson';
     	  cardnames[78]='Master Plan!';
     	  cardnames[79]='Vandalism!';
-    	  cardnames[80]='Seance';
-    	  
-    	 
-      
+    	  cardnames[80]='Seance';    
       }
       
       function sendLobbyCommand(text){
@@ -280,8 +277,15 @@
 	
     function drawCard(card, number, buttontype){
 		var text="";
+		var type="action";
+		if (card.hasOwnProperty('cars')){
+			type="thug";
+		}
+		if (card.hasOwnProperty('bottles')){
+			type="holding";
+		}
 		text+="<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\""+cardtexts[card.timingNumber]+"\">";
-		text+="<button class =\""+buttontype+" timingnumber" +card.timingNumber+"\" onclick=\"javascript:sendCommand("+number+");\"  disabled>";
+		text+="<button class =\""+buttontype+" " + type + " timingnumber" +card.timingNumber+"\" onclick=\"javascript:sendCommand("+number+");\"  disabled>";
 		text+= card.timingNumber + " - " + card.name;
 		if (card.hasOwnProperty('markers')){
 			text+=" ("+card.markers+")";
@@ -395,6 +399,7 @@
 			}
 		}	
 		text+= "</br>";
+		text+= "</br>";		
 		return text;
 	}
 	  

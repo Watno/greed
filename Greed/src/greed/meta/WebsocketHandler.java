@@ -1,4 +1,5 @@
 package greed.meta;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 	
 	@Override
 	public void onOpen(WebSocketConnection connection) {
-		System.out.println("new connection");
+		System.out.println(LocalDateTime.now() +" - " + "new connection");
 		synchronized (connections){
 			GreedConnection greedConnection = new GreedConnection(connection);
 			lobby.addConnection(greedConnection);
@@ -41,8 +42,8 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 	 
 	@Override
 	public void onClose(WebSocketConnection connection) {
-		System.out.println("connection closed");
 		GreedConnection greedConn = (GreedConnection) connection.data("GreedConnection");
+		System.out.println(LocalDateTime.now() +" - " + greedConn.getName() + " closed their connection");
 		greedConn.resign();
 		Table table = greedConn.getTable();
 		if (table!=null) {

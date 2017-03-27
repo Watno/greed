@@ -3,6 +3,8 @@ package greed.meta;
 import greed.meta.lobby.Lobby;
 import greed.meta.lobby.Table;
 
+import java.time.LocalDateTime;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
@@ -28,6 +30,7 @@ public class Chat {
 		json.addProperty("type", "chat");
 		json.addProperty("message", message);
 		json.addProperty("sender", connection.getName());
+		System.out.println(LocalDateTime.now() +" - " +connection.getName()+": "+message);
 		return json;
 	}
 	

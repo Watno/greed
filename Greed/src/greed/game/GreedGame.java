@@ -10,6 +10,7 @@ import greed.meta.GreedConnection;
 import greed.meta.JSONGenerator;
 import greed.meta.Logger;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +39,7 @@ public class GreedGame {
 	}
 		
 	public void startGame() {
-		System.out.println("Game started");
+		System.out.println(LocalDateTime.now() +" - " +"Game started");
 		initialize();
 		while (turnCounter<12) {
 			executeTurn();
