@@ -25,7 +25,6 @@ public class GreedThreadFromLobby implements Runnable {
 		for (GreedConnection thePlayer: connections) {
 			System.out.println(LocalDateTime.now() +" - " + thePlayer.getName());
 			thePlayer.setDecider(null);
-			thePlayer.setTable(null);
 			thePlayer.allowReturnToLobby();
 		}
 	}

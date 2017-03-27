@@ -87,6 +87,7 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 				}
 				if (parsedMessage.has("joinLobby")) {
 					greedConn.resign();
+					greedConn.setTable(null);
 					lobby.addConnection(greedConn);
 				}
 				lobby.sendJSON();
