@@ -1,5 +1,7 @@
 package greed.meta;
 
+import java.time.LocalDateTime;
+
 import org.webbitserver.WebSocketConnection;
 
 import greed.meta.lobby.Table;
@@ -63,6 +65,7 @@ public class GreedConnection {
 
 
 	public void setName(String name) {
+		System.out.println(LocalDateTime.now() +" - " + this.name +" changes their name to "+ name);
 		this.name = name;
 	}
 

@@ -68,3 +68,15 @@
 .infoarea {
 	height= 10vh
 }
+
+.thug {
+	background-color: #b6d887;
+}
+
+.holding {
+	background-color: #9b9bff;
+}
+
+.action {
+	background-color: #fcdb8f;	
+}
