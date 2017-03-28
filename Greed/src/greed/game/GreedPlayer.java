@@ -74,13 +74,13 @@ public class GreedPlayer {
 	
 	
 	public boolean payCashCost(int amount, GreedCard payedCard) {
-		Reason reason = new MoneyPaymentReason(payedCard, amount);
 		for (CashCostModifyEvent theEvent : cashCostModifyEvents) {
 			amount = theEvent.execute(amount, payedCard);
 		}
 		if (cash<amount) {
 			return false;
 		}
+		Reason reason = new MoneyPaymentReason(payedCard, amount);
 		if (makeYesNoChoice(reason)) {
 			changeCash(-amount, reason);
 			return true;
