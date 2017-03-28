@@ -1,4 +1,4 @@
-package greed.game.cards;
+package greed.game.cards.effects;
 
 import greed.game.GreedCard;
 import greed.game.GreedGame;

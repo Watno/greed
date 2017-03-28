@@ -35,6 +35,5 @@ public abstract class Action extends GreedCard{
 	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getActions().remove(this);
-		theGame.addToDiscardPile(this);
 	}
 }

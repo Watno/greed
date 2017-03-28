@@ -5,6 +5,7 @@ import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Holding;
+import greed.game.cards.effects.RelocateEvent;
 
 public class Relocate extends Action {
 	private int markers=0;
@@ -18,7 +19,7 @@ public class Relocate extends Action {
 		Holding theHolding = thePlayer.payHolding(this);
 		if (theHolding!=null) {
 			markers = theHolding.getMarkersBeforeRemove();
-			putBackInHand(thePlayer, theGame, this, theGame.getDiscardPile());
+			theHolding.putBackInHand(thePlayer, theGame, this, theGame.getDiscardPile());
 			return true;
 		}
 		return false;

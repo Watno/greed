@@ -43,7 +43,6 @@ public abstract class Holding extends GreedCard {
 	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getHoldings().remove(this);
-		theGame.addToDiscardPile(this);
 		markersBeforeRemove = markers;
 		markers = 0;
 		thePlayer.changeHearts(-hearts);

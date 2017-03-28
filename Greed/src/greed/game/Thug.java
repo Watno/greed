@@ -32,7 +32,6 @@ public abstract class Thug extends GreedCard {
 	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {
 		super.removeFromPlay(thePlayer, theGame, reason);
 		thePlayer.getThugs().remove(this);
-		theGame.addToDiscardPile(this);
 		thePlayer.changeGuns(-guns);
 		thePlayer.changeCars(-cars);
 		thePlayer.changeKeys(-keys);
