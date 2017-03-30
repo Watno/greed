@@ -26,6 +26,10 @@ public abstract class Holding extends GreedCard {
 	}
 	
 	public void placeMarkers(GreedPlayer thePlayer) {
+		placeMarkersForReal(thePlayer);
+	}
+	
+	public void placeMarkersForReal(GreedPlayer thePlayer) {
 		int amount=0;
 		if (hearts>=1) {
 			amount+=thePlayer.getHearts();
@@ -38,6 +42,7 @@ public abstract class Holding extends GreedCard {
 		}
 		changeMarkers(amount, new IconReason());
 	}
+	
 	
 	@Override
 	public void removeFromPlay(GreedPlayer thePlayer, GreedGame theGame, Reason reason) {

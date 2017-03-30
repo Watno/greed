@@ -15,7 +15,7 @@ public class JunkyardEvent extends EndOfGameEvent{
 	public void execute(GreedGame theGame) {
 		if (source instanceof Holding) {
 			Holding sourceAsHolding  = (Holding) source;
-			sourceAsHolding.placeMarkers(profiteer);
+			sourceAsHolding.placeMarkersForReal(profiteer);
 		}
 	}
 }
