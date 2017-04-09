@@ -14,10 +14,10 @@ public class SuckerConvention extends Action {
 	
 	@Override
 	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
-		thePlayer.changeCash(30000, executingCard);
+		thePlayer.gainCash(30000, executingCard);
 		for (GreedPlayer otherPlayer: theGame.getPlayers()) {
 			if (!otherPlayer.equals(thePlayer)) {
-				otherPlayer.changeCash(10000, executingCard);
+				otherPlayer.gainCash(10000, executingCard);
 			}
 		}
 	}
