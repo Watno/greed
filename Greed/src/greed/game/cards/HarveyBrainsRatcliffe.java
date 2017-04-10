@@ -20,7 +20,7 @@ public class HarveyBrainsRatcliffe extends Thug {
 		ArrayList<GreedPlayer> playerlist = theGame.getPlayers();
 		for (int i=0; i<playerlist.size(); i++) {
 			GreedPlayer leftPlayer = playerlist.get(i);
-			if (leftPlayer!= thePlayer && (((playerlist.get(Math.floorMod((i+1), playerlist.size())) == thePlayer) ))) {
+			if (leftPlayer!= thePlayer && (((playerlist.get(Math.floorMod((i-1), playerlist.size())) == thePlayer) ))) {
 			//if the other player is indeed to the left 
 			theGame.addThisTurnEvent(new HarveyBrainsRatcliffeEvent(theGame, leftPlayer, timingNumber, executingCard, thePlayer));
 			}
