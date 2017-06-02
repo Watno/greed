@@ -12,7 +12,6 @@ import greed.game.eventtypes.IgnoreNeedEvent;
 import greed.game.eventtypes.RemoveFromPlayEvent;
 import greed.game.eventtypes.WhenPlayEvent;
 import greed.meta.GreedConnection;
-import greed.meta.RealDecisionMaker;
 import greed.meta.ai.CleverDecider;
 
 

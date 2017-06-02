@@ -340,9 +340,11 @@
 		for (i = 0; i < elements.length; i++) {
 			elements[i].disabled=!holdingbuttons;
 		}
-		document.getElementById('yesbutton').hidden=!yesbutton;
-		document.getElementById('nobutton').hidden=!nobutton;	
-		document.getElementById('returnbutton').hidden=!returnbutton;	
+		if (document.getElementById('prompt')!=""){
+			document.getElementById('yesbutton').hidden=!yesbutton;
+			document.getElementById('nobutton').hidden=!nobutton;	
+			document.getElementById('returnbutton').hidden=!returnbutton;
+		}
 //workaround to make Rubberface unable to select himself
 		var rubberfaces = document.getElementsByClassName('timingnumber54');
 		for (var i=0; i<rubberfaces.length; i++){
@@ -452,8 +454,9 @@
 					text+=drawPlayer(parsedMsg.players[(i+parsedMsg.privateInformation.position)%parsedMsg.players.length], i==0);					
 				}
 				document.getElementById('players').innerHTML = text;
-				$('[data-toggle="tooltip"]').tooltip();
 				activateButtons();
+				$('[data-toggle="tooltip"]').tooltip();
+				
           	}
           	if (parsedMsg.hasOwnProperty('request')) {
           		resetButtonStates();

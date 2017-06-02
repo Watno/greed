@@ -1,17 +1,12 @@
-package greed.meta;
+package greed.game;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import greed.game.DecisionMaker;
-import greed.game.GreedCard;
-import greed.game.GreedGame;
-import greed.game.GreedPlayer;
-import greed.game.MoneyPaymentReason;
-import greed.game.PaymentReason;
-import greed.game.Reason;
 import greed.game.cards.Seance;
 import greed.game.eventtypes.TriggeredEvent;
+import greed.meta.GreedConnection;
+import greed.meta.JSONGenerator;
 
 public class RealDecisionMaker implements DecisionMaker {
 	GreedConnection connection;

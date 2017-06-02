@@ -85,7 +85,7 @@ public class GreedGame {
 		List<PlayPlan> playPlans = Collections.synchronizedList(new ArrayList<PlayPlan>());
 		List<Thread> threads = new ArrayList<Thread>();
 		for (GreedPlayer thePlayer: players) {
-			Thread theThread = new Thread (new DraftPlayThread(turnCounter, thePlayer, playPlans));
+			Thread theThread = new Thread (new DraftPlayThread(turnCounter, thePlayer, playPlans, this));
 			threads.add(theThread);
 			theThread.start();
 		}
