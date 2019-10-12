@@ -3,5 +3,5 @@ package server;
 import java.util.ArrayList;
 
 public interface IGameFactory {
-	public Runnable createGame(ArrayList<User> connections, int numberOfPlayers);
+	public Runnable createGame(ArrayList<IUserFromGamePerspective> connections, int numberOfPlayers);
 }

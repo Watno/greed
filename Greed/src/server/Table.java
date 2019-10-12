@@ -20,8 +20,12 @@ public class Table {
 	
 	public void startGame() {
 		unreadyPlayers();
+		ArrayList<IUserFromGamePerspective> usersFromGamePerspective= new ArrayList<IUserFromGamePerspective>();
+		for(User user: players){
+			usersFromGamePerspective.add(user.joinGame());
+		}
 		new Thread(gameFactory
-			.createGame(players, numberOfPlayers))
+			.createGame(usersFromGamePerspective, numberOfPlayers))
 			.start();
 		lobby.removeTable(this);
 	}

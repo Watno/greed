@@ -3,12 +3,12 @@ package greed.meta;
 import java.util.ArrayList;
 
 import server.IGameFactory;
-import server.User;
+import server.IUserFromGamePerspective;
 
 public class GameFactory implements IGameFactory {
 
 	@Override
-	public Runnable createGame(ArrayList<User> connections, int numberOfPlayers) {
+	public Runnable createGame(ArrayList<IUserFromGamePerspective> connections, int numberOfPlayers) {
 		return new GreedThreadFromLobby(connections, numberOfPlayers);
 	}
 

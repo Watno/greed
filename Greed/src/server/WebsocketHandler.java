@@ -39,10 +39,6 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 		User greedConn = (User) connection.data("GreedConnection");
 		System.out.println(LocalDateTime.now() +" - " + greedConn.getName() + " closed their connection");
 		greedConn.resign();
-		Table table = greedConn.getTable();
-		if (table!=null) {
-			table.removePlayer(greedConn);
-		}
 	}
 	 
 	@Override
@@ -55,10 +51,7 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 				chat.handleMessage(parsedMessage, greedConn);
 			}
 			if (parsedMessage.has("greedcommand")) {
-				connection.data("input", parsedMessage.get("greedcommand"));
-				synchronized(greedConn) {
-					greedConn.notify();
-				}
+				greedConn.forwardToGame(parsedMessage.get("greedcommand"));
 			}
 			else {
 				if (parsedMessage.has("namechange")) {
@@ -81,7 +74,6 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 				}
 				if (parsedMessage.has("joinLobby")) {
 					greedConn.resign();
-					greedConn.setTable(null);
 					lobby.addConnection(greedConn);
 				}
 				lobby.sendJSON();

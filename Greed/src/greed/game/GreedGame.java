@@ -1,6 +1,90 @@
 package greed.game;
 
-import greed.game.cards.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import greed.game.cards.Arson;
+import greed.game.cards.BeggarsBanquet;
+import greed.game.cards.BiscuitsOMalley;
+import greed.game.cards.BobbyCorduroyBrown;
+import greed.game.cards.BookieJoint;
+import greed.game.cards.Chinatown;
+import greed.game.cards.CircusOfCrime;
+import greed.game.cards.ComplexScheme;
+import greed.game.cards.DaisysCookies;
+import greed.game.cards.DickieFlushDiamond;
+import greed.game.cards.DollsOnCall;
+import greed.game.cards.EdCheeseClothMcGinty;
+import greed.game.cards.EdRubberfaceTeach;
+import greed.game.cards.EstateHeist;
+import greed.game.cards.EugeneTheButcherMidge;
+import greed.game.cards.FriendlyGusCaspar;
+import greed.game.cards.Gambit;
+import greed.game.cards.GenerousJennyJones;
+import greed.game.cards.HalloweenJackParis;
+import greed.game.cards.HarveyBrainsRatcliffe;
+import greed.game.cards.Headquarters;
+import greed.game.cards.Hideout;
+import greed.game.cards.HonestWork;
+import greed.game.cards.Inform;
+import greed.game.cards.InsiderTrading;
+import greed.game.cards.InsuranceOffice;
+import greed.game.cards.InsuranceScam;
+import greed.game.cards.JackCrackerThompson;
+import greed.game.cards.JennysWaterfrontDive;
+import greed.game.cards.JoesGinJoint;
+import greed.game.cards.Junkyard;
+import greed.game.cards.KingRichardTheThird;
+import greed.game.cards.KrazyKatClub;
+import greed.game.cards.LamontesEscortService;
+import greed.game.cards.Liquidate;
+import greed.game.cards.LoanShark;
+import greed.game.cards.LouieSavoirOFarrell;
+import greed.game.cards.MassageParlor;
+import greed.game.cards.MasterPlan;
+import greed.game.cards.MickeyIstari;
+import greed.game.cards.MorticiasAbsintheParlor;
+import greed.game.cards.MuseumHeist;
+import greed.game.cards.NataschaTheSquirrelRubin;
+import greed.game.cards.NothingBeatsRockBenson;
+import greed.game.cards.OneLastHeist;
+import greed.game.cards.PaddysPub;
+import greed.game.cards.PeepingTomThumb;
+import greed.game.cards.PeteRepeatFell;
+import greed.game.cards.PickpocketNetwork;
+import greed.game.cards.PolycephalusPatriciaJones;
+import greed.game.cards.PoorHouse;
+import greed.game.cards.ProtectionRacket;
+import greed.game.cards.Raid;
+import greed.game.cards.RandomScrubPatterson;
+import greed.game.cards.Relocate;
+import greed.game.cards.Renovate;
+import greed.game.cards.RottenJohnnySimmons;
+import greed.game.cards.SandysSnookerNSchnaps;
+import greed.game.cards.Scouting;
+import greed.game.cards.Seance;
+import greed.game.cards.SexySadies;
+import greed.game.cards.Shakedown;
+import greed.game.cards.SixCorners;
+import greed.game.cards.Smuggling;
+import greed.game.cards.StealIdeas;
+import greed.game.cards.Sting;
+import greed.game.cards.StingyStanMcDowell;
+import greed.game.cards.StreetWalkers;
+import greed.game.cards.SuckerConvention;
+import greed.game.cards.SuicideMission;
+import greed.game.cards.TakeCareOfBusiness;
+import greed.game.cards.TedNapoleonBonham;
+import greed.game.cards.TheRitz;
+import greed.game.cards.ThievesHouse;
+import greed.game.cards.TommysGunsNAmmo;
+import greed.game.cards.TrotskysBurlesque;
+import greed.game.cards.Vandalism;
+import greed.game.cards.ViciousSydVarney;
+import greed.game.cards.WolfgangButtercup;
+import greed.game.cards.ZoningOffice;
 import greed.game.eventtypes.AfterPlaysResolveEvent;
 import greed.game.eventtypes.EachTurnEvent;
 import greed.game.eventtypes.EndOfGameEvent;
@@ -8,12 +92,7 @@ import greed.game.eventtypes.EndOfTurnEvent;
 import greed.game.eventtypes.TriggeredEvent;
 import greed.meta.JSONGenerator;
 import greed.meta.Logger;
-import server.User;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import server.IUserFromGamePerspective;
 
 
 
@@ -59,7 +138,7 @@ public class GreedGame {
 		JSONGenerator.generateJSON(this);
 	}
 	
-	public void addRealPlayer(User connection) {
+	public void addRealPlayer(IUserFromGamePerspective connection) {
 		players.get(realPlayers).makeReal(connection);
 		realPlayers++;
 	}

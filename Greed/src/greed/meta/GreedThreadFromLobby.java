@@ -4,26 +4,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import greed.game.GreedGame;
-import server.User;
+import server.IUserFromGamePerspective;
 
 public class GreedThreadFromLobby implements Runnable {
-	private ArrayList<User> connections;
+	private ArrayList<IUserFromGamePerspective> connections;
 	private int numberOfPlayers;
 	
-	public GreedThreadFromLobby(ArrayList<User> connections, int numberOfPlayers) {
+	public GreedThreadFromLobby(ArrayList<IUserFromGamePerspective> connections, int numberOfPlayers) {
 		this.connections = connections;
 		this.numberOfPlayers = numberOfPlayers;
 	}
 	@Override
 	public void run() {
 		GreedGame theGame = new GreedGame(numberOfPlayers);
-		for (User connection : connections) {
+		for (IUserFromGamePerspective connection : connections) {
 			System.out.println(LocalDateTime.now() +" - " + connection.getName());
 			theGame.addRealPlayer(connection);
 		}
 		theGame.startGame();
 		System.out.println(LocalDateTime.now() +" - " + "Game finished, players: ");
-		for (User thePlayer: connections) {
+		for (IUserFromGamePerspective thePlayer: connections) {
 			System.out.println(LocalDateTime.now() +" - " + thePlayer.getName());
 			thePlayer.allowReturnToLobby();
 		}

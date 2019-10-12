@@ -14,7 +14,7 @@ import greed.game.eventtypes.IgnoreNeedEvent;
 import greed.game.eventtypes.RemoveFromPlayEvent;
 import greed.game.eventtypes.WhenPlayEvent;
 import greed.meta.ai.CleverDecider;
-import server.User;
+import server.IUserFromGamePerspective;
 
 
 public class GreedPlayer {
@@ -372,7 +372,7 @@ public class GreedPlayer {
 		return name;
 	}
 
-	public void makeReal(User connection) {
+	public void makeReal(IUserFromGamePerspective connection) {
 		this.decisionMaker = new RealDecisionMaker(connection, theGame, this);
 		this.name = connection.getName();
 	}
@@ -382,6 +382,7 @@ public class GreedPlayer {
 	}
 
 	public void replaceByBot() {
+		this.name += " (resigned)";
 		this.decisionMaker = new CleverDecider(this, theGame);//still need to handle currently awaited decision by old decider
 	}
 

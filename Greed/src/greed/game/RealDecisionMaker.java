@@ -5,18 +5,19 @@ import java.util.Locale;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import greed.game.cards.Seance;
 import greed.game.eventtypes.TriggeredEvent;
 import greed.meta.JSONGenerator;
-import server.User;
+import server.IUserFromGamePerspective;
 
 public class RealDecisionMaker implements IDecisionMaker {
-	User connection;
+	IUserFromGamePerspective connection;
 	GreedGame theGame;
 	GreedPlayer thePlayer;
 	
-	public RealDecisionMaker(User connection, GreedGame theGame, GreedPlayer thePlayer) {
+	public RealDecisionMaker(IUserFromGamePerspective connection, GreedGame theGame, GreedPlayer thePlayer) {
 		this.connection = connection;
 		this.theGame = theGame;
 		this.thePlayer = thePlayer;
@@ -105,11 +106,7 @@ public class RealDecisionMaker implements IDecisionMaker {
 		//TODO Cleanup gamestate sending
 		connection.send(gameState);
 	}
-	
-	public void replaceByBot() {
-		thePlayer.replaceByBot();//still need to handle currently awaited decision by old decider
-	}
-	
+
 	private boolean requestBoolInput(JsonObject prompt) {
 		return requestInput(prompt).getAsInt()==0; //yes is 0, no is expected to be -1
 	}
@@ -120,7 +117,12 @@ public class RealDecisionMaker implements IDecisionMaker {
 	}
 	
 	private JsonElement requestInput(JsonObject prompt) {
-		return connection.requestInput(prompt);
+		JsonElement input = connection.requestInput(prompt);
+		if (connection.hasResigned()) {
+			thePlayer.replaceByBot();
+			return new JsonPrimitive(0);
+		}
+		return input;
 	}
 
 

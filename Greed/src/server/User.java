@@ -13,39 +13,29 @@ public class User {
 	private String name = "defaultname";
 	private Table table = null;
 	private boolean ready = false;
+	private UserInGame userInGame = null;
 
 	public User(WebSocketConnection connection) {
 		this.connection = connection;
 	}
 
-	public synchronized JsonElement requestInput(JsonObject request) {
-		send(request);
-		try {
-			wait();
-			sendInputAcceptance();
-			return (JsonElement) connection.data("input");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	public void resign() {
+		if (table != null) {
+			table.removePlayer(this);	
 		}
-		return null;
+		if (userInGame != null) {
+			userInGame.resign();
+		}
 	}
 
-	public synchronized void resign() {
-		table.removePlayer(this);
-		connection.data("input", 0);
-		notify();
+	public void forwardToGame(JsonElement json) {
+		if (userInGame != null) {
+			userInGame.receiveInput(json);
+		}
 	}
-
+	
 	public void send(JsonObject json) {
 		connection.send(new GsonBuilder().setPrettyPrinting().create().toJson(json));
-	}
-
-	public void allowReturnToLobby() {
-		JsonObject json = new JsonObject();
-		json.addProperty("request", "returnToLobby");
-		json.addProperty("optional", false);
-		json.addProperty("reason", "Game Over");
-		send(json);
 	}
 
 	public String getName() {
@@ -81,12 +71,10 @@ public class User {
 			}
 		}
 	}
-
-	private void sendInputAcceptance() {
-		JsonObject json = new JsonObject();
-		json.addProperty("request", "empty");
-		json.addProperty("optional", false);
-		json.addProperty("reason", "");
-		send(json);
+	
+	public UserInGame joinGame() {
+		this.userInGame = new UserInGame(this);
+		return this.userInGame;
 	}
+
 }
