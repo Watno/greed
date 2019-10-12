@@ -6,9 +6,9 @@ import greed.game.eventtypes.EachTurnEvent;
 import greed.game.eventtypes.EndOfGameEvent;
 import greed.game.eventtypes.EndOfTurnEvent;
 import greed.game.eventtypes.TriggeredEvent;
-import greed.meta.GreedConnection;
 import greed.meta.JSONGenerator;
 import greed.meta.Logger;
+import server.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class GreedGame {
 		JSONGenerator.generateJSON(this);
 	}
 	
-	public void addRealPlayer(GreedConnection connection) {
+	public void addRealPlayer(User connection) {
 		players.get(realPlayers).makeReal(connection);
 		realPlayers++;
 	}

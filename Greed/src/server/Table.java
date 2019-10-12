@@ -1,34 +1,34 @@
-package greed.meta.lobby;
+package server;
 
 import java.util.ArrayList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import greed.meta.GreedConnection;
-import greed.meta.GreedThreadFromLobby;
-
 
 public class Table {
-	private ArrayList<GreedConnection> players = new ArrayList<GreedConnection>();
+	private ArrayList<User> players = new ArrayList<User>();
 	private int numberOfPlayers=3;
 	private Lobby lobby; 
+	private IGameFactory gameFactory;
 	
-	public Table(GreedConnection player, Lobby lobby) {
+	public Table(IGameFactory gameFactory, User player, Lobby lobby) {
+		this.gameFactory = gameFactory;
 		addPlayer(player);
 		this.lobby=lobby;
 	}
 	
 	public void startGame() {
 		unreadyPlayers();
-		Thread game = new Thread (new GreedThreadFromLobby(players, numberOfPlayers));
+		new Thread(gameFactory
+			.createGame(players, numberOfPlayers))
+			.start();
 		lobby.removeTable(this);
-		game.start();
 	}
 	
-	public boolean addPlayer(GreedConnection player) {
-		unreadyPlayers();
+	public boolean addPlayer(User player) {
 		if (players.size()<numberOfPlayers) {
+			unreadyPlayers();
 			players.add(player);
 			if (player.getTable()!=null) {
 				player.getTable().removePlayer(player);
@@ -39,7 +39,7 @@ public class Table {
 		return false;
 	}
 	
-	public void removePlayer(GreedConnection player) {
+	public void removePlayer(User player) {
 		players.remove(player);
 		player.setTable(null);
 		if (players.size()==0) {
@@ -59,7 +59,7 @@ public class Table {
 		}
 	}
 
-	public ArrayList<GreedConnection> getPlayers() {
+	public ArrayList<User> getPlayers() {
 		return players;
 	}
 	
@@ -67,7 +67,7 @@ public class Table {
 		JsonObject json = new JsonObject();
 		json.addProperty("numberOfPlayers", numberOfPlayers);
 		JsonArray JsonPlayers = new JsonArray();
-		for (GreedConnection player : players) {
+		for (User player : players) {
 			JsonPlayers.add(player.getName());
 		}
 		json.add("players", JsonPlayers);
@@ -75,14 +75,14 @@ public class Table {
 	}
 	
 	private void unreadyPlayers() {
-		for (GreedConnection player : players) {
+		for (User player : players) {
 			player.setReady(false);
 		}
 	}
 	
-	public void sendChat(String chat) {
-		for (GreedConnection connection : players) {
-			connection.sendChat(chat);
+	public void sendChat(JsonObject json) {
+		for (User connection : players) {
+			connection.send(json);
 		}
 	}
 	

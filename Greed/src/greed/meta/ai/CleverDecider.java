@@ -3,13 +3,15 @@ package greed.meta.ai;
 import java.util.List;
 import java.util.Random;
 
-import greed.game.DecisionMaker;
+import com.google.gson.JsonObject;
+
+import greed.game.IDecisionMaker;
 import greed.game.GreedCard;
 import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 import greed.game.Reason;
 
-public class CleverDecider implements DecisionMaker {
+public class CleverDecider implements IDecisionMaker {
 	
 	GreedPlayer player;
 	GreedGame game;
@@ -83,7 +85,7 @@ public class CleverDecider implements DecisionMaker {
 	}
 
 	@Override
-	public void sendGameState(String gameState) {
+	public void sendGameState(JsonObject gameState) {
 		// TODO Auto-generated method stub
 
 	}

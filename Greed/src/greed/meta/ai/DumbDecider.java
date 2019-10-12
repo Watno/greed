@@ -1,9 +1,11 @@
 package greed.meta.ai;
 
-import greed.game.DecisionMaker;
+import com.google.gson.JsonObject;
+
+import greed.game.IDecisionMaker;
 import greed.game.Reason;
 
-public class DumbDecider implements DecisionMaker{
+public class DumbDecider implements IDecisionMaker{
 
 	@Override
 	public int pickDraftIndex() {
@@ -46,7 +48,7 @@ public class DumbDecider implements DecisionMaker{
 	}
 	
 	@Override
-	public void sendGameState(String gameState) {
+	public void sendGameState(JsonObject gameState) {
 	}
 
 }

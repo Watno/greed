@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
 import greed.game.eventtypes.AfterPlayEvent;
 import greed.game.eventtypes.CashCostModifyEvent;
 import greed.game.eventtypes.CashGainAmountModifyEvent;
@@ -11,12 +13,12 @@ import greed.game.eventtypes.IgnoreCostEvent;
 import greed.game.eventtypes.IgnoreNeedEvent;
 import greed.game.eventtypes.RemoveFromPlayEvent;
 import greed.game.eventtypes.WhenPlayEvent;
-import greed.meta.GreedConnection;
 import greed.meta.ai.CleverDecider;
+import server.User;
 
 
 public class GreedPlayer {
-	private DecisionMaker decisionMaker;
+	private IDecisionMaker decisionMaker;
 	private GreedGame theGame; 
 	private String name;
 	private int cash=0;
@@ -370,16 +372,15 @@ public class GreedPlayer {
 		return name;
 	}
 
-	public void makeReal(GreedConnection connection) {
+	public void makeReal(User connection) {
 		this.decisionMaker = new RealDecisionMaker(connection, theGame, this);
 		this.name = connection.getName();
 	}
 
-	public void send(String gameState) {
+	public void send(JsonObject gameState) {
 		decisionMaker.sendGameState(gameState);
 	}
 
-	
 	public void replaceByBot() {
 		this.decisionMaker = new CleverDecider(this, theGame);//still need to handle currently awaited decision by old decider
 	}

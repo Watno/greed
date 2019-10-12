@@ -1,11 +1,7 @@
-package greed.meta;
-
-import greed.meta.lobby.Lobby;
-import greed.meta.lobby.Table;
+package server;
 
 import java.time.LocalDateTime;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class Chat {
@@ -15,7 +11,7 @@ public class Chat {
 		this.lobby=lobby;
 	}
 	
-	public void handleMessage(JsonObject receivedMessage, GreedConnection connection) {
+	public void handleMessage(JsonObject receivedMessage, User connection) {
 		JsonObject json = makeJSON(receivedMessage.get("chat").getAsString(), connection);
 		if (receivedMessage.get("location").getAsString().equals("lobby")) {
 			sendToLobby(json);
@@ -25,7 +21,7 @@ public class Chat {
 		}
 	}
 	
-	private JsonObject makeJSON(String message, GreedConnection connection){
+	private JsonObject makeJSON(String message, User connection){
 		JsonObject json = new JsonObject();
 		json.addProperty("type", "chat");
 		json.addProperty("message", message);
@@ -36,12 +32,12 @@ public class Chat {
 	
 	private void sendToLobby(JsonObject json) {
 		json.addProperty("location", "lobby");
-		lobby.sendChat(new GsonBuilder().setPrettyPrinting().create().toJson(json));
+		lobby.sendChat(json);
 	}
 	
 	private void sendToTable(JsonObject json, Table table) {
 		json.addProperty("location", "table");
-		table.sendChat(new GsonBuilder().setPrettyPrinting().create().toJson(json));
+		table.sendChat(json);
 	}
 	
 }

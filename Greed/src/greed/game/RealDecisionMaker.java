@@ -3,21 +3,23 @@ package greed.game;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import greed.game.cards.Seance;
 import greed.game.eventtypes.TriggeredEvent;
-import greed.meta.GreedConnection;
 import greed.meta.JSONGenerator;
+import server.User;
 
-public class RealDecisionMaker implements DecisionMaker {
-	GreedConnection connection;
+public class RealDecisionMaker implements IDecisionMaker {
+	User connection;
 	GreedGame theGame;
 	GreedPlayer thePlayer;
 	
-	public RealDecisionMaker(GreedConnection connection, GreedGame theGame, GreedPlayer thePlayer) {
+	public RealDecisionMaker(User connection, GreedGame theGame, GreedPlayer thePlayer) {
 		this.connection = connection;
 		this.theGame = theGame;
 		this.thePlayer = thePlayer;
-		connection.setDecider(this);
 	}
 	
 	private String reasonToString(Reason reason) {
@@ -39,48 +41,48 @@ public class RealDecisionMaker implements DecisionMaker {
 	@Override
 	public int pickDraftIndex() {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("draftPile", false, "Pick a card to draft!"));
+		return requestIntInput(JSONGenerator.createPrompt("draftPile", false, "Pick a card to draft!"));
 	}
 
 	@Override
 	public int pickHandIndex() {
 		theGame.sendGameState();
-		return connection.requestInput(JSONGenerator.createPrompt("hand", false, "Pick a card to play!"));
+		return requestIntInput(JSONGenerator.createPrompt("hand", false, "Pick a card to play!"));
 	}
 
 	@Override
 	public int pickThugIndex(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("thug", false, "Pick a Thug"+reasonString+"!"));
+		return requestIntInput(JSONGenerator.createPrompt("thug", false, "Pick a Thug"+reasonString+"!"));
 	}
 
 	@Override
 	public int pickHoldingIndex(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("holding", false, "Pick a Holding"+reasonString+"!"));
+		return requestIntInput(JSONGenerator.createPrompt("holding", false, "Pick a Holding"+reasonString+"!"));
 	}
 
 	@Override
 	public int pickHandIndexOptional(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("hand", true, "You may pick a card from your Hand"+reasonString+"."));
+		return requestIntInput(JSONGenerator.createPrompt("hand", true, "You may pick a card from your Hand"+reasonString+"."));
 	}
 
 	@Override
 	public int pickThugIndexOptional(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reasonString+"."));
+		return requestIntInput(JSONGenerator.createPrompt("thug", true, "You may pick a Thug"+reasonString+"."));
 	}
 
 	@Override
 	public int pickHoldingIndexOptional(Reason reason) {
 		theGame.sendGameState();
 		String reasonString = reasonToString(reason);
-		return connection.requestInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reasonString+"."));
+		return requestIntInput(JSONGenerator.createPrompt("holding", true, "You may pick a Holding"+reasonString+"."));
 	}
 
 	@Override
@@ -95,16 +97,30 @@ public class RealDecisionMaker implements DecisionMaker {
 			choice = " pay $" + NumberFormat.getNumberInstance(Locale.US).format(moneyReason.getAmount());
 			choice += " for " + moneyReason.getPaidCard().getName();
 		}
-		return connection.requestInput(JSONGenerator.createPrompt("YesNo", true, "Do you want to" +choice+ "?"))==0; //yes is 0, no is expected to be -1
+		return requestBoolInput(JSONGenerator.createPrompt("YesNo", true, "Do you want to" +choice+ "?")); //yes is 0, no is expected to be -1
 	}
 	
 	@Override
-	public void sendGameState(String gameState) {
-		connection.sendState(gameState);
+	public void sendGameState(JsonObject gameState) {
+		//TODO Cleanup gamestate sending
+		connection.send(gameState);
 	}
 	
 	public void replaceByBot() {
 		thePlayer.replaceByBot();//still need to handle currently awaited decision by old decider
+	}
+	
+	private boolean requestBoolInput(JsonObject prompt) {
+		return requestInput(prompt).getAsInt()==0; //yes is 0, no is expected to be -1
+	}
+	
+	
+	private int requestIntInput(JsonObject prompt) {
+		return requestInput(prompt).getAsInt();
+	}
+	
+	private JsonElement requestInput(JsonObject prompt) {
+		return connection.requestInput(prompt);
 	}
 
 

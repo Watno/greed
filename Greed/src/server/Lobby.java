@@ -1,32 +1,35 @@
-package greed.meta.lobby;
+package server;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import greed.meta.GreedConnection;
-
 public class Lobby {
 	private ArrayList<Table> tables = new ArrayList<Table>();
-	private ArrayList<GreedConnection> connections = new ArrayList<GreedConnection>();
+	private ArrayList<User> connections = new ArrayList<User>();
+	private Map<String, IGameFactory> gameFactories;
 	
-	public void makeTable(GreedConnection player) {
-		tables.add(new Table(player, this));
+	public Lobby(Map<String, IGameFactory> gameFactories) {
+		this.gameFactories = gameFactories;
+	}
+
+	public void makeTable(User player) {
+		tables.add(new Table(gameFactories.get("Greed"), player, this));
 	}
 	
 	public void removeTable(Table table) {
 		tables.remove(table);
-		for (GreedConnection connection : table.getPlayers()) {
+		for (User connection : table.getPlayers()) {
 			removeConnection(connection);
 		}
 	}
 	
-	public void removeConnection(GreedConnection connection) {
+	public void removeConnection(User connection) {
 		connections.remove(connection);
 	}
-	public void addConnection(GreedConnection connection) {
+	public void addConnection(User connection) {
 		connections.add(connection);
 	}
 	
@@ -38,20 +41,20 @@ public class Lobby {
 		}
 		json.add("tables", jsonTables);
 		json.addProperty("type", "lobby");
-		for (GreedConnection connection : connections) {
+		for (User connection : connections) {
 			if (connection.getTable()!=null) {
 				json.addProperty("tablenumber", tables.indexOf(connection.getTable()));
 			}
 			else {
 				json.remove("tablenumber");
 			}
-			connection.sendLobby(new GsonBuilder().setPrettyPrinting().create().toJson(json));
+			connection.send(json);
 		}
 	}
 	
-	public void sendChat(String chat) {
-		for (GreedConnection connection : connections) {
-			connection.sendChat(chat);
+	public void sendChat(JsonObject chat) {
+		for (User connection : connections) {
+			connection.send(chat);
 		}
 	}
 

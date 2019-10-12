@@ -1,48 +1,42 @@
-package greed.meta;
+package server;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import greed.meta.lobby.Lobby;
-import greed.meta.lobby.Table;
-
 import org.webbitserver.BaseWebSocketHandler;
 import org.webbitserver.WebSocketConnection;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
  
 public class WebsocketHandler extends BaseWebSocketHandler {
  
-	private ArrayList<GreedConnection> connections;
+	private ArrayList<User> connections = new ArrayList<User>();
 	private Lobby lobby;
 	private Chat chat; 
-	 
-	public WebsocketHandler(ArrayList<GreedConnection> connections){
+	
+	
+	public WebsocketHandler(Lobby lobby, Chat chat) {
 		super();
-		this.connections=connections;
-		lobby = new Lobby();
-		chat = new Chat(lobby);
+		this.lobby = lobby;
+		this.chat = chat;
 	}
+
 	
 	@Override
 	public void onOpen(WebSocketConnection connection) {
 		System.out.println(LocalDateTime.now() +" - " + "new connection");
 		synchronized (connections){
-			GreedConnection greedConnection = new GreedConnection(connection);
+			User greedConnection = new User(connection);
 			lobby.addConnection(greedConnection);
-//			connections.add(greedConnection);
-//			connections.notify();
+
 			connection.data("GreedConnection",greedConnection);
 			lobby.sendJSON();
-//			lobby.addConnection(greedConnection);
-//			lobby.makeTable(greedConnection);
-//			greedConnection.getTable().startGame();
 		}
 	}
 	 
 	@Override
 	public void onClose(WebSocketConnection connection) {
-		GreedConnection greedConn = (GreedConnection) connection.data("GreedConnection");
+		User greedConn = (User) connection.data("GreedConnection");
 		System.out.println(LocalDateTime.now() +" - " + greedConn.getName() + " closed their connection");
 		greedConn.resign();
 		Table table = greedConn.getTable();
@@ -54,14 +48,14 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 	@Override
 	public void onMessage(WebSocketConnection connection, String message) {
 		JsonParser parser = new JsonParser();
-		GreedConnection greedConn = (GreedConnection) connection.data("GreedConnection");
+		User greedConn = (User) connection.data("GreedConnection");
 		try {
 			JsonObject parsedMessage = parser.parse(message).getAsJsonObject();
 			if (parsedMessage.has("chat")) {
 				chat.handleMessage(parsedMessage, greedConn);
 			}
 			if (parsedMessage.has("greedcommand")) {
-				connection.data("input", parsedMessage.get("greedcommand").getAsInt());
+				connection.data("input", parsedMessage.get("greedcommand"));
 				synchronized(greedConn) {
 					greedConn.notify();
 				}

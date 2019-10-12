@@ -10,8 +10,6 @@ import greed.game.GreedPlayer;
 import greed.game.Holding;
 import greed.game.Thug;
 
-import com.google.gson.GsonBuilder;
-
 public class JSONGenerator {
 	private static  JsonObject cardToJSON(GreedCard theCard) {
 		JsonObject json = new JsonObject();
@@ -114,16 +112,16 @@ public class JSONGenerator {
 		int position=0;
 		for (GreedPlayer thePlayer : theGame.getPlayers()) {
 			json.add("privateInformation", privateInformation(thePlayer, position));
-			thePlayer.send(new GsonBuilder().setPrettyPrinting().create().toJson(json));
+			thePlayer.send(json);
 			position++;
 		}
 	}
 	
-	public static String createPrompt(String request, boolean optional, String reason) {
+	public static JsonObject createPrompt(String request, boolean optional, String reason) {
 		JsonObject json = new JsonObject();
 		json.addProperty("request", request);
 		json.addProperty("optional", optional);
 		json.addProperty("reason", reason);
-		return new GsonBuilder().setPrettyPrinting().create().toJson(json);
+		return json;
 	}
 }
