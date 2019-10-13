@@ -1,5 +1,7 @@
 package spacealert.core;
 
+import spacealert.core.missionSteps.IMissionStep;
+
 public class PlayerActionsStep implements IMissionStep {
 	private int turnNumber;
 	

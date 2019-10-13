@@ -12,4 +12,10 @@ public class Game {
 	public boolean mouseJuggled(int phase) {
 		return true;
 	}
+	
+	public void delayAllCrewMembers(int delayedTurn) {
+		for(ICrewMember crewMember: crewMembers) {
+			crewMember.delay(delayedTurn);
+		}
+	}
 }
