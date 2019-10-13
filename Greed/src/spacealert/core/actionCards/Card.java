@@ -1,6 +1,8 @@
 package spacealert.core.actionCards;
 
+import spacealert.core.Game;
 import spacealert.core.ICrewMember;
+import spacealert.core.actionCards.effects.ICardEffect;
 
 public class Card {
 	private ICardEffect actionHalf;
@@ -18,12 +20,12 @@ public class Card {
 		this.orientation = orientation;
 	}
 
-	public void execute(ICrewMember crewMember) {
+	public void execute(ICrewMember crewMember, Game game) {
 		switch (orientation) {
 			case ACTION:
-				actionHalf.execute(crewMember);
+				actionHalf.execute(crewMember, game);
 			case MOVEMENT:
-				movementHalf.execute(crewMember);
+				movementHalf.execute(crewMember, game);
 			default:
 				break;
 		}

@@ -1,7 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="changed IDEs, implemented basic actions">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Button.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Gravolift.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/IDamageable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Position.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Station.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/PlayerActionsStep.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ICardEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/ICardEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1SA7iLUOEP6iLDlWhXKDGpXIZkc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="spacealert.core" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="spacealert.core.missionSteps" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="spacealert.core.actionCards.effects" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="" />
+      <created>1570994673019</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570994673019</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="changed IDEs, implemented basic actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed IDEs, implemented basic actions" />
+  </component>
 </project>

@@ -5,30 +5,37 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 
 public class ActionBoard {
 	private int size = 12;
 	private ArrayList<Optional<Card>> cards;
-	
+	private int lastExecutedTurn = 0;
+
 	public ActionBoard() {
-		cards= Stream.generate(() -> Optional.<Card>empty())
+		cards= Stream.generate(Optional::<Card>empty)
 				.limit(size)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public void execute(int turnToExecute, ICrewMember crewMember) {
+	public void execute(int turnToExecute, ICrewMember crewMember, Game game) {
 		int index = turnToExecute+1;
-		cards.get(index).ifPresent(x -> x.execute(crewMember)); 
+		cards.get(index).ifPresent(x -> x.execute(crewMember, game));
+		lastExecutedTurn = turnToExecute;
 	}
-	
-	public void delay(int delayedTurn) {
+
+	public void delay(){
+		delay(lastExecutedTurn +1);
+	}
+
+	private void delay(int delayedTurn) {
 		if (delayedTurn > size) return;
 		int index = delayedTurn+1;
 		Optional<Card> cardOnTurn = cards.get(index);
 		if (cardOnTurn.isPresent()) {
 			delay(delayedTurn+1);
-		};
+		}
 		if (delayedTurn != size) {
 			cards.set(index+1, cardOnTurn);	
 		}

@@ -12,7 +12,7 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
 
 	
 	private static List<IMissionStep> createMissionSteps() { 
-		List<IMissionStep> steps = new ArrayList<IMissionStep>();
+		List<IMissionStep> steps = new ArrayList<>();
 		
 		steps.addAll(createTurn(1));
 		steps.addAll(createTurnWithComputerMaintenance(2,1));
@@ -28,7 +28,7 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
 		steps.addAll(createTurn(10));
 		steps.addAll(createTurn(11));
 		steps.addAll(createTurn(12));
-		s
+
 		steps.add(new RocketResolutionStep());
 		steps.add(new ThreatActionsStep());
 		
@@ -37,7 +37,7 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
 	 
 	
 	private static List<IMissionStep> createTurn(int turn) {
-		return List.<IMissionStep>of(
+		return List.of(
 				new ThreatAppearsStep(turn),
 				new PlayerActionsStep(turn),
 				new ComputeDamageStep(),
@@ -46,11 +46,11 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
 	}
 	
 	private static List<IMissionStep> createTurnWithComputerMaintenance(int turn, int phase) {
-		return List.<IMissionStep>of(
+		return List.of(
 				new ThreatAppearsStep(turn),
 				new PlayerActionsStep(turn),
 				new ComputeDamageStep(),
-				new ComputerMaintenanceCheckStep(phase, turn),
+				new ComputerMaintenanceCheckStep(phase),
 				new ThreatActionsStep()
 				);
 	}
