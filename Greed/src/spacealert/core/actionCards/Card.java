@@ -20,14 +20,19 @@ public class Card {
 		this.orientation = orientation;
 	}
 
-	public void execute(ICrewMember crewMember, Game game) {
-		switch (orientation) {
-			case ACTION:
-				actionHalf.execute(crewMember, game);
-			case MOVEMENT:
-				movementHalf.execute(crewMember, game);
-			default:
-				break;
-		}
-	}
+    public void execute(ICrewMember crewMember, Game game) {
+        var activeHalf = getActiveHalf();
+        activeHalf.execute(crewMember, game);
+    }
+
+    private ICardEffect getActiveHalf() {
+        switch (orientation) {
+            case ACTION:
+                return actionHalf;
+            case MOVEMENT:
+                return movementHalf;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }

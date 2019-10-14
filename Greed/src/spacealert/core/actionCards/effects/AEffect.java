@@ -4,10 +4,9 @@ import spacealert.core.Button;
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 
-public class AEffect implements ICardEffect {
+public class AEffect extends CardEffect {
 
-    @Override
-    public void execute(ICrewMember crewmember, Game game) {
+    protected void executeEffect(ICrewMember crewmember, Game game) {
         crewmember.executeButton(Button.A);
     }
 }

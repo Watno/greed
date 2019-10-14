@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="10" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="changed IDEs, implemented basic actions">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Button.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Direction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Gravolift.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/IDamageable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Position.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Station.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented B-Buttons and rooms">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Wolfgang.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/BattleBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/EnergyBucket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Reactor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CardEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/CentralReactor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/CentralShield.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LateralReactor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LateralShield.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerBlueStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerRedStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerWhiteStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Space.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperBlueStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperRedStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperWhiteStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/PlayerActionsStep.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/ILocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Shield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Zone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ICardEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/ICardEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +47,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Greed" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -53,7 +68,12 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -63,6 +83,7 @@
       <recent name="spacealert.core.missionSteps" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="spacealert.core.locations" />
       <recent name="spacealert.core.actionCards.effects" />
     </key>
   </component>
@@ -89,6 +110,14 @@
       <option name="presentableId" value="Default" />
       <updated>1570994673019</updated>
     </task>
+    <task id="LOCAL-00001" summary="changed IDEs, implemented basic actions">
+      <created>1571003832044</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571003832044</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -96,7 +125,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -104,6 +135,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed IDEs, implemented basic actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed IDEs, implemented basic actions" />
+    <MESSAGE value="implemented B-Buttons and rooms" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented B-Buttons and rooms" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

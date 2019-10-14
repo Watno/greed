@@ -1,6 +1,7 @@
 package spacealert.core;
 
 import spacealert.core.actionCards.ActionBoard;
+import spacealert.core.locations.ILocation;
 
 import java.util.Optional;
 
@@ -18,7 +19,8 @@ public class CrewMember implements ICrewMember{
 	public void delay() {
 		actionBoard.delay();
 	}
-	
+
+	@Override
 	public void moveTo(ILocation newLocation) {
 		location.removeCrewMember(this);
 		newLocation.addCrewMember(this);
@@ -26,7 +28,7 @@ public class CrewMember implements ICrewMember{
 	}
 
 	public void moveInDirection(Direction direction){
-		var newPosition = game.getStationLayout().getAdjacentInDirection(location, direction);
+		var newPosition = game.getAdjacentInDirection(location, direction);
 		newPosition.ifPresent(this::moveTo);
 
 	}
@@ -43,5 +45,10 @@ public class CrewMember implements ICrewMember{
 	@Override
 	public void executeButton(Button button){
 		location.executeButton(this, button);
+	}
+
+	@Override
+	public boolean isInSpace() {
+		return location.isSpace();
 	}
 }
