@@ -7,6 +7,6 @@ import spacealert.core.ICrewMember;
 public class AEffect extends CardEffect {
 
     protected void executeEffect(ICrewMember crewmember, Game game) {
-        crewmember.executeButton(Button.A);
+        crewmember.executeButton(game, Button.A);
     }
 }

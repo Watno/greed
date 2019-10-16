@@ -6,19 +6,19 @@ import java.util.Optional;
 
 public interface ICrewMember {
 
-	void executeAction(int turn);
+    void executeAction(int turn, Game game);
 
 	void delay();
 
     void moveTo(ILocation newLocation);
 
-    void moveInDirection(Direction direction);
+    void moveInDirection(Game game, Direction direction);
 
 	ILocation getLocation();
 
 	Optional<Zone> getZone();
 
-    void executeButton(Button button);
+    void executeButton(Game game, Button button);
 
     boolean isInSpace();
 }

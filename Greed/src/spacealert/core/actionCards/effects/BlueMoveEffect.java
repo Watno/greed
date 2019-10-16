@@ -7,7 +7,7 @@ import spacealert.core.ICrewMember;
 public class BlueMoveEffect extends CardEffect {
 
     protected void executeEffect(ICrewMember crewmember, Game game) {
-        crewmember.moveInDirection(Direction.BLUE);
+        crewmember.moveInDirection(game, Direction.BLUE);
     }
 
 }

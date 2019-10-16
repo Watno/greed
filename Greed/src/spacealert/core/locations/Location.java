@@ -8,11 +8,14 @@ import java.util.Optional;
 
 public abstract class Location implements ILocation{
 	private Collection<ICrewMember> crewMembers = new ArrayList<>();
-	protected Optional<Position> position;
-	protected Game game;
+	private Optional<Position> position;
 
-	protected Location(Game game) {
-		this.game = game;
+	protected Location(Position position) {
+		this(Optional.of(position));
+	}
+
+	protected Location(Optional<Position> position) {
+		this.position = position;
 	}
 
 	@Override
@@ -46,23 +49,23 @@ public abstract class Location implements ILocation{
 	}
 
 	@Override
-	public void executeButton(ICrewMember crewMember, Button button){
+	public void executeButton(Game game, ICrewMember crewMember, Button button) {
 		switch (button) {
 			case A:
-				executeAButton(crewMember);
+				executeAButton(game, crewMember);
 				break;
 			case B:
-				executeBButton(crewMember);
+				executeBButton(game, crewMember);
 				break;
 			case C:
-				executeCButton(crewMember);
+				executeCButton(game, crewMember);
 				break;
 		}
 	}
 
-	protected abstract void executeAButton(ICrewMember crewMember);
+	protected abstract void executeAButton(Game game, ICrewMember crewMember);
 
-	protected abstract void executeBButton(ICrewMember crewMember);
+	protected abstract void executeBButton(Game game, ICrewMember crewMember);
 
-	protected abstract void executeCButton(ICrewMember crewMember);
+	protected abstract void executeCButton(Game game, ICrewMember crewMember);
 }

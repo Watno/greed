@@ -8,14 +8,14 @@ import java.util.Optional;
 public class StationLayout {
     private Map<Position, ILocation> stations;
 
-    public StationLayout(Game game) {
+    public StationLayout() {
         stations = Map.of(
-                new Position(Deck.UPPER, Zone.RED), new UpperRedStation(game),
-                new Position(Deck.UPPER, Zone.WHITE), new UpperWhiteStation(game),
-                new Position(Deck.UPPER, Zone.BLUE), new UpperBlueStation(game),
-                new Position(Deck.LOWER, Zone.RED), new LowerRedStation(game),
-                new Position(Deck.LOWER, Zone.WHITE), new LowerWhiteStation(game),
-                new Position(Deck.LOWER, Zone.BLUE), new LowerBlueStation(game)
+                new Position(Deck.UPPER, Zone.RED), new UpperRedStation(),
+                new Position(Deck.UPPER, Zone.WHITE), new UpperWhiteStation(),
+                new Position(Deck.UPPER, Zone.BLUE), new UpperBlueStation(),
+                new Position(Deck.LOWER, Zone.RED), new LowerRedStation(),
+                new Position(Deck.LOWER, Zone.WHITE), new LowerWhiteStation(),
+                new Position(Deck.LOWER, Zone.BLUE), new LowerBlueStation()
         );
     }
 

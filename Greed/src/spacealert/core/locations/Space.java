@@ -3,10 +3,12 @@ package spacealert.core.locations;
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 
+import java.util.Optional;
+
 public class Space extends Location {
 
-    public Space(Game game) {
-        super(game);
+    public Space() {
+        super(Optional.empty());
     }
 
     @Override
@@ -15,17 +17,17 @@ public class Space extends Location {
     }
 
     @Override
-    protected void executeAButton(ICrewMember crewMember) {
+    protected void executeAButton(Game game, ICrewMember crewMember) {
 
     }
 
     @Override
-    protected void executeBButton(ICrewMember crewMember) {
+    protected void executeBButton(Game game, ICrewMember crewMember) {
 
     }
 
     @Override
-    protected void executeCButton(ICrewMember crewMember) {
+    protected void executeCButton(Game game, ICrewMember crewMember) {
 
     }
 

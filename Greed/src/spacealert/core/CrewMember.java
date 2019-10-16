@@ -8,10 +8,15 @@ import java.util.Optional;
 public class CrewMember implements ICrewMember{
 	private ActionBoard actionBoard;
 	private ILocation location;
-	private Game game;
-	
+
+
+	public CrewMember(ILocation location, ActionBoard actionBoard) {
+		this.location = location;
+		this.actionBoard = actionBoard;
+	}
+
 	@Override
-	public void executeAction(int turn) {
+	public void executeAction(int turn, Game game) {
 		actionBoard.execute(turn, this, game);
 	}
 	
@@ -27,7 +32,8 @@ public class CrewMember implements ICrewMember{
 		location = newLocation;
 	}
 
-	public void moveInDirection(Direction direction){
+	@Override
+	public void moveInDirection(Game game, Direction direction) {
 		var newPosition = game.getAdjacentInDirection(location, direction);
 		newPosition.ifPresent(this::moveTo);
 
@@ -38,13 +44,14 @@ public class CrewMember implements ICrewMember{
 		return location;
 	}
 
+	@Override
 	public Optional<Zone> getZone(){
 		return location.getZone();
 	}
 
 	@Override
-	public void executeButton(Button button){
-		location.executeButton(this, button);
+	public void executeButton(Game game, Button button) {
+		location.executeButton(game, this, button);
 	}
 
 	@Override

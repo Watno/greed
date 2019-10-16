@@ -1,5 +1,6 @@
 package spacealert.core;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Position {
@@ -52,5 +53,19 @@ public class Position {
 
     public Zone getZone() {
         return zone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return deck == position.deck &&
+                zone == position.zone;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(deck, zone);
     }
 }

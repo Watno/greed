@@ -3,27 +3,26 @@ package spacealert.core.locations;
 import spacealert.core.*;
 
 public class LowerWhiteStation extends Location {
-    private Position position = new Position(Deck.LOWER, Zone.WHITE);
     private int availableFuelCapsules = 3;
 
-    public LowerWhiteStation(Game game) {
-        super(game);
+    public LowerWhiteStation() {
+        super(new Position(Deck.LOWER, Zone.WHITE));
     }
 
     @Override
-    protected void executeAButton(ICrewMember crewMember) {
+    protected void executeAButton(Game game, ICrewMember crewMember) {
 
     }
 
     @Override
-    protected void executeBButton(ICrewMember crewMember) {
+    protected void executeBButton(Game game, ICrewMember crewMember) {
         if (availableFuelCapsules > 0) {
             game.getReactor(Zone.WHITE).loadToFull();
         }
     }
 
     @Override
-    protected void executeCButton(ICrewMember crewMember) {
+    protected void executeCButton(Game game, ICrewMember crewMember) {
 
     }
 }

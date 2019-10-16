@@ -14,7 +14,7 @@ public class PlayerActionsStep implements IMissionStep {
 	@Override
 	public void execute(Game game) {
 		for(ICrewMember crewMember: game.getCrewMembers()) {
-			crewMember.executeAction(turn);
+			crewMember.executeAction(turn, game);
 		}
 
 	}

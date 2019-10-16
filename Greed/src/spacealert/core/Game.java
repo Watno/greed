@@ -1,10 +1,12 @@
 package spacealert.core;
 
+import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.locations.*;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Game {
 	private Collection<ICrewMember> crewMembers;
@@ -31,10 +33,23 @@ public class Game {
 				Zone.BLUE, new LateralShield()
 		);
 
-		space = new Space(this);
-		stationLayout = new StationLayout(this);
-
+		space = new Space();
+		stationLayout = new StationLayout();
 	}
+
+	public Game(Collection<ActionBoard> actionBoards) {
+		this();
+
+		crewMembers = actionBoards.stream()
+				.map(x -> new CrewMember(stationLayout.getStation(new Position(Deck.UPPER, Zone.WHITE)), x))
+				.collect(Collectors.toList());
+
+		for (var crewMember : crewMembers) {
+			var x = stationLayout.getStation(new Position(Deck.UPPER, Zone.WHITE));
+			x.addCrewMember(crewMember);
+		}
+	}
+
 
 	public Collection<ICrewMember> getCrewMembers() {
 		return crewMembers;

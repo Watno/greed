@@ -5,34 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented B-Buttons and rooms">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Wolfgang.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/BattleBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/EnergyBucket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/Reactor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CardEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/CentralReactor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/CentralShield.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LateralReactor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LateralShield.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerBlueStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerRedStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerWhiteStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Space.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperBlueStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperRedStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperWhiteStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/ILocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Shield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Position.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Zone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java" afterDir="false" />
@@ -40,6 +21,17 @@
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/ILocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerBlueStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerRedStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerRedStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/LowerWhiteStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperBlueStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperRedStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperRedStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/locations/UpperWhiteStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +48,7 @@
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -68,7 +61,14 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -76,6 +76,9 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="spacealert.core" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="spacealert.core" />
     </key>
@@ -85,6 +88,9 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="spacealert.core.locations" />
       <recent name="spacealert.core.actionCards.effects" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -98,6 +104,29 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="GameTest.randomGameSmokeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Greed" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="spacealert.core.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
+      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
+      <option name="METHOD_NAME" value="randomGameSmokeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GameTest.randomGameSmokeTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -117,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571003832044</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="implemented B-Buttons and rooms">
+      <created>1571086030250</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1571086030250</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,5 +174,21 @@
     <MESSAGE value="implemented B-Buttons and rooms" />
     <option name="LAST_COMMIT_MESSAGE" value="implemented B-Buttons and rooms" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

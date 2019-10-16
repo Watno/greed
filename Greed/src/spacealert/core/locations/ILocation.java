@@ -1,9 +1,6 @@
 package spacealert.core.locations;
 
-import spacealert.core.Button;
-import spacealert.core.ICrewMember;
-import spacealert.core.Position;
-import spacealert.core.Zone;
+import spacealert.core.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -20,7 +17,7 @@ public interface ILocation {
 
     Optional<Zone> getZone();
 
-    void executeButton(ICrewMember crewMember, Button button);
+    void executeButton(Game game, ICrewMember crewMember, Button button);
 
     boolean isSpace();
 }

@@ -3,24 +3,23 @@ package spacealert.core.locations;
 import spacealert.core.*;
 
 public class UpperWhiteStation extends Location {
-    private Position position = new Position(Deck.LOWER, Zone.WHITE);
 
-    public UpperWhiteStation(Game game) {
-        super(game);
+    public UpperWhiteStation() {
+        super(new Position(Deck.LOWER, Zone.WHITE));
     }
 
     @Override
-    protected void executeAButton(ICrewMember crewMember) {
+    protected void executeAButton(Game game, ICrewMember crewMember) {
 
     }
 
     @Override
-    protected void executeBButton(ICrewMember crewMember) {
+    protected void executeBButton(Game game, ICrewMember crewMember) {
         game.getShield(Zone.WHITE).chargeFrom(game.getReactor(Zone.WHITE));
     }
 
     @Override
-    protected void executeCButton(ICrewMember crewMember) {
+    protected void executeCButton(Game game, ICrewMember crewMember) {
 
     }
 }

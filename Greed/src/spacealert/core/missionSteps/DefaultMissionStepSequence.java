@@ -5,8 +5,8 @@ import java.util.List;
 
 public class DefaultMissionStepSequence extends MissionStepSequence {
 
-	
-	protected DefaultMissionStepSequence() {
+
+	public DefaultMissionStepSequence() {
 		super(createMissionSteps());
 	}
 

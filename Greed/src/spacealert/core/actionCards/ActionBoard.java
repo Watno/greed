@@ -1,12 +1,12 @@
 package spacealert.core.actionCards;
 
+import spacealert.core.Game;
+import spacealert.core.ICrewMember;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
 
 public class ActionBoard {
 	private int size = 12;
@@ -18,9 +18,16 @@ public class ActionBoard {
 				.limit(size)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
-	
+
+	public void place(int turn, Card card) {
+		int index = turn - 1;
+		if (cards.get(index).isEmpty()) {
+			cards.set(index, Optional.of(card));
+		}
+	}
+
 	public void execute(int turnToExecute, ICrewMember crewMember, Game game) {
-		int index = turnToExecute+1;
+		int index = turnToExecute - 1;
 		cards.get(index).ifPresent(x -> x.execute(crewMember, game));
 		lastExecutedTurn = turnToExecute;
 	}
