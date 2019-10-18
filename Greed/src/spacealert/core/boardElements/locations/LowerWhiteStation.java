@@ -17,6 +17,7 @@ public class LowerWhiteStation extends Location {
     protected void executeBButton(Game game, ICrewMember crewMember) {
         if (availableFuelCapsules > 0) {
             game.getReactor(Zone.WHITE).loadToFull();
+            availableFuelCapsules--;
         }
     }
 

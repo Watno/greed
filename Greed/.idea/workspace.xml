@@ -4,62 +4,10 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented all player actions, fixed bugs and added tests">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/Gravolift.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/Rocket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBotStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/Cannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/CentralHeavyCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyOrLightCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LateralHeavyCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LightCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/PulseCannon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/Reactor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/Shield.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Location.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartPhaseStep.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartTurnStep.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/tests/PositionTest.java" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/BattleBot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Direction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/EnergyBucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/EnergyBucket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Gravolift.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/IDamageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/IDamageable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Reactor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Shield.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/StationLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/StationLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BlueMoveEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CardEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CardEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/GravoliftMoveEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/RedMoveEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/CentralReactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/CentralReactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/CentralShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/CentralShield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/ILocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LateralReactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/LateralReactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LateralShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/LateralShield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerBlueStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerRedStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerRedStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/LowerWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerWhiteStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Space.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/UpperBlueStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperRedStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/UpperRedStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/locations/UpperWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/UpperWhiteStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/CentralShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/CentralShield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerWhiteStation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -251,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571086030250</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implemented all player actions, fixed bugs and added tests">
+      <created>1571434891240</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1571434891241</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -287,21 +242,6 @@
           <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
           <line>100</line>
           <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
-          <line>130</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
-          <line>122</line>
-          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
