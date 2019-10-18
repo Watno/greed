@@ -5,8 +5,8 @@ import spacealert.core.ICrewMember;
 
 public class PlayerActionsStep implements IMissionStep {
 	private int turn;
-	
-	public PlayerActionsStep(int turn) {
+
+	PlayerActionsStep(int turn) {
 		super();
 		this.turn = turn;
 	}
@@ -16,7 +16,7 @@ public class PlayerActionsStep implements IMissionStep {
 		for(ICrewMember crewMember: game.getCrewMembers()) {
 			crewMember.executeAction(turn, game);
 		}
-
+		game.resetAtEndOfActionPhase();
 	}
 
 }

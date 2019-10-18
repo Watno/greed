@@ -1,9 +1,9 @@
 package spacealert.core.actionCards;
 
-import spacealert.core.Direction;
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 import spacealert.core.actionCards.effects.*;
+import spacealert.core.boardElements.positions.Direction;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Card {
     private ICardEffect movementHalf;
     private CardOrientation orientation;
 
-    private Card(ICardEffect actionHalf, ICardEffect movementHalf) {
+    public Card(ICardEffect actionHalf, ICardEffect movementHalf) {
         this(actionHalf, movementHalf, CardOrientation.ACTION);
     }
 

@@ -3,9 +3,8 @@ package spacealert.core.missionSteps;
 import spacealert.core.Game;
 
 public class ComputerMaintenanceCheckStep implements IMissionStep {
-	public ComputerMaintenanceCheckStep(int phase) {
+	ComputerMaintenanceCheckStep() {
 		super();
-		this.phase = phase;
 	}
 
 	private int phase;
@@ -13,7 +12,7 @@ public class ComputerMaintenanceCheckStep implements IMissionStep {
 	
 	@Override
 	public void execute(Game game) {
-		if (!game.mouseJuggled(phase)) {
+		if (!game.mouseJuggled()) {
 			game.delayAllCrewMembers();
 		}
 	}

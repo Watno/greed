@@ -1,22 +1,23 @@
 package spacealert.core.actionCards.effects;
 
-import spacealert.core.*;
-import spacealert.core.Deck;
-import spacealert.core.Position;
-import spacealert.core.Zone;
+import spacealert.core.Game;
+import spacealert.core.ICrewMember;
+import spacealert.core.boardElements.positions.Deck;
+import spacealert.core.boardElements.positions.Position;
+import spacealert.core.boardElements.positions.Zone;
 
 public abstract class CardEffect implements ICardEffect {
 
     @Override
     public void execute(ICrewMember crewmember, Game game) {
-        if (crewmember.isInSpace()) {
+        if (crewmember.isInSpace() && !allowsStayingInSpace()) {
             {
-                if (!allowsStayingInSpace()) {
-                    crewmember.moveTo(game.getStation(new Position(Deck.UPPER, Zone.RED)));
-                }
+                crewmember.moveTo(game.getStation(new Position(Deck.UPPER, Zone.RED)));
+                crewmember.delay();
+                return;
             }
-            executeEffect(crewmember, game);
         }
+        executeEffect(crewmember, game);
     }
 
     protected boolean allowsStayingInSpace() {

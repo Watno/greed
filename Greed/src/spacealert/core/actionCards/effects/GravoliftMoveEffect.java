@@ -1,17 +1,13 @@
 package spacealert.core.actionCards.effects;
 
-import spacealert.core.Direction;
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
+import spacealert.core.boardElements.positions.Direction;
 
 public class GravoliftMoveEffect extends CardEffect {
 
     protected void executeEffect(ICrewMember crewmember, Game game) {
         crewmember.moveInDirection(game, Direction.GRAVOLIFT);
-        if (crewmember.getZone()
-                .map(zone -> game.getGravolift(zone).causesDelay())
-                .orElse(false)) {
-            crewmember.delay();
-        }
+        crewmember.getZone().ifPresent(x -> game.getGravolift(x).getUsedBy(crewmember));
     }
 }

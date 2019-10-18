@@ -1,8 +1,8 @@
 package spacealert.core.actionCards.effects;
 
-import spacealert.core.Direction;
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
+import spacealert.core.boardElements.positions.Direction;
 
 public class BlueMoveEffect extends CardEffect {
 

@@ -1,6 +1,9 @@
 package spacealert.core;
 
-import spacealert.core.locations.ILocation;
+import spacealert.core.boardElements.battleBots.BattleBotStorage;
+import spacealert.core.boardElements.locations.ILocation;
+import spacealert.core.boardElements.positions.Direction;
+import spacealert.core.boardElements.positions.Zone;
 
 import java.util.Optional;
 
@@ -21,4 +24,8 @@ public interface ICrewMember {
     void executeButton(Game game, Button button);
 
     boolean isInSpace();
+
+    void useBattleBotStorage(BattleBotStorage battleBotStorage);
+
+    boolean hasActiveBattlebot();
 }

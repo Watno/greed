@@ -28,8 +28,8 @@ public class ActionBoard {
 
 	public void execute(int turnToExecute, ICrewMember crewMember, Game game) {
 		int index = turnToExecute - 1;
-		cards.get(index).ifPresent(x -> x.execute(crewMember, game));
 		lastExecutedTurn = turnToExecute;
+		cards.get(index).ifPresent(x -> x.execute(crewMember, game));
 	}
 
 	public void delay(){
@@ -38,13 +38,13 @@ public class ActionBoard {
 
 	private void delay(int delayedTurn) {
 		if (delayedTurn > size) return;
-		int index = delayedTurn+1;
+		int index = delayedTurn - 1;
 		Optional<Card> cardOnTurn = cards.get(index);
 		if (cardOnTurn.isPresent()) {
 			delay(delayedTurn+1);
-		}
-		if (delayedTurn != size) {
-			cards.set(index+1, cardOnTurn);	
+			if (delayedTurn != size) {
+				cards.set(index + 1, cardOnTurn);
+			}
 		}
 		cards.set(index, Optional.empty());
 	}

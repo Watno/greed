@@ -1,16 +1,21 @@
 package spacealert.core;
 
 import spacealert.core.actionCards.ActionBoard;
-import spacealert.core.locations.ILocation;
+import spacealert.core.boardElements.battleBots.BattleBot;
+import spacealert.core.boardElements.battleBots.BattleBotStorage;
+import spacealert.core.boardElements.locations.ILocation;
+import spacealert.core.boardElements.positions.Direction;
+import spacealert.core.boardElements.positions.Zone;
 
 import java.util.Optional;
 
 public class CrewMember implements ICrewMember{
 	private ActionBoard actionBoard;
 	private ILocation location;
+	private Optional<BattleBot> battleBot = Optional.empty();
 
 
-	public CrewMember(ILocation location, ActionBoard actionBoard) {
+	CrewMember(ILocation location, ActionBoard actionBoard) {
 		this.location = location;
 		this.actionBoard = actionBoard;
 	}
@@ -57,5 +62,19 @@ public class CrewMember implements ICrewMember{
 	@Override
 	public boolean isInSpace() {
 		return location.isSpace();
+	}
+
+	@Override
+	public void useBattleBotStorage(BattleBotStorage battleBotStorage) {
+		if (battleBot.isEmpty()) {
+			battleBot = battleBotStorage.tryTakeBattleBotFrom();
+		} else {
+			battleBot.get().activate();
+		}
+	}
+
+	@Override
+	public boolean hasActiveBattlebot() {
+		return battleBot.map(BattleBot::isActive).orElse(false);
 	}
 }
