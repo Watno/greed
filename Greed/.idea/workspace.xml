@@ -4,10 +4,15 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented all player actions, fixed bugs and added tests">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/CentralShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/CentralShield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerWhiteStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerWhiteStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,9 +29,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="JUnit5 Test Class" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>

@@ -6,8 +6,10 @@ public class ThreatActionsStep implements IMissionStep {
 
 	@Override
 	public void execute(Game game) {
-		// TODO Auto-generated method stub
-		
+		for (var threat : game.getThreats()) {
+			threat.advance(game);
+		}
+		game.advanceRockets();
 	}
 
 }

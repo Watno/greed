@@ -17,6 +17,8 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
+import spacealert.core.threats.Threat;
+import spacealert.core.threats.Trajectory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,6 +30,8 @@ public class Game {
     private Map<Zone, Reactor> reactors;
     private Map<Zone, Shield> shields;
     private Map<Position, Cannon> cannons;
+    private Map<Zone, Trajectory> trajectories;
+    private Trajectory internalTrajectory;
     private Space space;
 
     private Set<Integer> mouseJuggles = new HashSet<>();
@@ -119,8 +123,21 @@ public class Game {
         return cannons.get(position);
     }
 
+    public Trajectory getTrajectory(Zone zone) {
+        return trajectories.get(zone);
+    }
+
+    public Trajectory getInternalTrajectory() {
+        return internalTrajectory;
+    }
+
     public Space getSpace() {
         return space;
+    }
+
+    public List<Threat> getThreats() {
+        //TODO
+        return List.of();
     }
 
     Optional<ILocation> getAdjacentInDirection(ILocation location, Direction direction) {
