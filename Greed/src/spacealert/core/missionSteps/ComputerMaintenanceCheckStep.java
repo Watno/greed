@@ -7,9 +7,6 @@ public class ComputerMaintenanceCheckStep implements IMissionStep {
 		super();
 	}
 
-	private int phase;
-	private int delayedTurn;
-	
 	@Override
 	public void execute(Game game) {
 		if (!game.mouseJuggled()) {

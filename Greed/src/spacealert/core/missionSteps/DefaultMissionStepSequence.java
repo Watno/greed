@@ -42,7 +42,7 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
 	private static List<IMissionStep> createTurn(int turn) {
 		return List.of(
                 new StartTurnStep(turn),
-				new ThreatAppearsStep(turn),
+                new ThreatAppearsStep(),
 				new PlayerActionsStep(turn),
 				new ComputeDamageStep(),
 				new ThreatActionsStep()
@@ -52,7 +52,7 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
     private static List<IMissionStep> createTurnWithComputerMaintenance(int turn) {
 		return List.of(
                 new StartTurnStep(turn),
-				new ThreatAppearsStep(turn),
+                new ThreatAppearsStep(),
 				new PlayerActionsStep(turn),
 				new ComputeDamageStep(),
                 new ComputerMaintenanceCheckStep(),

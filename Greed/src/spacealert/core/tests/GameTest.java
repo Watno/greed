@@ -10,11 +10,15 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
+import spacealert.core.threats.Threat;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,24 +26,84 @@ class GameTest {
 
     private static Random random = new Random();
 
-    @RepeatedTest(100)
+    @RepeatedTest(1000)
     void randomGameSmokeTest() {
         var deck = Card.defaultDeck();
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
 
-        var game = new Game(actionBoards);
+        var game = new Game(actionBoards, Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
 
         var missionStepSequence = new DefaultMissionStepSequence();
 
         missionStepSequence.execute(game);
     }
 
+
+    @Test
+    void pushA_ShouldKillTestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect()));
+
+        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        var missionStepSequence = new DefaultMissionStepSequence();
+
+        missionStepSequence.execute(game);
+
+        assertEquals(1, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void pushAFourTimes_ShouldKill3TestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect()));
+
+        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        var missionStepSequence = new DefaultMissionStepSequence();
+
+        missionStepSequence.execute(game);
+
+        assertEquals(3, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect(), new GravoliftMoveEffect(), new BEffect(), new GravoliftMoveEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect()));
+
+        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        var missionStepSequence = new DefaultMissionStepSequence();
+
+        missionStepSequence.execute(game);
+
+        assertEquals(5, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void moveRedThenC_thenBattlebot_ShouldEndInSpace() {
+        var actionBoard = createActionBoard(List.of(
+                new RedMoveEffect(), new GravoliftMoveEffect(), new CEffect(),
+                new GravoliftMoveEffect(), new CEffect(), new AttackWithBattleBotEffect(),
+                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect(),
+                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect()));
+
+        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        var missionStepSequence = new DefaultMissionStepSequence();
+
+        missionStepSequence.execute(game);
+
+        var crewMember = game.getCrewMembers().iterator().next();
+
+        assertEquals(game.getSpace(), crewMember.getLocation());
+    }
+
+
     @Test
     void gravoliftMove_ShouldMoveToLowerWhite() {
         var actionBoard = createActionBoard(List.of(new GravoliftMoveEffect()));
 
-        var game = new Game(List.of(actionBoard));
+        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
 
         var missionStepSequence = new DefaultMissionStepSequence();
 
@@ -61,7 +125,7 @@ class GameTest {
                         new GravoliftMoveEffect(),
                         new BlueMoveEffect()));
 
-        var game = new Game(List.of(actionBoard));
+        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
 
         var missionStepSequence = new DefaultMissionStepSequence();
 
@@ -92,7 +156,7 @@ class GameTest {
                         new GravoliftMoveEffect(),
                         new BlueMoveEffect()));
 
-        var game = new Game(List.of(actionBoard, actionBoard2));
+        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
 
         var missionStepSequence = new DefaultMissionStepSequence();
 
@@ -114,7 +178,7 @@ class GameTest {
                         new GravoliftMoveEffect(),
                         new RedMoveEffect()));
 
-        var game = new Game(List.of(actionBoard));
+        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
 
         var missionStepSequence = new DefaultMissionStepSequence();
 

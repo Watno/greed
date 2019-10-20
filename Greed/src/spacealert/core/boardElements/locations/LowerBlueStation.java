@@ -2,7 +2,7 @@ package spacealert.core.boardElements.locations;
 
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
-import spacealert.core.boardElements.Rocket;
+import spacealert.core.boardElements.damageSources.Rocket;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;

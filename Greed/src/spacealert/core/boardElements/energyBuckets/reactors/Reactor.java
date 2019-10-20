@@ -8,7 +8,7 @@ public abstract class Reactor extends EnergyBucket {
     }
 
     public void loadToFull() {
-        if (energy < capacity) capacity = energy;
+        if (energy < capacity) energy = capacity;
     }
 
     public boolean tryWithdrawOneEnergy() {

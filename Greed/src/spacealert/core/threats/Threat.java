@@ -1,24 +1,30 @@
 package spacealert.core.threats;
 
 import spacealert.core.Game;
-import spacealert.core.boardElements.positions.Zone;
 
 public abstract class Threat {
     private int speed;
     protected int hitPoints;
+    private int pointsForSurviving;
+    private int pointsForDestroying;
 
-    protected Threat(int speed, int hitPoints) {
+    protected Threat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying) {
         this.speed = speed;
         this.hitPoints = hitPoints;
+        this.pointsForSurviving = pointsForSurviving;
+        this.pointsForDestroying = pointsForDestroying;
+
+        squareOnTrajectory = 15;
+        //TODO fix to proper
     }
 
-    private int distanceFromShip;
-    private Zone zone;
+    private int squareOnTrajectory;
+//TODO initialize
 
     public void advance(Game game) {
-        var originalDistance = distanceFromShip;
-        distanceFromShip = Math.max(originalDistance - speed, 1);
-        for (var action : getTrajectory(game).getActionsBetween(originalDistance, distanceFromShip)) {
+        var originalSquare = squareOnTrajectory;
+        squareOnTrajectory = Math.max(originalSquare - speed, 1);
+        for (var action : getTrajectory(game).getActionsBetween(originalSquare, squareOnTrajectory)) {
             switch (action) {
                 case X:
                     doXAction(game);
@@ -31,15 +37,24 @@ public abstract class Threat {
                     break;
             }
         }
-        //TODO surviving threats
+        game.recordAsSurvived(this);
+    }
+
+    public int getSquareOnTrajectory() {
+        return squareOnTrajectory;
+    }
+
+    public int getDistance() {
+        if (squareOnTrajectory > 10) return 3;
+        if (squareOnTrajectory > 5) return 2;
+        return 1;
     }
 
     abstract Trajectory getTrajectory(Game game);
 
+    protected abstract void doXAction(Game game);
 
-    abstract void doXAction(Game game);
+    protected abstract void doYAction(Game game);
 
-    abstract void doYAction(Game game);
-
-    abstract void doZAction(Game game);
+    protected abstract void doZAction(Game game);
 }

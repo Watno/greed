@@ -1,4 +1,4 @@
-package spacealert.core.boardElements.cannons;
+package spacealert.core.boardElements.damageSources.cannons;
 
 import spacealert.core.boardElements.positions.Zone;
 

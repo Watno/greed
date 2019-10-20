@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.battleBots;
 
 public class BattleBot {
-    private boolean active;
+    private boolean active = true;
 
     public void activate() {
         active = true;

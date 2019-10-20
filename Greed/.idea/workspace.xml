@@ -4,15 +4,36 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented all player actions, fixed bugs and added tests">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented fighting external threats, some fixes">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/tests/TestThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/CentralHeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/CentralHeavyCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyOrLightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LateralHeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/LateralHeavyCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/LightCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/PulseCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/Reactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/Reactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerBlueStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +42,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="221" />
+    <option name="myElementSize" value="237" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Greed" />
@@ -60,12 +81,15 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="spacealert.core" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="spacealert.core.tests" />
       <recent name="spacealert.core" />
     </key>
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="spacealert.core" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="spacealert.core.missionSteps" />
@@ -75,8 +99,8 @@
       <recent name="spacealert.core.locations" />
       <recent name="spacealert.core.actionCards.effects" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="spacealert.core.boardElements.damageSources.cannons" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -91,25 +115,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.randomGameSmokeTest">
-    <configuration name="GameTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Greed" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="spacealert.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="spacealert.core" />
-      <option name="TEST_OBJECT" value="uniqueId" />
-      <uniqueIds>
-        <uniqueId value="[engine:junit-jupiter]/[class:spacealert.core.tests.GameTest]" />
-      </uniqueIds>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.spacealert.core.tests in Greed">
+    <configuration name="GameTest.moveRedThenC_thenBattlebot_ShouldEndInSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
         <pattern>
@@ -119,13 +126,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="spacealert.core.tests" />
       <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
-      <option name="METHOD_NAME" value="clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite" />
+      <option name="METHOD_NAME" value="moveRedThenC_thenBattlebot_ShouldEndInSpace" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.randomGameSmokeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
         <pattern>
@@ -135,7 +142,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="spacealert.core.tests" />
       <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
-      <option name="METHOD_NAME" value="randomGameSmokeTest" />
+      <option name="METHOD_NAME" value="pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.pushAFourTimes_ShouldKill3TestThreat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Greed" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="spacealert.core.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
+      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
+      <option name="METHOD_NAME" value="pushAFourTimes_ShouldKill3TestThreat" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -171,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameTest.randomGameSmokeTest" />
-        <item itemvalue="JUnit.spacealert.core in Greed" />
-        <item itemvalue="JUnit.GameTest (1)" />
         <item itemvalue="JUnit.spacealert.core.tests in Greed" />
-        <item itemvalue="JUnit.GameTest.clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite" />
+        <item itemvalue="JUnit.spacealert.core in Greed" />
+        <item itemvalue="JUnit.GameTest.moveRedThenC_thenBattlebot_ShouldEndInSpace" />
+        <item itemvalue="JUnit.GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
+        <item itemvalue="JUnit.GameTest.pushAFourTimes_ShouldKill3TestThreat" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +254,8 @@
     <MESSAGE value="changed IDEs, implemented basic actions" />
     <MESSAGE value="implemented B-Buttons and rooms" />
     <MESSAGE value="implemented all player actions, fixed bugs and added tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented all player actions, fixed bugs and added tests" />
+    <MESSAGE value="implemented fighting external threats, some fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented fighting external threats, some fixes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -240,22 +264,50 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
-          <line>35</line>
+          <line>39</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
-          <line>100</line>
+          <line>164</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/actionCards/effects/BEffect.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
+          <line>56</line>
+          <properties class="spacealert.core.tests.GameTest" method="pushAFourTimes_ShouldKill3TestThreat">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Greed$spacealert_core_in_Greed.ic" NAME="spacealert.core in Greed Coverage Results" MODIFIED="1571434224042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Greed$spacealert_core_in_Greed.ic" NAME="spacealert.core in Greed Coverage Results" MODIFIED="1571594302132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Greed$spacealert_core_tests_in_Greed.ic" NAME="spacealert.core.tests in Greed Coverage Results" MODIFIED="1571434117744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Greed$spacealert_core_tests_in_Greed.ic" NAME="spacealert.core.tests in Greed Coverage Results" MODIFIED="1571593971525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.tests.*</FILTER>
     </SUITE>
   </component>

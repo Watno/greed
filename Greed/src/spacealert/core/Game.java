@@ -2,8 +2,9 @@ package spacealert.core;
 
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.boardElements.Gravolift;
-import spacealert.core.boardElements.Rocket;
-import spacealert.core.boardElements.cannons.*;
+import spacealert.core.boardElements.damageSources.DamageSource;
+import spacealert.core.boardElements.damageSources.Rocket;
+import spacealert.core.boardElements.damageSources.cannons.*;
 import spacealert.core.boardElements.energyBuckets.reactors.CentralReactor;
 import spacealert.core.boardElements.energyBuckets.reactors.LateralReactor;
 import spacealert.core.boardElements.energyBuckets.reactors.Reactor;
@@ -33,6 +34,11 @@ public class Game {
     private Map<Zone, Trajectory> trajectories;
     private Trajectory internalTrajectory;
     private Space space;
+
+    private ArrayList<List<Threat>> threatsBySpawn;
+    private ArrayList<Threat> activeThreats = new ArrayList<>();
+    private ArrayList<Threat> destroyedThreats = new ArrayList<>();
+    private ArrayList<Threat> survivedThreats = new ArrayList<>();
 
     private Set<Integer> mouseJuggles = new HashSet<>();
     private ArrayList<Integer> visualConfirmations = new ArrayList<>(Collections.nCopies(12, 0));
@@ -69,9 +75,17 @@ public class Game {
 
         space = new Space();
         stationLayout = new StationLayout();
+
+        trajectories = Map.of(
+                Zone.RED, Trajectory.T1(),
+                Zone.WHITE, Trajectory.T1(),
+                Zone.BLUE, Trajectory.T1()
+        );
+
+        internalTrajectory = Trajectory.T1();
     }
 
-    public Game(Collection<ActionBoard> actionBoards) {
+    public Game(Collection<ActionBoard> actionBoards, List<List<Threat>> threatsBySpawn) {
         this();
 
         crewMembers = actionBoards.stream()
@@ -82,6 +96,7 @@ public class Game {
             var x = stationLayout.getStation(new Position(Deck.UPPER, Zone.WHITE));
             x.addCrewMember(crewMember);
         }
+        this.threatsBySpawn = new ArrayList<>(threatsBySpawn);
     }
 
 
@@ -135,10 +150,18 @@ public class Game {
         return space;
     }
 
-    public List<Threat> getThreats() {
-        //TODO
-        return List.of();
+    public List<Threat> getActiveThreats() {
+        return List.copyOf(activeThreats);
     }
+
+    public List<Threat> getSurvivedThreats() {
+        return List.copyOf(survivedThreats);
+    }
+
+    public List<Threat> getDestroyedThreats() {
+        return List.copyOf(destroyedThreats);
+    }
+
 
     Optional<ILocation> getAdjacentInDirection(ILocation location, Direction direction) {
         return stationLayout.getAdjacentInDirection(location, direction);
@@ -176,4 +199,26 @@ public class Game {
         int index = currentTurn - 1;
         visualConfirmations.set(index, visualConfirmations.get(index) + 1);
 	}
+
+    public void recordAsSurvived(Threat threat) {
+        activeThreats.remove(threat);
+        survivedThreats.add(threat);
+    }
+
+    public void recordAsDestroyed(Threat threat) {
+        activeThreats.remove(threat);
+        destroyedThreats.add(threat);
+    }
+
+    public void spawnThreats() {
+        activeThreats.addAll(threatsBySpawn.get(currentTurn - 1));
+    }
+
+    public List<DamageSource> getDamageSources() {
+        var damageSources = new ArrayList<DamageSource>();
+        damageSources.addAll(cannons.values());
+        thisTurnRocket.ifPresent(damageSources::add);
+        space.getInterceptors().ifPresent(damageSources::add);
+        return damageSources;
+    }
 }
