@@ -4,37 +4,7 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="implemented fighting external threats, some fixes">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/tests/TestThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/CentralHeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/CentralHeavyCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/HeavyOrLightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LateralHeavyCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/LateralHeavyCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/LightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/LightCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/cannons/PulseCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/Reactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/reactors/Reactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerBlueStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/LowerBlueStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Space.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/DefaultMissionStepSequence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
-    </list>
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571434891241</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="implemented fighting external threats, some fixes">
+      <created>1571594509184</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571594509184</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
