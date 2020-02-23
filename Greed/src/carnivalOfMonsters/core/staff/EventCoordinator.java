@@ -1,0 +1,24 @@
+package carnivalOfMonsters.core.staff;
+
+import carnivalOfMonsters.core.ICanBePlayed;
+import carnivalOfMonsters.core.ITriggerOnPlay;
+import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.events.Event;
+
+public class EventCoordinator extends StaffMember implements ITriggerOnPlay{
+
+	protected EventCoordinator() {
+		super(3);
+	}
+
+	@Override
+	public boolean triggersOn(ICanBePlayed card) {
+		return card instanceof Event;
+	}
+
+	@Override
+	public void trigger(Player player, ICanBePlayed card) {
+		player.gainCrowns(1);
+	}
+
+}
