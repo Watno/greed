@@ -8,7 +8,7 @@ public class IntrepidExplorer extends StaffMember {
 
 	private LandType assignedLandType;
 	
-	protected IntrepidExplorer() {
+	public IntrepidExplorer() {
 		super(2);
 	}
 

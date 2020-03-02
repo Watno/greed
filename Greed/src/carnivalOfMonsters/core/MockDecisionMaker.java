@@ -1,7 +1,10 @@
 package carnivalOfMonsters.core;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +13,7 @@ public class MockDecisionMaker implements IDecisionMaker {
 	
 	@Override
 	public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
-		Map<LandType, Integer> result = Map.of();
+		Map<LandType, Integer> result = new HashMap<LandType, Integer>();
 		for (var landType: Stream.of(LandType.values()).sorted(Comparator.comparing(x -> x.equals(LandType.DREAMLANDS))).collect(Collectors.toList())) {
 			var assignableLandpoints = Integer.min(requiredLandpoints, player.getAvailableLandPoints(landType));
 			result.put(landType, assignableLandpoints);
@@ -23,4 +26,26 @@ public class MockDecisionMaker implements IDecisionMaker {
 	public LandType chooseLandTypeForExplorer() {
 		return LandType.ENCHANTEDFOREST;
 	}
+
+	@Override
+	public ICard pickCardToDraft(Collection<ICard> draftstack) {
+		return draftstack.iterator().next();
+	}
+
+	@Override
+	public PlayOrKeep choosePlayOrKeep(ICanBePlayed card) {
+		return PlayOrKeep.PLAY;
+	}
+
+	@Override
+	public Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards) {
+		return Optional.empty();
+	}
+
+	@Override
+	public void registerPlayer(Player player) {
+		this.player = player;
+		
+	}
+	
 }

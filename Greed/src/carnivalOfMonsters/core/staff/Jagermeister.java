@@ -2,7 +2,7 @@ package carnivalOfMonsters.core.staff;
 
 public class Jagermeister extends StaffMember {
 
-	protected Jagermeister() {
+	public Jagermeister() {
 		super(2);
 	}
 

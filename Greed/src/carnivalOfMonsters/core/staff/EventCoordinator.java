@@ -7,7 +7,7 @@ import carnivalOfMonsters.core.events.Event;
 
 public class EventCoordinator extends StaffMember implements ITriggerOnPlay{
 
-	protected EventCoordinator() {
+	public EventCoordinator() {
 		super(3);
 	}
 

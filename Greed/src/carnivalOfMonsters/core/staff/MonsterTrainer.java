@@ -7,7 +7,7 @@ import carnivalOfMonsters.core.monsters.Monster;
 
 public class MonsterTrainer extends StaffMember implements ITriggerOnPlay{
 
-	protected MonsterTrainer() {
+	public MonsterTrainer() {
 		super(2);
 	}
 

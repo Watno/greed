@@ -10,7 +10,7 @@ public class HuntDie {
 		this.randomizer = randomizer;
 	}
 
-	private int roll() {
+	public int roll() {
 		var roll = randomizer.nextInt(6);
 		if (roll == 0) return 2;
 		if (roll == 1) return 1;
