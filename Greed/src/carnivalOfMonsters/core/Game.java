@@ -28,6 +28,9 @@ import carnivalOfMonsters.core.monsters.OuterRealmSpider;
 import carnivalOfMonsters.core.monsters.Screecher;
 import carnivalOfMonsters.core.monsters.Succubus;
 import carnivalOfMonsters.core.monsters.TheAncientEnemy;
+import carnivalOfMonsters.core.seasons.DangerSeason;
+import carnivalOfMonsters.core.seasons.LandTypeSeason;
+import carnivalOfMonsters.core.seasons.Season;
 import carnivalOfMonsters.core.secretGoals.ATrueGentlemanHonorsHisDebts;
 import carnivalOfMonsters.core.secretGoals.AuthorityOn;
 import carnivalOfMonsters.core.secretGoals.EnthusiastForLittleThings;
@@ -46,12 +49,16 @@ public class Game {
 	private List<Player> players;
 
 	private Collection<HuntDie> huntDice;
+	
+	private Stack<Season> seasons;
 
 	public Game(Collection<Player> players) {
 		super();
 		this.players = new ArrayList<Player>(players);
 		createDrawPile();
 		createDraftstacks();
+		
+		createSeasons();
 
 		var random = new Random();
 		huntDice = Stream.generate(() -> new HuntDie(random)).limit(3).collect(Collectors.toList());
@@ -87,18 +94,36 @@ public class Game {
 			player.performDangerCheck(royalHunters);
 		}
 
-		// TODO Season Trophy
+		getCurrentSeason().assign(players);
+		seasons.pop();
+		
+		for (var player : players) {
+			player.moveMonstersToMenagerie();
+		}
+
+	
 	}
 
 	public Collection<ICard> draw(int numberOfCards) {
 		return Stream.generate(() -> drawPile.pop()).limit(Integer.min(numberOfCards, drawPile.size()))
 				.collect(Collectors.toList());
 	}
+	
+	public Season getCurrentSeason() {
+		return seasons.peek();
+	}
 
 	private List<Collection<ICard>> createDraftstacks() {
 		return players.stream().map(x -> draw(8)).collect(Collectors.toList());
 	}
 
+	private void createSeasons() {
+		seasons = new Stack<Season>();
+		seasons.addAll(Stream.of(LandType.values()).map(x -> new LandTypeSeason(x)).collect(Collectors.toList()));
+		seasons.add(new DangerSeason());
+		Collections.shuffle(seasons);
+	}
+	
 	// TODO extract
 	private void createDrawPile() {
 		drawPile = new Stack<ICard>();

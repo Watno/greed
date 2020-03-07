@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import carnivalOfMonsters.core.monsters.Monster;
+import carnivalOfMonsters.core.seasons.Season;
 
 public class Player {
 	public Player(IDecisionMaker decisionMaker) {
@@ -18,9 +19,10 @@ public class Player {
 
 	private IDecisionMaker decisionMaker;
 	
-	private List<ICanBeInPlay> cardsInPlay = new ArrayList<ICanBeInPlay>();
-	private List<ICard> keptCards = new ArrayList<ICard>();
-	private List<Monster> menagerie = new ArrayList<Monster>();
+	private ArrayList<ICanBeInPlay> cardsInPlay = new ArrayList<ICanBeInPlay>();
+	private ArrayList<ICard> keptCards = new ArrayList<ICard>();
+	private ArrayList<Monster> menagerie = new ArrayList<Monster>();
+	private ArrayList<Season> trophies = new ArrayList<Season>();
 	
 	private int crowns = 4;
 	private int loans = 0;
@@ -65,6 +67,12 @@ public class Player {
 	private void play(ICanBePlayed card, Game game) {
 		if (card.checkRequirement(this)) {
 			card.onPlay(this, game);
+			for(var effect: GetOnPlayEffects(game)){
+				if (effect.triggersOn(card)) {
+					effect.trigger(this, card);
+				}
+					
+			}
 			if (card instanceof ICanBeInPlay) {
 				cardsInPlay.add((ICanBeInPlay) card);
 			}
@@ -114,6 +122,10 @@ public class Player {
 		return Collections.unmodifiableCollection(keptCards);
 	}
 	
+	public Collection<ICanBeInPlay> getCardsInPlay() {
+		return Collections.unmodifiableCollection(cardsInPlay);
+	}
+	
 	public int getLoans(){
 		return loans;
 	}
@@ -153,6 +165,16 @@ public class Player {
 		}
 	}
 	
+	public void assignTrophy(Season trophy) {
+		trophies.add(trophy);
+	}
+	
+	public void moveMonstersToMenagerie() {
+		var monsters = keptCards.stream().filter(x -> x instanceof Monster).map( x-> (Monster) x).collect(Collectors.toList());
+		cardsInPlay.removeAll(monsters);
+		menagerie.addAll(monsters);
+	}
+	
 	public int score() {
 		return Stream.of(
 				menagerie.stream(),
@@ -166,6 +188,18 @@ public class Player {
 	private void takeLoan() {
 		loans++;
 		crowns += 3;
+	}
+	
+	private Collection<ITriggerOnPlay> GetOnPlayEffects(Game game) {
+		List<ITriggerOnPlay> result = cardsInPlay.stream()
+			.filter(x -> x instanceof ITriggerOnPlay)
+			.map(x -> (ITriggerOnPlay) x)
+			.collect(Collectors.toList());
+		
+			result.add(game.getCurrentSeason());
+			
+			return result;
+			
 	}
 
 	
