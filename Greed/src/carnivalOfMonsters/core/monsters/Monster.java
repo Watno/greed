@@ -1,23 +1,30 @@
 package carnivalOfMonsters.core.monsters;
 
+import com.google.gson.annotations.Expose;
+
+import carnivalOfMonsters.core.Card;
 import carnivalOfMonsters.core.Game;
 import carnivalOfMonsters.core.ICanBeInPlay;
 import carnivalOfMonsters.core.ICanBeScored;
 import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.Player;
 
-public abstract class Monster implements ICanBeInPlay, ICanBeScored {
+public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored {
 
+	@Expose
 	protected LandType landType;
+	@Expose
 	protected int level;
 	
+	@Expose
 	private int dangerLevel;
+	@Expose
 	private int monstrousLore;
 	
 	private int victoryPoints;
 	
-	protected Monster(LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
-		super();
+	protected Monster(String name, LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
+		super("Monster", name);
 		this.landType = landType;
 		this.level = level;
 		this.dangerLevel = dangerLevel;

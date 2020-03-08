@@ -8,6 +8,11 @@ import carnivalOfMonsters.core.monsters.Monster;
 
 public class RevealKeptMonsters extends Event {
 
+	public RevealKeptMonsters(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void onPlay(Player playingPlayer, Game game) {
 		//TODO add revelation (and choice)

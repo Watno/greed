@@ -57,6 +57,7 @@ public class Player {
 			var cardToPlay = decisionMaker.chooseKeptCardToPlay(playableKeptCards);
 			if (cardToPlay.isPresent() && playableKeptCards.contains(cardToPlay.get())) {
 				play(cardToPlay.get(), game);
+				keptCards.remove(cardToPlay.get());
 			}
 			else {
 				break;
@@ -170,7 +171,7 @@ public class Player {
 	}
 	
 	public void moveMonstersToMenagerie() {
-		var monsters = keptCards.stream().filter(x -> x instanceof Monster).map( x-> (Monster) x).collect(Collectors.toList());
+		var monsters = cardsInPlay.stream().filter(x -> x instanceof Monster).map( x-> (Monster) x).collect(Collectors.toList());
 		cardsInPlay.removeAll(monsters);
 		menagerie.addAll(monsters);
 	}
@@ -178,11 +179,21 @@ public class Player {
 	public int score() {
 		return Stream.of(
 				menagerie.stream(),
-				keptCards.stream().filter(x -> x instanceof ICanBeScored).map(x -> (ICanBeScored) x)
+				keptCards.stream().filter(x -> x instanceof ICanBeScored).map(x -> (ICanBeScored) x),
+				trophies.stream()
 				)
 		.flatMap(x -> x)
 		.mapToInt(x -> x.score(this))
-		.sum();
+		.sum()
+		+ crowns
+		+ hunterTokens
+		- 3*loans;
+	}
+	
+	public void drawStartingLands(Game game) {
+		for (var land: game.drawStartingLands()) {
+			play(land, game);
+		}
 	}
 	
 	private void takeLoan() {

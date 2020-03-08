@@ -11,8 +11,8 @@ public abstract class DreamlandMonster extends Monster {
 
 	private Map<LandType, Integer> assignedLandpoints;
 
-	protected DreamlandMonster(int level, int dangerLevel, int monstrousLore, int victoryPoints) {
-		super(LandType.DREAMLANDS, level, dangerLevel, monstrousLore, victoryPoints);
+	protected DreamlandMonster(String name, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
+		super(name, LandType.DREAMLANDS, level, dangerLevel, monstrousLore, victoryPoints);
 	}
 
 	@Override

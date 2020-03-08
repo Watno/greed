@@ -8,8 +8,8 @@ public class GainPerLandPoint extends Event{
 
 	private LandType landType;
 	
-	public GainPerLandPoint(LandType landType) {
-		super();
+	public GainPerLandPoint(String name, LandType landType) {
+		super(name);
 		this.landType = landType;
 	}
 	

@@ -4,8 +4,8 @@ import carnivalOfMonsters.core.LandType;
 
 public class Level4Danger2Monster extends NormalMonster {
 
-	public Level4Danger2Monster(LandType landType) {
-		super(landType, 4, 0, 2, 16);
+	public Level4Danger2Monster(String name, LandType landType) {
+		super(name, landType, 4, 0, 2, 16);
 	}
 
 }

@@ -5,8 +5,8 @@ import carnivalOfMonsters.core.Player;
 
 public abstract class NormalMonster extends Monster {
 
-	protected NormalMonster(LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
-		super(landType, level, dangerLevel, monstrousLore, victoryPoints);
+	protected NormalMonster(String name, LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
+		super(name, landType, level, dangerLevel, monstrousLore, victoryPoints);
 	}
 
 	@Override

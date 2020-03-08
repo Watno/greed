@@ -7,13 +7,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import carnivalOfMonsters.core.ICanBePlayed;
+import carnivalOfMonsters.core.ICanBeScored;
 import carnivalOfMonsters.core.ITriggerOnPlay;
 import carnivalOfMonsters.core.Player;
 
-public abstract class Season implements ITriggerOnPlay {
+public abstract class Season implements ITriggerOnPlay, ICanBeScored {
 	@Override
 	public void trigger(Player player, ICanBePlayed card) {
 		player.gainCrowns(2);
+	}
+	
+	@Override
+	public int score(Player player) {
+		return 3;
 	}
 	
 	public void assign(Collection<Player> players) {

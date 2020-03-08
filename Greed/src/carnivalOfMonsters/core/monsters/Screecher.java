@@ -2,8 +2,8 @@ package carnivalOfMonsters.core.monsters;
 
 public class Screecher extends DreamlandMonster{
 
-	public Screecher() {
-		super(3, 0, 0, 4);
+	public Screecher(String name) {
+		super(name, 3, 0, 0, 4);
 	}
 
 }
