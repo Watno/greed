@@ -7,8 +7,8 @@ public class AuthorityOn extends SecretGoal {
 
     private LandType landType;
 
-    public AuthorityOn(LandType landType) {
-        super();
+    public AuthorityOn(String name, LandType landType) {
+        super(name);
         this.landType = landType;
     }
 

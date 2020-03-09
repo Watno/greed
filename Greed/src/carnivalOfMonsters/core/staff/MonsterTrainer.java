@@ -7,8 +7,8 @@ import carnivalOfMonsters.core.monsters.Monster;
 
 public class MonsterTrainer extends StaffMember implements ITriggerOnPlay {
 
-    public MonsterTrainer() {
-        super(2);
+    public MonsterTrainer(String name) {
+        super(name, 2);
     }
 
     @Override

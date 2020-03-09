@@ -6,16 +6,16 @@ import com.google.gson.annotations.Expose;
 public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored {
 
     @Expose
-    protected LandType landType;
+    protected final LandType landType;
     @Expose
-    protected int level;
+    protected final int level;
 
     @Expose
-    private int dangerLevel;
+    private final int dangerLevel;
     @Expose
-    private int monstrousLore;
-
-    private int victoryPoints;
+    private final int monstrousLore;
+    @Expose
+    private final int victoryPoints;
 
     protected Monster(String name, LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
         super("Monster", name);

@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 
 public class Specialist extends SecretGoal {
 
+    public Specialist(String name) {
+        super(name);
+    }
+
     @Override
     public int score(Player player) {
         long numberOfLandTypes = Stream.of(LandType.values())

@@ -4,8 +4,8 @@ import carnivalOfMonsters.core.LandType;
 
 public class Level3Land extends DistantLand {
 
-    public Level3Land(LandType landType) {
-        super(landType, 3, 2);
+    public Level3Land(String name, LandType landType) {
+        super(name, landType, 3, 2);
     }
 
 }

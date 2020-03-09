@@ -2,6 +2,7 @@ package carnivalOfMonsters.core;
 
 import carnivalOfMonsters.core.monsters.Monster;
 import carnivalOfMonsters.core.seasons.Season;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,12 +13,19 @@ import java.util.stream.Stream;
 
 public class Player {
     private IDecisionMaker decisionMaker;
+    @Expose
     private ArrayList<ICanBeInPlay> cardsInPlay = new ArrayList<>();
+    @Expose
     private ArrayList<ICard> keptCards = new ArrayList<>();
+    @Expose
     private ArrayList<Monster> menagerie = new ArrayList<>();
+    @Expose
     private ArrayList<Season> trophies = new ArrayList<>();
+    @Expose
     private int crowns = 4;
+    @Expose
     private int loans = 0;
+    @Expose
     private int hunterTokens = 0;
 
     public Player(IDecisionMaker decisionMaker) {

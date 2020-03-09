@@ -5,6 +5,10 @@ import carnivalOfMonsters.core.lands.DistantLand;
 
 public class TwoPerDistandLand extends SecretGoal {
 
+    protected TwoPerDistandLand(String name) {
+        super(name);
+    }
+
     @Override
     public int score(Player player) {
         return (int) player.getCardsInPlay().stream()

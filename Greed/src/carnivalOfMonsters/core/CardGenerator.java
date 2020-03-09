@@ -83,43 +83,43 @@ public class CardGenerator {
         if (landType == LandType.DREAMLANDS) {
             return Stream.empty();
         } else {
-            return Stream.generate(() -> new BasicNormalLand(landType)).limit(2);
+            return Stream.generate(() -> new BasicNormalLand("TODO", landType)).limit(2);
         }
     }
 
     private static Stream<ICard> createLands(LandType landType) {
         if (landType == LandType.DREAMLANDS) {
-            return Stream.generate(Dreamlands::new).limit(12).map(x -> x);
+            return Stream.generate(() -> new Dreamlands("TODO")).limit(12).map(x -> x);
         } else {
-            return Stream.of(Stream.generate(() -> new BasicNormalLand(landType)).limit(8),
-                    Stream.generate(() -> new Level2Land(landType)).limit(4),
-                    Stream.generate(() -> new Level3Land(landType)).limit(2)).flatMap(x -> x);
+            return Stream.of(Stream.generate(() -> new BasicNormalLand("TODO", landType)).limit(8),
+                    Stream.generate(() -> new Level2Land("TODO", landType)).limit(4),
+                    Stream.generate(() -> new Level3Land("TODO", landType)).limit(2)).flatMap(x -> x);
 
         }
     }
 
     private static Stream<ICard> createMonsters(LandType landType) {
         if (landType == LandType.DREAMLANDS) {
-            return Stream.of(new OuterRealmSpider(null), new Screecher(null), new Succubus(null), new TheAncientEnemy(null));
+            return Stream.of(new OuterRealmSpider("TODO"), new Screecher("TODO"), new Succubus("TODO"), new TheAncientEnemy("TODO"));
         } else {
             return Stream
-                    .of(Stream.generate(() -> new Level1Monster(null, landType)).limit(3),
-                            Stream.of(new Level1Danger1Monster(null, landType), new Level1Lore1Monster(null, landType),
-                                    new Level2Monster(null, landType), new Level2Danger1Monster(null, landType),
-                                    new Level3Danger1Monster(null, landType), new Level4Danger2Monster(null, landType)))
+                    .of(Stream.generate(() -> new Level1Monster("TODO", landType)).limit(3),
+                            Stream.of(new Level1Danger1Monster("TODO", landType), new Level1Lore1Monster("TODO", landType),
+                                    new Level2Monster("TODO", landType), new Level2Danger1Monster("TODO", landType),
+                                    new Level3Danger1Monster("TODO", landType), new Level4Danger2Monster(null, landType)))
                     .flatMap(x -> x);
 
         }
     }
 
     private static Stream<ICard> createStaff(LandType landType) {
-        return Stream.of(new AuthorityOn(landType));
+        return Stream.of(new AuthorityOn("TODO", landType));
 
     }
 
     private static Stream<ICard> createStaff() {
-        return Stream.of(new EventCoordinator(), new IntrepidExplorer(), new IntrepidExplorer(), new IntrepidExplorer(),
-                new IntrepidExplorer(), new Jagermeister(), new Jagermeister(), new MonsterTrainer());
+        return Stream.of(new EventCoordinator("TODO"), new IntrepidExplorer("TODO"), new IntrepidExplorer("TODO"), new IntrepidExplorer("TODO"),
+                new IntrepidExplorer("TODO"), new Jagermeister("TODO"), new Jagermeister("TODO"), new MonsterTrainer("TODO"));
     }
 
     private static Stream<ICard> createEvents(LandType landType) {
@@ -140,13 +140,13 @@ public class CardGenerator {
         if (landType == LandType.DREAMLANDS) {
             return Stream.of();
         } else {
-            return Stream.of(new AuthorityOn(landType));
+            return Stream.of(new AuthorityOn("TODO", landType));
         }
     }
 
     private static Stream<ICard> createSecretGoals() {
-        return Stream.of(new ATrueGentlemanHonorsHisDebts(), new EnthusiastForLittleThings(),
-                new SevenIfSevenInLandType(), new SilverSpoon(), new Specialist(), new TwoPerHuntToken());
+        return Stream.of(new ATrueGentlemanHonorsHisDebts("TODO"), new EnthusiastForLittleThings("TODO"),
+                new SevenIfSevenInLandType("TODO"), new SilverSpoon("TODO"), new Specialist("TODO"), new TwoPerHuntToken("TODO"));
     }
 
 }

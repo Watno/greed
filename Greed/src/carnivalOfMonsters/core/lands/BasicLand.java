@@ -5,8 +5,8 @@ import carnivalOfMonsters.core.Player;
 
 public abstract class BasicLand extends Land {
 
-    protected BasicLand(LandType landType, int landpoints) {
-        super(landType, landpoints);
+    protected BasicLand(String name, LandType landType, int landpoints) {
+        super(name, landType, landpoints);
     }
 
     @Override

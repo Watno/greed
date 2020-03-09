@@ -10,8 +10,8 @@ public class LandTypeExpert extends StaffMember implements ITriggerOnPlay {
 
     private LandType landType;
 
-    protected LandTypeExpert(LandType landType) {
-        super(3);
+    protected LandTypeExpert(String name, LandType landType) {
+        super(name, 3);
         this.landType = landType;
     }
 

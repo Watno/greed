@@ -2,8 +2,8 @@ package carnivalOfMonsters.core.staff;
 
 public class Jagermeister extends StaffMember {
 
-    public Jagermeister() {
-        super(2);
+    public Jagermeister(String name) {
+        super(name, 2);
     }
 
     @Override

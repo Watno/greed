@@ -4,6 +4,10 @@ import carnivalOfMonsters.core.Player;
 
 public class EnthusiastForLittleThings extends SecretGoal {
 
+    public EnthusiastForLittleThings(String name) {
+        super(name);
+    }
+
     @Override
     public int score(Player player) {
         return (int) player.getMenagerie().stream()

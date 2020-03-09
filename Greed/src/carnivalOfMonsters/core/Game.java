@@ -2,6 +2,7 @@ package carnivalOfMonsters.core;
 
 import carnivalOfMonsters.core.lands.BasicNormalLand;
 import carnivalOfMonsters.core.seasons.Season;
+import com.google.gson.annotations.Expose;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import java.util.stream.Stream;
 public class Game {
     private Stack<ICard> drawPile;
 
+    @Expose
     private List<Player> players;
 
     private Collection<HuntDie> huntDice;

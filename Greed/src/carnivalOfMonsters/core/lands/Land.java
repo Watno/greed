@@ -1,16 +1,14 @@
 package carnivalOfMonsters.core.lands;
 
-import carnivalOfMonsters.core.Game;
-import carnivalOfMonsters.core.ICanBeInPlay;
-import carnivalOfMonsters.core.LandType;
-import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.*;
 
-public abstract class Land implements ICanBeInPlay {
+public abstract class Land extends Card implements ICanBeInPlay {
 
-    protected LandType landType;
-    private int landpoints;
-    protected Land(LandType landType, int landpoints) {
-        super();
+    protected final LandType landType;
+    private final int landpoints;
+
+    protected Land(String name, LandType landType, int landpoints) {
+        super("Land", name);
         this.landType = landType;
         this.landpoints = landpoints;
     }

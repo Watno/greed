@@ -1,16 +1,15 @@
 package carnivalOfMonsters.core.staff;
 
-import carnivalOfMonsters.core.Game;
-import carnivalOfMonsters.core.ICanBeInPlay;
-import carnivalOfMonsters.core.LandType;
-import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.*;
+import com.google.gson.annotations.Expose;
 
-public abstract class StaffMember implements ICanBeInPlay {
+public abstract class StaffMember extends Card implements ICanBeInPlay {
 
+    @Expose
     private int cost;
 
-    protected StaffMember(int cost) {
-        super();
+    protected StaffMember(String name, int cost) {
+        super("StaffMember", name);
         this.cost = cost;
     }
 

@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 
 public class SevenIfSevenInLandType extends SecretGoal {
 
+    public SevenIfSevenInLandType(String name) {
+        super(name);
+    }
+
     @Override
     public int score(Player player) {
         if (Stream.of(LandType.values())

@@ -8,8 +8,8 @@ public class IntrepidExplorer extends StaffMember {
 
     private LandType assignedLandType;
 
-    public IntrepidExplorer() {
-        super(2);
+    public IntrepidExplorer(String name) {
+        super(name, 2);
     }
 
     @Override
