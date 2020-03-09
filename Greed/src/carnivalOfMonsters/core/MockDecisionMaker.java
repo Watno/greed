@@ -41,7 +41,6 @@ public class MockDecisionMaker implements IDecisionMaker {
     @Override
     public void registerPlayer(Player player) {
         this.player = player;
-
     }
 
 }

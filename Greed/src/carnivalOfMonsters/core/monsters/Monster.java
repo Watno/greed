@@ -1,20 +1,20 @@
 package carnivalOfMonsters.core.monsters;
 
 import carnivalOfMonsters.core.*;
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored {
 
-    @Expose
+    @JsonProperty
     protected final LandType landType;
-    @Expose
+    @JsonProperty
     protected final int level;
 
-    @Expose
+    @JsonProperty
     private final int dangerLevel;
-    @Expose
+    @JsonProperty
     private final int monstrousLore;
-    @Expose
+    @JsonProperty
     private final int victoryPoints;
 
     protected Monster(String name, LandType landType, int level, int dangerLevel, int monstrousLore, int victoryPoints) {
@@ -36,6 +36,7 @@ public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored
         playingPlayer.draw(game, monstrousLore);
     }
 
+    @JsonProperty
     public LandType getLandType() {
         return landType;
     }

@@ -1,11 +1,11 @@
 package carnivalOfMonsters.core;
 
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class Card implements ICard {
-    @Expose
+    @JsonProperty
     private String name;
-    @Expose
+    @JsonProperty
     private String type;
 
     protected Card(String type, String name) {

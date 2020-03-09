@@ -27,8 +27,8 @@ public class CardGenerator {
 
     public static Stack<Season> createSeasons() {
         var seasons = new Stack<Season>();
-        seasons.addAll(Stream.of(LandType.values()).map(LandTypeSeason::new).collect(Collectors.toList()));
-        seasons.add(new DangerSeason());
+        seasons.addAll(Stream.of(LandType.values()).map(landType -> new LandTypeSeason("TODO", landType)).collect(Collectors.toList()));
+        seasons.add(new DangerSeason("TODO"));
         Collections.shuffle(seasons);
 
         return seasons;

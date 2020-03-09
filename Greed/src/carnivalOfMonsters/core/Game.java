@@ -2,6 +2,7 @@ package carnivalOfMonsters.core;
 
 import carnivalOfMonsters.core.lands.BasicNormalLand;
 import carnivalOfMonsters.core.seasons.Season;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.Expose;
 
 import java.util.*;
@@ -12,6 +13,7 @@ public class Game {
     private Stack<ICard> drawPile;
 
     @Expose
+    @JsonProperty
     private List<Player> players;
 
     private Collection<HuntDie> huntDice;

@@ -2,30 +2,28 @@ package carnivalOfMonsters.core;
 
 import carnivalOfMonsters.core.monsters.Monster;
 import carnivalOfMonsters.core.seasons.Season;
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Player {
     private IDecisionMaker decisionMaker;
-    @Expose
+
+    @JsonProperty
     private ArrayList<ICanBeInPlay> cardsInPlay = new ArrayList<>();
-    @Expose
+    @JsonProperty
     private ArrayList<ICard> keptCards = new ArrayList<>();
-    @Expose
+    @JsonProperty
     private ArrayList<Monster> menagerie = new ArrayList<>();
-    @Expose
+    @JsonProperty
     private ArrayList<Season> trophies = new ArrayList<>();
-    @Expose
+    @JsonProperty
     private int crowns = 4;
-    @Expose
+    @JsonProperty
     private int loans = 0;
-    @Expose
+    @JsonProperty
     private int hunterTokens = 0;
 
     public Player(IDecisionMaker decisionMaker) {
@@ -95,16 +93,31 @@ public class Player {
         return menagerie.stream().map(x -> (ICanBePlayed) x).collect(Collectors.toList());
     }
 
+    @JsonProperty("totalLandPoints")
+    public Map<LandType, Integer> getTotalLandPoints() {
+        return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getTotalLandPoints));
+    }
+
     public int getTotalLandPoints(LandType landType) {
         return cardsInPlay.stream()
                 .mapToInt(x -> x.getProvidedLandPoints(landType))
                 .sum();
     }
 
+    @JsonProperty("usedLandPoints")
+    public Map<LandType, Integer> getUsedLandPoints() {
+        return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getUsedLandPoints));
+    }
+
     public int getUsedLandPoints(LandType landType) {
         return cardsInPlay.stream()
                 .mapToInt(x -> x.getConsumedLandPoints(landType))
                 .sum();
+    }
+
+    @JsonProperty("availableLandPoints")
+    public Map<LandType, Integer> getAvailableLandPoints() {
+        return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getAvailableLandPoints));
     }
 
     public int getAvailableLandPoints(LandType landType) {

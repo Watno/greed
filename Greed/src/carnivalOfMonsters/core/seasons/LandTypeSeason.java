@@ -9,8 +9,8 @@ public class LandTypeSeason extends Season {
 
     private LandType landType;
 
-    public LandTypeSeason(LandType landType) {
-        super();
+    public LandTypeSeason(String name, LandType landType) {
+        super(name);
         this.landType = landType;
     }
 

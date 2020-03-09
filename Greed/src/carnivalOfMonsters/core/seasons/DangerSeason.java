@@ -6,6 +6,10 @@ import carnivalOfMonsters.core.monsters.Monster;
 
 public class DangerSeason extends Season {
 
+    public DangerSeason(String name) {
+        super(name);
+    }
+
     @Override
     public boolean triggersOn(Player player, ICanBePlayed card) {
         if (!(card instanceof Monster)) return false;

@@ -1,10 +1,12 @@
 package carnivalOfMonsters.core.lands;
 
 import carnivalOfMonsters.core.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class Land extends Card implements ICanBeInPlay {
-
+    @JsonProperty
     protected final LandType landType;
+    @JsonProperty
     private final int landpoints;
 
     protected Land(String name, LandType landType, int landpoints) {

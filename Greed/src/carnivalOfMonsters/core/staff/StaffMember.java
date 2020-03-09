@@ -1,11 +1,11 @@
 package carnivalOfMonsters.core.staff;
 
 import carnivalOfMonsters.core.*;
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class StaffMember extends Card implements ICanBeInPlay {
 
-    @Expose
+    @JsonProperty
     private int cost;
 
     protected StaffMember(String name, int cost) {
