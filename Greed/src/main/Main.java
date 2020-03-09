@@ -5,11 +5,11 @@ import server.Server;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Server server = new Server();
-		server.RegisterGameFactory("Greed", new GameFactory());
+        Server server = new Server();
+        server.RegisterGameFactory("Greed", new GameFactory());
 
-	}
+    }
 
 }

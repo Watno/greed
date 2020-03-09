@@ -6,13 +6,13 @@ import carnivalOfMonsters.core.Player;
 
 public abstract class Event extends Card implements ICanBePlayed {
 
-	protected Event(String name) {
-		super("Event", name);
-	}
+    protected Event(String name) {
+        super("Event", name);
+    }
 
-	@Override
-	public boolean checkRequirement(Player playingPlayer) {
-		return true;
-	}
+    @Override
+    public boolean checkRequirement(Player playingPlayer) {
+        return true;
+    }
 
 }

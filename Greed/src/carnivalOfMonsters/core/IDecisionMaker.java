@@ -6,15 +6,15 @@ import java.util.Optional;
 
 public interface IDecisionMaker {
 
-	Map<LandType, Integer> assignLandpoints(int requiredLandpoints);
+    Map<LandType, Integer> assignLandpoints(int requiredLandpoints);
 
-	LandType chooseLandTypeForExplorer();
-	
-	ICard pickCardToDraft(Collection<ICard> draftstack);
-	
-	PlayOrKeep choosePlayOrKeep(ICanBePlayed card);
-	
-	Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards);
-	
-	void registerPlayer(Player player);
+    LandType chooseLandTypeForExplorer();
+
+    ICard pickCardToDraft(Collection<ICard> draftstack);
+
+    PlayOrKeep choosePlayOrKeep(ICanBePlayed card);
+
+    Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards);
+
+    void registerPlayer(Player player);
 }

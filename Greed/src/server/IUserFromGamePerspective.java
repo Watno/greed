@@ -5,14 +5,14 @@ import com.google.gson.JsonObject;
 
 public interface IUserFromGamePerspective {
 
-	JsonElement requestInput(JsonObject request);
+    JsonElement requestInput(JsonObject request);
 
-	void allowReturnToLobby();
+    void allowReturnToLobby();
 
-	String getName();
-	
-	void send(JsonObject json);
-	
-	Boolean hasResigned();
+    String getName();
+
+    void send(JsonObject json);
+
+    Boolean hasResigned();
 
 }

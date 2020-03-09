@@ -5,13 +5,13 @@ import carnivalOfMonsters.core.Player;
 
 public class GainHunterToken extends Event {
 
-	public GainHunterToken(String name) {
-		super(name);
-	}
+    public GainHunterToken(String name) {
+        super(name);
+    }
 
-	@Override
-	public void onPlay(Player playingPlayer, Game game) {
-		playingPlayer.gainHunterToken();
-	}
+    @Override
+    public void onPlay(Player playingPlayer, Game game) {
+        playingPlayer.gainHunterToken();
+    }
 
 }

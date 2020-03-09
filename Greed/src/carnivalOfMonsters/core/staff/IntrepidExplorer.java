@@ -6,23 +6,23 @@ import carnivalOfMonsters.core.Player;
 
 public class IntrepidExplorer extends StaffMember {
 
-	private LandType assignedLandType;
-	
-	public IntrepidExplorer() {
-		super(2);
-	}
+    private LandType assignedLandType;
 
-	@Override
-	public void onPlay(Player playingPlayer, Game game) {
-		playingPlayer.getDecisionMaker().chooseLandTypeForExplorer();
-		super.onPlay(playingPlayer, game);
-	}
+    public IntrepidExplorer() {
+        super(2);
+    }
 
-	@Override
-	public int getProvidedLandPoints(LandType landType) {
-		if (landType == assignedLandType) return 1;
-		else return 0;
-	}
-	
+    @Override
+    public void onPlay(Player playingPlayer, Game game) {
+        playingPlayer.getDecisionMaker().chooseLandTypeForExplorer();
+        super.onPlay(playingPlayer, game);
+    }
+
+    @Override
+    public int getProvidedLandPoints(LandType landType) {
+        if (landType == assignedLandType) return 1;
+        else return 0;
+    }
+
 
 }
