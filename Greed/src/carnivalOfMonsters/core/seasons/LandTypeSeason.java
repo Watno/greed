@@ -15,10 +15,12 @@ public class LandTypeSeason extends Season {
 	private LandType landType;
 	
 	@Override
-	public boolean triggersOn(ICanBePlayed card) {
+	public boolean triggersOn(Player player, ICanBePlayed card) {
 		if (!(card instanceof Monster)) return false;
 		var monster = (Monster) card;
-		return monster.getLandType() == landType;
+		if (monster.getLandType() != landType) return false;
+		if (player.getCardsInPlay().stream().filter(x -> x instanceof Monster).map(x -> (Monster)x).anyMatch(x -> x.getLandType() == landType)) return false;
+		return true;
 	}
 	
 	@Override

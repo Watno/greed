@@ -12,7 +12,7 @@ public class EventCoordinator extends StaffMember implements ITriggerOnPlay{
 	}
 
 	@Override
-	public boolean triggersOn(ICanBePlayed card) {
+	public boolean triggersOn(Player player, ICanBePlayed card) {
 		return card instanceof Event;
 	}
 

@@ -12,7 +12,7 @@ public class MonsterTrainer extends StaffMember implements ITriggerOnPlay{
 	}
 
 	@Override
-	public boolean triggersOn(ICanBePlayed card) {
+	public boolean triggersOn(Player player, ICanBePlayed card) {
 		if (!(card instanceof Monster)) return false;
 		var monster = (Monster) card;
 		return monster.getDangerLevel() > 0;

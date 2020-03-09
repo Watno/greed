@@ -69,7 +69,7 @@ public class Player {
 		if (card.checkRequirement(this)) {
 			card.onPlay(this, game);
 			for(var effect: GetOnPlayEffects(game)){
-				if (effect.triggersOn(card)) {
+				if (effect.triggersOn(player, card)) {
 					effect.trigger(this, card);
 				}
 					
