@@ -1,19 +1,16 @@
 package carnivalOfMonsters.core;
 
+import carnivalOfMonsters.core.gamestate.PublicGameState;
 import carnivalOfMonsters.core.lands.BasicNormalLand;
 import carnivalOfMonsters.core.seasons.Season;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.Expose;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Game {
+public class Game implements Runnable {
     private Stack<ICard> drawPile;
 
-    @Expose
-    @JsonProperty
     private List<Player> players;
 
     private Collection<HuntDie> huntDice;
@@ -44,6 +41,8 @@ public class Game {
         for (int season = 1; season <= 4; season++) {
             runSeason(season);
         }
+
+        sendGameStateToPlayers();
         for (var player : players) {
             System.out.println(player.score());
         }
@@ -51,6 +50,7 @@ public class Game {
     }
 
     private void runSeason(int season) {
+        sendGameStateToPlayers();
         var draftStacks = createDraftstacks();
         for (int round = 1; round <= 8; round++) {
             for (int player = 0; player < players.size(); player++) {
@@ -59,10 +59,14 @@ public class Game {
                         draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * player + round, players.size())),
                         this);
             }
+            sendGameStateToPlayers();
         }
+
         for (var player : players) {
             player.allowPlayingKeptCards(this);
         }
+
+        sendGameStateToPlayers();
 
         var royalHunters = huntDice.stream().mapToInt(HuntDie::roll).sum();
         for (var player : players) {
@@ -97,4 +101,13 @@ public class Game {
         return players.stream().map(x -> draw(8)).collect(Collectors.toList());
     }
 
+    private void sendGameStateToPlayers() {
+        for (var player : players) {
+            player.sendGameStateToDecisionMaker(getPublicGameState());
+        }
+    }
+
+    private PublicGameState getPublicGameState() {
+        return new PublicGameState(getCurrentSeason(), players.stream().map(x -> x.getPublicPlayerGameState()).collect(Collectors.toList()));
+    }
 }

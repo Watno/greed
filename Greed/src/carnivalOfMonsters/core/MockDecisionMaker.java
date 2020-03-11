@@ -1,17 +1,25 @@
 package carnivalOfMonsters.core;
 
+import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
+import carnivalOfMonsters.core.gamestate.PublicPlayerGameState;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MockDecisionMaker implements IDecisionMaker {
-    private Player player;
+    public GameStateWithPrivateInfo gameState;
+    private String playerName;
+
+    public MockDecisionMaker(String playerName) {
+        this.playerName = playerName;
+    }
 
     @Override
     public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
         Map<LandType, Integer> result = new HashMap<>();
         for (var landType : Stream.of(LandType.values()).sorted(Comparator.comparing(x -> x.equals(LandType.DREAMLANDS))).collect(Collectors.toList())) {
-            var assignableLandpoints = Integer.min(requiredLandpoints, player.getAvailableLandPoints(landType));
+            var assignableLandpoints = Integer.min(requiredLandpoints, getOwnPlayerGameState().getAvailableLandPoints.get(landType));
             result.put(landType, assignableLandpoints);
             requiredLandpoints -= assignableLandpoints;
         }
@@ -39,8 +47,12 @@ public class MockDecisionMaker implements IDecisionMaker {
     }
 
     @Override
-    public void registerPlayer(Player player) {
-        this.player = player;
+    public void sendGameState(GameStateWithPrivateInfo gameState) {
+        this.gameState = gameState;
+    }
+
+    private PublicPlayerGameState getOwnPlayerGameState() {
+        return gameState.publicGameState.playerGameStates.stream().filter(x -> x.name.equals(playerName)).findFirst().get();
     }
 
 }

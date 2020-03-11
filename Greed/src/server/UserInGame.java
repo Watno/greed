@@ -1,5 +1,10 @@
 package server;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -7,6 +12,7 @@ public class UserInGame implements IUserFromGamePerspective {
     private User user;
     private String name;
     private JsonElement currentInput = null;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public UserInGame(User user) {
         super();
@@ -32,6 +38,29 @@ public class UserInGame implements IUserFromGamePerspective {
     }
 
     @Override
+    public synchronized <T> T requestTypedInput(ObjectNode request) {
+        send(request);
+        try {
+            T toReturn = null;
+            if (!hasResigned()) {
+                wait();
+                toReturn = objectMapper.readValue(currentInput.getAsString(), new TypeReference<T>() {
+                });
+                sendInputAcceptance();
+            }
+            currentInput = null;
+            return toReturn;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public void allowReturnToLobby() {
         JsonObject json = new JsonObject();
         json.addProperty("request", "returnToLobby");
@@ -47,6 +76,13 @@ public class UserInGame implements IUserFromGamePerspective {
 
     @Override
     public void send(JsonObject json) {
+        if (!hasResigned()) {
+            user.send(json);
+        }
+    }
+
+    @Override
+    public void send(ObjectNode json) {
         if (!hasResigned()) {
             user.send(json);
         }

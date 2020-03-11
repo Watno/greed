@@ -1,8 +1,11 @@
 package carnivalOfMonsters.core;
 
+import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
+import carnivalOfMonsters.core.gamestate.PrivateGameState;
+import carnivalOfMonsters.core.gamestate.PublicGameState;
+import carnivalOfMonsters.core.gamestate.PublicPlayerGameState;
 import carnivalOfMonsters.core.monsters.Monster;
 import carnivalOfMonsters.core.seasons.Season;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,26 +13,20 @@ import java.util.stream.Stream;
 
 public class Player {
     private IDecisionMaker decisionMaker;
+    private String name;
 
-    @JsonProperty
     private ArrayList<ICanBeInPlay> cardsInPlay = new ArrayList<>();
-    @JsonProperty
     private ArrayList<ICard> keptCards = new ArrayList<>();
-    @JsonProperty
     private ArrayList<Monster> menagerie = new ArrayList<>();
-    @JsonProperty
     private ArrayList<Season> trophies = new ArrayList<>();
-    @JsonProperty
     private int crowns = 4;
-    @JsonProperty
     private int loans = 0;
-    @JsonProperty
     private int hunterTokens = 0;
 
-    public Player(IDecisionMaker decisionMaker) {
+    public Player(String name, IDecisionMaker decisionMaker) {
         super();
+        this.name = name;
         this.decisionMaker = decisionMaker;
-        decisionMaker.registerPlayer(this);
     }
 
     public IDecisionMaker getDecisionMaker() {
@@ -93,7 +90,6 @@ public class Player {
         return menagerie.stream().map(x -> (ICanBePlayed) x).collect(Collectors.toList());
     }
 
-    @JsonProperty("totalLandPoints")
     public Map<LandType, Integer> getTotalLandPoints() {
         return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getTotalLandPoints));
     }
@@ -104,7 +100,6 @@ public class Player {
                 .sum();
     }
 
-    @JsonProperty("usedLandPoints")
     public Map<LandType, Integer> getUsedLandPoints() {
         return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getUsedLandPoints));
     }
@@ -115,7 +110,6 @@ public class Player {
                 .sum();
     }
 
-    @JsonProperty("availableLandPoints")
     public Map<LandType, Integer> getAvailableLandPoints() {
         return Stream.of(LandType.values()).collect(Collectors.toMap(x -> x, this::getAvailableLandPoints));
     }
@@ -228,5 +222,17 @@ public class Player {
 
     }
 
+    public void sendGameStateToDecisionMaker(PublicGameState publicGameState) {
+        decisionMaker.sendGameState(new GameStateWithPrivateInfo(publicGameState, getPrivateGameState()));
 
+
+    }
+
+    public PublicPlayerGameState getPublicPlayerGameState() {
+        return new PublicPlayerGameState(name, cardsInPlay, menagerie, trophies, crowns, loans, hunterTokens, getTotalLandPoints(), getAvailableLandPoints(), getUsedLandPoints());
+    }
+
+    private PrivateGameState getPrivateGameState() {
+        return new PrivateGameState(keptCards);
+    }
 }

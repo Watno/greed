@@ -1,5 +1,7 @@
 package carnivalOfMonsters.core;
 
+import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -16,5 +18,5 @@ public interface IDecisionMaker {
 
     Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards);
 
-    void registerPlayer(Player player);
+    void sendGameState(GameStateWithPrivateInfo gameState);
 }

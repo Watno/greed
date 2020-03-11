@@ -14,4 +14,8 @@ public abstract class Card implements ICard {
         this.type = type;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
 }
