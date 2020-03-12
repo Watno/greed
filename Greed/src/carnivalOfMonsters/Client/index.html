@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="custom.css?7" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="client.js?8"></script>
+    <script src="serverlocation.js"></script>
+    <title>Greed</title>
+
+<body onload="javascript:initialize();">
+<div class="container" id="initial">
+    <div class="row initial">
+        <div class="col-md-6">
+            <button onclick="javascript:changeName()">Select name</button>
+            <input id="newName" onkeydown="if (event.keyCode == 13) { changeName();}" type="text">
+        </div>
+    </div>
+</div>
+
+<div class="container" hidden id="lobby">
+    <div class="row newtablearea">
+        <div class="col-md-2 ">
+            <button onclick="javascript:newTable()">New Table</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="tables col-md-12" id="lobbyTables"></div>
+    </div>
+
+    <div class="row lobbychatarea">
+        <div class="col-md-6">
+            <div class="lobbychat" id="lobbyChat"></div>
+            <input id="lobbyChatMessage" onkeydown="if (event.keyCode == 13) { sendLobbyChat();}"
+                   type="text">
+            <button
+                    onclick="javascript:sendLobbyChat()">Chat
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="container" hidden id="gamearea">
+    <div class="lobbychat" id="gameMessages"></div>
+    <input id="gamecommand" onkeydown="if (event.keyCode == 13) { sendCommand();}"
+           type="text">
+    <button
+            onclick="javascript:sendCommand()">SendCommand
+    </button>
+</div>
+</div>
+
+
+</body>

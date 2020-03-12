@@ -14,7 +14,7 @@ public class GameFactory implements IGameFactory {
     public Runnable createGame(ArrayList<IUserFromGamePerspective> connections, int numberOfPlayers) {
         var players = connections.stream().map(x -> new Player(x.getName(), new RealDecisionMaker(x))).collect(Collectors.toList());
         while (players.size() < numberOfPlayers) {
-            String name = "Player " + numberOfPlayers;
+            String name = "Player " + players.size();
             players.add(new Player(name, new MockDecisionMaker(name)));
         }
         return new Game(players);

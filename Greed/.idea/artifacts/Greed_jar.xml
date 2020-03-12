@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact name="Greed:jar">
+    <output-path>$PROJECT_DIR$/Build/Greed_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Greed.jar">
+        <element id="module-output" name="Greed" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-annotations-2.10.3.jar" />
+      <element id="library" level="module" name="gson-2.8.6-javadoc.jar" module-name="Greed" />
+      <element id="library" level="module" name="JUnit5.4" module-name="Greed" />
+      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-core-2.10.3.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-databind-2.10.3.jar" />
+      <element id="library" level="module" name="gson-2.8.6-sources.jar" module-name="Greed" />
+      <element id="library" level="module" name="webbit-fixed.jar" module-name="Greed" />
+      <element id="library" level="module" name="junit5" module-name="Greed" />
+      <element id="library" level="module" name="gson-2.8.6.jar" module-name="Greed" />
+    </root>
+  </artifact>
+</component>

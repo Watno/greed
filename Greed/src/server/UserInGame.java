@@ -3,8 +3,9 @@ package server;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -18,6 +19,7 @@ public class UserInGame implements IUserFromGamePerspective {
         super();
         this.user = user;
         this.name = user.getName();
+        objectMapper.registerModule(new Jdk8Module());
     }
 
     @Override
@@ -38,14 +40,13 @@ public class UserInGame implements IUserFromGamePerspective {
     }
 
     @Override
-    public synchronized <T> T requestTypedInput(ObjectNode request) {
+    public synchronized <T> T requestTypedInput(JsonNode request, TypeReference<T> requestedType) {
         send(request);
         try {
             T toReturn = null;
             if (!hasResigned()) {
                 wait();
-                toReturn = objectMapper.readValue(currentInput.getAsString(), new TypeReference<T>() {
-                });
+                toReturn = objectMapper.readValue(currentInput.toString(), requestedType);
                 sendInputAcceptance();
             }
             currentInput = null;
@@ -82,7 +83,7 @@ public class UserInGame implements IUserFromGamePerspective {
     }
 
     @Override
-    public void send(ObjectNode json) {
+    public void send(JsonNode json) {
         if (!hasResigned()) {
             user.send(json);
         }

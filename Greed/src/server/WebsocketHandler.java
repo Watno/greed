@@ -60,7 +60,7 @@ public class WebsocketHandler extends BaseWebSocketHandler {
                     greedConn.setReady(parsedMessage.get("ready").getAsBoolean());
                 }
                 if (parsedMessage.has("newTable")) {
-                    lobby.makeTable(greedConn);
+                    lobby.makeTable(greedConn, parsedMessage.get("newTable").getAsString());
                 }
                 if (parsedMessage.has("changePlayers")) {
                     greedConn.getTable().setNumberOfPlayers(parsedMessage.get("changePlayers").getAsInt());

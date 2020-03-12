@@ -6,6 +6,7 @@ import carnivalOfMonsters.core.seasons.Season;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Game implements Runnable {
@@ -53,12 +54,10 @@ public class Game implements Runnable {
         sendGameStateToPlayers();
         var draftStacks = createDraftstacks();
         for (int round = 1; round <= 8; round++) {
-            for (int player = 0; player < players.size(); player++) {
-                // TODO parallel playing
-                players.get(player).makeTurn(
-                        draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * player + round, players.size())),
-                        this);
-            }
+            int localRound = round;
+            IntStream.range(0, players.size()).parallel().forEach(playernumber ->
+                    players.get(playernumber)
+                            .makeTurn(draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * playernumber + localRound, players.size())), this));
             sendGameStateToPlayers();
         }
 

@@ -34,12 +34,11 @@ public class Player {
     }
 
     public void makeTurn(Collection<ICard> draftstack, Game game) {
-        allowPlayingKeptCards(game);
         var cardToDraft = decisionMaker.pickCardToDraft(draftstack);
         if (!draftstack.contains(cardToDraft)) {
             throw new IllegalArgumentException();
         }
-
+        allowPlayingKeptCards(game);
         if ((cardToDraft instanceof ICanBePlayed) && ((ICanBePlayed) cardToDraft).checkRequirement(this) && (decisionMaker.choosePlayOrKeep((ICanBePlayed) cardToDraft) == PlayOrKeep.PLAY)) {
             play((ICanBePlayed) cardToDraft, game);
         } else {
@@ -87,7 +86,11 @@ public class Player {
     }
 
     private Collection<ICanBePlayed> getPlayableKeptCards() {
-        return menagerie.stream().map(x -> (ICanBePlayed) x).collect(Collectors.toList());
+        return keptCards.stream()
+                .filter(x -> x instanceof ICanBePlayed)
+                .map(x -> (ICanBePlayed) x)
+                .filter(x -> x.checkRequirement(this))
+                .collect(Collectors.toList());
     }
 
     public Map<LandType, Integer> getTotalLandPoints() {

@@ -15,8 +15,8 @@ public class Lobby {
         this.gameFactories = gameFactories;
     }
 
-    public void makeTable(User player) {
-        tables.add(new Table(gameFactories.get("Greed"), player, this));
+    public void makeTable(User player, String gameName) {
+        tables.add(new Table(gameFactories.get(gameName), player, this));
     }
 
     public void removeTable(Table table) {

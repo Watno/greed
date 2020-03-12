@@ -1,0 +1,56 @@
+.logarea {
+    height: 50vh;
+	overflow: auto
+}
+
+.newtablearea {
+	height: 5vh
+}
+
+.lobbychat {
+	height: 40vh;
+	overflow: auto
+}
+
+.lobbychatarea {
+	height: 45 vh;
+}
+
+.tables {
+	height: 45vh;
+	overflow: auto
+}
+
+/* necessary for tooltips on disabled buttons in Chrome */
+.buttonwrapper {
+	display: inline-block;
+}
+
+.divider{
+	height: 10vh;
+}
+.buttonwrapper [disabled] {
+  pointer-events: none;
+}
+/* end of necessary for tooltips on disabled buttons in Chrome*/
+
+.tooltip-inner {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+}
+.btn.disabled {
+    pointer-events: auto;
+}	
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.infoarea {
+	height: 10vh;
+}

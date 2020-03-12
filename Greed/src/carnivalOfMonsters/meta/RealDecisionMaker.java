@@ -3,7 +3,9 @@ package carnivalOfMonsters.meta;
 
 import carnivalOfMonsters.core.*;
 import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import server.IUserFromGamePerspective;
 
 import java.util.Collection;
@@ -16,6 +18,7 @@ public class RealDecisionMaker implements IDecisionMaker {
 
     public RealDecisionMaker(IUserFromGamePerspective user) {
         this.user = user;
+        serializer.registerModule(new Jdk8Module());
     }
 
     @Override
@@ -26,24 +29,27 @@ public class RealDecisionMaker implements IDecisionMaker {
 
     @Override
     public LandType chooseLandTypeForExplorer() {
-        //TODO
-        return user.requestTypedInput(serializer.createObjectNode());
+        return user.requestTypedInput(serializer.createObjectNode(), new TypeReference<>() {
+        });
     }
 
     @Override
     public ICard pickCardToDraft(Collection<ICard> draftstack) {
-        String selectedName = user.requestTypedInput(serializer.valueToTree(draftstack));
+        String selectedName = user.requestTypedInput(serializer.valueToTree(draftstack), new TypeReference<>() {
+        });
         return findByName(draftstack, selectedName);
     }
 
     @Override
     public PlayOrKeep choosePlayOrKeep(ICanBePlayed card) {
-        return user.requestTypedInput(serializer.valueToTree(card));
+        return user.requestTypedInput(serializer.valueToTree(card), new TypeReference<>() {
+        });
     }
 
     @Override
     public Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards) {
-        Optional<String> selectedName = user.requestTypedInput(serializer.valueToTree(keptCards));
+        Optional<String> selectedName = user.requestTypedInput(serializer.valueToTree(keptCards), new TypeReference<>() {
+        });
         if (!selectedName.isPresent()) {
             return Optional.empty();
         }
