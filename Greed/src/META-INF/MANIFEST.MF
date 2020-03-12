@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: main.Main
+Class-Path: jackson-annotations-2.10.3.jar gson-2.8.6-javadoc.jar junit-
+ jupiter-5.4.2.jar junit-jupiter-api-5.4.2.jar apiguardian-api-1.0.0.jar
+  opentest4j-1.1.1.jar junit-platform-commons-1.4.2.jar junit-jupiter-pa
+ rams-5.4.2.jar junit-jupiter-engine-5.4.2.jar junit-platform-engine-1.4
+ .2.jar jackson-core-2.10.3.jar jackson-databind-2.10.3.jar gson-2.8.6-s
+ ources.jar webbit-fixed.jar junit.jar gson-2.8.6.jar
+
