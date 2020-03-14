@@ -52,10 +52,12 @@ function sendLobbyChat() {
 	sendLobbyCommand('{"chat":"' + message + '","location":"lobby"}');
 }
 
-function sendCommand() {
-	var message = document.getElementById('gamecommand').value;
-	document.getElementById('gamecommand').value = "";
+function sendCommand(message) {
 	socket.send('{"greedcommand":"' + message + '"}');
+}
+
+function sendNullCommand() {
+	socket.send('{"greedcommand":null}');
 }
 
 function showMessage(text) {
@@ -123,42 +125,7 @@ function subscribeToWebSocket() {
 		socket.onmessage = function (msg) {
 			console.log(msg);
 			var parsedMsg = JSON.parse(msg.data);
-			if (parsedMsg.hasOwnProperty('players')) {
-				document.getElementById('lobby').hidden = true;
-				document.getElementById('game').hidden = false;
-				var log = document.getElementById('log');
-				var text = parsedMsg.log;
-				text = text.replace(/(?:\r\n|\r|\n)/g, '<br />');
-				for (var i = 1; i <= 80; i++) {
-					text = text.replace(RegExp(cardnames[i], "g"), "<span data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\"" + cardtexts[i] + "\">" + cardnames[i] + "</span>");
-				}
-				log.innerHTML = text;
-				log.scrollTop = log.scrollHeight - log.clientHeight;
-
-				var hand = parsedMsg.privateInformation.hand;
-				text = "Hand <br>"
-				for (var i = 0; i < hand.length; i++) {
-					text += drawCard(hand[i], i, 'handbutton');
-				}
-				document.getElementById('hand').innerHTML = text;
-				var draftPile = parsedMsg.privateInformation.draftPile;
-				text = "Draftpile <br>";
-				for (var i = 0; i < draftPile.length; i++) {
-					//text += draftPile[i].name + "<br>"; 
-					//text += "<button class =\"draftbutton\" onclick=\"javascript:sendCommand("+i+");\" disabled>"+draftPile[i].name + "</button>	";
-					text += drawCard(draftPile[i], i, 'draftbutton');
-				}
-				document.getElementById('draftPile').innerHTML = text;
-				text = "";
-				for (var i = 0; i < parsedMsg.players.length; i++) {
-					text += drawPlayer(parsedMsg.players[(i + parsedMsg.privateInformation.position) % parsedMsg.players.length], i == 0);
-				}
-				document.getElementById('players').innerHTML = text;
-				activateButtons();
-				$('[data-toggle="tooltip"]').tooltip();
-
-			}
-			else if (parsedMsg.type == 'lobby') {
+			if (parsedMsg.type == 'lobby') {
 				drawLobby(parsedMsg);
 			}
 			else if (parsedMsg.type == 'chat') {
@@ -177,15 +144,19 @@ function subscribeToWebSocket() {
 					gameChat.scrollTop = gameChat.scrollHeight - gameChat.clientHeight;
 				}
 			}
-			else {
+			else if(parsedMsg.hasOwnProperty('publicGameState')){
 			    document.getElementById('lobby').hidden = true;
 			    document.getElementById('gamearea').hidden = false;
-					var gameMessages = document.getElementById('gameMessages');
-					var text = gameMessages.innerHTML;
-					text += "<br>" + msg.data;
-					gameMessages.innerHTML = text;
-					gameMessages.scrollTop = gameMessages.scrollHeight - gameMessages.clientHeight;
-
+					var gameState = document.getElementById('gamestate');
+					gameState.innerHTML = drawGameState(parsedMsg);
+			}
+			else if(parsedMsg.hasOwnProperty('requestType')){
+				var requestArea = document.getElementById('requestArea');
+				requestArea.innerHTML = drawRequest(parsedMsg)
+			}
+			else {
+				var requestArea = document.getElementById('requestArea');
+				requestArea.innerHTML = "";
 			}
 
 		};
@@ -209,11 +180,18 @@ function appendTo(original, addition){
     return original;
 }
 
-function drawCard(card, number, buttontype) {
+function drawCard(card, enabled) {
     var buttonmetastart = "";
 
     buttonmetastart += "<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\"Test\">";
-    buttonmetastart += `<button class ="${card.type} ${card.landType}" onclick="javascript:sendCommand(${card.name})">`;
+	buttonmetastart += `<button class ="${card.type} ${card.landType}"`;
+	if (enabled != null){
+		buttonmetastart += ` onclick="javascript:sendCommand(\'${card.name}\')"`;
+	}
+	else{
+		buttonmetastart += " disabled"
+	}
+	buttonmetastart += `>`;
     var buttonmetaend= "</button></span>";
 
     var prefix = '';
@@ -232,6 +210,9 @@ function drawCard(card, number, buttontype) {
     if (card.hasOwnProperty('landpoints')){
         suffix = appendTo(suffix, card.landpoints)
     }
+    if (card.hasOwnProperty('cost')){
+        prefix = appendTo(prefix, "$"+card.cost)
+    }
 
     if (prefix != ''){
         prefix += ' - ';
@@ -241,5 +222,84 @@ function drawCard(card, number, buttontype) {
     }
 
     return buttonmetastart + prefix + card.name + suffix + buttonmetaend;
+}
+
+function drawGameState(gameState){
+    var season = "Aktuelle Saison: " + drawCard(gameState.publicGameState.currentSeason);
+
+    var playerInfos = "";
+    var ownIndex;
+    for (var i = 0; i<gameState.publicGameState.playerGameStates.length; i++){
+        if (gameState.publicGameState.playerGameStates[i].name == gameState.privateGameState.name){
+            ownIndex = i;
+			playerInfos += drawPlayer(gameState.publicGameState.playerGameStates[i]);
+			
+			var keptCards = 'Aufgehobene Karten: ';
+			for (var j = 0; j<gameState.privateGameState.keptCards.length; j++){
+				keptCards = appendTo(keptCards, drawCard(gameState.privateGameState.keptCards[j]));
+			}
+			playerInfos += `<br\> ${keptCards}`
+        }
+	}
+	
+	for (var i = 1; i<gameState.publicGameState.playerGameStates.length; i++){
+		playerInfos +="<br\><br\>"+ drawPlayer(gameState.publicGameState.playerGameStates[i%gameState.publicGameState.playerGameStates.length]);
+    }
+
+    return season + "<br\><br\>" + playerInfos;
+}
+
+function drawPlayer(playerInfo){
+    var name = playerInfo.name;
+    var landTypeInfo ='';
+    var landtypes = ["DARKLANDS", "AERIE", "DEPTHS", "ENCHANTEDFOREST", "CAVES", "DREAMLANDS" ];
+    for (var i = 0; i<landtypes.length; i++){
+           landTypeInfo = appendTo(landTypeInfo, `<span class="${landtypes[i]}"> ${playerInfo.usedLandPoints[landtypes[i]]}/${playerInfo.totalLandPoints[landtypes[i]]}</span>`);
+    }
+
+    var crowns = "$" + playerInfo.crowns;
+    var loans = `Kredite: ${playerInfo.loans}`;
+    var trophies = `Trophäen: ${playerInfo.trophies.length}`;
+    var hunterTokens = `Jagdmarker: ${playerInfo.hunterTokens}`;
+    var numberOfKeptCards = `Aufgehobene Karten: ${playerInfo.numberOfKeptCards}`;
+
+    var inPlay = 'Im Spiel:';
+    for (var i = 0; i<playerInfo.cardsInPlay.length; i++){
+           inPlay = appendTo(inPlay, drawCard(playerInfo.cardsInPlay[i]));
+    }
+
+    var menagerie = 'Menagerie:';
+    for (var i = 0; i<playerInfo.menagerie.length; i++){
+           menagerie = appendTo(menagerie, drawCard(playerInfo.menagerie[i]));
+    }
+
+    return  `${name} <br\>${crowns} ${landTypeInfo} ${numberOfKeptCards} ${hunterTokens}  ${trophies}  ${loans}<br\>${inPlay}<br\>${menagerie}`
+}
+
+function drawRequest(request){
+	var prompt;
+	switch (request.requestType){
+		case "DraftRequest":
+			prompt = "Wähle eine Karte aus:";
+			break;
+		case "PlayOrKeepRequest":
+			prompt = "Spiele die Karte aus oder behalte sie:";
+			prompt += "<br\>"+drawCard(request.card); 
+			prompt += ` <button onclick="javascript:sendCommand('PLAY')">Ausspielen</button>`;
+			prompt += ` <button onclick="javascript:sendCommand('KEEP')">Behalten</button>`;
+			break;
+		case "PlayFromKeptRequest":
+			prompt = "Du darfst eine aufgehobene Karte ausspielen:<br\>" 
+			prompt += ` <button onclick="javascript:sendNullCommand()">Keine Karte ausspielen</button>`;
+			break;
+	}
+	if (request.hasOwnProperty("cards")){
+		var cards = ""
+		for (var i = 0; i<request.cards.length; i++){
+			cards = appendTo(cards, drawCard(request.cards[i], true));
+	 	}
+		prompt += "<br\>"+cards
+	}
+	return prompt;
 }
 

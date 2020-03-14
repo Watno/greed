@@ -227,15 +227,13 @@ public class Player {
 
     public void sendGameStateToDecisionMaker(PublicGameState publicGameState) {
         decisionMaker.sendGameState(new GameStateWithPrivateInfo(publicGameState, getPrivateGameState()));
-
-
     }
 
     public PublicPlayerGameState getPublicPlayerGameState() {
-        return new PublicPlayerGameState(name, cardsInPlay, menagerie, trophies, crowns, loans, hunterTokens, getTotalLandPoints(), getAvailableLandPoints(), getUsedLandPoints());
+        return new PublicPlayerGameState(name, cardsInPlay, menagerie, keptCards.size(), trophies, crowns, loans, hunterTokens, getTotalLandPoints(), getAvailableLandPoints(), getUsedLandPoints());
     }
 
     private PrivateGameState getPrivateGameState() {
-        return new PrivateGameState(keptCards);
+        return new PrivateGameState(name, keptCards);
     }
 }

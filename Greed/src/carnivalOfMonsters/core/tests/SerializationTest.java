@@ -1,9 +1,13 @@
 package carnivalOfMonsters.core.tests;
 
 import carnivalOfMonsters.core.LandType;
+import carnivalOfMonsters.core.events.Gain2Crowns;
 import carnivalOfMonsters.core.lands.BasicNormalLand;
 import carnivalOfMonsters.core.monsters.Level2Monster;
 import carnivalOfMonsters.core.monsters.Screecher;
+import carnivalOfMonsters.core.monsters.TheAncientEnemy;
+import carnivalOfMonsters.core.secretGoals.SilverSpoon;
+import carnivalOfMonsters.core.staff.Jagermeister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +21,42 @@ public class SerializationTest {
     void screecher() throws JsonProcessingException {
         var sut = new Screecher("Screecher");
         var serializer = new ObjectMapper();
+        var json = serializer.writeValueAsString(sut);
+        System.out.println(json);
+    }
+
+    @Test
+    void ancientenemy() throws JsonProcessingException {
+        var sut = new TheAncientEnemy("The Ancient Enemy");
+        var serializer = new ObjectMapper();
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
+        var json = serializer.writeValueAsString(sut);
+        System.out.println(json);
+    }
+
+    @Test
+    void event() throws JsonProcessingException {
+        var sut = new Gain2Crowns("Gain 2 crowns");
+        var serializer = new ObjectMapper();
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
+        var json = serializer.writeValueAsString(sut);
+        System.out.println(json);
+    }
+
+    @Test
+    void staff() throws JsonProcessingException {
+        var sut = new Jagermeister("Jägermeister");
+        var serializer = new ObjectMapper();
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
+        var json = serializer.writeValueAsString(sut);
+        System.out.println(json);
+    }
+
+    @Test
+    void secretGoal() throws JsonProcessingException {
+        var sut = new SilverSpoon("Silver Spoon");
+        var serializer = new ObjectMapper();
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
         var json = serializer.writeValueAsString(sut);
         System.out.println(json);
     }

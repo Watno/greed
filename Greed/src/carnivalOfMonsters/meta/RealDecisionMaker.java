@@ -3,6 +3,7 @@ package carnivalOfMonsters.meta;
 
 import carnivalOfMonsters.core.*;
 import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
+import carnivalOfMonsters.meta.requests.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,32 +26,32 @@ public class RealDecisionMaker implements IDecisionMaker {
 
     @Override
     public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
-        return user.requestTypedInput(serializer.createObjectNode(), new TypeReference<>() {
+        return user.requestTypedInput(serializer.valueToTree(new AssignLandpointsForDreamlandRequest(requiredLandpoints)), new TypeReference<>() {
         });
     }
 
     @Override
     public LandType chooseLandTypeForExplorer() {
-        return user.requestTypedInput(serializer.createObjectNode(), new TypeReference<>() {
+        return user.requestTypedInput(serializer.valueToTree(new LandtypeForExplorerRequest()), new TypeReference<>() {
         });
     }
 
     @Override
     public ICard pickCardToDraft(Collection<ICard> draftstack) {
-        String selectedName = user.requestTypedInput(serializer.valueToTree(draftstack), new TypeReference<>() {
+        String selectedName = user.requestTypedInput(serializer.valueToTree(new DraftRequest(draftstack)), new TypeReference<>() {
         });
         return findByName(draftstack, selectedName);
     }
 
     @Override
     public PlayOrKeep choosePlayOrKeep(ICanBePlayed card) {
-        return user.requestTypedInput(serializer.valueToTree(card), new TypeReference<>() {
+        return user.requestTypedInput(serializer.valueToTree(new PlayOrKeepRequest(card)), new TypeReference<>() {
         });
     }
 
     @Override
     public Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards) {
-        Optional<String> selectedName = user.requestTypedInput(serializer.valueToTree(keptCards), new TypeReference<>() {
+        Optional<String> selectedName = user.requestTypedInput(serializer.valueToTree(new PlayFromKeptRequest(keptCards)), new TypeReference<>() {
         });
         if (!selectedName.isPresent()) {
             return Optional.empty();

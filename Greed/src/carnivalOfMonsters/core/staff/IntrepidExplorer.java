@@ -5,7 +5,6 @@ import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.Player;
 
 public class IntrepidExplorer extends StaffMember {
-
     private LandType assignedLandType;
 
     public IntrepidExplorer(String name) {

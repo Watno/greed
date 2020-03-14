@@ -19,7 +19,7 @@ public class MockDecisionMaker implements IDecisionMaker {
     public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
         Map<LandType, Integer> result = new HashMap<>();
         for (var landType : Stream.of(LandType.values()).sorted(Comparator.comparing(x -> x.equals(LandType.DREAMLANDS))).collect(Collectors.toList())) {
-            var assignableLandpoints = Integer.min(requiredLandpoints, getOwnPlayerGameState().getAvailableLandPoints.get(landType));
+            var assignableLandpoints = Integer.min(requiredLandpoints, getOwnPlayerGameState().availableLandPoints.get(landType));
             result.put(landType, assignableLandpoints);
             requiredLandpoints -= assignableLandpoints;
         }

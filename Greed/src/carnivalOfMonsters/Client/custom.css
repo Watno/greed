@@ -47,6 +47,19 @@
 	height: 10vh;
 }
 
+.StaffMember {
+    background-color: lightslategray;
+}
+
+.Event {
+    background-color: beige;
+}
+
+.SecretGoal {
+    background-color: brown;
+    color: white;
+}
+
 .DREAMLANDS {
 	background-color: purple;
 	color: white;
