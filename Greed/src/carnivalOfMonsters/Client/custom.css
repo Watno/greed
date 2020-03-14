@@ -41,16 +41,39 @@
 }
 .btn.disabled {
     pointer-events: auto;
-}	
-
-.red {
-	background-color: red;
-}
-
-.green {
-	background-color: green;
 }
 
 .infoarea {
 	height: 10vh;
 }
+
+.DREAMLANDS {
+	background-color: purple;
+	color: white;
+}
+
+.DARKLANDS {
+	background-color: black;
+	color: white;
+}
+
+.CAVES {
+	background-color: red;
+	color: white
+}
+
+.AERIE {
+	background-color: yellow;
+}
+
+.ENCHANTEDFOREST {
+	background-color: green;
+	color: white
+}
+
+.DEPTHS {
+	background-color: blue;
+	color: white
+}
+
+

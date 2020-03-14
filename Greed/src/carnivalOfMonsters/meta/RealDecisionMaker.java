@@ -4,6 +4,7 @@ package carnivalOfMonsters.meta;
 import carnivalOfMonsters.core.*;
 import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import server.IUserFromGamePerspective;
@@ -19,12 +20,13 @@ public class RealDecisionMaker implements IDecisionMaker {
     public RealDecisionMaker(IUserFromGamePerspective user) {
         this.user = user;
         serializer.registerModule(new Jdk8Module());
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
     }
 
     @Override
     public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
-        //TODO
-        return null;
+        return user.requestTypedInput(serializer.createObjectNode(), new TypeReference<>() {
+        });
     }
 
     @Override

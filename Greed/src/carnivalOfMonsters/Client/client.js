@@ -2,7 +2,6 @@ var socket;
 var nameSelected = false;
 
 function initialize() {
-
 	subscribeToWebSocket();
 }
 
@@ -200,3 +199,47 @@ function subscribeToWebSocket() {
 		showMessage('Your browser does not support HTML5 WebSockets.');
 	}
 }
+
+function appendTo(original, addition){
+    if (original != ''){
+        original += ' ';
+    }
+    original += addition;
+
+    return original;
+}
+
+function drawCard(card, number, buttontype) {
+    var buttonmetastart = "";
+
+    buttonmetastart += "<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\"Test\">";
+    buttonmetastart += `<button class ="${card.type} ${card.landType}" onclick="javascript:sendCommand(${card.name})">`;
+    var buttonmetaend= "</button></span>";
+
+    var prefix = '';
+    var suffix = '';
+
+    if (card.type == "Monster"){
+        prefix = appendTo(prefix, card.level)
+        if (card.dangerLevel > 0){
+            suffix = appendTo(suffix, "G: " + card.dangerLevel);
+        }
+        if (card.monstrousLore > 0){
+            suffix = appendTo(suffix, "W: " + card.monstrousLore);
+        }
+        suffix = appendTo(suffix, "SP: " + card.victoryPoints);
+    }
+    if (card.hasOwnProperty('landpoints')){
+        suffix = appendTo(suffix, card.landpoints)
+    }
+
+    if (prefix != ''){
+        prefix += ' - ';
+    }
+    if (suffix != ''){
+        suffix = ' - ' + suffix;
+    }
+
+    return buttonmetastart + prefix + card.name + suffix + buttonmetaend;
+}
+
