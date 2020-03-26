@@ -10,8 +10,8 @@ public class Server {
 
     private Map<String, IGameFactory> gameFactories = new HashMap<>();
 
-    public Server() {
-        WebServer webServer = WebServers.createWebServer(8080);
+    public Server(int port) {
+        WebServer webServer = WebServers.createWebServer(port);
         Lobby lobby = new Lobby(gameFactories);
         Chat chat = new Chat(lobby);
         WebsocketHandler handler = new WebsocketHandler(lobby, chat);

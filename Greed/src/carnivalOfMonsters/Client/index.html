@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="client.js?8"></script>
     <script src="serverlocation.js"></script>
-    <title>Greed</title>
+    <title>Carnival of Monsters</title>
 
 <body onload="javascript:initialize();">
 <div class="container" id="initial">
@@ -44,9 +44,24 @@
     </div>
 </div>
 
-<div class="container" hidden id="gamearea">
-    <div id="requestArea"></div>
-    <div id="gamestate"></div>
+<div class="container-fluid gamearea" hidden id="gamearea">
+    <div class="row">
+        <div class="col-sm-6">
+            <p id="requestArea"></p>
+            <p id="gamestate"></p>
+        </div>
+        <div class="col-sm-6">
+            <div class="logarea" id="log"></div>
+            <div class="gameChatarea">
+                <div class="gameChat" id="gameChat"></div>
+                <input id="gameChatMessage" onkeydown="if (event.keyCode == 13) { sendGameChat();}"
+                       type="text">
+                <button
+                        onclick="javascript:sendGameChat()">Chat
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

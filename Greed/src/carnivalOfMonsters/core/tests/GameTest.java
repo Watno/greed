@@ -1,8 +1,8 @@
 package carnivalOfMonsters.core.tests;
 
 import carnivalOfMonsters.core.Game;
-import carnivalOfMonsters.core.MockDecisionMaker;
 import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.meta.MockDecisionMaker;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.RepeatedTest;

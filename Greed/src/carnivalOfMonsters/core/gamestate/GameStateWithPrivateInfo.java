@@ -1,8 +1,8 @@
 package carnivalOfMonsters.core.gamestate;
 
 public class GameStateWithPrivateInfo {
-    public PublicGameState publicGameState;
-    public PrivateGameState privateGameState;
+    final public PublicGameState publicGameState;
+    final public PrivateGameState privateGameState;
 
     public GameStateWithPrivateInfo(PublicGameState publicGameState, PrivateGameState privateGameState) {
         this.publicGameState = publicGameState;

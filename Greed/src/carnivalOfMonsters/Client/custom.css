@@ -1,92 +1,108 @@
 .logarea {
-    height: 50vh;
-	overflow: auto
+height: 50vh;
+overflow: auto
 }
 
 .newtablearea {
-	height: 5vh
+height: 5vh
 }
 
 .lobbychat {
-	height: 40vh;
-	overflow: auto
+height: 40vh;
+overflow: auto
 }
 
 .lobbychatarea {
-	height: 45 vh;
+height: 45 vh;
+}
+
+.gameChat {
+height: 30vh;
+overflow: auto
+}
+
+.gameChatarea {
+height: 35 vh;
 }
 
 .tables {
-	height: 45vh;
-	overflow: auto
+height: 45vh;
+overflow: auto
 }
 
 /* necessary for tooltips on disabled buttons in Chrome */
 .buttonwrapper {
-	display: inline-block;
+display: inline-block;
 }
 
 .divider{
-	height: 10vh;
+height: 10vh;
 }
 .buttonwrapper [disabled] {
-  pointer-events: none;
+pointer-events: none;
 }
 /* end of necessary for tooltips on disabled buttons in Chrome*/
 
 .tooltip-inner {
-    background-color: #FFFFFF;
-    color: #000000;
-    border: 1px solid #000000;
+background-color: #FFFFFF;
+color: #000000;
+border: 1px solid #000000;
 }
 .btn.disabled {
-    pointer-events: auto;
+pointer-events: auto;
 }
 
 .infoarea {
-	height: 10vh;
+height: 10vh;
 }
 
 .StaffMember {
-    background-color: lightslategray;
+background-color: lightslategray;
 }
 
 .Event {
-    background-color: beige;
+background-color: beige;
 }
 
 .SecretGoal {
-    background-color: brown;
-    color: white;
+background-color: brown;
+color: white;
 }
 
 .DREAMLANDS {
-	background-color: purple;
-	color: white;
+background-color: purple;
+color: white;
 }
 
 .DARKLANDS {
-	background-color: black;
-	color: white;
+background-color: black;
+color: white;
 }
 
 .CAVES {
-	background-color: red;
-	color: white
+background-color: red;
+color: white
 }
 
 .AERIE {
-	background-color: yellow;
+background-color: yellow;
 }
 
 .ENCHANTEDFOREST {
-	background-color: green;
-	color: white
+background-color: green;
+color: white
 }
 
 .DEPTHS {
-	background-color: blue;
-	color: white
+background-color: blue;
+color: white
 }
 
+.logentry {
+	margin-left: 20px;
+}
+
+.GameLogEntry {
+	margin-left: 0px;
+}
 

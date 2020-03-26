@@ -41,24 +41,27 @@ public class UserInGame implements IUserFromGamePerspective {
 
     @Override
     public synchronized <T> T requestTypedInput(JsonNode request, TypeReference<T> requestedType) {
-        send(request);
-        try {
-            T toReturn = null;
-            if (!hasResigned()) {
-                wait();
-                toReturn = objectMapper.readValue(currentInput.toString(), requestedType);
-                sendInputAcceptance();
+        while (true) {
+            try {
+                send(request);
+                T toReturn = null;
+                if (!hasResigned()) {
+                    wait();
+                    toReturn = objectMapper.readValue(currentInput.toString(), requestedType);
+                    sendInputAcceptance();
+                }
+                currentInput = null;
+                return toReturn;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
             }
-            currentInput = null;
-            return toReturn;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
     @Override

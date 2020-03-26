@@ -1,6 +1,9 @@
 var socket;
 var nameSelected = false;
 
+var landtypes = ["DARKLANDS", "AERIE", "DEPTHS", "ENCHANTEDFOREST", "CAVES", "DREAMLANDS" ];
+var landTypeNames = ["Dunkellande", "Wolkenlande", "Tiefsee", "Wald", "Höhlen", "Traumlande" ];
+
 function initialize() {
 	subscribeToWebSocket();
 }
@@ -8,6 +11,7 @@ function initialize() {
 function sendLobbyCommand(text) {
 	socket.send(text);
 }
+
 
 function newTable() {
 	sendLobbyCommand('{"newTable":"CarnivalOfMonsters"}');
@@ -52,12 +56,14 @@ function sendLobbyChat() {
 	sendLobbyCommand('{"chat":"' + message + '","location":"lobby"}');
 }
 
-function sendCommand(message) {
-	socket.send('{"greedcommand":"' + message + '"}');
+function sendGameChat() {
+	var message = document.getElementById('gameChatMessage').value;
+	document.getElementById('gameChatMessage').value = "";
+	sendLobbyCommand('{"chat":"' + message + '","location":"table"}');
 }
 
-function sendNullCommand() {
-	socket.send('{"greedcommand":null}');
+function sendCommand(message) {
+	socket.send('{"greedcommand":'+JSON.stringify(message)+'}');
 }
 
 function showMessage(text) {
@@ -147,8 +153,9 @@ function subscribeToWebSocket() {
 			else if(parsedMsg.hasOwnProperty('publicGameState')){
 			    document.getElementById('lobby').hidden = true;
 			    document.getElementById('gamearea').hidden = false;
-					var gameState = document.getElementById('gamestate');
-					gameState.innerHTML = drawGameState(parsedMsg);
+				var gameState = document.getElementById('gamestate');
+				gameState.innerHTML = drawGameState(parsedMsg);
+				drawLog(parsedMsg.publicGameState.gameLog)
 			}
 			else if(parsedMsg.hasOwnProperty('requestType')){
 				var requestArea = document.getElementById('requestArea');
@@ -252,7 +259,6 @@ function drawGameState(gameState){
 function drawPlayer(playerInfo){
     var name = playerInfo.name;
     var landTypeInfo ='';
-    var landtypes = ["DARKLANDS", "AERIE", "DEPTHS", "ENCHANTEDFOREST", "CAVES", "DREAMLANDS" ];
     for (var i = 0; i<landtypes.length; i++){
            landTypeInfo = appendTo(landTypeInfo, `<span class="${landtypes[i]}"> ${playerInfo.usedLandPoints[landtypes[i]]}/${playerInfo.totalLandPoints[landtypes[i]]}</span>`);
     }
@@ -290,7 +296,21 @@ function drawRequest(request){
 			break;
 		case "PlayFromKeptRequest":
 			prompt = "Du darfst eine aufgehobene Karte ausspielen:<br\>" 
-			prompt += ` <button onclick="javascript:sendNullCommand()">Keine Karte ausspielen</button>`;
+			prompt += ` <button onclick="javascript:sendCommand(null)">Keine Karte ausspielen</button>`;
+			break;
+		case "LandtypeForExplorerRequest":
+			prompt = "Wähle den Landtyp für den mutigen Entedecker:<br\>" 
+			for (var i = 0; i<landtypes.length; i++){
+				prompt = appendTo(prompt, `<button class="${landtypes[i]}" onclick="javascript:sendCommand(\'${landtypes[i]}\')"> ${landTypeNames[i]}</button>`);
+			}
+			break;
+		case "AssignLandpointsForDreamlandRequest":
+			prompt = `Ordne dem Traumlandemonster ${request.level} Landpunkte zu :<br\>` 
+			for (var i = 0; i<landtypes.length; i++){
+				prompt = appendTo(prompt, `${landTypeNames[i]}: <input id="AssignLandpointsForDreamland_${landtypes[i]}" class="${landtypes[i]}" type="number" value="0" min="0" size ="2"/>`);
+			}
+			prompt+="<br\>"
+			prompt+=`<button onclick="javascript:assignLandPointsForDreamland(${request.level})">Zuordnen</button>`
 			break;
 	}
 	if (request.hasOwnProperty("cards")){
@@ -303,3 +323,56 @@ function drawRequest(request){
 	return prompt;
 }
 
+function assignLandPointsForDreamland(requiredLandpoints){
+	let assignment = new Object();
+	for (var i = 0; i<landtypes.length; i++){
+		assignment[landtypes[i]] = parseInt(document.getElementById(`AssignLandpointsForDreamland_${landtypes[i]}`).value);
+	}
+	let sum = Array.from(Object.values(assignment)).reduce((a,b) => a+b, 0);
+	if (sum == requiredLandpoints){
+		sendCommand(assignment);
+	}
+	else {
+		alert(`Genau ${requiredLandpoints} Landpunkte müssen zugewiesen werden.`);
+	}
+}
+
+
+function drawLog(gamelog){
+	function toString(logentry){
+
+		var textstart = `<div class = "logentry ${logentry.type}">`;
+		var textend = `</div>`
+		var innertext = ""
+		switch (logentry.type){
+			case "GameLogEntry":
+				innertext = "Carnival of Monsters: "
+				break;
+			case "SeasonLogEntry":
+				innertext = `Saison ${logentry.seasonnumber}`;
+				break;
+			case "HuntPhaseEntry":
+				innertext = `Jagdphase: Königliche Jäger würfeln ${logentry.dieRolls[0]}, ${logentry.dieRolls[1]}, ${logentry.dieRolls[2]}`;
+				break;
+			case "ScorePhaseLogEntry":
+				innertext = `Spielende`;
+				break;
+			case "PlayerScoreLogEntry":
+				innertext = `${logentry.playername}: ${logentry.score} Siegpunkte`;
+				break;
+
+		}
+
+		var nestedEntries ="";
+		for (var i = 0; i<logentry.dependantEntries.length; i++){
+			nestedEntries+= toString(logentry.dependantEntries[i]);
+		}
+
+		return textstart + innertext + nestedEntries +textend;
+	}
+
+	var log = document.getElementById('log');
+	var text = toString(gamelog);
+	log.innerHTML = text;
+	log.scrollTop = log.scrollHeight - log.clientHeight;
+}

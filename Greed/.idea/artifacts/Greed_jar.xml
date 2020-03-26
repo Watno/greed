@@ -1,19 +1,28 @@
 <component name="ArtifactManager">
-  <artifact name="Greed:jar">
-    <output-path>$PROJECT_DIR$/Build/Greed_jar</output-path>
-    <root id="root">
-      <element id="archive" name="Greed.jar">
-        <element id="module-output" name="Greed" />
+  <artifact type="jar" name="Greed:jar">
+    <output-path>$PROJECT_DIR$/Build</output-path>
+    <root id="archive" name="Greed.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Build/META-INF/MANIFEST.MF" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-annotations-2.10.3.jar" />
-      <element id="library" level="module" name="gson-2.8.6-javadoc.jar" module-name="Greed" />
-      <element id="library" level="module" name="JUnit5.4" module-name="Greed" />
-      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-core-2.10.3.jar" />
-      <element id="file-copy" path="$PROJECT_DIR$/externallib/jackson-databind-2.10.3.jar" />
-      <element id="library" level="module" name="gson-2.8.6-sources.jar" module-name="Greed" />
-      <element id="library" level="module" name="webbit-fixed.jar" module-name="Greed" />
-      <element id="library" level="module" name="junit5" module-name="Greed" />
-      <element id="library" level="module" name="gson-2.8.6.jar" module-name="Greed" />
+      <element id="module-output" name="Greed" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/jackson-core-2.10.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/gson-2.8.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/gson-2.8.6-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/webbit-fixed.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/jackson-annotations-2.10.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/jackson-databind-2.10.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/jackson-datatype-jdk8-2.10.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/externallib/gson-2.8.6-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

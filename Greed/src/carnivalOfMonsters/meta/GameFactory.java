@@ -1,7 +1,6 @@
 package carnivalOfMonsters.meta;
 
 import carnivalOfMonsters.core.Game;
-import carnivalOfMonsters.core.MockDecisionMaker;
 import carnivalOfMonsters.core.Player;
 import server.IGameFactory;
 import server.IUserFromGamePerspective;
@@ -14,7 +13,7 @@ public class GameFactory implements IGameFactory {
     public Runnable createGame(ArrayList<IUserFromGamePerspective> connections, int numberOfPlayers) {
         var players = connections.stream().map(x -> new Player(x.getName(), new RealDecisionMaker(x))).collect(Collectors.toList());
         while (players.size() < numberOfPlayers) {
-            String name = "Player " + players.size();
+            String name = "Spieler " + (players.size() + 1);
             players.add(new Player(name, new MockDecisionMaker(name)));
         }
         return new Game(players);

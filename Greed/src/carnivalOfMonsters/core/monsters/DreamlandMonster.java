@@ -29,11 +29,21 @@ public abstract class DreamlandMonster extends Monster {
 
     @Override
     public void onPlay(Player playingPlayer, Game game) {
-        assignedLandpoints = playingPlayer.getDecisionMaker().assignLandpoints(level);
-        while (assignedLandpoints.values().stream().mapToInt(x -> x).sum() != level) {
-            assignedLandpoints = playingPlayer.getDecisionMaker().assignLandpoints(level);
-        }
+        Map<LandType, Integer> assignment = null;
+        do {
+            assignment = playingPlayer.getDecisionMaker().assignLandpoints(level);
+        } while (!assignedLandpointsAreValid(assignment, playingPlayer));
+        assignedLandpoints = assignment;
         super.onPlay(playingPlayer, game);
+    }
+
+    private boolean assignedLandpointsAreValid(Map<LandType, Integer> assignment, Player player) {
+        if (assignment == null) return false;
+        if (assignment.values().stream().mapToInt(x -> x).sum() != level) return false;
+        for (var landType : LandType.values()) {
+            if (assignment.get(landType) > player.getAvailableLandPoints(landType)) return false;
+        }
+        return true;
     }
 
 }

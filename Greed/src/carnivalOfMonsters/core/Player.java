@@ -6,6 +6,7 @@ import carnivalOfMonsters.core.gamestate.PublicGameState;
 import carnivalOfMonsters.core.gamestate.PublicPlayerGameState;
 import carnivalOfMonsters.core.monsters.Monster;
 import carnivalOfMonsters.core.seasons.Season;
+import carnivalOfMonsters.core.secretGoals.SecretGoal;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,6 +32,10 @@ public class Player {
 
     public IDecisionMaker getDecisionMaker() {
         return decisionMaker;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void makeTurn(Collection<ICard> draftstack, Game game) {
@@ -191,7 +196,7 @@ public class Player {
     public int score() {
         return Stream.of(
                 menagerie.stream(),
-                keptCards.stream().filter(x -> x instanceof ICanBeScored).map(x -> (ICanBeScored) x),
+                keptCards.stream().filter(x -> x instanceof SecretGoal).map(x -> (ICanBeScored) x),
                 trophies.stream()
         )
                 .flatMap(x -> x)

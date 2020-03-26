@@ -2,7 +2,9 @@ package carnivalOfMonsters.core;
 
 import carnivalOfMonsters.core.gamestate.PublicGameState;
 import carnivalOfMonsters.core.lands.BasicNormalLand;
+import carnivalOfMonsters.core.logging.*;
 import carnivalOfMonsters.core.seasons.Season;
+import carnivalOfMonsters.core.secretGoals.SecondRowIsGoodEnough;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,6 +20,8 @@ public class Game implements Runnable {
 
     private Stack<Season> seasons;
     private Stack<BasicNormalLand> startingLands;
+
+    private GameLogEntry gamelog = new GameLogEntry();
 
     public Game(Collection<Player> players) {
         super();
@@ -43,14 +47,27 @@ public class Game implements Runnable {
             runSeason(season);
         }
 
-        sendGameStateToPlayers();
+        ScorePhaseLogEntry scorePhaseLogEntry = new ScorePhaseLogEntry();
+        gamelog.addDependantEntry(scorePhaseLogEntry);
+        var scores = players.stream().collect(Collectors.toMap(x -> x, x -> x.score()));
+        var rankedPlayers = players.stream().sorted(Comparator.comparing(x -> scores.get(x)).reversed()).collect(Collectors.toList());
         for (var player : players) {
-            System.out.println(player.score());
+            var score = scores.get(player);
+            if (player.getKeptCards().stream().anyMatch(x -> x instanceof SecondRowIsGoodEnough)) {
+                if (score == scores.get(rankedPlayers.get(1))) {
+                    score += 7;
+                }
+            }
+            System.out.println(player.getName() + ": " + score);
+            scorePhaseLogEntry.addDependantEntry(new PlayerScoreLogEntry(player.getName(), score));
         }
-
+        sendGameStateToPlayers();
     }
 
     private void runSeason(int season) {
+        var seasonLogEntry = new SeasonLogEntry(season);
+        gamelog.addDependantEntry(seasonLogEntry);
+
         sendGameStateToPlayers();
         var draftStacks = createDraftstacks();
         for (int round = 1; round <= 8; round++) {
@@ -67,7 +84,9 @@ public class Game implements Runnable {
 
         sendGameStateToPlayers();
 
-        var royalHunters = huntDice.stream().mapToInt(HuntDie::roll).sum();
+        var rolls = huntDice.stream().map(HuntDie::roll).collect(Collectors.toList());
+        seasonLogEntry.addDependantEntry(new HuntPhaseEntry(rolls));
+        var royalHunters = rolls.stream().mapToInt(x -> x).sum();
         for (var player : players) {
             player.performDangerCheck(royalHunters);
         }
@@ -107,6 +126,6 @@ public class Game implements Runnable {
     }
 
     private PublicGameState getPublicGameState() {
-        return new PublicGameState(getCurrentSeason(), players.stream().map(x -> x.getPublicPlayerGameState()).collect(Collectors.toList()));
+        return new PublicGameState(getCurrentSeason(), players.stream().map(x -> x.getPublicPlayerGameState()).collect(Collectors.toList()), gamelog);
     }
 }

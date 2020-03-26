@@ -13,7 +13,7 @@ public class IntrepidExplorer extends StaffMember {
 
     @Override
     public void onPlay(Player playingPlayer, Game game) {
-        playingPlayer.getDecisionMaker().chooseLandTypeForExplorer();
+        assignedLandType = playingPlayer.getDecisionMaker().chooseLandTypeForExplorer();
         super.onPlay(playingPlayer, game);
     }
 
