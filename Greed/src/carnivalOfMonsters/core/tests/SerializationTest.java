@@ -1,5 +1,6 @@
 package carnivalOfMonsters.core.tests;
 
+import carnivalOfMonsters.core.CardGenerator;
 import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.events.Gain2Crowns;
 import carnivalOfMonsters.core.lands.BasicNormalLand;
@@ -74,6 +75,15 @@ public class SerializationTest {
     @EnumSource(LandType.class)
     void basicLand(LandType landType) throws JsonProcessingException {
         var sut = new BasicNormalLand(landType.toString(), landType);
+        var serializer = new ObjectMapper();
+        serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
+        var json = serializer.writeValueAsString(sut);
+        System.out.println(json);
+    }
+
+    @Test
+    void allCards() throws JsonProcessingException {
+        var sut = CardGenerator.createDrawPile();
         var serializer = new ObjectMapper();
         serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
         var json = serializer.writeValueAsString(sut);

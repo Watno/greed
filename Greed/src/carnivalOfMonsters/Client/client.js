@@ -199,23 +199,28 @@ function drawCard(card, enabled) {
 		buttonmetastart += " disabled"
 	}
 	buttonmetastart += `>`;
-    var buttonmetaend= "</button></span>";
+	var buttonmetaend= "</button></span>";
+	
+	if (card.type != "Season") buttonmetastart += `<img class='icon' src='images\\${card.type.toLowerCase()}.png'/> `;
 
-    var prefix = '';
+    var prefix = ``;
     var suffix = '';
 
     if (card.type == "Monster"){
         prefix = appendTo(prefix, card.level)
         if (card.dangerLevel > 0){
-            suffix = appendTo(suffix, "G: " + card.dangerLevel);
+            suffix = appendTo(suffix, "<img class='icon' src='images\\danger.png'/>" + card.dangerLevel);
         }
         if (card.monstrousLore > 0){
-            suffix = appendTo(suffix, "W: " + card.monstrousLore);
+            suffix = appendTo(suffix, "<img class='icon' src='images\\card.png'/>" + card.monstrousLore);
         }
-        suffix = appendTo(suffix, "SP: " + card.victoryPoints);
+        suffix = appendTo(suffix, "<img class='icon' src='images\\vp.png'/>" + card.victoryPoints);
     }
     if (card.hasOwnProperty('landpoints')){
         suffix = appendTo(suffix, card.landpoints)
+	}
+	if (card.hasOwnProperty('requiredLandpoints')){
+        prefix = appendTo(prefix, card.requiredLandpoints)
     }
     if (card.hasOwnProperty('cost')){
         prefix = appendTo(prefix, "$"+card.cost)
@@ -279,7 +284,10 @@ function drawPlayer(playerInfo){
            menagerie = appendTo(menagerie, drawCard(playerInfo.menagerie[i]));
     }
 
-    return  `${name} <br\>${crowns} ${landTypeInfo} ${numberOfKeptCards} ${hunterTokens}  ${trophies}  ${loans}<br\>${inPlay}<br\>${menagerie}`
+	return  `<div class="playerName">${name}</div>
+	<div class="playerinfoHeader">${crowns} ${landTypeInfo} ${numberOfKeptCards} ${hunterTokens}  ${trophies}  ${loans}</div>
+	${inPlay}<br\>
+	${menagerie}`
 }
 
 function drawRequest(request){

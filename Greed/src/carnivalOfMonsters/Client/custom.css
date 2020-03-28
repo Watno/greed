@@ -95,7 +95,7 @@ color: white
 
 .DEPTHS {
 background-color: blue;
-color: white
+color: white;
 }
 
 .logentry {
@@ -104,5 +104,20 @@ color: white
 
 .GameLogEntry {
 	margin-left: 0px;
+}
+
+.SecretGoal, .DREAMLANDS, .DARKLANDS, .CAVES, .ENCHANTEDFOREST, .DEPTHS{
+	color: white;
+}
+.SecretGoal .icon, .DREAMLANDS .icon, .DARKLANDS .icon, .CAVES .icon, .ENCHANTEDFOREST .icon, .DEPTHS .icon {
+	filter: invert(100%);
+}
+
+.icon{
+	height: 1em;
+}
+
+.playerName, .playerinfoHeader{
+	font-size: large;
 }
 

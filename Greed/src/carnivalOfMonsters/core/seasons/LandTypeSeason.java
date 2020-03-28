@@ -4,9 +4,11 @@ import carnivalOfMonsters.core.ICanBePlayed;
 import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.Player;
 import carnivalOfMonsters.core.monsters.Monster;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LandTypeSeason extends Season {
 
+    @JsonProperty
     private LandType landType;
 
     public LandTypeSeason(String name, LandType landType) {
