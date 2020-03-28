@@ -3,6 +3,9 @@ package carnivalOfMonsters.core.staff;
 import carnivalOfMonsters.core.Game;
 import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.logging.ILogEntry;
+
+import java.util.Optional;
 
 public class IntrepidExplorer extends StaffMember {
     private LandType assignedLandType;
@@ -12,9 +15,9 @@ public class IntrepidExplorer extends StaffMember {
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
         assignedLandType = playingPlayer.getDecisionMaker().chooseLandTypeForExplorer();
-        super.onPlay(playingPlayer, game);
+        super.onPlay(playingPlayer, game, loggingContext);
     }
 
     @Override

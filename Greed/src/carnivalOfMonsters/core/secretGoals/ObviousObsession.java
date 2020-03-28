@@ -12,7 +12,7 @@ public class ObviousObsession extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         if (Stream.of(LandType.values())
                 .anyMatch(x -> player.getAvailableLandPoints(x) >= 7)) {
             return 7;

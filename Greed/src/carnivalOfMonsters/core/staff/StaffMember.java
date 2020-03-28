@@ -1,7 +1,10 @@
 package carnivalOfMonsters.core.staff;
 
 import carnivalOfMonsters.core.*;
+import carnivalOfMonsters.core.logging.ILogEntry;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Optional;
 
 public abstract class StaffMember extends Card implements ICanBeInPlay {
 
@@ -19,8 +22,8 @@ public abstract class StaffMember extends Card implements ICanBeInPlay {
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
-        playingPlayer.pay(cost);
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
+        playingPlayer.pay(cost, loggingContext);
 
     }
 

@@ -1,15 +1,27 @@
 package carnivalOfMonsters.core.logging;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class PlayerScoreLogEntry extends LogEntry {
-    @JsonProperty
     final public String playername;
-    @JsonProperty
-    final public int score;
+    public int score;
+    public int scoreForMenagerie;
+    public int scoreForSecretGoals;
+    public int scoreForTrophies;
+    public int scoreForCrowns;
+    public int scoreForHunterTokens;
+    public int scoreForLoans;
 
-    public PlayerScoreLogEntry(String playername, int score) {
+
+    public PlayerScoreLogEntry(String playername) {
         this.playername = playername;
+    }
+
+    public void setScores(int score, int scoreForMenagerie, int scoreForSecretGoals, int scoreForTrophies, int scoreForCrowns, int scoreForHunterTokens, int scoreForLoans) {
         this.score = score;
+        this.scoreForMenagerie = scoreForMenagerie;
+        this.scoreForSecretGoals = scoreForSecretGoals;
+        this.scoreForTrophies = scoreForTrophies;
+        this.scoreForCrowns = scoreForCrowns;
+        this.scoreForHunterTokens = scoreForHunterTokens;
+        this.scoreForLoans = scoreForLoans;
     }
 }

@@ -9,7 +9,7 @@ public class SeekerBeyondTheGateOfDreams extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return (int) (player.getCardsInPlay().stream().filter(x -> x instanceof Dreamlands).count() * 2);
     }
 }

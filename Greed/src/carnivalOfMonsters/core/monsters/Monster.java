@@ -1,7 +1,10 @@
 package carnivalOfMonsters.core.monsters;
 
 import carnivalOfMonsters.core.*;
+import carnivalOfMonsters.core.logging.ILogEntry;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Optional;
 
 public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored {
 
@@ -32,7 +35,7 @@ public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
         playingPlayer.draw(game, monstrousLore);
     }
 
@@ -51,7 +54,7 @@ public abstract class Monster extends Card implements ICanBeInPlay, ICanBeScored
     }
 
     @Override
-    public int score(Player player) {
+    public int score(Player player, Optional<ILogEntry> loggingContext) {
         return victoryPoints;
     }
 }

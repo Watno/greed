@@ -49,17 +49,17 @@ public class Game implements Runnable {
 
         ScorePhaseLogEntry scorePhaseLogEntry = new ScorePhaseLogEntry();
         gamelog.addDependantEntry(scorePhaseLogEntry);
-        var scores = players.stream().collect(Collectors.toMap(x -> x, x -> x.score()));
+        var scores = players.stream().collect(Collectors.toMap(x -> x, x -> x.score(Optional.of(scorePhaseLogEntry))));
         var rankedPlayers = players.stream().sorted(Comparator.comparing(x -> scores.get(x)).reversed()).collect(Collectors.toList());
         for (var player : players) {
             var score = scores.get(player);
             if (player.getKeptCards().stream().anyMatch(x -> x instanceof SecondRowIsGoodEnough)) {
                 if (score == scores.get(rankedPlayers.get(1))) {
                     score += 7;
+                    scorePhaseLogEntry.addDependantEntry(new SecondRowLogEntry(player.getName(), player.getKeptCards().stream().filter(x -> x instanceof SecondRowIsGoodEnough).map(x -> (SecondRowIsGoodEnough) x).findFirst().get()));
                 }
             }
             System.out.println(player.getName() + ": " + score);
-            scorePhaseLogEntry.addDependantEntry(new PlayerScoreLogEntry(player.getName(), score));
         }
         sendGameStateToPlayers();
     }
@@ -72,23 +72,25 @@ public class Game implements Runnable {
         var draftStacks = createDraftstacks();
         for (int round = 1; round <= 8; round++) {
             int localRound = round;
+            var turnLogEntry = new TurnLogEntry(localRound);
             IntStream.range(0, players.size()).parallel().forEach(playernumber ->
                     players.get(playernumber)
-                            .makeTurn(draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * playernumber + localRound, players.size())), this));
+                            .makeTurn(draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * playernumber + localRound, players.size())), this, Optional.of(turnLogEntry)));
             sendGameStateToPlayers();
         }
 
         for (var player : players) {
-            player.allowPlayingKeptCards(this);
+            player.allowPlayingKeptCards(this, Optional.of(seasonLogEntry));
         }
 
         sendGameStateToPlayers();
 
         var rolls = huntDice.stream().map(HuntDie::roll).collect(Collectors.toList());
-        seasonLogEntry.addDependantEntry(new HuntPhaseEntry(rolls));
+        HuntPhaseEntry huntPhaseEntry = new HuntPhaseEntry(rolls);
+        seasonLogEntry.addDependantEntry(huntPhaseEntry);
         var royalHunters = rolls.stream().mapToInt(x -> x).sum();
         for (var player : players) {
-            player.performDangerCheck(royalHunters);
+            player.performDangerCheck(royalHunters, Optional.of(huntPhaseEntry));
         }
 
         getCurrentSeason().assign(players);

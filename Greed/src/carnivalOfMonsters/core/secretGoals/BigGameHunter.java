@@ -8,7 +8,7 @@ public class BigGameHunter extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return (int) player.getMenagerie().stream()
                 .filter(x -> x.getLevel() == 3)
                 .count() * 2

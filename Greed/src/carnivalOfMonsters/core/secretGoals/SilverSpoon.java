@@ -9,7 +9,7 @@ public class SilverSpoon extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return 4;
     }
 

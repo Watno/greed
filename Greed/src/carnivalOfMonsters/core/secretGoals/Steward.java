@@ -8,7 +8,7 @@ public class Steward extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return (int) (player.getCardsInPlay().stream().filter(x -> x instanceof SecretGoal).count() - 1) * 2;
     }
 }

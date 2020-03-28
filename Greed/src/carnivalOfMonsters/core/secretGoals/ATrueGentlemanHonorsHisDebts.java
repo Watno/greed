@@ -8,7 +8,7 @@ public class ATrueGentlemanHonorsHisDebts extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return 2 * player.getLoans();
     }
 

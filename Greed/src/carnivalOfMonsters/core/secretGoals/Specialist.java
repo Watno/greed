@@ -12,7 +12,7 @@ public class Specialist extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         long numberOfLandTypes = Stream.of(LandType.values())
                 .filter(x -> player.getAvailableLandPoints(x) > 0)
                 .count();

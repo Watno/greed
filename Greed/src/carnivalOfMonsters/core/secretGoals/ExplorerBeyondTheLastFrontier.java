@@ -10,7 +10,7 @@ public class ExplorerBeyondTheLastFrontier extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return (int) player.getCardsInPlay().stream()
                 .filter(x -> x instanceof DistantLand)
                 .count() * 2;

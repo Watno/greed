@@ -8,7 +8,7 @@ public class SecondRowIsGoodEnough extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         //TODO score in different place
         return 0;
     }

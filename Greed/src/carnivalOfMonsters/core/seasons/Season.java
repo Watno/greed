@@ -1,6 +1,7 @@
 package carnivalOfMonsters.core.seasons;
 
 import carnivalOfMonsters.core.*;
+import carnivalOfMonsters.core.logging.ILogEntry;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -19,7 +20,7 @@ public abstract class Season extends Card implements ITriggerOnPlay, ICanBeScore
     }
 
     @Override
-    public int score(Player player) {
+    public int score(Player player, Optional<ILogEntry> loggingContext) {
         return 3;
     }
 

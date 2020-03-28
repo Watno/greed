@@ -13,7 +13,7 @@ public class AuthorityOn extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return (int) player.getMenagerie().stream()
                 .filter(x -> x.getLandType() == landType)
                 .count() * 2;

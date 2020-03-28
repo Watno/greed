@@ -11,7 +11,7 @@ public class JackOfAllTrades extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         if (Arrays.stream(LandType.values()).allMatch(x -> player.getTotalLandPoints(x) >= 2)) {
             return 7;
         } else return 0;

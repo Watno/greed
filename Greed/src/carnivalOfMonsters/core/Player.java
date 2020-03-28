@@ -4,6 +4,7 @@ import carnivalOfMonsters.core.gamestate.GameStateWithPrivateInfo;
 import carnivalOfMonsters.core.gamestate.PrivateGameState;
 import carnivalOfMonsters.core.gamestate.PublicGameState;
 import carnivalOfMonsters.core.gamestate.PublicPlayerGameState;
+import carnivalOfMonsters.core.logging.*;
 import carnivalOfMonsters.core.monsters.Monster;
 import carnivalOfMonsters.core.seasons.Season;
 import carnivalOfMonsters.core.secretGoals.SecretGoal;
@@ -38,28 +39,28 @@ public class Player {
         return name;
     }
 
-    public void makeTurn(Collection<ICard> draftstack, Game game) {
+    public void makeTurn(Collection<ICard> draftstack, Game game, Optional<ILogEntry> loggingContext) {
         var cardToDraft = decisionMaker.pickCardToDraft(draftstack);
         if (!draftstack.contains(cardToDraft)) {
             throw new IllegalArgumentException();
         }
-        allowPlayingKeptCards(game);
+        allowPlayingKeptCards(game, loggingContext);
         if ((cardToDraft instanceof ICanBePlayed) && ((ICanBePlayed) cardToDraft).checkRequirement(this) && (decisionMaker.choosePlayOrKeep((ICanBePlayed) cardToDraft) == PlayOrKeep.PLAY)) {
-            play((ICanBePlayed) cardToDraft, game);
+            play((ICanBePlayed) cardToDraft, game, loggingContext, PlaySource.DRAFT);
         } else {
-            keep(cardToDraft);
+            keep(cardToDraft, loggingContext);
         }
 
         draftstack.remove(cardToDraft);
     }
 
 
-    public void allowPlayingKeptCards(Game game) {
+    public void allowPlayingKeptCards(Game game, Optional<ILogEntry> loggingContext) {
         while (!getPlayableKeptCards().isEmpty()) {
             var playableKeptCards = getPlayableKeptCards();
             var cardToPlay = decisionMaker.chooseKeptCardToPlay(playableKeptCards);
             if (cardToPlay.isPresent() && playableKeptCards.contains(cardToPlay.get())) {
-                play(cardToPlay.get(), game);
+                play(cardToPlay.get(), game, loggingContext, PlaySource.KEPT);
                 keptCards.remove(cardToPlay.get());
             } else {
                 break;
@@ -67,11 +68,14 @@ public class Player {
         }
     }
 
-    private void play(ICanBePlayed card, Game game) {
+    private void play(ICanBePlayed card, Game game, Optional<ILogEntry> loggingContext, PlaySource playSource) {
         if (card.checkRequirement(this)) {
-            card.onPlay(this, game);
+            var logEntry = new PlayCardLogEntry(name, card, playSource);
+            loggingContext.ifPresent(x -> x.addDependantEntry(logEntry));
+            card.onPlay(this, game, Optional.of(logEntry));
             for (var effect : GetOnPlayEffects(game)) {
                 if (effect.triggersOn(this, card)) {
+                    logEntry.addDependantEntry(new TriggerLogEntry(effect));
                     effect.trigger(this, card);
                 }
 
@@ -84,8 +88,8 @@ public class Player {
         }
     }
 
-    private void keep(ICard cardToDraft) {
-        pay(1);
+    private void keep(ICard cardToDraft, Optional<ILogEntry> loggingContext) {
+        pay(1, loggingContext);
         keptCards.add(cardToDraft);
 
     }
@@ -160,27 +164,32 @@ public class Player {
         crowns += amount;
     }
 
-    public void pay(int amount) {
+    public void pay(int amount, Optional<ILogEntry> loggingContext) {
         crowns -= amount;
+        var loansTaken = 0;
         while (crowns < 0) {
+            loansTaken++;
             takeLoan();
         }
+        int finalLoansTaken = loansTaken;
+        loggingContext.ifPresent(x -> x.addDependantEntry(new PayLogEntry(this.name, amount, finalLoansTaken)));
     }
 
     public void gainHunterToken() {
         hunterTokens++;
     }
 
-    public void performDangerCheck(int royalHunters) {
-        var missingHunters = getDangerLevel() - royalHunters;
-        if (missingHunters > 0) {
-            var compensatedByTokens = Integer.min(missingHunters, hunterTokens);
-            hunterTokens -= compensatedByTokens;
-            var stillMissingHunters = missingHunters - compensatedByTokens;
-            if (stillMissingHunters > 0) {
-                pay(stillMissingHunters);
-            }
+    public void performDangerCheck(int royalHunters, Optional<ILogEntry> loggingContext) {
+        int dangerLevel = getDangerLevel();
+        var missingHunters = dangerLevel - royalHunters;
+        var compensatedByTokens = Integer.max(0, Integer.min(missingHunters, hunterTokens));
+        hunterTokens -= compensatedByTokens;
+        var stillMissingHunters = missingHunters - compensatedByTokens;
+        var logEntry = new DangerCheckLogEntry(this.name, dangerLevel, compensatedByTokens);
+        if (stillMissingHunters > 0) {
+            pay(stillMissingHunters, Optional.of(logEntry));
         }
+        loggingContext.ifPresent(x -> x.addDependantEntry(logEntry));
     }
 
     public void assignTrophy(Season trophy) {
@@ -193,23 +202,25 @@ public class Player {
         menagerie.addAll(monsters);
     }
 
-    public int score() {
-        return Stream.of(
-                menagerie.stream(),
-                keptCards.stream().filter(x -> x instanceof SecretGoal).map(x -> (ICanBeScored) x),
-                trophies.stream()
-        )
-                .flatMap(x -> x)
-                .mapToInt(x -> x.score(this))
-                .sum()
-                + crowns
-                + hunterTokens
-                - 3 * loans;
+    public int score(Optional<ILogEntry> loggingContext) {
+        var logEntry = new PlayerScoreLogEntry(this.name);
+        var scoreForMenagerie = menagerie.stream().mapToInt(x -> x.score(this, Optional.of(logEntry))).sum();
+        var scoreForSecretGoals = keptCards.stream().filter(x -> x instanceof SecretGoal).map(x -> (ICanBeScored) x)
+                .mapToInt(x -> x.score(this, Optional.of(logEntry))).sum();
+        var scoreForTrophies = trophies.stream().mapToInt(x -> x.score(this, Optional.of(logEntry))).sum();
+        var scoreForCrowns = crowns;
+        var scoreForHunterTokens = hunterTokens;
+        var scoreForLoans = -3 * loans;
+        int score = scoreForMenagerie + scoreForSecretGoals + scoreForTrophies + scoreForCrowns + scoreForHunterTokens + scoreForLoans;
+
+        logEntry.setScores(score, scoreForMenagerie, scoreForSecretGoals, scoreForTrophies, scoreForCrowns, scoreForHunterTokens, scoreForLoans);
+        loggingContext.ifPresent(x -> x.addDependantEntry(logEntry));
+        return score;
     }
 
     public void drawStartingLands(Game game) {
         for (var land : game.drawStartingLands()) {
-            play(land, game);
+            play(land, game, Optional.empty(), PlaySource.SETUP);
         }
     }
 

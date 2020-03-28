@@ -1,7 +1,10 @@
 package carnivalOfMonsters.core.lands;
 
 import carnivalOfMonsters.core.*;
+import carnivalOfMonsters.core.logging.ILogEntry;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Optional;
 
 public abstract class Land extends Card implements ICanBeInPlay {
     @JsonProperty
@@ -28,7 +31,7 @@ public abstract class Land extends Card implements ICanBeInPlay {
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
     }
 
     @Override

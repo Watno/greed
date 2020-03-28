@@ -3,8 +3,10 @@ package carnivalOfMonsters.core.monsters;
 import carnivalOfMonsters.core.Game;
 import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.logging.ILogEntry;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public abstract class DreamlandMonster extends Monster {
@@ -28,13 +30,13 @@ public abstract class DreamlandMonster extends Monster {
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
         Map<LandType, Integer> assignment = null;
         do {
             assignment = playingPlayer.getDecisionMaker().assignLandpoints(level);
         } while (!assignedLandpointsAreValid(assignment, playingPlayer));
         assignedLandpoints = assignment;
-        super.onPlay(playingPlayer, game);
+        super.onPlay(playingPlayer, game, loggingContext);
     }
 
     private boolean assignedLandpointsAreValid(Map<LandType, Integer> assignment, Player player) {

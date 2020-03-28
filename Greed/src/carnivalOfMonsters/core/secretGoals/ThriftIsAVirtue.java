@@ -8,7 +8,7 @@ public class ThriftIsAVirtue extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         if (player.getLoans() == 0) return 6;
         else return 0;
     }

@@ -2,24 +2,29 @@ package carnivalOfMonsters.core.events;
 
 import carnivalOfMonsters.core.Game;
 import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.logging.ILogEntry;
+import carnivalOfMonsters.core.logging.RevealKeptMonstersLogEntry;
 import carnivalOfMonsters.core.monsters.Monster;
 
-import java.util.stream.Stream;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RevealKeptMonsters extends Event {
 
     public RevealKeptMonsters(String name) {
         super(name);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
-    public void onPlay(Player playingPlayer, Game game) {
-        //TODO add revelation (and choice)
+    public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
 
-        playingPlayer.gainCrowns((int) Stream.of(playingPlayer.getMenagerie())
+        var revealedMonsters = playingPlayer.getMenagerie().stream()
                 .filter(x -> x instanceof Monster)
-                .count());
+                .collect(Collectors.toList());
+
+        loggingContext.ifPresent(x -> x.addDependantEntry(new RevealKeptMonstersLogEntry(revealedMonsters)));
+
+        playingPlayer.gainCrowns(revealedMonsters.size());
 
     }
 

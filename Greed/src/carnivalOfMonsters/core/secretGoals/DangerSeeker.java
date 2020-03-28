@@ -9,7 +9,7 @@ public class DangerSeeker extends SecretGoal {
     }
 
     @Override
-    public int score(Player player) {
+    public int getScore(Player player) {
         return player.getMenagerie().stream()
                 .mapToInt(x -> x.getDangerLevel())
                 .sum();

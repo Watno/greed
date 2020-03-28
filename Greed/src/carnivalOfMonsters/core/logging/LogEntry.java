@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-public abstract class LogEntry {
+public abstract class LogEntry implements ILogEntry {
     @JsonProperty
-    private List<LogEntry> dependantEntries = new ArrayList<>();
+    private List<ILogEntry> dependantEntries = new ArrayList<>();
 
-    public List<LogEntry> getDependantEntries() {
+    @Override
+    public List<ILogEntry> getDependantEntries() {
         return dependantEntries;
     }
 
-    protected void addDependantEntry(LogEntry entry) {
+    @Override
+    public void addDependantEntry(ILogEntry entry) {
         dependantEntries.add(entry);
     }
 }
