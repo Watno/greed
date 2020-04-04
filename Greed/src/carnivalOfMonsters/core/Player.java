@@ -39,19 +39,22 @@ public class Player {
         return name;
     }
 
-    public void makeTurn(Collection<ICard> draftstack, Game game, Optional<ILogEntry> loggingContext) {
+    public ILogEntry makeTurn(Collection<ICard> draftstack, Game game) {
+        var playerTurnLogEntry = new PlayerTurnLogEntry(name);
         var cardToDraft = decisionMaker.pickCardToDraft(draftstack);
         if (!draftstack.contains(cardToDraft)) {
             throw new IllegalArgumentException();
         }
-        allowPlayingKeptCards(game, loggingContext);
+        allowPlayingKeptCards(game, Optional.of(playerTurnLogEntry));
         if ((cardToDraft instanceof ICanBePlayed) && ((ICanBePlayed) cardToDraft).checkRequirement(this) && (decisionMaker.choosePlayOrKeep((ICanBePlayed) cardToDraft) == PlayOrKeep.PLAY)) {
-            play((ICanBePlayed) cardToDraft, game, loggingContext, PlaySource.DRAFT);
+            play((ICanBePlayed) cardToDraft, game, Optional.of(playerTurnLogEntry), PlaySource.DRAFT);
         } else {
-            keep(cardToDraft, loggingContext);
+            keep(cardToDraft, Optional.of(playerTurnLogEntry));
         }
 
         draftstack.remove(cardToDraft);
+
+        return playerTurnLogEntry;
     }
 
 
@@ -89,7 +92,9 @@ public class Player {
     }
 
     private void keep(ICard cardToDraft, Optional<ILogEntry> loggingContext) {
-        pay(1, loggingContext);
+        var keepCardEntry = new KeepCardLogEntry();
+        loggingContext.ifPresent(x -> x.addDependantEntry(keepCardEntry));
+        pay(1, Optional.of(keepCardEntry));
         keptCards.add(cardToDraft);
 
     }

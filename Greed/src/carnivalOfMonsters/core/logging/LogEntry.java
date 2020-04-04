@@ -1,12 +1,10 @@
 package carnivalOfMonsters.core.logging;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class LogEntry implements ILogEntry {
     @JsonProperty
     private List<ILogEntry> dependantEntries = new ArrayList<>();
@@ -18,6 +16,9 @@ public abstract class LogEntry implements ILogEntry {
 
     @Override
     public void addDependantEntry(ILogEntry entry) {
+        if (entry == null) {
+            throw new IllegalArgumentException("Logentry is null");
+        }
         dependantEntries.add(entry);
     }
 }

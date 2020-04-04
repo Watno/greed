@@ -1,6 +1,7 @@
 package carnivalOfMonsters.core.seasons;
 
 import carnivalOfMonsters.core.*;
+import carnivalOfMonsters.core.logging.AwardTrophyLogEntry;
 import carnivalOfMonsters.core.logging.ILogEntry;
 
 import java.util.Collection;
@@ -24,9 +25,11 @@ public abstract class Season extends Card implements ITriggerOnPlay, ICanBeScore
         return 3;
     }
 
-    public void assign(Collection<Player> players) {
+    public void assign(Collection<Player> players, Optional<ILogEntry> loggingContext) {
         var playerToAssign = determinePlayerToAssign(players);
         playerToAssign.ifPresent(player -> player.assignTrophy(this));
+        loggingContext.ifPresent(x -> x.addDependantEntry(new AwardTrophyLogEntry(playerToAssign.map(y -> y.getName()), this)));
+
     }
 
     private Optional<Player> determinePlayerToAssign(Collection<Player> players) {

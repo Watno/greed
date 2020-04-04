@@ -14,8 +14,24 @@
     <title>Carnival Display Test</title>
 
 <body onload="javascript:test();">
-<div class="container" id="test">
-</div>
+<div class="container-fluid gamearea" id="gamearea">
+    <div class="row">
+        <div class="col-sm-6">
+            <p id="requestArea"></p>
+            <p id="gamestate"></p>
+        </div>
+        <div class="col-sm-6">
+            <div class="logarea" id="log"></div>
+            <div class="gameChatarea">
+                <div class="gameChat" id="gameChat"></div>
+                <input id="gameChatMessage" onkeydown="if (event.keyCode == 13) { sendGameChat();}"
+                       type="text">
+                <button
+                        onclick="javascript:sendGameChat()">Chat
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

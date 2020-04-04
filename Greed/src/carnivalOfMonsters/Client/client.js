@@ -192,7 +192,7 @@ function drawCard(card, enabled) {
 
     buttonmetastart += "<span class = 'buttonwrapper' data-placement='auto' data-html=true data-toggle=\"tooltip\" data-title=\"Test\">";
 	buttonmetastart += `<button class ="${card.type} ${card.landType}"`;
-	if (enabled != null){
+	if (enabled == true){
 		buttonmetastart += ` onclick="javascript:sendCommand(\'${card.name}\')"`;
 	}
 	else{
@@ -359,14 +359,84 @@ function drawLog(gamelog){
 			case "SeasonLogEntry":
 				innertext = `Saison ${logentry.seasonnumber}`;
 				break;
+			case "TurnLogEntry":
+				innertext = `Runde ${logentry.turnNumber}`;
+				break;
+			case "PlayerTurnLogEntry":
+				innertext = `${logentry.playername}`;
+				break;
+			case "KeepCardLogEntry":
+				innertext = `behält eine Karte.`;
+				break;
+			case "PayLogEntry":
+				innertext = `bezahlt ${logentry.amount}`;
+				if (logentry.loans > 0){
+					innertext += " und muss dafür "
+					if (logentry.loans == 1){
+						innertext += "einen Kredit"
+					}
+					else{
+						innertext += `${logentry.loans} Kredite`
+					}
+					innertext += " aufnehmen"
+				}
+				innertext += "."
+				break;
+			case "PlayCardLogEntry":
+				innertext = `spielt ${drawCard(logentry.card)}`;
+				if (logentry.playSource == "KEPT"){
+					innertext += " aus seinen aufgehobenen Karten"
+				}
+				innertext += "."
+				break;
+			case "TriggerLogEntry":
+				innertext = `löst den Effekt von ${drawCard(logentry.triggeringCard)} aus.`;
+				break;
+			case "RevealKeptMonstersLogEntry":
+				if (logentry.revealedMonsters != 0){
+					revealedMonstersText = logentry.revealedMonsters.map(x => drawCard(x)).join(", ")
+				}
+				else {
+					revealedMonstersText = "keine Monster"
+				}
+				innertext = `zeigt ${revealedMonstersText}.`;
+				break;
 			case "HuntPhaseEntry":
 				innertext = `Jagdphase: Königliche Jäger würfeln ${logentry.dieRolls[0]}, ${logentry.dieRolls[1]}, ${logentry.dieRolls[2]}`;
+				break;
+			case "DangerCheckLogEntry":
+				innertext = `${logentry.playername} hat ${logentry.dangerLevel} Gefahrensymbole`
+				if (logentry.spentHunterTokens > 0){
+					innertext += ` und gibt ${logentry.spentHunterTokens} Jägermarker aus`
+				}
+				innertext += "."
+				break;
+			case "AwardTrophyLogEntry":
+				if (logentry.playername != null){
+					winner = logentry.playername;
+				}
+				else {
+					winner = "niemanden"
+				}
+				innertext = `Die Trophäe für ${drawCard(logentry.trophy)} geht an ${winner}.`;
 				break;
 			case "ScorePhaseLogEntry":
 				innertext = `Spielende`;
 				break;
 			case "PlayerScoreLogEntry":
-				innertext = `${logentry.playername}: ${logentry.score} Siegpunkte`;
+				innertext = `${logentry.playername}: ${logentry.score} Siegpunkte: `;
+				innertext += `${logentry.scoreForMenagerie} Punkte für Monster in der Menagerie, `;
+				innertext += `${logentry.scoreForSecretGoals} Punkte für geheime Ziele, `;
+				innertext += `${logentry.scoreForTrophies} Punkte für Trophäen, `;
+				innertext += `${logentry.scoreForCrowns} Punkte für übrige Kronen, `;
+				innertext += `${logentry.scoreForHunterTokens} Punkte für Jägermarker, `;
+				innertext += `${logentry.scoreForLoans} Punkte für Kredite, `;
+				break;
+			case "SecretGoalScoreEntry":
+				innertext = `${logentry.score} Punkte für ${drawCard(logentry.goal)}`;
+				break;
+			case "SecondRowLogEntry":
+				innertext = `${logentry.playername} erhält 7 weitere Punkte für ${drawCard(logentry.secondRowIsGoodEnough)}.`;
 				break;
 
 		}

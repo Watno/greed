@@ -7,6 +7,7 @@ import carnivalOfMonsters.core.seasons.Season;
 import carnivalOfMonsters.core.secretGoals.SecondRowIsGoodEnough;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -73,9 +74,18 @@ public class Game implements Runnable {
         for (int round = 1; round <= 8; round++) {
             int localRound = round;
             var turnLogEntry = new TurnLogEntry(localRound);
+            seasonLogEntry.addDependantEntry(turnLogEntry);
+            var playerTurnLogs = new ConcurrentHashMap<Player, ILogEntry>();
             IntStream.range(0, players.size()).parallel().forEach(playernumber ->
-                    players.get(playernumber)
-                            .makeTurn(draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * playernumber + localRound, players.size())), this, Optional.of(turnLogEntry)));
+            {
+                var player = players.get(playernumber);
+                var log = player.makeTurn(draftStacks.get(Math.floorMod((int) (Math.pow(-1, season)) * playernumber + localRound, players.size())), this);
+                playerTurnLogs.put(player, log);
+            });
+            for (var player : players) {
+                turnLogEntry.addDependantEntry(playerTurnLogs.get(player));
+            }
+
             sendGameStateToPlayers();
         }
 
@@ -93,7 +103,7 @@ public class Game implements Runnable {
             player.performDangerCheck(royalHunters, Optional.of(huntPhaseEntry));
         }
 
-        getCurrentSeason().assign(players);
+        getCurrentSeason().assign(players, Optional.of(seasonLogEntry));
         seasons.pop();
 
         for (var player : players) {
