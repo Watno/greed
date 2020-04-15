@@ -1,0 +1,123 @@
+.logarea {
+height: 50vh;
+overflow: auto
+}
+
+.newtablearea {
+height: 5vh
+}
+
+.lobbychat {
+height: 40vh;
+overflow: auto
+}
+
+.lobbychatarea {
+height: 45 vh;
+}
+
+.gameChat {
+height: 30vh;
+overflow: auto
+}
+
+.gameChatarea {
+height: 35 vh;
+}
+
+.tables {
+height: 45vh;
+overflow: auto
+}
+
+/* necessary for tooltips on disabled buttons in Chrome */
+.buttonwrapper {
+display: inline-block;
+}
+
+.divider{
+height: 10vh;
+}
+.buttonwrapper [disabled] {
+pointer-events: none;
+}
+/* end of necessary for tooltips on disabled buttons in Chrome*/
+
+.tooltip-inner {
+background-color: #FFFFFF;
+color: #000000;
+border: 1px solid #000000;
+}
+.btn.disabled {
+pointer-events: auto;
+}
+
+.infoarea {
+height: 10vh;
+}
+
+.StaffMember {
+background-color: lightslategray;
+}
+
+.Event {
+background-color: beige;
+}
+
+.SecretGoal {
+background-color: brown;
+color: white;
+}
+
+.DREAMLANDS {
+background-color: purple;
+color: white;
+}
+
+.DARKLANDS {
+background-color: black;
+color: white;
+}
+
+.CAVES {
+background-color: red;
+color: white
+}
+
+.AERIE {
+background-color: yellow;
+}
+
+.ENCHANTEDFOREST {
+background-color: green;
+color: white
+}
+
+.DEPTHS {
+background-color: blue;
+color: white;
+}
+
+.logentry {
+	margin-left: 20px;
+}
+
+.GameLogEntry {
+	margin-left: 0px;
+}
+
+.SecretGoal, .DREAMLANDS, .DARKLANDS, .CAVES, .ENCHANTEDFOREST, .DEPTHS{
+	color: white;
+}
+.SecretGoal .icon, .DREAMLANDS .icon, .DARKLANDS .icon, .CAVES .icon, .ENCHANTEDFOREST .icon, .DEPTHS .icon {
+	filter: invert(100%);
+}
+
+.icon{
+	height: 1em;
+}
+
+.playerName, .playerinfoHeader{
+	font-size: large;
+}
+

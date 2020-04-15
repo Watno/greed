@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="custom.css?7" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="client.js?8"></script>
+    <script src="test.js?8"></script>
+
+    <title>Carnival Display Test</title>
+
+<body onload="javascript:test();">
+<div class="container-fluid gamearea" id="gamearea">
+    <div class="row">
+        <div class="col-sm-6">
+            <p id="requestArea"></p>
+            <p id="gamestate"></p>
+        </div>
+        <div class="col-sm-6">
+            <div class="logarea" id="log"></div>
+            <div class="gameChatarea">
+                <div class="gameChat" id="gameChat"></div>
+                <input id="gameChatMessage" onkeydown="if (event.keyCode == 13) { sendGameChat();}"
+                       type="text">
+                <button
+                        onclick="javascript:sendGameChat()">Chat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
