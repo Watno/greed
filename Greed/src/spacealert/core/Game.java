@@ -2,6 +2,8 @@ package spacealert.core;
 
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.boardElements.Gravolift;
+import spacealert.core.boardElements.IDamageable;
+import spacealert.core.boardElements.Structure;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.damageSources.Rocket;
 import spacealert.core.boardElements.damageSources.cannons.*;
@@ -18,8 +20,8 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
-import spacealert.core.threats.Threat;
 import spacealert.core.threats.Trajectory;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +34,7 @@ public class Game {
     private Map<Zone, Shield> shields;
     private Map<Position, Cannon> cannons;
     private Map<Zone, Trajectory> trajectories;
+    private Map<Zone, List<IDamageable>> damagetokens;
     private Trajectory internalTrajectory;
     private Space space;
 
@@ -46,6 +49,8 @@ public class Game {
     private int currentPhase;
     private Optional<Rocket> nextTurnRocket = Optional.empty();
     private Optional<Rocket> thisTurnRocket = Optional.empty();
+
+    private Random random = new Random();
 
     public Game() {
         gravolifts = Map.of(
@@ -72,6 +77,7 @@ public class Game {
                 new Position(Deck.LOWER, Zone.BLUE), new LightCannon(Zone.BLUE)
         );
 
+        damagetokens = Arrays.stream(Zone.values()).collect(Collectors.toMap(x -> x, this::getDamagetokens));
 
         space = new Space();
         stationLayout = new StationLayout();
@@ -83,6 +89,18 @@ public class Game {
         );
 
         internalTrajectory = Trajectory.T1();
+    }
+
+    private List<IDamageable> getDamagetokens(Zone zone) {
+        var tokens = new ArrayList<IDamageable>();
+        tokens.add(cannons.get(new Position(Deck.UPPER, zone)));
+        tokens.add(cannons.get(new Position(Deck.LOWER, zone)));
+        tokens.add(shields.get(zone));
+        tokens.add(reactors.get(zone));
+        tokens.add(gravolifts.get(zone));
+        tokens.add(new Structure());
+
+        return tokens;
     }
 
     public Game(Collection<ActionBoard> actionBoards, List<List<Threat>> threatsBySpawn) {
@@ -227,5 +245,30 @@ public class Game {
 
     public Optional<Rocket> getCurrentTurnRocket() {
         return thisTurnRocket;
+    }
+
+    public GameLost damage(Zone zone, int amount) {
+        for (int i = 0; i < amount; i++) {
+            var gameLost = damage(zone);
+            if (gameLost == GameLost.TRUE) return GameLost.TRUE;
+        }
+        return GameLost.FALSE;
+    }
+
+    public GameLost damage(Zone zone) {
+        var availableDamageTokens = damagetokens.get(zone);
+        if (availableDamageTokens.isEmpty()) return GameLost.TRUE;
+        var index = random.nextInt(availableDamageTokens.size());
+        var randomDamageToken = availableDamageTokens.remove(index);
+        randomDamageToken.damage();
+        return GameLost.FALSE;
+    }
+
+    public int applyShieldsToDamage(Zone zone, int amount) {
+        return shields.get(zone).blockDamage(amount);
+    }
+
+    public Collection<Shield> getShields() {
+        return shields.values();
     }
 }

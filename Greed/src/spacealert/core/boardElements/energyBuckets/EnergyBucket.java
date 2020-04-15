@@ -1,8 +1,9 @@
 package spacealert.core.boardElements.energyBuckets;
 
+import spacealert.core.boardElements.IDamageable;
 import spacealert.core.boardElements.energyBuckets.reactors.Reactor;
 
-public abstract class EnergyBucket {
+public abstract class EnergyBucket implements IDamageable {
     protected int capacity;
     protected int energy;
 
@@ -19,5 +20,11 @@ public abstract class EnergyBucket {
 
         source.energy -= energyToTransfer;
         this.energy += energyToTransfer;
+    }
+
+    @Override
+    public void damage() {
+        capacity--;
+        if (energy > capacity) energy = capacity;
     }
 }

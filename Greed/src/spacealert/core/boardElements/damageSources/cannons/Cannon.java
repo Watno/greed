@@ -2,7 +2,7 @@ package spacealert.core.boardElements.damageSources.cannons;
 
 import spacealert.core.boardElements.IDamageable;
 import spacealert.core.boardElements.damageSources.DamageSource;
-import spacealert.core.threats.ExternalThreat;
+import spacealert.core.threats.templates.ExternalThreat;
 
 import java.util.List;
 
@@ -23,9 +23,5 @@ public abstract class Cannon extends DamageSource implements IDamageable {
     abstract void actuallyAssignDamage(List<ExternalThreat> externalThreats);
 
 
-    @Override
-    public void damage() {
-        //TODO
-    }
 
 }

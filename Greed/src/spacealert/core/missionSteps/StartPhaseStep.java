@@ -1,6 +1,7 @@
 package spacealert.core.missionSteps;
 
 import spacealert.core.Game;
+import spacealert.core.GameLost;
 
 public class StartPhaseStep implements IMissionStep {
     private int phase;
@@ -10,7 +11,9 @@ public class StartPhaseStep implements IMissionStep {
     }
 
     @Override
-    public void execute(Game game) {
+    public GameLost execute(Game game) {
         game.startPhase(phase);
+
+        return GameLost.FALSE;
     }
 }

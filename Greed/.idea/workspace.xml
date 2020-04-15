@@ -4,25 +4,48 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="work on internal threats">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Intruder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Malfunction.java" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/GameLost.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/Structure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/Amoeba.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/ArmoredGrappler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/CryoshieldFighter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/Destroyer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/EnergyCloud.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/Fighter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/Gunship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/Meteoroid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/PulseBall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/StealthFighter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/EnergyBucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/EnergyBucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/Shield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/shields/Shield.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/ILocation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputerMaintenanceCheckStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/IMissionStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/IMissionStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/PlayerActionsStep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartPhaseStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartPhaseStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartTurnStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/StartTurnStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatActionsStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/TestThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/TestThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/ExternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/InternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Intruder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/Intruder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Malfunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/Malfunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/Threat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571594509184</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="work on internal threats">
+      <created>1586968098117</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1586968098117</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -253,50 +283,54 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="617" y="218" key="#Project_Structure/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586962094434" />
-    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser" timestamp="1586967561265">
+    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser" timestamp="1586987829369">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967561265" />
+    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586987829369" />
     <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog" timestamp="1586967342709">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967342709" />
-    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1586967980560">
+    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586987416989">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967980560" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1586967958206">
+    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586987416989" />
+    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1586988075729">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1586967958206">
+    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586988075729" />
+    <state width="2005" height="376" key="GridCell.Tab.0.bottom" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1586967958206">
+    <state width="2005" height="376" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.0.center" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1586967958206">
+    <state width="2005" height="376" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.0.left" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
-    <state width="2005" height="376" key="GridCell.Tab.1.bottom" timestamp="1586963750725">
+    <state width="2005" height="376" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.0.right" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.1.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
-    <state width="2005" height="376" key="GridCell.Tab.1.center" timestamp="1586963750725">
+    <state width="2005" height="376" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.1.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
-    <state width="2005" height="376" key="GridCell.Tab.1.left" timestamp="1586963750725">
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.1.center" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.1.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
-    <state width="2005" height="376" key="GridCell.Tab.1.right" timestamp="1586963750725">
+    <state width="2005" height="376" key="GridCell.Tab.1.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.1.left" timestamp="1586968521089">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="376" key="GridCell.Tab.1.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
+    <state width="2005" height="376" key="GridCell.Tab.1.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
+    <state width="2005" height="376" key="GridCell.Tab.1.right" timestamp="1586968521089">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586968521089" />
     <state x="198" y="94" key="MergeDialog" timestamp="1586958199723">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -313,14 +347,18 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="617" y="292" key="Vcs.Push.Dialog.v2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958242188" />
-    <state x="755" y="332" key="extract.method.dialog" timestamp="1586965242860">
+    <state x="755" y="332" key="extract.method.dialog" timestamp="1586986570681">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="755" y="332" key="extract.method.dialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586965242860" />
-    <state x="668" y="283" width="711" height="546" key="find.popup" timestamp="1586967336725">
+    <state x="755" y="332" key="extract.method.dialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586986570681" />
+    <state x="668" y="283" width="713" height="546" key="find.popup" timestamp="1586986525362">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="668" y="283" width="711" height="546" key="find.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967336725" />
+    <state x="668" y="283" width="713" height="546" key="find.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586986525362" />
+    <state x="767" y="182" key="refactoring.ChangeSignatureDialog" timestamp="1586985001873">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="767" y="182" key="refactoring.ChangeSignatureDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586985001873" />
     <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1586963443955">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -340,8 +378,8 @@
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java</url>
-          <line>21</line>
+          <url>file://$PROJECT_DIR$/src/spacealert/core/threats/templates/ExternalThreat.java</url>
+          <line>22</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -361,7 +399,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
-          <line>208</line>
+          <line>226</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

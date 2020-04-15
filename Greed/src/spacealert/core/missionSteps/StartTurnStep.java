@@ -1,6 +1,7 @@
 package spacealert.core.missionSteps;
 
 import spacealert.core.Game;
+import spacealert.core.GameLost;
 
 public class StartTurnStep implements IMissionStep {
     private int turn;
@@ -10,7 +11,9 @@ public class StartTurnStep implements IMissionStep {
     }
 
     @Override
-    public void execute(Game game) {
+    public GameLost execute(Game game) {
         game.startTurn(turn);
+
+        return GameLost.FALSE;
     }
 }

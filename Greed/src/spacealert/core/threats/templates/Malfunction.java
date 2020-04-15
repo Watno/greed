@@ -1,4 +1,4 @@
-package spacealert.core.threats;
+package spacealert.core.threats.templates;
 
 import spacealert.core.Button;
 import spacealert.core.boardElements.positions.Position;

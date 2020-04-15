@@ -2,8 +2,8 @@ package spacealert.core.actionCards.effects;
 
 import spacealert.core.Game;
 import spacealert.core.ICrewMember;
-import spacealert.core.threats.InternalThreat;
-import spacealert.core.threats.Threat;
+import spacealert.core.threats.templates.InternalThreat;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.Comparator;
 

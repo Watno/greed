@@ -1,42 +1,51 @@
-package spacealert.core.threats;
+package spacealert.core.threats.templates;
 
 import spacealert.core.Game;
+import spacealert.core.GameLost;
+import spacealert.core.threats.Trajectory;
 
 public abstract class Threat {
     private int speed;
-    protected int hitPoints;
+    protected int maximumHitPoints;
     private int pointsForSurviving;
     private int pointsForDestroying;
 
     protected Threat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying) {
         this.speed = speed;
-        this.hitPoints = hitPoints;
+        this.maximumHitPoints = hitPoints;
+        this.currentHitPoints = hitPoints;
         this.pointsForSurviving = pointsForSurviving;
         this.pointsForDestroying = pointsForDestroying;
 
     }
 
+    protected int currentHitPoints;
+
     private int spawnTurn;
     private int squareOnTrajectory;
 
 
-    public void advance(Game game) {
+    public GameLost advance(Game game) {
         var originalSquare = squareOnTrajectory;
         squareOnTrajectory = Math.max(originalSquare - speed, 1);
         for (var action : getTrajectory(game).getActionsBetween(originalSquare, squareOnTrajectory)) {
             switch (action) {
                 case X:
-                    doXAction(game);
+                    var lostByAction = doXAction(game);
+                    if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
                     break;
                 case Y:
-                    doYAction(game);
+                    lostByAction = doYAction(game);
+                    if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
                     break;
                 case Z:
-                    doZAction(game);
+                    lostByAction = doZAction(game);
+                    if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
                     becomeSurvived(game);
                     break;
             }
         }
+        return GameLost.FALSE;
     }
 
     protected void becomeSurvived(Game game) {
@@ -64,17 +73,17 @@ public abstract class Threat {
 
     abstract Trajectory getTrajectory(Game game);
 
-    protected abstract void doXAction(Game game);
+    protected abstract GameLost doXAction(Game game);
 
-    protected abstract void doYAction(Game game);
+    protected abstract GameLost doYAction(Game game);
 
-    protected abstract void doZAction(Game game);
+    protected abstract GameLost doZAction(Game game);
 
     protected void takeDamage(Game game, int damage) {
         if (damage > 0) {
-            hitPoints -= damage;
+            currentHitPoints -= damage;
         }
-        if (hitPoints <= 0) becomeDestroyed(game);
+        if (currentHitPoints <= 0) becomeDestroyed(game);
     }
 
     protected void becomeDestroyed(Game game) {

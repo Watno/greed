@@ -10,7 +10,7 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
-import spacealert.core.threats.Threat;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.ArrayList;
 import java.util.Collections;

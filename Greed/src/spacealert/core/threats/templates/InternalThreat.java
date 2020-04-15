@@ -1,4 +1,4 @@
-package spacealert.core.threats;
+package spacealert.core.threats.templates;
 
 import spacealert.core.Button;
 import spacealert.core.Game;
@@ -6,6 +6,7 @@ import spacealert.core.ICrewMember;
 import spacealert.core.boardElements.locations.ILocation;
 import spacealert.core.boardElements.locations.Location;
 import spacealert.core.boardElements.positions.Position;
+import spacealert.core.threats.Trajectory;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.damageSources;
 
 import spacealert.core.boardElements.positions.Zone;
-import spacealert.core.threats.ExternalThreat;
+import spacealert.core.threats.templates.ExternalThreat;
 
 import java.util.Comparator;
 import java.util.List;

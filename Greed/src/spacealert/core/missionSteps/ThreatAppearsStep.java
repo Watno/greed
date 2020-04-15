@@ -1,16 +1,19 @@
 package spacealert.core.missionSteps;
 
 import spacealert.core.Game;
+import spacealert.core.GameLost;
 
 public class ThreatAppearsStep implements IMissionStep {
 
     protected ThreatAppearsStep() {
-		super();
-	}
+        super();
+    }
 
-	@Override
-	public void execute(Game game) {
+    @Override
+    public GameLost execute(Game game) {
         game.spawnThreats();
-	}
+
+        return GameLost.FALSE;
+    }
 
 }
