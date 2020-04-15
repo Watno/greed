@@ -84,11 +84,11 @@ public class Game {
 
         trajectories = Map.of(
                 Zone.RED, Trajectory.T1(),
-                Zone.WHITE, Trajectory.T1(),
-                Zone.BLUE, Trajectory.T1()
+                Zone.WHITE, Trajectory.T2(),
+                Zone.BLUE, Trajectory.T3()
         );
 
-        internalTrajectory = Trajectory.T1();
+        internalTrajectory = Trajectory.T4();
     }
 
     private List<IDamageable> getDamagetokens(Zone zone) {

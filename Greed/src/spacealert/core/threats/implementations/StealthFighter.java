@@ -7,7 +7,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class StealthFighter extends ExternalThreat {
-    protected StealthFighter(Zone zone) {
+    public StealthFighter(Zone zone) {
         super(3, 4, 2, 4, 2, zone);
     }
 

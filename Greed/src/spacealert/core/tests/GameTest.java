@@ -10,12 +10,10 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
+import spacealert.core.threats.implementations.*;
 import spacealert.core.threats.templates.Threat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -32,11 +30,31 @@ class GameTest {
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
 
-        var game = new Game(actionBoards, Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+        var game = new Game(actionBoards, getRandomThreatList());
 
         var missionStepSequence = new DefaultMissionStepSequence();
 
         missionStepSequence.execute(game);
+    }
+
+    private List<List<Threat>> getRandomThreatList() {
+        var list = Arrays.asList(
+                List.<Threat>of(new Amoeba(Zone.WHITE)),
+                List.<Threat>of(new ArmoredGrappler(Zone.BLUE)),
+                List.<Threat>of(new CryoshieldFighter(Zone.RED)),
+                List.<Threat>of(new Destroyer(Zone.WHITE)),
+                List.<Threat>of(new EnergyCloud(Zone.BLUE)),
+                List.<Threat>of(new Fighter(Zone.RED)),
+                List.<Threat>of(new Gunship(Zone.WHITE)),
+                List.<Threat>of(new Meteoroid(Zone.BLUE)),
+                List.<Threat>of(new PulseBall(Zone.RED)),
+                List.<Threat>of(new StealthFighter(Zone.WHITE)),
+                List.<Threat>of(),
+                List.<Threat>of()
+        );
+        Collections.shuffle(list);
+
+        return list;
     }
 
 

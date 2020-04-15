@@ -8,7 +8,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class Amoeba extends ExternalThreat {
-    protected Amoeba(Zone zone) {
+    public Amoeba(Zone zone) {
         super(2, 8, 2, 4, 0, zone);
     }
 

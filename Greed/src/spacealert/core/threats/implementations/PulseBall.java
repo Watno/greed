@@ -6,7 +6,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class PulseBall extends ExternalThreat {
-    protected PulseBall(Zone zone) {
+    public PulseBall(Zone zone) {
         super(2, 5, 2, 4, 1, zone);
     }
 

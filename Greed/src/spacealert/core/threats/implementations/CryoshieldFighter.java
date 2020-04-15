@@ -6,7 +6,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class CryoshieldFighter extends ExternalThreat {
-    protected CryoshieldFighter(Zone zone) {
+    public CryoshieldFighter(Zone zone) {
         super(3, 4, 2, 4, 1, zone);
     }
 

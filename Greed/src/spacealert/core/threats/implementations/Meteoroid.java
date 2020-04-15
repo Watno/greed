@@ -8,7 +8,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class Meteoroid extends ExternalThreat {
-    protected Meteoroid(Zone zone) {
+    public Meteoroid(Zone zone) {
         super(5, 5, 2, 4, 0, zone);
     }
 

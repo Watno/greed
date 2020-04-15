@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EnergyCloud extends ExternalThreat {
-    protected EnergyCloud(Zone zone) {
+    public EnergyCloud(Zone zone) {
         super(2, 5, 2, 4, 3, zone);
     }
 

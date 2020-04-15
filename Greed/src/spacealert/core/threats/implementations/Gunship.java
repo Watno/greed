@@ -6,7 +6,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class Gunship extends ExternalThreat {
-    protected Gunship(Zone zone) {
+    public Gunship(Zone zone) {
         super(2, 5, 2, 4, 2, zone);
     }
 

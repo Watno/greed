@@ -6,7 +6,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
 public class ArmoredGrappler extends ExternalThreat {
-    protected ArmoredGrappler(Zone zone) {
+    public ArmoredGrappler(Zone zone) {
         super(2, 4, 2, 4, 3, zone);
     }
 
