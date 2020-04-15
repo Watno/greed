@@ -57,4 +57,7 @@ public class Trajectory {
         return actions;
     }
 
+    public int getStartingPosition() {
+        return length + 1;
+    }
 }

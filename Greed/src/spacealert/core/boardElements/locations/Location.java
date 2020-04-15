@@ -5,13 +5,17 @@ import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
+import spacealert.core.threats.InternalThreat;
+import spacealert.core.threats.Threat;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Optional;
 
 public abstract class Location implements ILocation {
     private Collection<ICrewMember> crewMembers = new ArrayList<>();
+    private Collection<InternalThreat> internalThreats = new ArrayList<>();
     private Optional<Position> position;
 
     Location(Position position) {
@@ -50,23 +54,49 @@ public abstract class Location implements ILocation {
         }
     }
 
+
+    @Override
+    public void addInternalThreat(InternalThreat threat) {
+        internalThreats.add(threat);
+    }
+
+    @Override
+    public void removeInternalThreat(InternalThreat threat) {
+        var wasPresent = internalThreats.remove(threat);
+        if (!wasPresent) {
+            throw new IllegalStateException("expected Threat is not here.");
+        }
+    }
+
+    @Override
+    public Collection<InternalThreat> getInternalThreats() {
+        return internalThreats;
+    }
+
     public Optional<Zone> getZone() {
         return position.map(Position::getZone);
     }
 
     @Override
     public void executeButton(Game game, ICrewMember crewMember, Button button) {
-        if (isSpace()) return;
-        switch (button) {
-            case A:
-                executeAButton(game, crewMember);
-                break;
-            case B:
-                executeBButton(game, crewMember);
-                break;
-            case C:
-                executeCButton(game, crewMember);
-                break;
+        if (internalThreats.stream().anyMatch(x -> x.interceptsButton(button))) {
+            internalThreats.stream()
+                    .filter(x -> x.interceptsButton(button))
+                    .filter(InternalThreat::isSurvived)
+                    .min(Comparator.comparing(Threat::getSpawnTurn))
+                    .ifPresent(x -> x.interceptButtonPress(game, this));
+        } else if (!isSpace()) {
+            switch (button) {
+                case A:
+                    executeAButton(game, crewMember);
+                    break;
+                case B:
+                    executeBButton(game, crewMember);
+                    break;
+                case C:
+                    executeCButton(game, crewMember);
+                    break;
+            }
         }
     }
 

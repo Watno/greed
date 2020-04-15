@@ -211,7 +211,10 @@ public class Game {
     }
 
     public void spawnThreats() {
-        activeThreats.addAll(threatsBySpawn.get(currentTurn - 1));
+        for (var threat : threatsBySpawn.get(currentTurn - 1)) {
+            threat.spawn(this, currentTurn);
+            activeThreats.add(threat);
+        }
     }
 
     public List<DamageSource> getDamageSources() {
@@ -220,5 +223,9 @@ public class Game {
         thisTurnRocket.ifPresent(damageSources::add);
         space.getInterceptors().ifPresent(damageSources::add);
         return damageSources;
+    }
+
+    public Optional<Rocket> getCurrentTurnRocket() {
+        return thisTurnRocket;
     }
 }

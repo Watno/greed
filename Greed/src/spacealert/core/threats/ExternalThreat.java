@@ -42,10 +42,8 @@ public abstract class ExternalThreat extends Threat {
 
     public void resolveDamage(Game game) {
         var unblockedDamage = assignedDamage - shieldPoints;
-        if (unblockedDamage > 0) {
-            hitPoints -= unblockedDamage;
-        }
-        if (hitPoints <= 0) game.recordAsDestroyed(this);
+        takeDamage(game, unblockedDamage);
         assignedDamage = 0;
     }
+
 }

@@ -41,7 +41,6 @@ public class CrewMember implements ICrewMember{
 	public void moveInDirection(Game game, Direction direction) {
 		var newPosition = game.getAdjacentInDirection(location, direction);
 		newPosition.ifPresent(this::moveTo);
-
 	}
 
 	@Override
@@ -76,5 +75,10 @@ public class CrewMember implements ICrewMember{
 	@Override
 	public boolean hasActiveBattlebot() {
 		return battleBot.map(BattleBot::isActive).orElse(false);
+	}
+
+	@Override
+	public void disableBattleBot() {
+		battleBot.ifPresent(BattleBot::disable);
 	}
 }

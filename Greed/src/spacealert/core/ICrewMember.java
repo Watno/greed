@@ -19,7 +19,7 @@ public interface ICrewMember {
 
 	ILocation getLocation();
 
-	Optional<Zone> getZone();
+    Optional<Zone> getZone();
 
     void executeButton(Game game, Button button);
 
@@ -28,4 +28,6 @@ public interface ICrewMember {
     void useBattleBotStorage(BattleBotStorage battleBotStorage);
 
     boolean hasActiveBattlebot();
+
+    void disableBattleBot();
 }

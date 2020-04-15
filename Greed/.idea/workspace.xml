@@ -4,8 +4,26 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="work on internal threats">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Intruder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Malfunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/effects/AttackWithBattleBotEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/battleBots/BattleBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/ILocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/ILocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/locations/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/ExternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/InternalThreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Threat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/Trajectory.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +53,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -44,9 +67,10 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
@@ -73,20 +97,8 @@
       <recent name="spacealert.core.boardElements.damageSources.cannons" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="JUnit.spacealert.core.tests in Greed">
-    <configuration name="GameTest.moveRedThenC_thenBattlebot_ShouldEndInSpace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameTest">
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
         <pattern>
@@ -96,24 +108,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="spacealert.core.tests" />
       <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
-      <option name="METHOD_NAME" value="moveRedThenC_thenBattlebot_ShouldEndInSpace" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Greed" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="spacealert.core.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
-      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
-      <option name="METHOD_NAME" value="pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,6 +124,22 @@
       <option name="PACKAGE_NAME" value="spacealert.core.tests" />
       <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
       <option name="METHOD_NAME" value="pushAFourTimes_ShouldKill3TestThreat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.randomGameSmokeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Greed" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="spacealert.core.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
+      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
+      <option name="METHOD_NAME" value="randomGameSmokeTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="JUnit.GameTest.pushAFourTimes_ShouldKill3TestThreat" />
+        <item itemvalue="JUnit.GameTest.randomGameSmokeTest" />
         <item itemvalue="JUnit.spacealert.core.tests in Greed" />
         <item itemvalue="JUnit.spacealert.core in Greed" />
-        <item itemvalue="JUnit.GameTest.moveRedThenC_thenBattlebot_ShouldEndInSpace" />
-        <item itemvalue="JUnit.GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
-        <item itemvalue="JUnit.GameTest.pushAFourTimes_ShouldKill3TestThreat" />
       </list>
     </recent_temporary>
   </component>
@@ -232,9 +243,88 @@
     <MESSAGE value="implemented B-Buttons and rooms" />
     <MESSAGE value="implemented all player actions, fixed bugs and added tests" />
     <MESSAGE value="implemented fighting external threats, some fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented fighting external threats, some fixes" />
+    <MESSAGE value="work on internal threats" />
+    <option name="LAST_COMMIT_MESSAGE" value="work on internal threats" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="617" y="218" key="#Project_Structure" timestamp="1586962094434">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="617" y="218" key="#Project_Structure/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586962094434" />
+    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser" timestamp="1586967561265">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="830" y="266" key="#com.intellij.ide.util.MemberChooser/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967561265" />
+    <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog" timestamp="1586967342709">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967342709" />
+    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1586967980560">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967980560" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1586967958206">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1586967958206">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1586967958206">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1586967958206">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="305" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967958206" />
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom" timestamp="1586963750725">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
+    <state width="2005" height="376" key="GridCell.Tab.1.center" timestamp="1586963750725">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
+    <state width="2005" height="376" key="GridCell.Tab.1.left" timestamp="1586963750725">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
+    <state width="2005" height="376" key="GridCell.Tab.1.right" timestamp="1586963750725">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="2005" height="376" key="GridCell.Tab.1.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963750725" />
+    <state x="198" y="94" key="MergeDialog" timestamp="1586958199723">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="198" y="94" key="MergeDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958199723" />
+    <state x="737" y="274" key="MultipleFileMergeDialog" timestamp="1586958199728">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="737" y="274" key="MultipleFileMergeDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958199728" />
+    <state x="717" y="318" key="Vcs.Multiple.Commit.Info.Dialog.Key" timestamp="1586958089018">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="717" y="318" key="Vcs.Multiple.Commit.Info.Dialog.Key/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958089018" />
+    <state x="617" y="292" key="Vcs.Push.Dialog.v2" timestamp="1586958242188">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="617" y="292" key="Vcs.Push.Dialog.v2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958242188" />
+    <state x="755" y="332" key="extract.method.dialog" timestamp="1586965242860">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="755" y="332" key="extract.method.dialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586965242860" />
+    <state x="668" y="283" width="711" height="546" key="find.popup" timestamp="1586967336725">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="668" y="283" width="711" height="546" key="find.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586967336725" />
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1586963443955">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963443955" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -268,6 +358,11 @@
           <url>file://$PROJECT_DIR$/src/spacealert/core/actionCards/effects/CEffect.java</url>
           <line>9</line>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/Game.java</url>
+          <line>208</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>

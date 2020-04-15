@@ -14,12 +14,11 @@ public abstract class Threat {
         this.pointsForSurviving = pointsForSurviving;
         this.pointsForDestroying = pointsForDestroying;
 
-        squareOnTrajectory = 15;
-        //TODO fix to proper
     }
 
+    private int spawnTurn;
     private int squareOnTrajectory;
-//TODO initialize
+
 
     public void advance(Game game) {
         var originalSquare = squareOnTrajectory;
@@ -34,9 +33,13 @@ public abstract class Threat {
                     break;
                 case Z:
                     doZAction(game);
+                    becomeSurvived(game);
                     break;
             }
         }
+    }
+
+    protected void becomeSurvived(Game game) {
         game.recordAsSurvived(this);
     }
 
@@ -44,10 +47,19 @@ public abstract class Threat {
         return squareOnTrajectory;
     }
 
+    public int getSpawnTurn() {
+        return spawnTurn;
+    }
+
     public int getDistance() {
         if (squareOnTrajectory > 10) return 3;
         if (squareOnTrajectory > 5) return 2;
         return 1;
+    }
+
+    public void spawn(Game game, int turn) {
+        squareOnTrajectory = getTrajectory(game).getStartingPosition();
+        spawnTurn = turn;
     }
 
     abstract Trajectory getTrajectory(Game game);
@@ -57,4 +69,15 @@ public abstract class Threat {
     protected abstract void doYAction(Game game);
 
     protected abstract void doZAction(Game game);
+
+    protected void takeDamage(Game game, int damage) {
+        if (damage > 0) {
+            hitPoints -= damage;
+        }
+        if (hitPoints <= 0) becomeDestroyed(game);
+    }
+
+    protected void becomeDestroyed(Game game) {
+        game.recordAsDestroyed(this);
+    }
 }

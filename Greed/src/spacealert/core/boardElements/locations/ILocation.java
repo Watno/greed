@@ -5,6 +5,7 @@ import spacealert.core.Game;
 import spacealert.core.ICrewMember;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
+import spacealert.core.threats.InternalThreat;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -18,6 +19,12 @@ public interface ILocation {
     void addCrewMember(ICrewMember crewMember);
 
     void removeCrewMember(ICrewMember crewMember);
+
+    void addInternalThreat(InternalThreat threat);
+
+    void removeInternalThreat(InternalThreat threat);
+
+    Collection<InternalThreat> getInternalThreats();
 
     Optional<Zone> getZone();
 

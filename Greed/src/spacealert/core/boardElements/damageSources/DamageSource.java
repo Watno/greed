@@ -22,7 +22,9 @@ public abstract class DamageSource {
                 .filter(x -> x.canBeTargetedBy(this))
                 .filter(x -> x.isIn(zones))
                 .filter(x -> ranges.contains(x.getDistance()))
-                .sorted(Comparator.comparing(ExternalThreat::getSquareOnTrajectory))
+                .sorted(Comparator
+                        .comparing(ExternalThreat::getSquareOnTrajectory)
+                        .thenComparing(ExternalThreat::getSpawnTurn))
                 .collect(Collectors.toList());
     }
 }

@@ -10,4 +10,8 @@ public class BattleBot {
     public boolean isActive() {
         return active;
     }
+
+    public void disable() {
+        active = false;
+    }
 }

@@ -18,7 +18,6 @@ public class ComputeDamageStep implements IMissionStep {
 		for (var threat : externalThreats) {
 			threat.resolveDamage(game);
 		}
-
 	}
 
 }
