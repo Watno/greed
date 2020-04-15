@@ -24,7 +24,7 @@ public class RealDecisionMaker implements IDecisionMaker {
         serializer.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
     }
 
-    @Override
+    @Overridea
     public Map<LandType, Integer> assignLandpoints(int requiredLandpoints) {
         return user.requestTypedInput(serializer.valueToTree(new AssignLandpointsForDreamlandRequest(requiredLandpoints)), new TypeReference<>() {
         });
