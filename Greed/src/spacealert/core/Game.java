@@ -37,6 +37,8 @@ public class Game {
     private Map<Zone, List<IDamageable>> damagetokens;
     private Trajectory internalTrajectory;
     private Space space;
+    private ArrayList<Rocket> availableRockets = new ArrayList<>(List.of(new Rocket(), new Rocket(), new Rocket()));
+
 
     private ArrayList<List<Threat>> threatsBySpawn;
     private ArrayList<Threat> activeThreats = new ArrayList<>();
@@ -82,13 +84,14 @@ public class Game {
         space = new Space();
         stationLayout = new StationLayout();
 
+        var allTrajectories = Trajectory.all();
         trajectories = Map.of(
-                Zone.RED, Trajectory.T1(),
-                Zone.WHITE, Trajectory.T2(),
-                Zone.BLUE, Trajectory.T3()
+                Zone.RED, allTrajectories.remove(0),
+                Zone.WHITE, allTrajectories.remove(0),
+                Zone.BLUE, allTrajectories.remove(0)
         );
 
-        internalTrajectory = Trajectory.T4();
+        internalTrajectory = allTrajectories.remove(0);
     }
 
     private List<IDamageable> getDamagetokens(Zone zone) {
@@ -181,7 +184,7 @@ public class Game {
     }
 
 
-    Optional<ILocation> getAdjacentInDirection(ILocation location, Direction direction) {
+    public Optional<ILocation> getAdjacentInDirection(ILocation location, Direction direction) {
         return stationLayout.getAdjacentInDirection(location, direction);
     }
 
@@ -199,9 +202,13 @@ public class Game {
         currentTurn = turn;
     }
 
-    public boolean tryLaunchRocket(Rocket rocket) {
-        if (nextTurnRocket.isEmpty()) {
-            nextTurnRocket = Optional.of(rocket);
+    public List<Rocket> getAvailableRockets() {
+        return List.copyOf(availableRockets);
+    }
+
+    public boolean tryLaunchRocket() {
+        if (!availableRockets.isEmpty() && nextTurnRocket.isEmpty()) {
+            nextTurnRocket = Optional.of(availableRockets.remove(0));
             return true;
         } else {
             return false;
@@ -230,8 +237,8 @@ public class Game {
 
     public void spawnThreats() {
         for (var threat : threatsBySpawn.get(currentTurn - 1)) {
-            threat.spawn(this, currentTurn);
             activeThreats.add(threat);
+            threat.spawn(this, currentTurn);
         }
     }
 

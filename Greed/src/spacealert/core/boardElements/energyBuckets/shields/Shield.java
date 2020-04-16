@@ -13,7 +13,4 @@ public class Shield extends EnergyBucket {
         return amount - blockedDamage;
     }
 
-    public void drain() {
-        energy = 0;
-    }
 }

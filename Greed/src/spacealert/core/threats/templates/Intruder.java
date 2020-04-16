@@ -1,5 +1,7 @@
 package spacealert.core.threats.templates;
 
+import spacealert.core.Game;
+import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
 
 import java.util.List;
@@ -16,6 +18,18 @@ public abstract class Intruder extends InternalThreat {
     @Override
     public boolean canBeTargetedByBattlebot() {
         return true;
+    }
+
+    public void moveInDirection(Game game, Direction direction) {
+        for (var location : locations) {
+            var newLocation = game.getAdjacentInDirection(location, direction);
+            if (newLocation.isPresent()) {
+                location.removeInternalThreat(this);
+                newLocation.get().addInternalThreat(this);
+                locations.remove(location);
+                locations.add(newLocation.get());
+            }
+        }
     }
 
 }

@@ -27,4 +27,8 @@ public abstract class EnergyBucket implements IDamageable {
         capacity--;
         if (energy > capacity) energy = capacity;
     }
+
+    public void drain() {
+        energy = 0;
+    }
 }

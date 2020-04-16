@@ -10,10 +10,14 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
-import spacealert.core.threats.implementations.*;
+import spacealert.core.threats.implementations.external.*;
+import spacealert.core.threats.implementations.internal.*;
 import spacealert.core.threats.templates.Threat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -24,7 +28,7 @@ class GameTest {
 
     private static Random random = new Random();
 
-    @RepeatedTest(1000)
+    @RepeatedTest(100000)
     void randomGameSmokeTest() {
         var deck = Card.defaultDeck();
         var actionBoards = IntStream.range(0, 5)
@@ -38,23 +42,33 @@ class GameTest {
     }
 
     private List<List<Threat>> getRandomThreatList() {
-        var list = Arrays.asList(
-                List.<Threat>of(new Amoeba(Zone.WHITE)),
-                List.<Threat>of(new ArmoredGrappler(Zone.BLUE)),
-                List.<Threat>of(new CryoshieldFighter(Zone.RED)),
-                List.<Threat>of(new Destroyer(Zone.WHITE)),
-                List.<Threat>of(new EnergyCloud(Zone.BLUE)),
-                List.<Threat>of(new Fighter(Zone.RED)),
-                List.<Threat>of(new Gunship(Zone.WHITE)),
-                List.<Threat>of(new Meteoroid(Zone.BLUE)),
-                List.<Threat>of(new PulseBall(Zone.RED)),
-                List.<Threat>of(new StealthFighter(Zone.WHITE)),
-                List.<Threat>of(),
-                List.<Threat>of()
-        );
-        Collections.shuffle(list);
+        var allThreats = new ArrayList<>(List.of(
+                new Amoeba(getRandomZone()),
+                new ArmoredGrappler(getRandomZone()),
+                new CryoshieldFighter(getRandomZone()),
+                new Destroyer(getRandomZone()),
+                new EnergyCloud(getRandomZone()),
+                new Fighter(getRandomZone()),
+                new Gunship(getRandomZone()),
+                new Meteoroid(getRandomZone()),
+                new PulseBall(getRandomZone()),
+                new StealthFighter(getRandomZone()),
+                new HackedShieldsRed(),
+                new HackedShieldsBlue(),
+                new SaboteurBlue(),
+                new SaboteurRed(),
+                new SkirmishersBlue(),
+                new SkirmishersRed(),
+                new UnstableWarheads()
+        ));
+        Collections.shuffle(allThreats, random);
 
-        return list;
+        return allThreats.stream().limit(8).map(List::of).collect(Collectors.toList());
+    }
+
+    private Zone getRandomZone() {
+        var index = random.nextInt(Zone.values().length);
+        return Zone.values()[index];
     }
 
 

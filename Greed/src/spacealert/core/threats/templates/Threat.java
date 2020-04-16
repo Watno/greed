@@ -2,6 +2,7 @@ package spacealert.core.threats.templates;
 
 import spacealert.core.Game;
 import spacealert.core.GameLost;
+import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.Trajectory;
 
 public abstract class Threat {
@@ -69,6 +70,14 @@ public abstract class Threat {
     public void spawn(Game game, int turn) {
         squareOnTrajectory = getTrajectory(game).getStartingPosition();
         spawnTurn = turn;
+        onSpawn(game);
+        if (currentHitPoints == 0) {
+            becomeDestroyed(game);
+        }
+    }
+
+    protected void onSpawn(Game game) {
+
     }
 
     abstract Trajectory getTrajectory(Game game);
@@ -88,5 +97,19 @@ public abstract class Threat {
 
     protected void becomeDestroyed(Game game) {
         game.recordAsDestroyed(this);
+    }
+
+    public boolean alwaysGetsTargetedBy(DamageSource damageSource) {
+        return false;
+    }
+
+    public void assignDamageTo(int damage, DamageSource source) {
+    }
+
+    protected void heal(int amount) {
+        currentHitPoints = Math.min(currentHitPoints + amount, maximumHitPoints);
+    }
+
+    public void resolveDamage(Game game) {
     }
 }

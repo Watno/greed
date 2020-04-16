@@ -39,8 +39,8 @@ public class CrewMember implements ICrewMember{
 
 	@Override
 	public void moveInDirection(Game game, Direction direction) {
-		var newPosition = game.getAdjacentInDirection(location, direction);
-		newPosition.ifPresent(this::moveTo);
+		var newLocation = game.getAdjacentInDirection(location, direction);
+		newLocation.ifPresent(this::moveTo);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package spacealert.core.threats.implementations;
+package spacealert.core.threats.implementations.external;
 
 import spacealert.core.Game;
 import spacealert.core.GameLost;

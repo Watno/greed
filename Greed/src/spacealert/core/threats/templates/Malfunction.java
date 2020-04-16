@@ -21,5 +21,4 @@ public abstract class Malfunction extends InternalThreat {
         return affectedButton == button;
     }
 
-
 }

@@ -2,6 +2,7 @@ package spacealert.core.threats.templates;
 
 import spacealert.core.Button;
 import spacealert.core.Game;
+import spacealert.core.GameLost;
 import spacealert.core.ICrewMember;
 import spacealert.core.boardElements.locations.ILocation;
 import spacealert.core.boardElements.locations.Location;
@@ -23,13 +24,16 @@ public abstract class InternalThreat extends Threat {
         this(speed, hitPoints, pointsForSurviving, pointsForDestroying, List.of(spawnPosition));
     }
 
-    private List<ILocation> locations;
+    protected List<ILocation> locations;
     private boolean survived = false;
 
     @Override
     public void spawn(Game game, int spawnTurn) {
-        super.spawn(game, spawnTurn);
         locations = spawnPositions.stream().map(game::getStation).collect(Collectors.toList());
+        for (var location : locations) {
+            location.addInternalThreat(this);
+        }
+        super.spawn(game, spawnTurn);
     }
 
     @Override
@@ -77,5 +81,13 @@ public abstract class InternalThreat extends Threat {
 
     public boolean isSurvived() {
         return survived;
+    }
+
+    protected GameLost damage(Game game, int amount) {
+        for (var location : locations) {
+            var gameLost = location.getZone().map(x -> game.damage(x, amount)).orElse(GameLost.FALSE);
+            if (gameLost == GameLost.TRUE) return GameLost.TRUE;
+        }
+        return GameLost.FALSE;
     }
 }

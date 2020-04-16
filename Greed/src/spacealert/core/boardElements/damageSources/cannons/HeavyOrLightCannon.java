@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.damageSources.cannons;
 
 import spacealert.core.boardElements.positions.Zone;
-import spacealert.core.threats.templates.ExternalThreat;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public abstract class HeavyOrLightCannon extends Cannon {
     }
 
     @Override
-    public void actuallyAssignDamage(List<ExternalThreat> externalThreats) {
-        var targets = getPossibleTargets(externalThreats, List.of(1, 2, 3), List.of(zone));
+    public void actuallyAssignDamage(List<Threat> threats) {
+        var targets = getPossibleTargets(threats, List.of(1, 2, 3), List.of(zone));
         if (!targets.isEmpty()) {
             targets.get(0).assignDamageTo(damage, this);
         }

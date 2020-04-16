@@ -1,9 +1,6 @@
 package spacealert.core.threats;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Trajectory {
     private Map<Integer, Action> actionSpaces;
@@ -17,6 +14,21 @@ public class Trajectory {
             actionSpaces.put(positionOfY, Action.Y);
         }
         this.length = length;
+    }
+
+    public static List<Trajectory> all() {
+        var result = new ArrayList<>(List.of(
+                Trajectory.T1(),
+                Trajectory.T2(),
+                Trajectory.T3(),
+                Trajectory.T4(),
+                Trajectory.T5(),
+                Trajectory.T6(),
+                Trajectory.T7()
+        ));
+        Collections.shuffle(result);
+
+        return result;
     }
 
     public static Trajectory T1() {

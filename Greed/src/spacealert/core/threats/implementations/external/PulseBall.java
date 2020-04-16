@@ -1,27 +1,27 @@
-package spacealert.core.threats.implementations;
+package spacealert.core.threats.implementations.external;
 
 import spacealert.core.Game;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
-public class Fighter extends ExternalThreat {
-    public Fighter(Zone zone) {
-        super(3, 4, 2, 4, 2, zone);
+public class PulseBall extends ExternalThreat {
+    public PulseBall(Zone zone) {
+        super(2, 5, 2, 4, 1, zone);
     }
 
     @Override
     protected GameLost doXAction(Game game) {
-        return attack(game, 1);
+        return attack(game, Zone.all, 1);
     }
 
     @Override
     protected GameLost doYAction(Game game) {
-        return attack(game, 2);
+        return attack(game, Zone.all, 1);
     }
 
     @Override
     protected GameLost doZAction(Game game) {
-        return attack(game, 3);
+        return attack(game, Zone.all, 2);
     }
 }

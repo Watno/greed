@@ -26,10 +26,6 @@ public abstract class ExternalThreat extends Threat {
         return game.getTrajectory(zone);
     }
 
-    public boolean alwaysGetsTargetedBy(DamageSource damageSource) {
-        return false;
-    }
-
     public boolean canBeTargetedBy(DamageSource damageSource) {
         return true;
     }
@@ -38,10 +34,12 @@ public abstract class ExternalThreat extends Threat {
         return zones.contains(this.zone);
     }
 
+    @Override
     public void assignDamageTo(int damage, DamageSource source) {
         assignedDamage += damage;
     }
 
+    @Override
     public void resolveDamage(Game game) {
         var unblockedDamage = assignedDamage - getEffectiveShieldPoints();
         takeDamage(game, unblockedDamage);
@@ -71,9 +69,5 @@ public abstract class ExternalThreat extends Threat {
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
         return GameLost.FALSE;
-    }
-
-    protected void heal(int amount) {
-        currentHitPoints = Math.min(currentHitPoints + amount, maximumHitPoints);
     }
 }

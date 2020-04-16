@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.damageSources.cannons;
 
 import spacealert.core.boardElements.positions.Zone;
-import spacealert.core.threats.templates.ExternalThreat;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ public class PulseCannon extends Cannon {
     }
 
     @Override
-    public void actuallyAssignDamage(List<ExternalThreat> externalThreats) {
+    public void actuallyAssignDamage(List<Threat> threats) {
         List<Integer> targetedSectors = damaged ? List.of(1) : List.of(1, 2);
-        var targets = getPossibleTargets(externalThreats, targetedSectors, Zone.all);
+        var targets = getPossibleTargets(threats, targetedSectors, Zone.all);
         for (var target : targets) {
             target.assignDamageTo(1, this);
         }
