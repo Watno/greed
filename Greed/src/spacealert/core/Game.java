@@ -22,11 +22,14 @@ import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.Trajectory;
 import spacealert.core.threats.templates.Threat;
+import spacealert.core.triggeredEffects.ICanHaveTriggeredEffectsAttached;
+import spacealert.core.triggeredEffects.ModifyDamageToShipEffect;
+import spacealert.core.triggeredEffects.TriggeredEffect;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Game {
+public class Game implements ICanHaveTriggeredEffectsAttached {
     private Collection<ICrewMember> crewMembers;
     private StationLayout stationLayout;
     private Map<Zone, Gravolift> gravolifts;
@@ -235,11 +238,13 @@ public class Game {
         destroyedThreats.add(threat);
     }
 
-    public void spawnThreats() {
+    public GameLost spawnThreats() {
         for (var threat : threatsBySpawn.get(currentTurn - 1)) {
             activeThreats.add(threat);
-            threat.spawn(this, currentTurn);
+            var gameLost = threat.spawn(this, currentTurn);
+            if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
+        return GameLost.FALSE;
     }
 
     public List<DamageSource> getDamageSources() {
@@ -255,6 +260,9 @@ public class Game {
     }
 
     public GameLost damage(Zone zone, int amount) {
+        for (var effect : triggeredEffects.stream().filter(x -> x instanceof ModifyDamageToShipEffect).map(x -> (ModifyDamageToShipEffect) x).collect(Collectors.toList())) {
+            amount = effect.getModifiedDamage(zone, amount);
+        }
         for (int i = 0; i < amount; i++) {
             var gameLost = damage(zone);
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
@@ -262,7 +270,7 @@ public class Game {
         return GameLost.FALSE;
     }
 
-    public GameLost damage(Zone zone) {
+    private GameLost damage(Zone zone) {
         var availableDamageTokens = damagetokens.get(zone);
         if (availableDamageTokens.isEmpty()) return GameLost.TRUE;
         var index = random.nextInt(availableDamageTokens.size());
@@ -277,5 +285,18 @@ public class Game {
 
     public Collection<Shield> getShields() {
         return shields.values();
+    }
+
+    private List<TriggeredEffect> triggeredEffects = new ArrayList<>() {
+    };
+
+    @Override
+    public void attach(TriggeredEffect effect) {
+        triggeredEffects.add(effect);
+    }
+
+    @Override
+    public void remove(TriggeredEffect effect) {
+        triggeredEffects.remove(effect);
     }
 }

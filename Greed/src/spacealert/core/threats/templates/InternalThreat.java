@@ -28,12 +28,12 @@ public abstract class InternalThreat extends Threat {
     private boolean survived = false;
 
     @Override
-    public void spawn(Game game, int spawnTurn) {
+    public GameLost spawn(Game game, int spawnTurn) {
         locations = spawnPositions.stream().map(game::getStation).collect(Collectors.toList());
         for (var location : locations) {
             location.addInternalThreat(this);
         }
-        super.spawn(game, spawnTurn);
+        return super.spawn(game, spawnTurn);
     }
 
     @Override
@@ -42,9 +42,10 @@ public abstract class InternalThreat extends Threat {
     }
 
     @Override
-    protected void becomeDestroyed(Game game) {
-        super.becomeDestroyed(game);
+    protected GameLost becomeDestroyed(Game game) {
+        var gameLost = super.becomeDestroyed(game);
         removeFromLocations();
+        return gameLost;
     }
 
     protected void removeFromLocations() {

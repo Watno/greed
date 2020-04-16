@@ -6,7 +6,7 @@ import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.Trajectory;
 
 public abstract class Threat {
-    private int speed;
+    protected int speed;
     protected int maximumHitPoints;
     private int pointsForSurviving;
     private int pointsForDestroying;
@@ -67,13 +67,14 @@ public abstract class Threat {
         return 1;
     }
 
-    public void spawn(Game game, int turn) {
+    public GameLost spawn(Game game, int turn) {
         squareOnTrajectory = getTrajectory(game).getStartingPosition();
         spawnTurn = turn;
         onSpawn(game);
         if (currentHitPoints == 0) {
-            becomeDestroyed(game);
+            return becomeDestroyed(game);
         }
+        return GameLost.FALSE;
     }
 
     protected void onSpawn(Game game) {
@@ -88,28 +89,37 @@ public abstract class Threat {
 
     protected abstract GameLost doZAction(Game game);
 
-    protected void takeDamage(Game game, int damage) {
+    public GameLost takeDamage(Game game, int damage) {
         if (damage > 0) {
             currentHitPoints -= damage;
         }
-        if (currentHitPoints <= 0) becomeDestroyed(game);
+        if (currentHitPoints <= 0) return becomeDestroyed(game);
+        else return GameLost.FALSE;
     }
 
-    protected void becomeDestroyed(Game game) {
+    protected GameLost becomeDestroyed(Game game) {
         game.recordAsDestroyed(this);
+        return onDestroyed(game);
     }
+
+    protected GameLost onDestroyed(Game game) {
+        return GameLost.FALSE;
+    }
+
+    ;
 
     public boolean alwaysGetsTargetedBy(DamageSource damageSource) {
         return false;
     }
 
-    public void assignDamageTo(int damage, DamageSource source) {
+    public void assignDamageTo(Game game, int damage, DamageSource source) {
     }
 
     protected void heal(int amount) {
         currentHitPoints = Math.min(currentHitPoints + amount, maximumHitPoints);
     }
 
-    public void resolveDamage(Game game) {
+    public GameLost resolveDamage(Game game) {
+        return GameLost.FALSE;
     }
 }

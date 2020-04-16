@@ -11,10 +11,11 @@ public class ComputeDamageStep implements IMissionStep {
 		var threats = game.getActiveThreats();
 
 		for (var damageSource : damageSources) {
-			damageSource.assignDamage(threats);
+			damageSource.assignDamage(threats, game);
 		}
 		for (var threat : threats) {
-			threat.resolveDamage(game);
+			var gameLost = threat.resolveDamage(game);
+			if (gameLost == GameLost.TRUE) return GameLost.TRUE;
 		}
 		return GameLost.FALSE;
 	}

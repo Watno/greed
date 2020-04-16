@@ -9,10 +9,11 @@ import spacealert.core.boardElements.positions.Zone;
 
 import java.util.Optional;
 
-public class CrewMember implements ICrewMember{
+public class CrewMember implements ICrewMember {
 	private ActionBoard actionBoard;
 	private ILocation location;
 	private Optional<BattleBot> battleBot = Optional.empty();
+	private boolean knockedOut = false;
 
 
 	CrewMember(ILocation location, ActionBoard actionBoard) {
@@ -22,9 +23,9 @@ public class CrewMember implements ICrewMember{
 
 	@Override
 	public void executeAction(int turn, Game game) {
-		actionBoard.execute(turn, this, game);
+		if (!knockedOut) actionBoard.execute(turn, this, game);
 	}
-	
+
 	@Override
 	public void delay() {
 		actionBoard.delay();
@@ -80,5 +81,10 @@ public class CrewMember implements ICrewMember{
 	@Override
 	public void disableBattleBot() {
 		battleBot.ifPresent(BattleBot::disable);
+	}
+
+	@Override
+	public void becomeKnockedOut() {
+		knockedOut = true;
 	}
 }

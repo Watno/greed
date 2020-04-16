@@ -11,9 +11,7 @@ public class ThreatAppearsStep implements IMissionStep {
 
     @Override
     public GameLost execute(Game game) {
-        game.spawnThreats();
-
-        return GameLost.FALSE;
+        return game.spawnThreats();
     }
 
 }

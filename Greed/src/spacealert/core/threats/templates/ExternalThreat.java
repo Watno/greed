@@ -35,15 +35,16 @@ public abstract class ExternalThreat extends Threat {
     }
 
     @Override
-    public void assignDamageTo(int damage, DamageSource source) {
+    public void assignDamageTo(Game game, int damage, DamageSource source) {
         assignedDamage += damage;
     }
 
     @Override
-    public void resolveDamage(Game game) {
+    public GameLost resolveDamage(Game game) {
         var unblockedDamage = assignedDamage - getEffectiveShieldPoints();
-        takeDamage(game, unblockedDamage);
+        var gameLost = takeDamage(game, unblockedDamage);
         resetAfterDamageResolution();
+        return gameLost;
     }
 
     protected void resetAfterDamageResolution() {

@@ -30,4 +30,6 @@ public interface ICrewMember {
     boolean hasActiveBattlebot();
 
     void disableBattleBot();
+
+    void becomeKnockedOut();
 }

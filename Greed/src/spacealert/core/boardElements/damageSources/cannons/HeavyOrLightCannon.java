@@ -1,5 +1,6 @@
 package spacealert.core.boardElements.damageSources.cannons;
 
+import spacealert.core.Game;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.Threat;
 
@@ -15,10 +16,10 @@ public abstract class HeavyOrLightCannon extends Cannon {
     }
 
     @Override
-    public void actuallyAssignDamage(List<Threat> threats) {
+    public void actuallyAssignDamage(Game game, List<Threat> threats) {
         var targets = getPossibleTargets(threats, List.of(1, 2, 3), List.of(zone));
         if (!targets.isEmpty()) {
-            targets.get(0).assignDamageTo(damage, this);
+            targets.get(0).assignDamageTo(game, damage, this);
         }
     }
 

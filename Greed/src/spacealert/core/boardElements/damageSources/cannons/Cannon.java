@@ -1,5 +1,6 @@
 package spacealert.core.boardElements.damageSources.cannons;
 
+import spacealert.core.Game;
 import spacealert.core.boardElements.IDamageable;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.templates.Threat;
@@ -15,12 +16,12 @@ public abstract class Cannon extends DamageSource implements IDamageable {
         charged = true;
     }
 
-    public void assignDamage(List<Threat> threats) {
-        if (charged) actuallyAssignDamage(threats);
+    public void assignDamage(List<Threat> threats, Game game) {
+        if (charged) actuallyAssignDamage(game, threats);
         charged = false;
     }
 
-    abstract void actuallyAssignDamage(List<Threat> threats);
+    abstract void actuallyAssignDamage(Game game, List<Threat> threats);
 
 
 }

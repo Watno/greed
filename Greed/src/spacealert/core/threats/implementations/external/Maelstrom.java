@@ -7,9 +7,9 @@ import spacealert.core.boardElements.damageSources.cannons.PulseCannon;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 
-public class EnergyCloud extends ExternalThreat {
-    public EnergyCloud(Zone zone) {
-        super(2, 5, 2, 4, 3, zone);
+public class Maelstrom extends ExternalThreat {
+    public Maelstrom(Zone zone) {
+        super(2, 8, 4, 8, 3, zone);
     }
 
     @Override
@@ -22,12 +22,12 @@ public class EnergyCloud extends ExternalThreat {
 
     @Override
     protected GameLost doYAction(Game game) {
-        return attack(game, Zone.otherThan(zone), 1);
+        return attack(game, Zone.otherThan(zone), 2);
     }
 
     @Override
     protected GameLost doZAction(Game game) {
-        return attack(game, Zone.otherThan(zone), 2);
+        return attack(game, Zone.otherThan(zone), 3);
     }
 
     private boolean hitByPulseCannon = false;

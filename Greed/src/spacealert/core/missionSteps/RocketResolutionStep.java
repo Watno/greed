@@ -10,11 +10,11 @@ public class RocketResolutionStep implements IMissionStep{
         var rocket = game.getCurrentTurnRocket();
         var threats = game.getActiveThreats();
 
-        rocket.ifPresent(x -> x.assignDamage(threats));
+        rocket.ifPresent(x -> x.assignDamage(threats, game));
         for (var threat : threats) {
-            threat.resolveDamage(game);
+            var gameLost = threat.resolveDamage(game);
+            if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
-
         return GameLost.FALSE;
     }
 
