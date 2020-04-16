@@ -2,6 +2,7 @@ package spacealert.core.threats.implementations.internal;
 
 import spacealert.core.Game;
 import spacealert.core.GameLost;
+import spacealert.core.ICrewMember;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
@@ -41,7 +42,7 @@ public class CommandosRed extends Intruder {
         if (gameLost == GameLost.TRUE) return GameLost.TRUE;
 
         locations.stream().flatMap(x -> x.getCrewMembers().stream())
-                .forEach(x -> x.becomeKnockedOut());
+                .forEach(ICrewMember::becomeKnockedOut);
         return GameLost.FALSE;
     }
 }

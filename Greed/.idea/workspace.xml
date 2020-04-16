@@ -5,43 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/Asteroid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/CryoshieldFrigate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/Frigate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/InterstellarOctopus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/LeviathanTanker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/Maelstrom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/ManOfWar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/PulseSatellite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/Alien.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/BattlebotUprising.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/CommandosBlue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/CommandosRed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/CrossedWires.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/Fissure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/triggeredEffects/FissureXEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/triggeredEffects/FissureYEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/triggeredEffects/ModifyDamageToShipEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/CrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/ICrewMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/DamageSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Interceptors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/Rocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/Cannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/HeavyOrLightCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/damageSources/cannons/PulseCannon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/EnergyBucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/energyBuckets/EnergyBucket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/boardElements/positions/Zone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ComputeDamageStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/RocketResolutionStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/missionSteps/ThreatAppearsStep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/CryoshieldFighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/CryoshieldFighter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/EnergyCloud.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/external/EnergyCloud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/templates/ExternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/ExternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/templates/InternalThreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/InternalThreat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/templates/Threat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/templates/Threat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/BattlebotUprising.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/BattlebotUprising.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587054629169</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added more threats">
+      <created>1587061729022</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1587061729022</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,10 +295,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586987416989" />
-    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1587061672910">
+    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1587061728077">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061672910" />
+    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061728077" />
     <state x="93" y="93" width="1862" height="926" key="DiffContextDialog" timestamp="1587046903965">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

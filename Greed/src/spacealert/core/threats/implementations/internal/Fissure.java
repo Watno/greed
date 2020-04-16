@@ -34,6 +34,7 @@ public class Fissure extends InternalThreat {
 
     @Override
     protected GameLost doXAction(Game game) {
+        //noinspection OptionalGetWithoutIsPresent
         triggeredXEffect = Optional.of(new FissureXEffect(locations.get(0).getZone().get()));
         game.attach(triggeredXEffect.get());
         return GameLost.FALSE;
@@ -42,7 +43,7 @@ public class Fissure extends InternalThreat {
     @Override
     protected GameLost doYAction(Game game) {
         triggeredXEffect.ifPresent(TriggeredEffect::remove);
-        if (!triggeredYEffect.isPresent()) {
+        if (triggeredYEffect.isEmpty()) {
             triggeredYEffect = Optional.of(new FissureYEffect());
             game.attach(triggeredYEffect.get());
         }

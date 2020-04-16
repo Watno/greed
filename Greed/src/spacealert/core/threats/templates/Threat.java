@@ -106,8 +106,6 @@ public abstract class Threat {
         return GameLost.FALSE;
     }
 
-    ;
-
     public boolean alwaysGetsTargetedBy(DamageSource damageSource) {
         return false;
     }

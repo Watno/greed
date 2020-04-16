@@ -20,7 +20,7 @@ public class BattlebotUprising extends Malfunction {
 
     @Override
     protected GameLost doXAction(Game game) {
-        game.getCrewMembers().stream().filter(x -> x.hasActiveBattlebot())
+        game.getCrewMembers().stream().filter(ICrewMember::hasActiveBattlebot)
                 .forEach(ICrewMember::becomeKnockedOut);
         return GameLost.FALSE;
     }
@@ -31,11 +31,12 @@ public class BattlebotUprising extends Malfunction {
                 .forEach(ICrewMember::becomeKnockedOut);
         return GameLost.FALSE;
     }
-    
+
     @Override
     protected GameLost doZAction(Game game) {
-        game.getCrewMembers().stream().filter(x -> x.getLocation().getPosition()
-                .get() != new Position(Deck.UPPER, Zone.WHITE))
+        //noinspection OptionalGetWithoutIsPresent
+        game.getCrewMembers().stream().filter(x -> !x.getLocation().getPosition()
+                .get().equals(new Position(Deck.UPPER, Zone.WHITE)))
                 .forEach(ICrewMember::becomeKnockedOut);
         return GameLost.FALSE;
     }
@@ -46,7 +47,7 @@ public class BattlebotUprising extends Malfunction {
     public void interceptButtonPress(Game game, Location location) {
         super.interceptButtonPress(game, location);
         var added = pressedLocations.add(location);
-        if (added && pressedLocations.equals(locations)) {
+        if (added && pressedLocations.equals(new HashSet<>(locations))) {
             takeDamage(game, 1); //should actually happen at end of Player Actions
         }
 
