@@ -29,8 +29,8 @@ public class Fissure extends InternalThreat {
         takeDamage(game, 1);
     }
 
-    private Optional<FissureXEffect> triggeredXEffect;
-    private Optional<FissureYEffect> triggeredYEffect;
+    private Optional<FissureXEffect> triggeredXEffect = Optional.empty();
+    private Optional<FissureYEffect> triggeredYEffect = Optional.empty();
 
     @Override
     protected GameLost doXAction(Game game) {

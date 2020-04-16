@@ -53,13 +53,27 @@ class GameTest {
                 new Meteoroid(getRandomZone()),
                 new PulseBall(getRandomZone()),
                 new StealthFighter(getRandomZone()),
+                new Asteroid(getRandomZone()),
+                new CryoshieldFrigate(getRandomZone()),
+                new Frigate(getRandomZone()),
+                new InterstellarOctopus(getRandomZone()),
+                new LeviathanTanker(getRandomZone()),
+                new Maelstrom(getRandomZone()),
+                new ManOfWar(getRandomZone()),
+                new PulseSatellite(getRandomZone()),
                 new HackedShieldsRed(),
                 new HackedShieldsBlue(),
                 new SaboteurBlue(),
                 new SaboteurRed(),
                 new SkirmishersBlue(),
                 new SkirmishersRed(),
-                new UnstableWarheads()
+                new UnstableWarheads(),
+                new Alien(),
+                new BattlebotUprising(),
+                new CommandosBlue(),
+                new CommandosRed(),
+                new CrossedWires(),
+                new Fissure()
         ));
         Collections.shuffle(allThreats, random);
 
