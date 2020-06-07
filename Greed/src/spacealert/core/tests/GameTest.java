@@ -4,7 +4,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import spacealert.core.Game;
 import spacealert.core.actionCards.ActionBoard;
-import spacealert.core.actionCards.Card;
+import spacealert.core.actionCards.ActionCard;
 import spacealert.core.actionCards.effects.*;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
@@ -30,7 +30,7 @@ class GameTest {
 
     @RepeatedTest(100000)
     void randomGameSmokeTest() {
-        var deck = Card.defaultDeck();
+        var deck = ActionCard.defaultDeck();
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
 
@@ -240,7 +240,7 @@ class GameTest {
     private ActionBoard createActionBoard(List<ICardEffect> effects) {
         var actionBoard = new ActionBoard();
         var cards = effects.stream()
-                .map(x -> new Card(x, new AEffect()))
+                .map(x -> new ActionCard(x, new AEffect()))
                 .collect(Collectors.toList());
         int turn = 1;
         for (var card : cards) {
@@ -250,7 +250,7 @@ class GameTest {
         return actionBoard;
     }
 
-    private ActionBoard createRandomActionBoard(List<Card> deck) {
+    private ActionBoard createRandomActionBoard(List<ActionCard> deck) {
         var actionBoard = new ActionBoard();
         for (int turn = 1; turn <= 12; turn++) {
             if (trueWithPercentage(80)) {

@@ -10,16 +10,16 @@ import java.util.stream.Stream;
 
 public class ActionBoard {
 	private int size = 12;
-	private ArrayList<Optional<Card>> cards;
+	private ArrayList<Optional<ActionCard>> cards;
 	private int lastExecutedTurn = 0;
 
 	public ActionBoard() {
-		cards= Stream.generate(Optional::<Card>empty)
+		cards = Stream.generate(Optional::<ActionCard>empty)
 				.limit(size)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	public void place(int turn, Card card) {
+	public void place(int turn, ActionCard card) {
 		int index = turn - 1;
 		if (cards.get(index).isEmpty()) {
 			cards.set(index, Optional.of(card));
@@ -39,9 +39,9 @@ public class ActionBoard {
 	private void delay(int delayedTurn) {
 		if (delayedTurn > size) return;
 		int index = delayedTurn - 1;
-		Optional<Card> cardOnTurn = cards.get(index);
+		Optional<ActionCard> cardOnTurn = cards.get(index);
 		if (cardOnTurn.isPresent()) {
-			delay(delayedTurn+1);
+			delay(delayedTurn + 1);
 			if (delayedTurn != size) {
 				cards.set(index + 1, cardOnTurn);
 			}
