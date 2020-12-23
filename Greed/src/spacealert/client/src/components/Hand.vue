@@ -6,41 +6,41 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import {defineComponent, computed, PropType} from "vue";
 import ActionCardModel from "../models/ActionCardModel";
 import SelectedCardModel from "../models/SelectedCardModel";
 import ActionCard from "./ActionCard.vue";
 import { SelectedCardPositionModel } from '../models/SelectedCardPositionModel';
 
-@Component({
-    components: { ActionCard }
-})
-export default class Hand extends Vue {
-    @Prop()
-    cards!: ActionCardModel[];
+export default defineComponent({
+    components: {ActionCard},
+    props: {
+        cards:{
+            type: Array as PropType<Array<ActionCardModel>>,
+            required: true
+        },
+        selectedCard:{
+            type: SelectedCardModel,
+        }
+    },
+    setup(props, {emit}){
+        const cardOnBoardSelected = computed(() => (props.selectedCard != null) && props.selectedCard.position == SelectedCardPositionModel.ActionBoard )
+         
+        function selectCard(cardId: string) {
+            emit('select-card', cardId);
+        } 
 
-    @Prop()
-    selectedCard!: SelectedCardModel | null;
+        function flipCard(cardId: string) {
+            emit('flip-card', cardId);
+        } 
 
-    get cardOnBoardSelected(): boolean {
-        return (this.selectedCard != null) && this.selectedCard.position == SelectedCardPositionModel.ActionBoard;
+        function returnSelectedCard(){
+            emit('return-selected-card')
+        }
+
+        return {cardOnBoardSelected, selectCard, flipCard, returnSelectedCard};
     }
-
-    @Emit()
-    selectCard(id: string): string {
-        return id;
-    }
-
-    @Emit()
-    flipCard(id: string): string {
-        return id;
-    }
-
-    @Emit()
-    returnSelectedCard(){
-        1+1;
-    }
-}
+});
 
 </script>
 

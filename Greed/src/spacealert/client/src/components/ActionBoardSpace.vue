@@ -6,44 +6,40 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import {defineComponent, computed} from "vue";
 import ActionCardModel from "../models/ActionCardModel";
 import SelectedCardModel from "../models/SelectedCardModel";
 import ActionCard from "./ActionCard.vue";
+export default defineComponent({
+    components: { ActionCard },
+    props: {
+        position:{
+            type: Number,
+        },
+        card:{
+            type: ActionCardModel,
+        },
+        selectedCard:{
+            type: SelectedCardModel,
+        }
+  },
+  setup(props, {emit}) {
+      const hasCard = computed(() => props.card != null)
 
-@Component({
-    components: { ActionCard }
+      function selectCard(id: string) {
+        emit('select-card', id);
+      } 
+
+      function flipCard(id: string) {
+        emit('flip-card', id);
+      } 
+
+      function placeCard(){
+          emit('place-card', props.position)
+      }
+      return {hasCard, selectCard, flipCard, placeCard}
+  } 
 })
-export default class ActionBoardSpace extends Vue {
-    @Prop()
-    position!: number
-
-    @Prop()
-    card!: ActionCardModel | null
-
-    @Prop()
-    selectedCard!: SelectedCardModel | null
-
-    get hasCard(): boolean {
-        return this.card != null;
-    }
-
-    @Emit()
-    selectCard(id: string): string {
-        return id;
-    }
-
-    @Emit()
-    flipCard(id: string): string {
-        return id;
-    }
-
-    @Emit()
-    placeCard(): number {
-        return this.position;
-    }
-}
-
 </script>
 
 <style scoped>

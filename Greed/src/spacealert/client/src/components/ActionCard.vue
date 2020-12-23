@@ -1,51 +1,43 @@
 <template>
   <div v-bind:class="['card', { flipped: flipped }, {selected: selected}]" @click="select" @contextmenu.prevent="flip">
-    <img :src="actionHalfImage" width="50px" height="50px" />
-    <img :src="movementHalfImage" width="50px" height="50px" class="bottom" />
+    <img :src="actionHalfImage" />
+    <img :src="movementHalfImage" class="bottom" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import {defineComponent, computed} from "vue";
 import ActionCardModel from "../models/ActionCardModel";
 import {CardOrientationModel} from "../models/CardOrientationModel";
 import SelectedCardModel from '../models/SelectedCardModel';
-
-@Component
-export default class ActionCard extends Vue {
-    @Prop()
-    card!: ActionCardModel;
-
-    @Prop()
-    selectedCard!: SelectedCardModel | null
-
-    get flipped(): boolean {
-      return this.card.orientation == CardOrientationModel.MOVEMENT;
+export default defineComponent({
+  props: {
+    card:{
+      type: ActionCardModel,
+      required: true
+    },
+    selectedCard:{
+      type: SelectedCardModel,
     }
-    get movementHalfImage(): string {
-      return `./${this.card.movementHalf.type}.png`;
-    }
-    get actionHalfImage(): string {
-      return `./${this.card.actionHalf.type}.png`;
-    }
+  },
+  setup(props, {emit}) {
+    const movementHalfImage = computed(() => `./${props.card.movementHalf.type}.png`);
+    const actionHalfImage = computed(() => `./${props.card.actionHalf.type}.png`);
 
-    get selected(): boolean {
-      if (this.selectedCard == null){
+    const flipped = computed(() => props.card.orientation == CardOrientationModel.MOVEMENT) ;
+    const flip = () => emit('flip', props.card.id);
+
+    const selected = computed(() => {
+      if (props.selectedCard == null){
         return false;
       }
-      return this.selectedCard.id == this.card.id;
-    }
+      return props.selectedCard.id == props.card.id;
+    });
+    const select = () => emit('select', props.card.id);
+    return {movementHalfImage, actionHalfImage, flipped, flip, selected, select};
+  }
+});
 
-    @Emit() 
-    select(): string {
-      return this.card.id;
-    }
-
-    @Emit() 
-    flip(): string {
-      return this.card.id;
-    }
-}
 </script>
 
 <style scoped>
@@ -71,5 +63,7 @@ export default class ActionCard extends Vue {
 
 img {
   display: block;
+  width: 50px;
+  height: 50px;
 }
 </style>
