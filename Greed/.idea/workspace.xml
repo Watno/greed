@@ -5,8 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/IDecisionMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlanningPhaseExposedToDecisionMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlayerExposedToDecisionMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/PlanningPhase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/HumanDecisionMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardInHandCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnAndroidActionBoardCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnOwnActionBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/IPlanningPhaseCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnOwnActionBoardCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromOwnActionBoardCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/BattlebotUprising.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/threats/implementations/internal/BattlebotUprising.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/IUserFromGamePerspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/IUserFromGamePerspective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/UserInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserInGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/SeializationExperimenting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/SerializationExperimenting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +41,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -39,7 +58,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -47,11 +65,14 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -59,31 +80,32 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="spacealert.core.boardElements.damageSources.cannons" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="spacealert.core.planningPhase" />
       <recent name="spacealert.core" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="spacealert.core.missionSteps" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="spacealert.core.tests" />
       <recent name="spacealert.core" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="spacealert.core.missionSteps" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="spacealert.humanPlayerInterface.commands.actionCards" />
       <recent name="spacealert.core.triggeredEffects" />
       <recent name="spacealert.core.threats.implementations.internal" />
       <recent name="spacealert.core.threats.implementations.external" />
       <recent name="spacealert.core.missionSteps" />
-      <recent name="spacealert.core.locations" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="spacealert.core.boardElements.damageSources.cannons" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.randomGameSmokeTest">
+  <component name="RunManager" selected="JUnit.SerializationExperimenting.actionBoard">
     <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
@@ -147,30 +169,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="spacealert.core in Greed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SerializationExperimenting.actionBoard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="spacealert.core.*" />
+          <option name="PATTERN" value="spacealert.core.tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="spacealert.core" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
+      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.SerializationExperimenting" />
+      <option name="METHOD_NAME" value="actionBoard" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SerializationExperimenting.actionBoard" />
         <item itemvalue="JUnit.GameTest.randomGameSmokeTest" />
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
         <item itemvalue="JUnit.GameTest.pushAFourTimes_ShouldKill3TestThreat" />
-        <item itemvalue="JUnit.spacealert.core in Greed" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -253,13 +278,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed IDEs, implemented basic actions" />
@@ -273,108 +297,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="added more threats" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="617" y="218" key="#Project_Structure" timestamp="1586962094434">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="617" y="218" key="#Project_Structure/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586962094434" />
-    <state x="93" y="93" width="1862" height="926" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1587048324001">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="93" y="93" width="1862" height="926" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587048324001" />
-    <state x="830" y="266" width="885" height="561" key="#com.intellij.ide.util.MemberChooser" timestamp="1587060396300">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="830" y="266" width="885" height="561" key="#com.intellij.ide.util.MemberChooser/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587060396300" />
-    <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog" timestamp="1587057571798">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="728" y="303" key="#com.intellij.refactoring.memberPullUp.PullUpDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587057571798" />
-    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586987416989">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="623" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586987416989" />
-    <state x="692" y="155" key="CommitChangelistDialog2" timestamp="1587061728077">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="692" y="155" key="CommitChangelistDialog2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061728077" />
-    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog" timestamp="1587046903965">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="93" y="93" width="1862" height="926" key="DiffContextDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587046903965" />
-    <state width="1255" height="305" key="GridCell.Tab.0.bottom" timestamp="1587061625371">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1255" height="305" key="GridCell.Tab.0.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061625371" />
-    <state width="1255" height="305" key="GridCell.Tab.0.center" timestamp="1587061625371">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1255" height="305" key="GridCell.Tab.0.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061625371" />
-    <state width="1255" height="305" key="GridCell.Tab.0.left" timestamp="1587061625371">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1255" height="305" key="GridCell.Tab.0.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061625371" />
-    <state width="1255" height="305" key="GridCell.Tab.0.right" timestamp="1587061625371">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1255" height="305" key="GridCell.Tab.0.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587061625371" />
-    <state width="1002" height="376" key="GridCell.Tab.1.bottom" timestamp="1587057254248">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1002" height="376" key="GridCell.Tab.1.bottom/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587057254248" />
-    <state width="1002" height="376" key="GridCell.Tab.1.center" timestamp="1587057254248">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1002" height="376" key="GridCell.Tab.1.center/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587057254248" />
-    <state width="1002" height="376" key="GridCell.Tab.1.left" timestamp="1587057254248">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1002" height="376" key="GridCell.Tab.1.left/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587057254248" />
-    <state width="1002" height="376" key="GridCell.Tab.1.right" timestamp="1587057254248">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state width="1002" height="376" key="GridCell.Tab.1.right/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587057254248" />
-    <state x="198" y="94" key="MergeDialog" timestamp="1586958199723">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="198" y="94" key="MergeDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958199723" />
-    <state x="737" y="274" key="MultipleFileMergeDialog" timestamp="1586958199728">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="737" y="274" key="MultipleFileMergeDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958199728" />
-    <state x="1204" y="463" key="ReplaceDuplicatesPrompt" timestamp="1587041980106">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="1204" y="463" key="ReplaceDuplicatesPrompt/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587041980106" />
-    <state x="832" y="270" key="RollbackChangesDialog" timestamp="1587041950508">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="832" y="270" key="RollbackChangesDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587041950508" />
-    <state x="717" y="318" key="Vcs.Multiple.Commit.Info.Dialog.Key" timestamp="1586958089018">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="717" y="318" key="Vcs.Multiple.Commit.Info.Dialog.Key/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958089018" />
-    <state x="617" y="292" key="Vcs.Push.Dialog.v2" timestamp="1586958242188">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="617" y="292" key="Vcs.Push.Dialog.v2/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586958242188" />
-    <state x="755" y="332" key="extract.method.dialog" timestamp="1586988483938">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="755" y="332" key="extract.method.dialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586988483938" />
-    <state x="668" y="283" width="713" height="546" key="find.popup" timestamp="1587042991204">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="668" y="283" width="713" height="546" key="find.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587042991204" />
-    <state x="767" y="182" key="refactoring.ChangeSignatureDialog" timestamp="1587060472690">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="767" y="182" key="refactoring.ChangeSignatureDialog/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1587060472690" />
-    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1586963443955">
-      <screen x="0" y="0" width="2048" height="1112" />
-    </state>
-    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/2560.0.1920.1030/0.0.2048.1112@0.0.2048.1112" timestamp="1586963443955" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -437,6 +359,14 @@
           </properties>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/spacealert/core/tests/SerializationExperimenting.java</url>
+          <line>19</line>
+          <properties class="spacealert.core.tests.SerializationExperimenting" method="actionBoard">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -444,10 +374,10 @@
     <SUITE FILE_PATH="coverage/Greed$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1586988763957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.tests.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Greed$All_in_Greed.ic" NAME="All in Greed Coverage Results" MODIFIED="1587049501026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Greed$spacealert_core_in_Greed.ic" NAME="spacealert.core in Greed Coverage Results" MODIFIED="1587049636630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Greed$All_in_Greed.ic" NAME="All in Greed Coverage Results" MODIFIED="1587049501026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Greed$spacealert_core_tests_in_Greed.ic" NAME="spacealert.core.tests in Greed Coverage Results" MODIFIED="1571593971525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.tests.*</FILTER>
     </SUITE>

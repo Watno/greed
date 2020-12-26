@@ -11,6 +11,8 @@ public interface IUserFromGamePerspective {
 
     <T> T requestTypedInput(JsonNode request, TypeReference<T> requestedType);
 
+    <T> T awaitTypedInput(TypeReference<T> requestedType);
+
     void allowReturnToLobby();
 
     String getName();

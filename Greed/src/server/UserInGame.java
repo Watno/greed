@@ -34,7 +34,7 @@ public class UserInGame implements IUserFromGamePerspective {
             currentInput = null;
             return toReturn;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //awaiting Thread was cancelled
         }
         return null;
     }
@@ -53,7 +53,7 @@ public class UserInGame implements IUserFromGamePerspective {
                 currentInput = null;
                 return toReturn;
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //awaiting Thread was cancelled
             } catch (JsonMappingException e) {
                 e.printStackTrace();
             } catch (JsonProcessingException e) {
@@ -61,7 +61,29 @@ public class UserInGame implements IUserFromGamePerspective {
             }
             return null;
         }
+    }
 
+    @Override
+    public <T> T awaitTypedInput(TypeReference<T> requestedType) {
+        while (true) {
+            try {
+                T toReturn = null;
+                if (!hasResigned()) {
+                    wait();
+                    toReturn = objectMapper.readValue(currentInput.toString(), requestedType);
+                    sendInputAcceptance();
+                }
+                currentInput = null;
+                return toReturn;
+            } catch (InterruptedException e) {
+                //awaiting Thread was cancelled
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ import spacealert.core.boardElements.positions.Direction;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,9 +16,11 @@ import java.util.stream.Stream;
 
 public class ActionCard {
     @JsonProperty
-    private ICardEffect actionHalf;
+    public final UUID id = UUID.randomUUID();
     @JsonProperty
-    private ICardEffect movementHalf;
+    private final ICardEffect actionHalf;
+    @JsonProperty
+    private final ICardEffect movementHalf;
     @JsonProperty
     private CardOrientation orientation;
 
