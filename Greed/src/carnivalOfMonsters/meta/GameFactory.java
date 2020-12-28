@@ -2,8 +2,8 @@ package carnivalOfMonsters.meta;
 
 import carnivalOfMonsters.core.Game;
 import carnivalOfMonsters.core.Player;
-import server.IGameFactory;
-import server.IUserFromGamePerspective;
+import server.games.IGameFactory;
+import server.games.IUserFromGamePerspective;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

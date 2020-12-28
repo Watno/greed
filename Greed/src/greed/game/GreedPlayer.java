@@ -1,25 +1,18 @@
 package greed.game;
+
+import com.google.gson.JsonObject;
+import greed.game.eventtypes.*;
+import greed.meta.ai.CleverDecider;
+import server.games.IUserFromGamePerspective;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.gson.JsonObject;
-
-import greed.game.eventtypes.AfterPlayEvent;
-import greed.game.eventtypes.CashCostModifyEvent;
-import greed.game.eventtypes.CashGainAmountModifyEvent;
-import greed.game.eventtypes.CashGainEvent;
-import greed.game.eventtypes.IgnoreCostEvent;
-import greed.game.eventtypes.IgnoreNeedEvent;
-import greed.game.eventtypes.RemoveFromPlayEvent;
-import greed.game.eventtypes.WhenPlayEvent;
-import greed.meta.ai.CleverDecider;
-import server.IUserFromGamePerspective;
-
 
 public class GreedPlayer {
 	private IDecisionMaker decisionMaker;
-	private GreedGame theGame; 
+	private GreedGame theGame;
 	private String name;
 	private int cash=0;
 	private int cars=0;

@@ -1,10 +1,10 @@
 package greed.meta;
 
+import greed.game.GreedGame;
+import server.games.IUserFromGamePerspective;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import greed.game.GreedGame;
-import server.IUserFromGamePerspective;
 
 public class GreedThreadFromLobby implements Runnable {
 	private ArrayList<IUserFromGamePerspective> connections;

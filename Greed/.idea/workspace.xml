@@ -4,28 +4,44 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/IDecisionMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlanningPhaseExposedToDecisionMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlayerExposedToDecisionMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/PlanningPhase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/HumanDecisionMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardInHandCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnAndroidActionBoardCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnOwnActionBoard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/IPlanningPhaseCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnOwnActionBoardCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromOwnActionBoardCommand.java" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="start of planning phase">
+      <change afterPath="$PROJECT_DIR$/src/server/connections/IConnectionSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/connections/WebsocketConnectionSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/connections/testing/MockConnectionSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/externalPlayerInterface/ExternalDecisionMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/spacealert/tests/TestWithExternalPlayerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/IUserFromGamePerspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/IUserFromGamePerspective.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/UserInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/UserInGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/actionCards/ActionCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spacealert/core/tests/SeializationExperimenting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/tests/SerializationExperimenting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/carnivalOfMonsters/meta/GameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/carnivalOfMonsters/meta/GameFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/carnivalOfMonsters/meta/RealDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/carnivalOfMonsters/meta/RealDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/greed/game/GreedGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/greed/game/GreedGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/greed/game/GreedPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/greed/game/GreedPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/greed/game/RealDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/greed/game/RealDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/greed/meta/GameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/greed/meta/GameFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/greed/meta/GreedThreadFromLobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/greed/meta/GreedThreadFromLobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/lobbies/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/IGameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/games/IGameFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/IUserFromGamePerspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/games/IUserFromGamePerspective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/lobbies/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/lobbies/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/lobbies/LobbyUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/UserInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/games/UserInGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/WebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/connections/WebsocketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/IDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/IDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlanningPhaseExposedToDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlanningPhaseExposedToDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/planningPhase/IPlayerExposedToDecisionMaker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/planningPhase/PlanningPhase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/PlanningPhase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/core/planningPhase/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/HumanDecisionMaker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardInHandCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/FlipCardInHandCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/FlipCardOnAndroidActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/FlipCardOnOwnActionBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/FlipCardOnOwnActionBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/IPlanningPhaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/IPlanningPhaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/PlaceCardOnOwnActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnOwnActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/spacealert/humanPlayerInterface/commands/actionCards/RetrieveCardFromOwnActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromOwnActionBoardCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +103,7 @@
       <recent name="" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="server" />
       <recent name="spacealert.core.planningPhase" />
       <recent name="spacealert.core" />
     </key>
@@ -105,7 +122,7 @@
       <recent name="spacealert.core.missionSteps" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SerializationExperimenting.actionBoard">
+  <component name="RunManager" selected="JUnit.TestWithExternalPlayerInterface.Test">
     <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Greed" />
       <extension name="coverage">
@@ -132,22 +149,6 @@
       <option name="PACKAGE_NAME" value="spacealert.core.tests" />
       <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
       <option name="METHOD_NAME" value="pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.pushAFourTimes_ShouldKill3TestThreat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Greed" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="spacealert.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="spacealert.core.tests" />
-      <option name="MAIN_CLASS_NAME" value="spacealert.core.tests.GameTest" />
-      <option name="METHOD_NAME" value="pushAFourTimes_ShouldKill3TestThreat" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,13 +186,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestWithExternalPlayerInterface.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Greed" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="spacealert.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="spacealert.tests" />
+      <option name="MAIN_CLASS_NAME" value="spacealert.tests.TestWithExternalPlayerInterface" />
+      <option name="METHOD_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestWithExternalPlayerInterface.Test" />
         <item itemvalue="JUnit.SerializationExperimenting.actionBoard" />
         <item itemvalue="JUnit.GameTest.randomGameSmokeTest" />
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.GameTest.pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat" />
-        <item itemvalue="JUnit.GameTest.pushAFourTimes_ShouldKill3TestThreat" />
       </list>
     </recent_temporary>
   </component>
@@ -270,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587061729022</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="start of planning phase">
+      <created>1609015407144</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1609015407144</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -294,7 +318,8 @@
     <MESSAGE value="damage to ship and basic external threats" />
     <MESSAGE value="improved Smoketest" />
     <MESSAGE value="added more threats" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more threats" />
+    <MESSAGE value="start of planning phase" />
+    <option name="LAST_COMMIT_MESSAGE" value="start of planning phase" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -351,10 +376,25 @@
           <line>9</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/spacealert/tests/TestWithExternalPlayerInterface.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/connections/testing/MockConnectionSender.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/connections/testing/MockConnectionSender.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/spacealert/core/tests/GameTest.java</url>
           <line>88</line>
-          <properties class="spacealert.core.tests.GameTest" method="pushAFourTimes_ShouldKill3TestThreat">
+          <properties class="spacealert.core.tests.GameTest" method="pushA_ShouldKillTestThreat">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="48" />

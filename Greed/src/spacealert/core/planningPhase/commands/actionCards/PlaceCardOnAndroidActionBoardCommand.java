@@ -1,18 +1,18 @@
-package spacealert.humanPlayerInterface.commands.actionCards;
+package spacealert.core.planningPhase.commands.actionCards;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import spacealert.core.planningPhase.IPlanningPhaseExposedToDecisionMaker;
-import spacealert.core.planningPhase.IPlayerExposedToDecisionMaker;
+import spacealert.core.planningPhase.PlanningPhase;
+import spacealert.core.planningPhase.Player;
 
 import java.util.UUID;
 
 public class PlaceCardOnAndroidActionBoardCommand implements IPlanningPhaseCommand {
     @JsonProperty
-    private UUID cardId;
+    private final UUID cardId;
     @JsonProperty
-    private int position;
+    private final int position;
     @JsonProperty
-    private UUID actionBoardId;
+    private final UUID actionBoardId;
 
     public PlaceCardOnAndroidActionBoardCommand(UUID cardId, int position, UUID actionBoardId) {
         this.cardId = cardId;
@@ -21,7 +21,7 @@ public class PlaceCardOnAndroidActionBoardCommand implements IPlanningPhaseComma
     }
 
     @Override
-    public void execute(IPlanningPhaseExposedToDecisionMaker planningPhase, IPlayerExposedToDecisionMaker player) {
+    public void execute(PlanningPhase planningPhase, Player player) {
         planningPhase.placeCardOnAndroidActionBoard(player, actionBoardId, cardId, position);
     }
 }

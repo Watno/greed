@@ -3,25 +3,27 @@ package spacealert.core.planningPhase;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Player implements IPlayerExposedToDecisionMaker {
-    private Collection<ActionCard> hand;
+public class Player {
+    private ArrayList<ActionCard> hand;
     private ActionBoard actionBoard;
 
-    @Override
+    public Player() {
+        hand = new ArrayList<>();
+        actionBoard = new ActionBoard();
+    }
+
     public void flipCardInHand(UUID cardId) {
         findCardInHand(cardId).ifPresent(ActionCard::flip);
     }
 
-    @Override
     public void flipCardOnActionBoard(UUID cardId) {
         actionBoard.flipCardById(cardId);
     }
 
-    @Override
     public void placeCardOnOwnActionBoard(UUID cardId, int position) {
         placeCardOnActionBoard(actionBoard, cardId, position);
     }
@@ -34,7 +36,6 @@ public class Player implements IPlayerExposedToDecisionMaker {
                 });
     }
 
-    @Override
     public void retrieveCardFromActionBoard(UUID cardId) {
         retrieveCardFromActionBoard(this.actionBoard, cardId);
     }

@@ -1,16 +1,15 @@
 package greed.game;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-
 import greed.game.cards.Seance;
 import greed.game.eventtypes.TriggeredEvent;
 import greed.meta.JSONGenerator;
-import server.IUserFromGamePerspective;
+import server.games.IUserFromGamePerspective;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class RealDecisionMaker implements IDecisionMaker {
 	IUserFromGamePerspective connection;

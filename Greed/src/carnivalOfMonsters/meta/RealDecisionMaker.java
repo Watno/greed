@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import server.IUserFromGamePerspective;
+import server.games.IUserFromGamePerspective;
 
 import java.util.Collection;
 import java.util.Map;

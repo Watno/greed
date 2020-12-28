@@ -2,33 +2,57 @@ package spacealert.core.planningPhase;
 
 import spacealert.core.IDecisionMaker;
 import spacealert.core.actionCards.ActionBoard;
+import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
-    private Map<IDecisionMaker, Player> players;
-    private Collection<ActionBoard> androidActionBoards;
+    private final Map<IDecisionMaker, Player> players;
+    private final List<ActionBoard> androidActionBoards;
+
+    public PlanningPhase(Collection<IDecisionMaker> decisionMakers, int numberOfPlayers) {
+        players = decisionMakers.stream().collect(Collectors.toMap(x -> x, x -> new Player()));
+        androidActionBoards = Stream.generate(ActionBoard::new)
+                .limit(numberOfPlayers - decisionMakers.size())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void execute(IDecisionMaker decisionMaker, IPlanningPhaseCommand command) {
+        command.execute(this, players.get(decisionMaker));
+    }
 
     public void execute() {
         var decisionMakerThreads = players.keySet().stream()
-                .map(x -> x.allowMakingDecisionsForPlanningPhase(this, players.get(x)))
+                .map(x -> new Thread(x.allowMakingDecisionsForPlanningPhase(this)))
                 .collect(Collectors.toList());
         for (var thread : decisionMakerThreads) {
-            thread.run();
+            thread.start();
         }
         var timer = new Timer();
+        var lock = new Object();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 for (var thread : decisionMakerThreads) {
-                    thread.;
+                    thread.interrupt();
+                }
+                synchronized (lock) {
+                    lock.notifyAll();
                 }
             }
-        });
+        }, 10000);
+        synchronized (lock) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
-    @Override
     public void flipCardOnAndroidActionBoard(UUID cardId) {
         if (players.size() > 1) return; //Flipping on android boards is only allowed in solo mode;
         for (var actionBoard : androidActionBoards) {
@@ -36,17 +60,15 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
         }
     }
 
-    @Override
-    public void placeCardOnAndroidActionBoard(IPlayerExposedToDecisionMaker player, UUID actionBoardId, UUID cardId, int position) {
+    public void placeCardOnAndroidActionBoard(Player player, UUID actionBoardId, UUID cardId, int position) {
         getAndroidActionBoardById(actionBoardId)
-                .ifPresent(x -> ((Player) player).placeCardOnActionBoard(x, cardId, position));
+                .ifPresent(x -> player.placeCardOnActionBoard(x, cardId, position));
     }
 
-    @Override
-    public void retrieveCardFromAndroidActionBoard(IPlayerExposedToDecisionMaker player, UUID actionBoardId, UUID cardId) {
+    public void retrieveCardFromAndroidActionBoard(Player player, UUID actionBoardId, UUID cardId) {
         if (players.size() > 1) return; //Returning from android boards is only allowed in solo mode;
         getAndroidActionBoardById(actionBoardId)
-                .ifPresent(x -> ((Player) player).retrieveCardFromActionBoard(x, cardId));
+                .ifPresent(x -> player.retrieveCardFromActionBoard(x, cardId));
     }
 
     private Optional<ActionBoard> getAndroidActionBoardById(UUID actionBoardId) {
@@ -54,5 +76,6 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
                 .filter(x -> x.id.equals(actionBoardId))
                 .findFirst();
     }
+
 
 }

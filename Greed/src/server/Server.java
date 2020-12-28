@@ -2,6 +2,10 @@ package server;
 
 import org.webbitserver.WebServer;
 import org.webbitserver.WebServers;
+import server.connections.WebsocketHandler;
+import server.games.IGameFactory;
+import server.lobbies.Chat;
+import server.lobbies.Lobby;
 
 import java.util.HashMap;
 import java.util.Map;

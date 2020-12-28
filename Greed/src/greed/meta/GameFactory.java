@@ -1,9 +1,9 @@
 package greed.meta;
 
-import java.util.ArrayList;
+import server.games.IGameFactory;
+import server.games.IUserFromGamePerspective;
 
-import server.IGameFactory;
-import server.IUserFromGamePerspective;
+import java.util.ArrayList;
 
 public class GameFactory implements IGameFactory {
 
