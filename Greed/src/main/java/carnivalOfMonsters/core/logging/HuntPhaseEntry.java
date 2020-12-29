@@ -1,11 +1,13 @@
 package carnivalOfMonsters.core.logging;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class HuntPhaseEntry extends LogEntry {
-    final public Collection<Integer> dieRolls;
+    final public List<Integer> dieRolls;
 
-    public HuntPhaseEntry(Collection rolls) {
-        this.dieRolls = rolls;
+    public HuntPhaseEntry(Collection<Integer> rolls) {
+        this.dieRolls = new ArrayList<>(rolls);
     }
 }

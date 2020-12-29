@@ -2,7 +2,6 @@ package server.games;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
@@ -15,7 +14,6 @@ public class UserInGame implements IUserFromGamePerspective {
     private IConnectionSender connection;
     private String name;
     private String currentInput = null;
-    private JsonParser jsonParser = new JsonParser();
     private ObjectMapper objectMapper = ObjectMapperProvider.provide();
 
     public UserInGame(IConnectionSender connection, String name) {
@@ -32,7 +30,7 @@ public class UserInGame implements IUserFromGamePerspective {
                 wait();
                 sendInputAcceptance();
             }
-            JsonElement toReturn = jsonParser.parse(currentInput);
+            JsonElement toReturn = JsonParser.parseString(currentInput);
             currentInput = null;
             return toReturn;
         } catch (InterruptedException e) {
@@ -56,12 +54,9 @@ public class UserInGame implements IUserFromGamePerspective {
                 return toReturn;
             } catch (InterruptedException e) {
                 //awaiting Thread was cancelled
-            } catch (JsonMappingException e) {
-                e.printStackTrace();
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
-            return null;
         }
     }
 
@@ -77,12 +72,9 @@ public class UserInGame implements IUserFromGamePerspective {
                 }
                 currentInput = null;
                 return toReturn;
-            } catch (JsonMappingException e) {
-                e.printStackTrace();
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
-            return null;
         }
     }
 

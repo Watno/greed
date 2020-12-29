@@ -7,13 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="start of planning phase">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_4_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Wolfgang.xml" beforeDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="more project fixes">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/carnivalOfMonsters/core/logging/HuntPhaseEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/carnivalOfMonsters/core/logging/HuntPhaseEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/connections/WebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/connections/WebsocketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/games/UserInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/games/UserInGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +42,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1SA7iLUOEP6iLDlWhXKDGpXIZkc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -62,7 +67,7 @@
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -267,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609015407144</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixed project">
+      <created>1609256349729</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1609256349729</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -292,7 +304,9 @@
     <MESSAGE value="improved Smoketest" />
     <MESSAGE value="added more threats" />
     <MESSAGE value="start of planning phase" />
-    <option name="LAST_COMMIT_MESSAGE" value="start of planning phase" />
+    <MESSAGE value="fixed project" />
+    <MESSAGE value="more project fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="more project fixes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -351,7 +365,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java</url>
-          <line>26</line>
+          <line>27</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -361,13 +375,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/games/UserInGame.java</url>
-          <line>130</line>
+          <line>123</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java</url>
-          <line>49</line>
+          <line>50</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/games/UserInGame.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/core/tests/GameTest.java</url>

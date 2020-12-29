@@ -46,10 +46,9 @@ public class WebsocketHandler extends BaseWebSocketHandler {
 
     @Override
     public void onMessage(WebSocketConnection connection, String message) {
-        JsonParser parser = new JsonParser();
         LobbyUser greedConn = (LobbyUser) connection.data("GreedConnection");
         try {
-            JsonObject parsedMessage = parser.parse(message).getAsJsonObject();
+            JsonObject parsedMessage = JsonParser.parseString(message).getAsJsonObject();
             if (parsedMessage.has("chat")) {
                 chat.handleMessage(parsedMessage, greedConn);
             }

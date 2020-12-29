@@ -21,11 +21,12 @@ public class TestWithExternalPlayerInterface {
         new Thread(() -> doInputs(userInGame)).start();
         var planningPhase = new PlanningPhase(Arrays.asList(new ExternalDecisionMaker(userInGame)), 4);
         planningPhase.execute();
+
     }
 
     public void inputFromConsole(UserInGame userInGame){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while (true){
+        while (!Thread.currentThread().isInterrupted()) {
             String command = null;
             try {
                 command = reader.readLine();
@@ -37,7 +38,7 @@ public class TestWithExternalPlayerInterface {
     }
 
     public void doInputs(UserInGame userInGame){
-        var serializer = new ObjectMapperProvider().provide();
+        var serializer = ObjectMapperProvider.provide();
 
         try {
             Thread.sleep(1000);
