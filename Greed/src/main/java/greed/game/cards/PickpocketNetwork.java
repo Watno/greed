@@ -7,13 +7,13 @@ import greed.game.GreedPlayer;
 
 public class PickpocketNetwork extends Action {
 
-	public PickpocketNetwork() {
-		super(31, "Pickpocket network!");
-	}
-	
-	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
-		thePlayer.gainCash(thePlayer.getKeys()*10000, executingCard);
-		thePlayer.gainCash(thePlayer.getWrenches()*10000, executingCard);
-	}
+    public PickpocketNetwork() {
+        super(31, "Pickpocket network!");
+    }
+
+    @Override
+    public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+        thePlayer.gainCash(thePlayer.getKeys() * 10000, executingCard);
+        thePlayer.gainCash(thePlayer.getWrenches() * 10000, executingCard);
+    }
 }

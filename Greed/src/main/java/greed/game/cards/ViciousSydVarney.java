@@ -7,14 +7,14 @@ import greed.game.Thug;
 import greed.game.eventtypes.IgnoreCostEvent;
 
 public class ViciousSydVarney extends Thug {
-	
-	public ViciousSydVarney() {
-		super(63, "\"Vicious\" Syd Varney", 0, 1, 0);
-	}
-	
-	
-	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard)  {
-		theGame.addNextTurnEvent(new IgnoreCostEvent(theGame, thePlayer, timingNumber, this));
-	}
+
+    public ViciousSydVarney() {
+        super(63, "\"Vicious\" Syd Varney", 0, 1, 0);
+    }
+
+
+    @Override
+    public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+        theGame.addNextTurnEvent(new IgnoreCostEvent(theGame, thePlayer, timingNumber, this));
+    }
 }

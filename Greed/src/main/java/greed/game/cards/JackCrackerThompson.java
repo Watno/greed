@@ -7,16 +7,16 @@ import greed.game.Thug;
 
 public class JackCrackerThompson extends Thug {
 
-	public JackCrackerThompson () {
-		super(77, "Jack \"Cracker\" Thompson ", 0, 0, 1);
-	}
-	
-	@Override
-	public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
-		for (GreedPlayer otherPlayer : theGame.getPlayers()) {
-			if (!otherPlayer.equals(thePlayer)) {
-				otherPlayer.changeCash(-otherPlayer.getNumberOfHoldings()*5000, executingCard);
-			}
-		}
-	}
+    public JackCrackerThompson() {
+        super(77, "Jack \"Cracker\" Thompson ", 0, 0, 1);
+    }
+
+    @Override
+    public void doRules(GreedPlayer thePlayer, GreedGame theGame, GreedCard executingCard) {
+        for (GreedPlayer otherPlayer : theGame.getPlayers()) {
+            if (!otherPlayer.equals(thePlayer)) {
+                otherPlayer.changeCash(-otherPlayer.getNumberOfHoldings() * 5000, executingCard);
+            }
+        }
+    }
 }
