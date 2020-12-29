@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="custom.css?7">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="client.js?8"></script>
+	<script src="serverlocation.js"></script>
+	<title>Greed</title>
+
+<body onload="javascript:initialize();">
+	<div id="initial" class="container">
+		<div class="row initial">
+			<div class="col-md-6">
+				<button onclick="javascript:changeName()">Select name</button>
+				<input id="newName" type="text" onkeydown="if (event.keyCode == 13) { changeName();}">
+			</div>
+		</div>
+	</div>
+
+	<div id="lobby" class="container" hidden>
+		<div class="row newtablearea">
+			<div class="col-md-2 ">
+				<button onclick="javascript:newTable()">New Table</button>
+			</div>
+		</div>
+		<div class="row">
+			<div id="lobbyTables" class="tables col-md-12"></div>
+		</div>
+
+		<div class="row lobbychatarea">
+			<div class="col-md-6">
+				<div id="lobbyChat" class="lobbychat"></div>
+				<input id="lobbyChatMessage" type="text"
+					onkeydown="if (event.keyCode == 13) { sendLobbyChat();}"><button
+					onclick="javascript:sendLobbyChat()">Chat</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="game" class="container gamearea" hidden>
+		<div class="row">
+			<div class="col-md-6">
+				<p id="prompt"></p>
+				<p id="hand"></p>
+				<p id="draftPile"></p>
+				<div id="players"></div>
+			</div>
+			<div class="col-md-6">
+				<div id="log" class="logarea"></div>
+				<div class="gameChatarea">
+					<div id="gameChat" class="gameChat"></div>
+					<input id="gameChatMessage" type="text"
+						onkeydown="if (event.keyCode == 13) { sendGameChat();}"><button
+						onclick="javascript:sendGameChat()">Chat</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="infoarea" class="container infoarea">
+		<div class="row">
+			<div class="col-md-12">
+				Greed is a game designed by Donald X. Vaccarino published by Queen Games (<a
+					href="https://ssl.queen-games.com/greed/" )>product page</a>). For questions or feedback
+				about this site, email <a href="mailto:watno@arcor.de">watno@arcor.de</a>.
+			</div>
+		</div>
+	</div>
+
+</body>
