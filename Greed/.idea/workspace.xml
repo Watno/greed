@@ -7,20 +7,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="more project fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="formatting">
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.sha1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externallib/webbit-fixed.jar" beforeDir="false" afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/carnivalOfMonsters/core/logging/HuntPhaseEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/carnivalOfMonsters/core/logging/HuntPhaseEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/connections/WebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/connections/WebsocketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/games/UserInGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/games/UserInGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
   </component>
   <component name="CoverageViewManager">
     <option name="myElementSize" value="244" />
@@ -67,7 +77,7 @@
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -99,6 +109,16 @@
       <recent name="spacealert.core.threats.implementations.external" />
       <recent name="spacealert.core.missionSteps" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=externallib/webbit-fixed.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar - Dversion=lostdj " />
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=externallib/webbit-fixed.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar - Dversion=0.4.16-lostdj" />
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=externallib/webbit-fixed.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-lostdj" />
+      <command value="mvn deploy:deploy-file -Durl=file:///F:\spacealert\greed\Greed\localMavenRepository -Dfile=externallib/webbit-fixed.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-lostdj" />
+      <command value="mvn clean" />
+      <command value="mvn compile" />
+    </option>
   </component>
   <component name="RunManager" selected="JUnit.TestWithExternalPlayerInterface.test">
     <configuration name="GameTest.randomGameSmokeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -279,7 +299,21 @@
       <option name="project" value="LOCAL" />
       <updated>1609256349729</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="more project fixes">
+      <created>1609258077467</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1609258077467</updated>
+    </task>
+    <task id="LOCAL-00013" summary="formatting">
+      <created>1609258598498</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1609258598498</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,7 +340,8 @@
     <MESSAGE value="start of planning phase" />
     <MESSAGE value="fixed project" />
     <MESSAGE value="more project fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="more project fixes" />
+    <MESSAGE value="formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="formatting" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -364,18 +399,13 @@
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java</url>
           <line>24</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/games/UserInGame.java</url>
-          <line>123</line>
+          <line>122</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -385,8 +415,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/games/UserInGame.java</url>
-          <line>57</line>
+          <line>56</line>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/server/connections/WebsocketConnectionSender.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/core/tests/GameTest.java</url>

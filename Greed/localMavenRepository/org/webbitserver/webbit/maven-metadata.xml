@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <groupId>org.webbitserver</groupId>
+    <artifactId>webbit</artifactId>
+    <versioning>
+        <release>0.4.16-lostdj</release>
+        <versions>
+            <version>0.4.16-lostdj</version>
+        </versions>
+        <lastUpdated>20201230123738</lastUpdated>
+    </versioning>
+</metadata>
