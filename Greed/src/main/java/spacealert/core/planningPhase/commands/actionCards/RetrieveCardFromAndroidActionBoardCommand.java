@@ -2,6 +2,7 @@ package spacealert.core.planningPhase.commands.actionCards;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import spacealert.core.Color;
 import spacealert.core.planningPhase.PlanningPhase;
 import spacealert.core.planningPhase.Player;
 
@@ -11,16 +12,16 @@ public class RetrieveCardFromAndroidActionBoardCommand implements IPlanningPhase
     @JsonProperty
     private UUID cardId;
     @JsonProperty
-    private UUID actionBoardId;
+    private Color color;
 
     @JsonCreator
-    public RetrieveCardFromAndroidActionBoardCommand(UUID cardId, UUID actionBoardId) {
+    public RetrieveCardFromAndroidActionBoardCommand(UUID cardId, Color color) {
         this.cardId = cardId;
-        this.actionBoardId = actionBoardId;
+        this.color = color;
     }
 
     @Override
     public void execute(PlanningPhase planningPhase, Player player) {
-        planningPhase.retrieveCardFromAndroidActionBoard(player, actionBoardId, cardId);
+        planningPhase.retrieveCardFromAndroidActionBoard(player, color, cardId);
     }
 }

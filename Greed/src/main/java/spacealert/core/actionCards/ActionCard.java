@@ -7,7 +7,7 @@ import spacealert.core.actionCards.effects.*;
 import spacealert.core.boardElements.positions.Direction;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Stack;
 import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -35,8 +35,9 @@ public class ActionCard {
         this.orientation = orientation;
     }
 
-    public static List<ActionCard> defaultDeck() {
-        var deck = Stream.of(Direction.GRAVOLIFT, Direction.BLUE, Direction.RED)
+    public static Stack<ActionCard> defaultDeck() {
+        var deck = new Stack<ActionCard>();
+        deck.addAll(Stream.of(Direction.GRAVOLIFT, Direction.BLUE, Direction.RED)
                 .map(ActionCard::getMoveFromDirection)
                 .flatMap(x -> Stream.of(
                         IntStream.range(0, 10)
@@ -47,7 +48,7 @@ public class ActionCard {
                                 .mapToObj(n -> new ActionCard(new CEffect(), x.get())),
                         IntStream.range(0, 5)
                                 .mapToObj(n -> new ActionCard(new AttackWithBattleBotEffect(), x.get()))
-                ).flatMap(y -> y)).collect(Collectors.toList());
+                ).flatMap(y -> y)).collect(Collectors.toList()));
         Collections.shuffle(deck);
         return deck;
     }

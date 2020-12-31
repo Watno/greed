@@ -8,18 +8,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="formatting">
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.pom.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Wolfgang.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_3_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_30_1_jre.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_16_lostdj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/GameStateWithPrivateInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PrivateGameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PublicGameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PublicPlayerGameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Android.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externallib/webbit-fixed.jar" beforeDir="false" afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/0.4.16-lostdj/webbit-0.4.16-lostdj.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/IDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/IDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/PlanningPhase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/PlanningPhase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +56,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -51,9 +65,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1SA7iLUOEP6iLDlWhXKDGpXIZkc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -76,7 +87,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -86,6 +97,9 @@
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="spacealert.core.boardElements.damageSources.cannons" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\spacealert\greed\Greed\src\main\java\spacealert\core\gamestates" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -400,7 +414,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java</url>
-          <line>24</line>
+          <line>30</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

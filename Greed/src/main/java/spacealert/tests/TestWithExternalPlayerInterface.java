@@ -20,7 +20,7 @@ public class TestWithExternalPlayerInterface {
         var userInGame = new UserInGame(new MockConnectionSender(), "Test");
         new Thread(() -> doInputs(userInGame)).start();
         var planningPhase = new PlanningPhase(Arrays.asList(new ExternalDecisionMaker(userInGame)), 4);
-        planningPhase.execute();
+        planningPhase.run();
 
     }
 
