@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.webbitserver:webbit:0.4.16-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webbitserver/webbit/0.4.16-SNAPSHOT/webbit-0.4.16-20210109.203157-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webbitserver/webbit/0.4.16-SNAPSHOT/webbit-0.4.16-20210109.203157-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/webbitserver/webbit/0.4.16-SNAPSHOT/webbit-0.4.16-20210109.203157-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -8,32 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab71739-ad76-4d5f-8b91-5ca3c007519b" name="Default Changelist" comment="formatting">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Wolfgang.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_3_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_30_1_jre.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_16_lostdj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/GameStateWithPrivateInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PrivateGameState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PublicGameState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/gamestates/PublicPlayerGameState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Android.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_16_lostdj.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webbitserver_webbit_0_4_16_SNAPSHOT.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greed.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.md5" beforeDir="false" afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/localMavenRepository/org/webbitserver/webbit/maven-metadata.xml.sha1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/IDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/IDecisionMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/PlanningPhase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/PlanningPhase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/PlaceCardOnAndroidActionBoardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/core/planningPhase/commands/actionCards/RetrieveCardFromAndroidActionBoardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/externalPlayerInterface/ExternalDecisionMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spacealert/tests/TestWithExternalPlayerInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +113,10 @@
       <command value="mvn deploy:deploy-file -Durl=file:///F:\spacealert\greed\Greed\localMavenRepository -Dfile=externallib/webbit-fixed.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-lostdj" />
       <command value="mvn clean" />
       <command value="mvn compile" />
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=&quot;C:\Users\Wolfgang\git\webbit\out\artifacts\webbit_jar\webbit.jar&quot; -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-SNAPSHOT" />
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=..\webbit\out\artifacts\webbit_jar\webbit.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-SNAPSHOT" />
+      <command value="mvn deploy:deploy-file -Durl=file:///localMavenRepository -Dfile=..\..\webbit\out\artifacts\webbit_jar\webbit.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-SNAPSHOT" />
+      <command value="mvn deploy:deploy-file -Durl=file:///C:\Users\Wolfgang\git\greed\Greed\localMavenRepository -Dfile=..\..\webbit\out\artifacts\webbit_jar\webbit.jar -DgroupId=org.webbitserver -DartifactId=webbit -Dpackaging=jar -Dversion=0.4.16-SNAPSHOT" />
     </option>
   </component>
   <component name="RunManager" selected="JUnit.TestWithExternalPlayerInterface.test">
@@ -224,7 +209,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -335,12 +319,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed IDEs, implemented basic actions" />
@@ -358,6 +343,36 @@
     <option name="LAST_COMMIT_MESSAGE" value="formatting" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1343" height="330" key="GridCell.Tab.0.bottom" timestamp="1610224641287">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1343" height="330" key="GridCell.Tab.0.bottom/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610224641287" />
+    <state width="1343" height="330" key="GridCell.Tab.0.center" timestamp="1610224641286">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1343" height="330" key="GridCell.Tab.0.center/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610224641286" />
+    <state width="1343" height="330" key="GridCell.Tab.0.left" timestamp="1610224641286">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1343" height="330" key="GridCell.Tab.0.left/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610224641286" />
+    <state width="1343" height="330" key="GridCell.Tab.0.right" timestamp="1610224641286">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state width="1343" height="330" key="GridCell.Tab.0.right/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610224641286" />
+    <state x="885" y="311" key="RollbackChangesDialog" timestamp="1610225087942">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="885" y="311" key="RollbackChangesDialog/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610225087942" />
+    <state x="911" y="334" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1610223437647">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="911" y="334" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610223437647" />
+    <state x="754" y="279" width="672" height="677" key="run.anything.popup" timestamp="1610224606819">
+      <screen x="0" y="0" width="2194" height="1194" />
+    </state>
+    <state x="754" y="279" width="672" height="677" key="run.anything.popup/0.0.2194.1194/-2560.0.2048.1112@0.0.2194.1194" timestamp="1610224606819" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -460,10 +475,10 @@
     <SUITE FILE_PATH="coverage/Greed$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1586988763957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.tests.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Greed$All_in_Greed.ic" NAME="All in Greed Coverage Results" MODIFIED="1587049501026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Greed$spacealert_core_in_Greed.ic" NAME="spacealert.core in Greed Coverage Results" MODIFIED="1587049636630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Greed$All_in_Greed.ic" NAME="All in Greed Coverage Results" MODIFIED="1587049501026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Greed$spacealert_core_tests_in_Greed.ic" NAME="spacealert.core.tests in Greed Coverage Results" MODIFIED="1571593971525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>spacealert.core.tests.*</FILTER>
     </SUITE>
