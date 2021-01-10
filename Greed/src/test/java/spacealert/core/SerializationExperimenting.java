@@ -1,4 +1,4 @@
-package spacealert.core.tests;
+package spacealert.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package spacealert.core.tests;
+package spacealert.core;
 
 import org.junit.jupiter.api.Test;
 import spacealert.core.boardElements.positions.Deck;

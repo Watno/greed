@@ -1,7 +1,5 @@
-package spacealert.core.tests;
+package spacealert.core;
 
-import spacealert.core.Game;
-import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 

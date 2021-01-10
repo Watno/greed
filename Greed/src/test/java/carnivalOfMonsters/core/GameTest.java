@@ -1,7 +1,5 @@
-package carnivalOfMonsters.core.tests;
+package carnivalOfMonsters.core;
 
-import carnivalOfMonsters.core.Game;
-import carnivalOfMonsters.core.Player;
 import carnivalOfMonsters.meta.MockDecisionMaker;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;

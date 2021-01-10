@@ -1,8 +1,5 @@
-package carnivalOfMonsters.core.tests;
+package carnivalOfMonsters.core;
 
-import carnivalOfMonsters.core.CardGenerator;
-import carnivalOfMonsters.core.ICanBeInPlay;
-import carnivalOfMonsters.core.LandType;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
@@ -12,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CardGeneratorTest {
     @Test
     void createDrawPile_shouldHaveCount_206() {
-        var sut = new CardGenerator();
         var drawPile = CardGenerator.createDrawPile();
 
         assertEquals(206, drawPile.size());
@@ -20,10 +16,9 @@ public class CardGeneratorTest {
 
     @Test
     void createDrawPile_shouldNotHaveDuplicateNames() {
-        var sut = new CardGenerator();
         var drawPile = CardGenerator.createDrawPile();
 
-        var cardsWithSameName = drawPile.stream().collect(Collectors.groupingBy(x -> x.getName()));
+        var cardsWithSameName = drawPile.stream().collect(Collectors.groupingBy(ICard::getName));
 
         for (var name : cardsWithSameName.keySet()) {
             var referenceCard = cardsWithSameName.get(name).get(0);

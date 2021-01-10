@@ -1,4 +1,4 @@
-package spacealert.tests;
+package spacealert;
 
 import org.junit.jupiter.api.Test;
 import server.connections.serialization.ObjectMapperProvider;

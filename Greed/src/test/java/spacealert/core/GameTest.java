@@ -1,8 +1,7 @@
-package spacealert.core.tests;
+package spacealert.core;
 
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import spacealert.core.Game;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
 import spacealert.core.actionCards.effects.*;

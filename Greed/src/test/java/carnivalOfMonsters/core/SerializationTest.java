@@ -1,7 +1,5 @@
-package carnivalOfMonsters.core.tests;
+package carnivalOfMonsters.core;
 
-import carnivalOfMonsters.core.CardGenerator;
-import carnivalOfMonsters.core.LandType;
 import carnivalOfMonsters.core.events.Gain2Crowns;
 import carnivalOfMonsters.core.lands.BasicNormalLand;
 import carnivalOfMonsters.core.monsters.Level2Monster;
