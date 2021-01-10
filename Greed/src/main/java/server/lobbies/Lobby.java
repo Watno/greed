@@ -5,19 +5,18 @@ import com.google.gson.JsonObject;
 import server.games.IGameFactory;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Lobby {
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<LobbyUser> connections = new ArrayList<>();
-    private Map<String, IGameFactory> gameFactories;
+    private IGameFactory gameFactory;
 
-    public Lobby(Map<String, IGameFactory> gameFactories) {
-        this.gameFactories = gameFactories;
+    public Lobby(IGameFactory gameFactory) {
+        this.gameFactory = gameFactory;
     }
 
-    public void makeTable(LobbyUser player, String gameName) {
-        tables.add(new Table(gameFactories.get(gameName), player, this));
+    public void makeTable(LobbyUser player) {
+        tables.add(new Table(gameFactory, player, this));
     }
 
     public void removeTable(Table table) {

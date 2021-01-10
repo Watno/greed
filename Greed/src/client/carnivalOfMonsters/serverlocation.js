@@ -3,6 +3,6 @@
  */
 
 function connectToServer() {
-    socket = new WebSocket('ws://localhost:8080/greed');
+    socket = new WebSocket('ws://localhost:8080/carnival');
     return socket;
 }

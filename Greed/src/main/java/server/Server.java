@@ -7,23 +7,19 @@ import server.games.IGameFactory;
 import server.lobbies.Chat;
 import server.lobbies.Lobby;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Server {
 
-    private Map<String, IGameFactory> gameFactories = new HashMap<>();
+    private WebServer webServer;
 
     public Server(int port) {
-        WebServer webServer = WebServers.createWebServer(port);
-        Lobby lobby = new Lobby(gameFactories);
-        Chat chat = new Chat(lobby);
-        WebsocketHandler handler = new WebsocketHandler(lobby, chat);
-        webServer.add("/greed", handler);
+        webServer = WebServers.createWebServer(port);
         webServer.start();
     }
 
-    public void RegisterGameFactory(String gameName, IGameFactory factory) {
-        gameFactories.put(gameName, factory);
+    public void RegisterGame(String gameName, IGameFactory factory) {
+        Lobby lobby = new Lobby(factory);
+        Chat chat = new Chat(lobby);
+        WebsocketHandler handler = new WebsocketHandler(lobby, chat);
+        webServer.add("/" + gameName, handler);
     }
 }
