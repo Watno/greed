@@ -15,7 +15,7 @@ public class ServerBuilder {
 
     public ServerBuilder(int port) {
         builder = Undertow.builder()
-                .addHttpListener(port, "localhost")
+                .addHttpListener(port, "0.0.0.0")
                 .setHandler(pathHandler);
     }
 
