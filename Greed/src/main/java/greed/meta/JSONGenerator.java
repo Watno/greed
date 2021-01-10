@@ -31,13 +31,11 @@ public class JSONGenerator {
 	}
 	
 	private static JsonObject thugToJSON(Thug theThug) {
-		JsonObject json = cardToJSON(theThug);
-		return json;
+		return cardToJSON(theThug);
 	}
 	
 	private static JsonObject actionToJSON(Action theAction) {
-		JsonObject json = cardToJSON(theAction);
-		return json;
+		return cardToJSON(theAction);
 	}
 	
 	private static JsonObject playerToJSONpublic(GreedPlayer thePlayer) {

@@ -7,7 +7,7 @@ import greed.game.GreedPlayer;
 import greed.game.eventtypes.WhenPlayEvent;
 
 public class InformEvent extends WhenPlayEvent {
-    GreedPlayer profiteer;
+    final GreedPlayer profiteer;
 
     public InformEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source, GreedPlayer profiteer) {
         super(theGame, owner, timingNumber, source);

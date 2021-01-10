@@ -7,7 +7,7 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public abstract class WhenPlayEvent extends TriggeredEvent {
-    protected GreedPlayer owner;
+    protected final GreedPlayer owner;
 
     public WhenPlayEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {
         super(owner.getWhenPlayEvents(), timingNumber, source);

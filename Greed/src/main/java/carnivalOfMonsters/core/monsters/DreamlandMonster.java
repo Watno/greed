@@ -31,7 +31,7 @@ public abstract class DreamlandMonster extends Monster {
 
     @Override
     public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
-        Map<LandType, Integer> assignment = null;
+        Map<LandType, Integer> assignment;
         do {
             assignment = playingPlayer.getDecisionMaker().assignLandpoints(level);
         } while (!assignedLandpointsAreValid(assignment, playingPlayer));

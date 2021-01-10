@@ -53,6 +53,7 @@ public class MockDecisionMaker implements IDecisionMaker {
     }
 
     private PublicPlayerGameState getOwnPlayerGameState() {
+        //noinspection OptionalGetWithoutIsPresent
         return gameState.publicGameState.playerGameStates.stream().filter(x -> x.name.equals(playerName)).findFirst().get();
     }
 

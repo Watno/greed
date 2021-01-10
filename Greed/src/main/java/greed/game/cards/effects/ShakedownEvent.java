@@ -7,7 +7,7 @@ import greed.game.Thug;
 import greed.game.eventtypes.WhenPlayEvent;
 
 public class ShakedownEvent extends WhenPlayEvent {
-    GreedPlayer profiteer;
+    final GreedPlayer profiteer;
 
     public ShakedownEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source, GreedPlayer profiteer) {
         super(theGame, owner, timingNumber, source);

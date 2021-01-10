@@ -14,15 +14,15 @@ import java.util.List;
 
 public class GreedGame {
     private int turnCounter = 0;
-    private final ArrayList<GreedPlayer> players = new ArrayList<GreedPlayer>();
-    private final ArrayList<GreedCard> drawPile = new ArrayList<GreedCard>();
-    private final ArrayList<GreedCard> discardPile = new ArrayList<GreedCard>();
-    private final ArrayList<AfterPlaysResolveEvent> afterPlaysResolveEvents = new ArrayList<AfterPlaysResolveEvent>();
-    private final ArrayList<EachTurnEvent> eachTurnEvents = new ArrayList<EachTurnEvent>();
-    private final ArrayList<EndOfTurnEvent> endOfTurnEvents = new ArrayList<EndOfTurnEvent>();
-    private final ArrayList<EndOfGameEvent> endOfGameEvents = new ArrayList<EndOfGameEvent>();
-    private ArrayList<TriggeredEvent> thisTurnEvents = new ArrayList<TriggeredEvent>();
-    private ArrayList<TriggeredEvent> nextTurnEvents = new ArrayList<TriggeredEvent>();
+    private final ArrayList<GreedPlayer> players = new ArrayList<>();
+    private final ArrayList<GreedCard> drawPile = new ArrayList<>();
+    private final ArrayList<GreedCard> discardPile = new ArrayList<>();
+    private final ArrayList<AfterPlaysResolveEvent> afterPlaysResolveEvents = new ArrayList<>();
+    private final ArrayList<EachTurnEvent> eachTurnEvents = new ArrayList<>();
+    private final ArrayList<EndOfTurnEvent> endOfTurnEvents = new ArrayList<>();
+    private final ArrayList<EndOfGameEvent> endOfGameEvents = new ArrayList<>();
+    private ArrayList<TriggeredEvent> thisTurnEvents = new ArrayList<>();
+    private ArrayList<TriggeredEvent> nextTurnEvents = new ArrayList<>();
     private final Logger logger = new Logger();
     private int realPlayers = 0;
 
@@ -72,13 +72,13 @@ public class GreedGame {
 		turnCounter++;
 		logger.turnStart(turnCounter);
 		thisTurnEvents = nextTurnEvents;
-		nextTurnEvents = new ArrayList<TriggeredEvent>();
+		nextTurnEvents = new ArrayList<>();
 		for (TriggeredEvent theEvent: thisTurnEvents) {
 			logger.activateEffect(theEvent);
 			theEvent.activate();
 		}
-		List<PlayPlan> playPlans = Collections.synchronizedList(new ArrayList<PlayPlan>());
-		List<Thread> threads = new ArrayList<Thread>();
+		List<PlayPlan> playPlans = Collections.synchronizedList(new ArrayList<>());
+		List<Thread> threads = new ArrayList<>();
 		for (GreedPlayer thePlayer: players) {
 			Thread theThread = new Thread (new DraftPlayThread(turnCounter, thePlayer, playPlans, this));
 			threads.add(theThread);
@@ -121,7 +121,7 @@ public class GreedGame {
 	}
 	
 	private List<GreedCard> buildDraftPile() {
-		List<GreedCard> draftPile = Collections.synchronizedList(new ArrayList<GreedCard>());
+		List<GreedCard> draftPile = Collections.synchronizedList(new ArrayList<>());
 		for(int i=0; i<12; i++) {
 			GreedCard theCard = draw();//there are always cards in the draw piel at this stage
 			draftPile.add(theCard);

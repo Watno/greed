@@ -7,8 +7,8 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public abstract class EndOfGameEvent extends TriggeredEvent {
-    protected GreedPlayer profiteer;
-    protected GreedGame theGame;
+    protected final GreedPlayer profiteer;
+    protected final GreedGame theGame;
 
     public EndOfGameEvent(GreedGame theGame, GreedPlayer profiteer, int timingNumber, GreedCard source) {
         super(theGame.getEndOfGameEvents(), timingNumber, source);

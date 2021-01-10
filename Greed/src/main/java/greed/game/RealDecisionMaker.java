@@ -12,9 +12,9 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class RealDecisionMaker implements IDecisionMaker {
-	IUserFromGamePerspective connection;
-	GreedGame theGame;
-	GreedPlayer thePlayer;
+	final IUserFromGamePerspective connection;
+	final GreedGame theGame;
+	final GreedPlayer thePlayer;
 	
 	public RealDecisionMaker(IUserFromGamePerspective connection, GreedGame theGame, GreedPlayer thePlayer) {
 		this.connection = connection;

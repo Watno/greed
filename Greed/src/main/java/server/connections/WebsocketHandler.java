@@ -41,7 +41,7 @@ public class WebsocketHandler implements WebSocketConnectionCallback {
         }
     }
 
-    class ReceiveListener extends AbstractReceiveListener {
+    static class ReceiveListener extends AbstractReceiveListener {
         private final LobbyUser lobbyUser;
         private final Lobby lobby;
         private final Chat chat;

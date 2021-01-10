@@ -28,7 +28,7 @@ public abstract class Season extends Card implements ITriggerOnPlay, ICanBeScore
     public void assign(Collection<Player> players, Optional<ILogEntry> loggingContext) {
         var playerToAssign = determinePlayerToAssign(players);
         playerToAssign.ifPresent(player -> player.assignTrophy(this));
-        loggingContext.ifPresent(x -> x.addDependantEntry(new AwardTrophyLogEntry(playerToAssign.map(y -> y.getName()), this)));
+        loggingContext.ifPresent(x -> x.addDependantEntry(new AwardTrophyLogEntry(playerToAssign.map(Player::getName), this)));
 
     }
 

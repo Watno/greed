@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class CleverDecider implements IDecisionMaker {
 	
-	GreedPlayer player;
-	GreedGame game;
+	final GreedPlayer player;
+	final GreedGame game;
 	
 	public CleverDecider(GreedPlayer player, GreedGame game) {
 		super();

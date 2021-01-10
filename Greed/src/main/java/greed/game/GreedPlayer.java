@@ -21,19 +21,19 @@ public class GreedPlayer {
     private int hearts = 0;
     private int bottles = 0;
     private int wrenches = 0;
-    private final List<GreedCard> hand = Collections.synchronizedList(new ArrayList<GreedCard>());
+    private final List<GreedCard> hand = Collections.synchronizedList(new ArrayList<>());
     private List<GreedCard> draftPile;
-    private final ArrayList<Holding> holdings = new ArrayList<Holding>();
-    private final ArrayList<Thug> thugs = new ArrayList<Thug>();
-    private final ArrayList<Action> actions = new ArrayList<Action>();
-    private final ArrayList<IgnoreNeedEvent> ignoreNeedEvents = new ArrayList<IgnoreNeedEvent>();
-    private final ArrayList<IgnoreCostEvent> ignoreCostEvents = new ArrayList<IgnoreCostEvent>();
-    private final ArrayList<WhenPlayEvent> whenPlayEvents = new ArrayList<WhenPlayEvent>();
-    private final ArrayList<AfterPlayEvent> afterPlayEvents = new ArrayList<AfterPlayEvent>();
-    private final ArrayList<CashCostModifyEvent> cashCostModifyEvents = new ArrayList<CashCostModifyEvent>();
-    private final ArrayList<CashGainAmountModifyEvent> cashGainAmountModifyEvents = new ArrayList<CashGainAmountModifyEvent>();
-    private final ArrayList<CashGainEvent> cashGainEvents = new ArrayList<CashGainEvent>();
-    private final ArrayList<RemoveFromPlayEvent> removeFromPlayEvents = new ArrayList<RemoveFromPlayEvent>();
+    private final ArrayList<Holding> holdings = new ArrayList<>();
+    private final ArrayList<Thug> thugs = new ArrayList<>();
+    private final ArrayList<Action> actions = new ArrayList<>();
+    private final ArrayList<IgnoreNeedEvent> ignoreNeedEvents = new ArrayList<>();
+    private final ArrayList<IgnoreCostEvent> ignoreCostEvents = new ArrayList<>();
+    private final ArrayList<WhenPlayEvent> whenPlayEvents = new ArrayList<>();
+    private final ArrayList<AfterPlayEvent> afterPlayEvents = new ArrayList<>();
+    private final ArrayList<CashCostModifyEvent> cashCostModifyEvents = new ArrayList<>();
+    private final ArrayList<CashGainAmountModifyEvent> cashGainAmountModifyEvents = new ArrayList<>();
+    private final ArrayList<CashGainEvent> cashGainEvents = new ArrayList<>();
+    private final ArrayList<RemoveFromPlayEvent> removeFromPlayEvents = new ArrayList<>();
 
 
     GreedPlayer(GreedGame theGame, String name, int position) {

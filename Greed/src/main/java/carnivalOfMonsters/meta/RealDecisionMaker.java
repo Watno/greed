@@ -53,10 +53,7 @@ public class RealDecisionMaker implements IDecisionMaker {
     public Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards) {
         Optional<String> selectedName = user.requestTypedInput(serializer.valueToTree(new PlayFromKeptRequest(keptCards)), new TypeReference<>() {
         });
-        if (!selectedName.isPresent()) {
-            return Optional.empty();
-        }
-        return Optional.of(findByName(keptCards, selectedName.get()));
+        return selectedName.map(s -> findByName(keptCards, s));
     }
 
     @Override
@@ -65,6 +62,7 @@ public class RealDecisionMaker implements IDecisionMaker {
     }
 
     private <T extends ICard> T findByName(Collection<T> cards, String name) {
+        //noinspection OptionalGetWithoutIsPresent
         return cards.stream().filter(x -> x.getName().equals(name)).findFirst().get();
     }
 }

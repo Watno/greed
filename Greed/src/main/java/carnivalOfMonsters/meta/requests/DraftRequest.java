@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collection;
 
 public class DraftRequest extends Request {
+    @SuppressWarnings("FieldCanBeLocal")
     @JsonProperty
     private final Collection<ICard> cards;
 

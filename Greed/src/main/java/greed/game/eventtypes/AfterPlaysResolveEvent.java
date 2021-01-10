@@ -7,8 +7,8 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public abstract class AfterPlaysResolveEvent extends TriggeredEvent {
-    protected GreedPlayer profiteer;
-    protected GreedGame theGame;
+    protected final GreedPlayer profiteer;
+    protected final GreedGame theGame;
 
     public AfterPlaysResolveEvent(GreedGame theGame, GreedPlayer profiteer, int timingNumber, GreedCard source) {
         super(theGame.getAfterPlaysResolveEvents(), timingNumber, source);

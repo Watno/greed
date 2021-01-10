@@ -51,12 +51,13 @@ public class Game implements Runnable {
         ScorePhaseLogEntry scorePhaseLogEntry = new ScorePhaseLogEntry();
         gamelog.addDependantEntry(scorePhaseLogEntry);
         var scores = players.stream().collect(Collectors.toMap(x -> x, x -> x.score(Optional.of(scorePhaseLogEntry))));
-        var rankedPlayers = players.stream().sorted(Comparator.comparing(x -> scores.get(x)).reversed()).collect(Collectors.toList());
+        var rankedPlayers = players.stream().sorted(Comparator.comparing(scores::get).reversed()).collect(Collectors.toList());
         for (var player : players) {
             var score = scores.get(player);
             if (player.getKeptCards().stream().anyMatch(x -> x instanceof SecondRowIsGoodEnough)) {
-                if (score == scores.get(rankedPlayers.get(1))) {
+                if (score.equals(scores.get(rankedPlayers.get(1)))) {
                     score += 7;
+                    //noinspection OptionalGetWithoutIsPresent
                     scorePhaseLogEntry.addDependantEntry(new SecondRowLogEntry(player.getName(), player.getKeptCards().stream().filter(x -> x instanceof SecondRowIsGoodEnough).map(x -> (SecondRowIsGoodEnough) x).findFirst().get()));
                 }
             }
@@ -114,12 +115,12 @@ public class Game implements Runnable {
     }
 
     public Collection<ICard> draw(int numberOfCards) {
-        return Stream.generate(() -> drawPile.pop()).limit(Integer.min(numberOfCards, drawPile.size()))
+        return Stream.generate(drawPile::pop).limit(Integer.min(numberOfCards, drawPile.size()))
                 .collect(Collectors.toList());
     }
 
     public Collection<BasicNormalLand> drawStartingLands() {
-        return Stream.generate(() -> startingLands.pop()).limit(2)
+        return Stream.generate(startingLands::pop).limit(2)
                 .collect(Collectors.toList());
     }
 
@@ -138,6 +139,6 @@ public class Game implements Runnable {
     }
 
     private PublicGameState getPublicGameState() {
-        return new PublicGameState(getCurrentSeason(), players.stream().map(x -> x.getPublicPlayerGameState()).collect(Collectors.toList()), gamelog);
+        return new PublicGameState(getCurrentSeason(), players.stream().map(Player::getPublicPlayerGameState).collect(Collectors.toList()), gamelog);
     }
 }

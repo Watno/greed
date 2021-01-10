@@ -7,8 +7,8 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public abstract class EachTurnEvent extends TriggeredEvent {
-    protected GreedPlayer profiteer;
-    protected GreedGame theGame;
+    protected final GreedPlayer profiteer;
+    protected final GreedGame theGame;
 
     public EachTurnEvent(GreedGame theGame, GreedPlayer profiteer, int timingNumber, GreedCard source) {
         super(theGame.getEachTurnEvents(), timingNumber, source);

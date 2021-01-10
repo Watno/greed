@@ -27,6 +27,7 @@ public class TrotskysBurlesqueEvent extends EachTurnEvent {
             }
         }
         if (!tied) {
+            assert ownerOfMostHearts != null;
             ownerOfMostHearts.gainCash(5000, this);
         }
 

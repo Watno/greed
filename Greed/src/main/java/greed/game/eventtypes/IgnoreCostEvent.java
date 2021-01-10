@@ -5,7 +5,7 @@ import greed.game.GreedGame;
 import greed.game.GreedPlayer;
 
 public class IgnoreCostEvent extends TriggeredEvent {
-	GreedPlayer owner;
+	final GreedPlayer owner;
 	
 	public IgnoreCostEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source){
 		super(owner.getIgnoreCostEvents(), timingNumber, source);

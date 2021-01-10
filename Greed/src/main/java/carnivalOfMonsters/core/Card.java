@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public abstract class Card implements ICard {
     @JsonProperty
     private final String name;
+    @SuppressWarnings("FieldCanBeLocal")
     @JsonProperty
     private final String type;
 

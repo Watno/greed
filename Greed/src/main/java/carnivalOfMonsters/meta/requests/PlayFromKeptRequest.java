@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collection;
 
 public class PlayFromKeptRequest extends Request {
+    @SuppressWarnings("FieldCanBeLocal")
     @JsonProperty
     private final Collection<ICanBePlayed> cards;
 

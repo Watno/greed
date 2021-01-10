@@ -3,10 +3,10 @@ package greed.game;
 import java.util.List;
 
 public class DraftPlayThread implements Runnable {
-	int turnCounter;
-	GreedPlayer thePlayer;
-	GreedGame theGame;
-	List<PlayPlan> playPlans;
+	final int turnCounter;
+	final GreedPlayer thePlayer;
+	final GreedGame theGame;
+	final List<PlayPlan> playPlans;
 	
 	public DraftPlayThread(int turnCounter, GreedPlayer thePlayer, List<PlayPlan> playPlans, GreedGame theGame) {
 		this.turnCounter=turnCounter;

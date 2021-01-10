@@ -6,7 +6,7 @@ import greed.game.GreedPlayer;
 import greed.game.eventtypes.CashGainAmountModifyEvent;
 
 public class MasterPlanEvent extends CashGainAmountModifyEvent {
-    GreedGame theGame;
+    final GreedGame theGame;
 
     public MasterPlanEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {
         super(theGame, owner, timingNumber, source);

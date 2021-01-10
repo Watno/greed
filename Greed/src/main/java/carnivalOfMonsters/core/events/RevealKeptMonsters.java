@@ -19,7 +19,6 @@ public class RevealKeptMonsters extends Event {
     public void onPlay(Player playingPlayer, Game game, Optional<ILogEntry> loggingContext) {
 
         var revealedMonsters = playingPlayer.getMenagerie().stream()
-                .filter(x -> x instanceof Monster)
                 .collect(Collectors.toList());
 
         loggingContext.ifPresent(x -> x.addDependantEntry(new RevealKeptMonstersLogEntry(revealedMonsters)));

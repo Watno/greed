@@ -27,6 +27,7 @@ public class DollsOnCallEvent extends EachTurnEvent {
             }
         }
         if (!tied) {
+            assert ownerOfMostHoldings != null;
             ownerOfMostHoldings.gainCash(5000, this);
         }
 

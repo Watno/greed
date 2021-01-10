@@ -13,7 +13,7 @@ public abstract class GreedCard implements Reason {
     protected int timingNumber;
     protected String name;
     private int turnPlayed = -1;
-    private final ArrayList<TriggeredEvent> permanentEffects = new ArrayList<TriggeredEvent>();
+    private final ArrayList<TriggeredEvent> permanentEffects = new ArrayList<>();
     private List<? extends GreedCard> location;
     protected GreedPlayer owner = null;
 
@@ -39,12 +39,12 @@ public abstract class GreedCard implements Reason {
 	protected boolean checkPrerequisites(GreedPlayer thePlayer, GreedGame theGame){
 		boolean allowPlay = true;
 		if (thePlayer.getIgnoreCostEvents().size()==0) {
-			allowPlay &= payCost(thePlayer, theGame);
+			allowPlay = payCost(thePlayer, theGame);
 		}
 		if (thePlayer.getIgnoreNeedEvents().size()==0) {
 			allowPlay &= checkNeed(thePlayer, theGame);
 		}
-		if (allowPlay == false) {
+		if (!allowPlay) {
 			theGame.getLogger().cantAffordCard(thePlayer, this);
 		}
 		return allowPlay;

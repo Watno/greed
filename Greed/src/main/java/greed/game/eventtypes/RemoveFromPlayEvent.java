@@ -7,7 +7,7 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public class RemoveFromPlayEvent extends TriggeredEvent {
-    protected GreedPlayer owner;
+    protected final GreedPlayer owner;
 
     public RemoveFromPlayEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {
         super(owner.getRemoveFromPlayEvents(), timingNumber, source);

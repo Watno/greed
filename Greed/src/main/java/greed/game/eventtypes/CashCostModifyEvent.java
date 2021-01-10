@@ -7,7 +7,7 @@ import greed.game.GreedPlayer;
 import java.util.Collections;
 
 public abstract class CashCostModifyEvent extends TriggeredEvent {
-    protected GreedPlayer owner;
+    protected final GreedPlayer owner;
 
     public CashCostModifyEvent(GreedGame theGame, GreedPlayer owner, int timingNumber, GreedCard source) {
         super(owner.getCashCostModifyEvents(), timingNumber, source);

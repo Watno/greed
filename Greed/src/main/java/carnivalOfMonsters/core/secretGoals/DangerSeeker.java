@@ -1,6 +1,7 @@
 package carnivalOfMonsters.core.secretGoals;
 
 import carnivalOfMonsters.core.Player;
+import carnivalOfMonsters.core.monsters.Monster;
 
 public class DangerSeeker extends SecretGoal {
 
@@ -11,7 +12,7 @@ public class DangerSeeker extends SecretGoal {
     @Override
     public int getScore(Player player) {
         return player.getMenagerie().stream()
-                .mapToInt(x -> x.getDangerLevel())
+                .mapToInt(Monster::getDangerLevel)
                 .sum();
     }
 }
