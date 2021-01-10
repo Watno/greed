@@ -1,8 +1,8 @@
 package spacealert;
 
 import org.junit.jupiter.api.Test;
+import server.MockConnectionSender;
 import server.connections.serialization.ObjectMapperProvider;
-import server.connections.testing.MockConnectionSender;
 import server.games.UserInGame;
 import spacealert.core.planningPhase.PlanningPhase;
 import spacealert.core.planningPhase.commands.actionCards.FlipCardInHandCommand;
