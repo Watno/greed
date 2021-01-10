@@ -235,7 +235,7 @@ function sendGameChat() {
 }
 
 function sendCommand(number) {
-	socket.send("{\"greedcommand\" :" + number + "}");
+	socket.send("{\"gamecommand\" :" + number + "}");
 }
 
 function showMessage(text) {

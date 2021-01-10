@@ -14,7 +14,7 @@ public class UserInGame implements IUserFromGamePerspective {
     private IConnectionSender connection;
     private String name;
     private String currentInput = null;
-    private ObjectMapper objectMapper = ObjectMapperProvider.provide();
+    private final ObjectMapper objectMapper = ObjectMapperProvider.provide();
 
     public UserInGame(IConnectionSender connection, String name) {
         super();
@@ -26,10 +26,10 @@ public class UserInGame implements IUserFromGamePerspective {
     public synchronized JsonElement requestInput(JsonObject request) {
         send(request);
         try {
-            if (!hasResigned()) {
-                wait();
-                sendInputAcceptance();
-            }
+            if (hasResigned()) return null;
+            wait();
+            if (hasResigned()) return null;
+            sendInputAcceptance();
             JsonElement toReturn = JsonParser.parseString(currentInput);
             currentInput = null;
             return toReturn;
@@ -44,12 +44,12 @@ public class UserInGame implements IUserFromGamePerspective {
         while (true) {
             try {
                 send(request);
-                T toReturn = null;
-                if (!hasResigned()) {
-                    wait();
-                    toReturn = objectMapper.readValue(currentInput, requestedType);
-                    sendInputAcceptance();
-                }
+                T toReturn;
+                if (hasResigned()) return null;
+                wait();
+                if (hasResigned()) return null;
+                toReturn = objectMapper.readValue(currentInput, requestedType);
+                sendInputAcceptance();
                 currentInput = null;
                 return toReturn;
             } catch (InterruptedException e) {
@@ -64,12 +64,12 @@ public class UserInGame implements IUserFromGamePerspective {
     public synchronized <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException {
         while (true) {
             try {
-                T toReturn = null;
-                if (!hasResigned()) {
-                    wait();
-                    toReturn = objectMapper.readValue(currentInput, requestedType);
-                    sendInputAcceptance();
-                }
+                T toReturn;
+                if (hasResigned()) return null;
+                wait();
+                if (hasResigned()) return null;
+                toReturn = objectMapper.readValue(currentInput, requestedType);
+                sendInputAcceptance();
                 currentInput = null;
                 return toReturn;
             } catch (JsonProcessingException e) {

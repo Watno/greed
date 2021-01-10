@@ -63,7 +63,7 @@ function sendGameChat() {
 }
 
 function sendCommand(message) {
-	socket.send('{"greedcommand":'+JSON.stringify(message)+'}');
+	socket.send('{"gamecommand":'+JSON.stringify(message)+'}');
 }
 
 function showMessage(text) {

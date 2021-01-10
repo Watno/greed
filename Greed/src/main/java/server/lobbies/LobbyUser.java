@@ -2,22 +2,20 @@ package server.lobbies;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.webbitserver.WebSocketConnection;
 import server.connections.IConnectionSender;
-import server.connections.WebsocketConnectionSender;
 import server.games.UserInGame;
 
 import java.time.LocalDateTime;
 
 public class LobbyUser {
-    private IConnectionSender connection;
+    private final IConnectionSender connection;
     private String name = "defaultname";
     private Table table = null;
     private boolean ready = false;
     private UserInGame userInGame = null;
 
-    public LobbyUser(WebSocketConnection connection) {
-        this.connection = new WebsocketConnectionSender(connection);
+    public LobbyUser(IConnectionSender connection) {
+        this.connection = connection;
     }
 
     public void resign() {
@@ -31,7 +29,7 @@ public class LobbyUser {
 
     public void forwardToGame(JsonElement json) {
         if (userInGame != null) {
-            userInGame.receiveInput(json.getAsString());
+            userInGame.receiveInput(json.toString());
         }
     }
 
