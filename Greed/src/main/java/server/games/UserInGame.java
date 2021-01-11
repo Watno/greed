@@ -11,65 +11,39 @@ import server.connections.IConnectionSender;
 import server.connections.serialization.ObjectMapperProvider;
 
 public class UserInGame implements IUserFromGamePerspective {
-    private IConnectionSender connection;
+    private IConnectionSender connectionSender;
     private String name;
     private String currentInput = null;
     private final ObjectMapper objectMapper = ObjectMapperProvider.provide();
 
-    public UserInGame(IConnectionSender connection, String name) {
+    public UserInGame(IConnectionSender connectionSender, String name) {
         super();
-        this.connection = connection;
+        this.connectionSender = connectionSender;
         this.name = name;
     }
 
     @Override
-    public synchronized JsonElement requestInput(JsonObject request) {
+    public synchronized JsonElement requestInput(JsonObject request) throws DisconnectedException, InterruptedException {
         send(request);
-        try {
-            if (hasResigned()) return null;
-            wait();
-            if (hasResigned()) return null;
-            sendInputAcceptance();
-            JsonElement toReturn = JsonParser.parseString(currentInput);
-            currentInput = null;
-            return toReturn;
-        } catch (InterruptedException e) {
-            //awaiting Thread was cancelled
-        }
-        return null;
+        waitAndThrowIfDisconnected();
+        JsonElement toReturn = JsonParser.parseString(currentInput);
+        currentInput = null;
+        return toReturn;
     }
 
     @Override
-    public synchronized <T> T requestTypedInput(JsonNode request, TypeReference<T> requestedType) {
-        while (true) {
-            try {
-                send(request);
-                T toReturn;
-                if (hasResigned()) return null;
-                wait();
-                if (hasResigned()) return null;
-                toReturn = objectMapper.readValue(currentInput, requestedType);
-                sendInputAcceptance();
-                currentInput = null;
-                return toReturn;
-            } catch (InterruptedException e) {
-                //awaiting Thread was cancelled
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        }
+    public synchronized <T> T requestTypedInput(Object request, TypeReference<T> requestedType) throws DisconnectedException, InterruptedException {
+        send(objectMapper.valueToTree(request));
+        return awaitTypedInput(requestedType);
     }
 
+
     @Override
-    public synchronized <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException {
-        while (true) {
+    public synchronized <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException, DisconnectedException {
+        waitAndThrowIfDisconnected();
+        while(true) {
             try {
-                T toReturn;
-                if (hasResigned()) return null;
-                wait();
-                if (hasResigned()) return null;
-                toReturn = objectMapper.readValue(currentInput, requestedType);
-                sendInputAcceptance();
+                var toReturn = objectMapper.readValue(currentInput, requestedType);
                 currentInput = null;
                 return toReturn;
             } catch (JsonProcessingException e) {
@@ -94,28 +68,28 @@ public class UserInGame implements IUserFromGamePerspective {
 
     @Override
     public void send(JsonObject json) {
-        if (!hasResigned()) {
-            connection.send(json);
+        if (!isDisconnected()) {
+            connectionSender.send(json);
         }
     }
 
     @Override
     public void send(JsonNode json) {
-        if (!hasResigned()) {
-            connection.send(json);
+        if (!isDisconnected()) {
+            connectionSender.send(json);
         }
     }
 
     @Override
     public void send(Object object) {
-        if (!hasResigned()) {
-            connection.send(object);
+        if (!isDisconnected()) {
+            connectionSender.send(object);
         }
     }
 
     @Override
-    public Boolean hasResigned() {
-        return connection == null;
+    public Boolean isDisconnected() {
+        return connectionSender == null;
     }
 
     public synchronized void receiveInput(String json) {
@@ -123,9 +97,9 @@ public class UserInGame implements IUserFromGamePerspective {
         notify();
     }
 
-    public synchronized void resign() {
-        connection = null;
-        name += " (resigned)";
+    public synchronized void markAsDisconnected() {
+        connectionSender = null;
+        name += " (disconnected)";
         notify();
     }
 
@@ -135,6 +109,13 @@ public class UserInGame implements IUserFromGamePerspective {
         json.addProperty("optional", false);
         json.addProperty("reason", "");
         send(json);
+    }
+
+    private synchronized void waitAndThrowIfDisconnected() throws DisconnectedException, InterruptedException {
+        if (isDisconnected()) throw new DisconnectedException();
+        wait();
+        if (isDisconnected()) throw new DisconnectedException();
+        sendInputAcceptance();
     }
 
 

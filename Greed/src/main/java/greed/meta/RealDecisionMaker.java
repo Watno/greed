@@ -1,11 +1,13 @@
-package greed.game;
+package greed.meta;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import greed.game.*;
 import greed.game.cards.Seance;
 import greed.game.eventtypes.TriggeredEvent;
 import greed.meta.JSONGenerator;
+import server.games.DisconnectedException;
 import server.games.IUserFromGamePerspective;
 
 import java.text.NumberFormat;
@@ -116,12 +118,14 @@ public class RealDecisionMaker implements IDecisionMaker {
 	}
 	
 	private JsonElement requestInput(JsonObject prompt) {
-		JsonElement input = connection.requestInput(prompt);
-		if (connection.hasResigned()) {
+		try {
+			return connection.requestInput(prompt);
+		} catch (DisconnectedException e) {
 			thePlayer.replaceByBot();
 			return new JsonPrimitive(0);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
-		return input;
 	}
 
 

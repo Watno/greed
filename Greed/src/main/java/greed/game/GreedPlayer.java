@@ -2,6 +2,7 @@ package greed.game;
 
 import com.google.gson.JsonObject;
 import greed.game.eventtypes.*;
+import greed.meta.RealDecisionMaker;
 import greed.meta.ai.CleverDecider;
 import server.games.IUserFromGamePerspective;
 
@@ -374,7 +375,7 @@ public class GreedPlayer {
 	}
 
 	public void replaceByBot() {
-		this.name += " (resigned)";
+		this.name += " (disconnected)";
 		this.decisionMaker = new CleverDecider(this, theGame);//still need to handle currently awaited decision by old decider
 	}
 

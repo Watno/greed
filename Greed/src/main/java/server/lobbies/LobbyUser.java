@@ -23,7 +23,7 @@ public class LobbyUser {
             table.removePlayer(this);
         }
         if (userInGame != null) {
-            userInGame.resign();
+            userInGame.markAsDisconnected();
         }
     }
 

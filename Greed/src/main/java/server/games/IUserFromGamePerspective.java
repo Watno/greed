@@ -7,11 +7,11 @@ import com.google.gson.JsonObject;
 
 public interface IUserFromGamePerspective {
 
-    JsonElement requestInput(JsonObject request);
+    JsonElement requestInput(JsonObject request) throws DisconnectedException, InterruptedException;
 
-    <T> T requestTypedInput(JsonNode request, TypeReference<T> requestedType);
+    <T> T requestTypedInput(Object request, TypeReference<T> requestedType) throws DisconnectedException, InterruptedException;
 
-    <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException;
+    <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException, DisconnectedException;
 
     void allowReturnToLobby();
 
@@ -23,6 +23,6 @@ public interface IUserFromGamePerspective {
 
     void send(Object object);
 
-    Boolean hasResigned();
+    Boolean isDisconnected();
 
 }
