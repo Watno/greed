@@ -1,6 +1,7 @@
 package spacealert.externalPlayerInterface;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import server.games.DisconnectedException;
 import server.games.IUserFromGamePerspective;
 import spacealert.core.IDecisionMaker;
 import spacealert.core.gamestates.GameStateWithPrivateInfo;
@@ -33,6 +34,8 @@ public class ExternalDecisionMaker implements IDecisionMaker {
             }
         } catch (InterruptedException e) {
             user.send("End of planning phase during wait");
+        } catch (DisconnectedException e) {
+            System.out.println("disconnected");
         }
         user.send("End of planning phase");
     }
