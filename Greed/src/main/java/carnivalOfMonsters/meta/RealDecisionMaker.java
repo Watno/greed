@@ -72,8 +72,7 @@ public class RealDecisionMaker implements IDecisionMaker {
     public Optional<ICanBePlayed> chooseKeptCardToPlay(Collection<ICanBePlayed> keptCards) {
         if (replacement.isPresent()) return replacement.get().chooseKeptCardToPlay(keptCards);
         try {
-            Optional<String> selectedName = requestTypedInput(new PlayFromKeptRequest(keptCards), new TypeReference<>() {
-            });
+            Optional<String> selectedName = requestTypedInput(new PlayFromKeptRequest(keptCards), new TypeReference<>() {});
             return selectedName.map(s -> findByName(keptCards, s));
         } catch (DisconnectedException e) {
             replaceWithBot();
