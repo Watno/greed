@@ -26,8 +26,7 @@ public class Table {
         for (LobbyUser lobbyUser : players) {
             usersFromGamePerspective.add(lobbyUser.joinGame());
         }
-        new Thread(gameFactory
-                .createGame(usersFromGamePerspective, numberOfPlayers))
+        new Thread(null, gameFactory.createGame(usersFromGamePerspective, numberOfPlayers), "GameThread" )
                 .start();
         lobby.removeTable(this);
     }
