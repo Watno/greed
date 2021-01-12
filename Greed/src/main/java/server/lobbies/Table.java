@@ -6,6 +6,7 @@ import server.games.IGameFactory;
 import server.games.IUserFromGamePerspective;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 
 public class Table {
@@ -26,8 +27,7 @@ public class Table {
         for (LobbyUser lobbyUser : players) {
             usersFromGamePerspective.add(lobbyUser.joinGame());
         }
-        new Thread(null, gameFactory.createGame(usersFromGamePerspective, numberOfPlayers), "GameThread" )
-                .start();
+        CompletableFuture.runAsync(gameFactory.createGame(usersFromGamePerspective, numberOfPlayers));
         lobby.removeTable(this);
     }
 
@@ -51,10 +51,6 @@ public class Table {
             lobby.removeTable(this);
         }
         unreadyPlayers();
-    }
-
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
     }
 
     public void setNumberOfPlayers(int numberOfPlayers) {

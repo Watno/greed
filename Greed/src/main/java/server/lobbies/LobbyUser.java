@@ -61,14 +61,8 @@ public class LobbyUser {
 
     public void setReady(boolean ready) {
         this.ready = ready;
-        if (ready) {
-            boolean starting = true;
-            for (LobbyUser player : table.getPlayers()) {
-                starting &= player.isReady();
-            }
-            if (starting) {
-                table.startGame();
-            }
+        if (table.getPlayers().stream().allMatch(LobbyUser::isReady)) {
+            table.startGame();
         }
     }
 
