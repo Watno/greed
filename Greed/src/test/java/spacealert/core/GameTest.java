@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameTest {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     @RepeatedTest(100000)
     void randomGameSmokeTest() {
@@ -185,14 +185,6 @@ class GameTest {
     @Test
     void clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite() {
         var actionBoard = createActionBoard(
-                List.of(
-                        new BlueMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new RedMoveEffect(),
-                        new RedMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new BlueMoveEffect()));
-        var actionBoard2 = createActionBoard(
                 List.of(
                         new BlueMoveEffect(),
                         new GravoliftMoveEffect(),
