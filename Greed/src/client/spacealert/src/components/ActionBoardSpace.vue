@@ -24,7 +24,7 @@ export default defineComponent({
         }
   },
   setup(props, {emit}) {
-      const hasCard = computed(() => props.card != null)
+      const hasCard = computed(() => props.card != null);
 
       function selectCard(id: string) {
         emit('select-card', id);

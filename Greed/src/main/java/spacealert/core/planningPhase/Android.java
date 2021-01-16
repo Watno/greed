@@ -1,5 +1,6 @@
 package spacealert.core.planningPhase;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.Color;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
@@ -8,8 +9,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class Android {
-    private Color color;
-    private ActionBoard actionBoard;
+    @JsonProperty
+    private final Color color;
+    @JsonProperty
+    private final ActionBoard actionBoard;
 
     public Android(Color color) {
         this.color = color;

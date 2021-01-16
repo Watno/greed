@@ -28,11 +28,11 @@ export default defineComponent ({
       } 
 
       function flipCard(cardId: string) {
-        emit('flip-card', props.board.id, cardId);
+        emit('flip-card', cardId);
       } 
 
       function placeCard(position: number){
-        emit('place-card', props.board.id, position);
+        emit('place-card', position);
       }
 
       return {selectCard, flipCard, placeCard}

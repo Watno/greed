@@ -7,12 +7,12 @@ import spacealert.core.planningPhase.Player;
 
 import java.util.UUID;
 
-public class FlipCardOnOwnActionBoard implements IPlanningPhaseCommand {
+public class FlipCardOnOwnActionBoardCommand implements IPlanningPhaseCommand {
     @JsonProperty
-    private UUID cardId;
+    private final UUID cardId;
 
     @JsonCreator
-    public FlipCardOnOwnActionBoard(UUID cardId) {
+    public FlipCardOnOwnActionBoardCommand(UUID cardId) {
         this.cardId = cardId;
     }
 

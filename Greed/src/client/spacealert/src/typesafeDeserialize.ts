@@ -14,7 +14,6 @@ export async function typesafeDeserialize<T>(type: ClassType<T>, json: string): 
     return result;
 }
 
-
 export async function typesafeDeserializeArray<T>(type: ClassType<T>, json: string): Promise<T[]>{
     const result = deserializeArray<T>(type, json);
     await validateOrReject(result, { })

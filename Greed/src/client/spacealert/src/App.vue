@@ -1,127 +1,192 @@
 <template>
-  <div v-if="loaded" >
-    <Hand :cards="hand" :selectedCard="selectedCard" @select-card="onCardInHandSelected" @flip-card="onCardInHandFlipped" @return-selected-card="onReturnSelectedCardToHand" />
-    <ActionBoard v-for="board in boards" :board="board" :key="board.Id" :selectedCard="selectedCard" @select-card="onCardInActionBoardSelected" @flip-card="onCardInActionBoardFlipped" @place-card="onCardPlaced"/>
-  </div>
+	<div>
+		<button v-if="!gameStarted" @click="startGame">Start</button>
+		<div v-if="gameStarted">
+			<Hand
+				:cards="hand"
+				:selectedCard="selectedCard"
+				@select-card="onCardInHandSelected"
+				@flip-card="onCardInHandFlipped"
+				@return-selected-card="onReturnSelectedCardToHand"
+			/>
+			<PlayerArea
+				:publicPlayerGameState="ownPublicPlayerGameState"
+				:selectedCard="selectedCard"
+				@select-card="onCardOnActionBoardSelected"
+				@flip-card="onCardOnOwnActionBoardFlipped"
+				@place-card="onCardPlacedToOwnActionBoard"
+			/>
+			<PlayerArea
+				v-for="publicPlayerGameState in otherPublicPlayerGameStates"
+				:publicPlayerGameState="publicPlayerGameState"
+				:key="publicPlayerGameState.color"
+				:selectedCard="selectedCard"
+			/>
+			<Android
+				v-for="android in androids"
+				:android="android"
+				:key="android.color"
+				:selectedCard="selectedCard"
+				@select-card="onCardOnActionBoardSelected"
+				@flip-card="onCardOnAndroidActionBoardFlipped"
+				@place-card="onCardPlacedToAndroidActionBoard"
+			/>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
-import Hand from "./components/Hand.vue";
-import ActionBoard from "./components/ActionBoard.vue";
-import ActionCardModel from "./models/ActionCardModel";
-import {typesafeDeserialize, typesafeDeserializeArray} from "./typesafeDeserialize";
-import SelectedCardModel from './models/SelectedCardModel';
-import { SelectedCardPositionModel } from './models/SelectedCardPositionModel';
-import { CardOrientationModel } from './models/CardOrientationModel';
-import ActionBoardModel from './models/ActionBoardModel';
+import { computed, defineComponent, ref } from "vue";
+import {
+	typesafeDeserialize,
+	typesafeDeserializeArray,
+} from "./typesafeDeserialize";
 import { Guid } from "guid-typescript";
+import { getServerlocation } from "./serverlocation";
+
+import Hand from "./components/Hand.vue";
+import Android from "./components/Android.vue";
+import PlayerArea from "./components/PlayerArea.vue";
+
+import ActionCardModel from "./models/ActionCardModel";
+import GameStateWithPrivateInfoModel from "./models/GameStateWithPrivateInfoModel";
+import { ColorModel } from "./models/ColorModel";
+
+import SelectedCardModel from "./models/SelectedCardModel";
+import { SelectedCardPositionModel } from "./models/SelectedCardPositionModel";
+
+import FlipCardInHandCommand from "./models/commands/FlipCardInHandCommand";
+import FlipCardOnOwnActionBoardCommand from "./models/commands/FlipCardOnOwnActionBoardCommand";
+import FlipCardOnAndroidActionBoardCommand from "./models/commands/FlipCardOnAndroidActionBoardCommand";
+import PlaceCardOnOwnActionBoardCommand from "./models/commands/PlaceCardOnOwnActionBoardCommand";
+import PlaceCardOnAndroidActionBoardCommand from "./models/commands/PlaceCardOnAndroidActionBoardCommand";
+import RetrieveCardFromOwnActionBoardCommand from "./models/commands/RetrieveCardFromOwnActionBoardCommand";
+import RetrieveCardFromAndroidActionBoardCommand from "./models/commands/RetrieveCardFromAndroidActionBoardCommand";
 
 export default defineComponent({
-  components: {Hand, ActionBoard},
-  setup(){
-    const hand = ref([] as ActionCardModel[]);
-    const boards = ref([] as ActionBoardModel[]);
-    const loaded = ref(false);
-    const selectedCard = ref(null as SelectedCardModel | null);
+	components: { Hand, Android, PlayerArea },
+	setup() {
+		const socket = new WebSocket(getServerlocation());
+		const gameState = ref(null as GameStateWithPrivateInfoModel);
+		const selectedCard = ref(null as SelectedCardModel | null);
 
+		function sendGameCommand(object: object) {
+			console.log(object);
+			socket.send(
+				JSON.stringify({
+					gamecommand: object,
+				})
+			);
+		}
 
-    function refresh(){
-      typesafeDeserializeArray(ActionCardModel, JSON.stringify(hand.value))
-        .then(x => hand.value = x);
-      typesafeDeserializeArray(ActionBoardModel, JSON.stringify(boards.value))
-        .then(x => boards.value = x);
-    }
-    
-    function findBoardById(id: string): ActionBoardModel{
-      const board = boards.value.find(x => x.id == id);
-      if (board == undefined) throw "No board with id" + id;
-      return board;
-    }
+		function onCardInHandSelected(id: string) {
+			selectedCard.value = new SelectedCardModel(
+				id,
+				SelectedCardPositionModel.Hand,
+				null
+			);
+		}
 
-    function onCardInHandSelected(id: string){
-      selectedCard.value = new SelectedCardModel(id, SelectedCardPositionModel.Hand, null);
-      refresh();
-    }
+		function onCardOnActionBoardSelected(boardId: string, cardId: string) {
+			selectedCard.value = new SelectedCardModel(
+				cardId,
+				SelectedCardPositionModel.ActionBoard,
+				boardId
+			);
+		}
 
-    function onCardInActionBoardSelected(boardId: string, cardId: string){
-      selectedCard.value = new SelectedCardModel(cardId, SelectedCardPositionModel.ActionBoard, boardId);
-      refresh();
-    }
+		function onCardInHandFlipped(id: string) {
+			sendGameCommand(new FlipCardInHandCommand(id));
+		}
 
-    function onCardInHandFlipped(id: string){
-      const card = hand.value.find(x => x.id == id);
-      if (card == null) return;
-      switch (card.orientation){
-        case CardOrientationModel.ACTION: card.orientation = CardOrientationModel.MOVEMENT; 
-        break;
-        case CardOrientationModel.MOVEMENT: card.orientation = CardOrientationModel.ACTION;
-        break;
-      }
-      refresh();
-    }
+		function onCardOnOwnActionBoardFlipped(color: ColorModel, cardId: string) {
+			sendGameCommand(new FlipCardOnOwnActionBoardCommand(cardId));
+		}
 
-    function onCardInActionBoardFlipped(boardId: string, cardId: string){
-      const board = findBoardById(boardId);
-      const card = board.cards.find(x => x?.id == cardId);
-      if (card == null) return;
-      switch (card.orientation){
-        case CardOrientationModel.ACTION: card.orientation = CardOrientationModel.MOVEMENT; 
-        break;
-        case CardOrientationModel.MOVEMENT: card.orientation = CardOrientationModel.ACTION;
-        break;
-      }
-      refresh();
-    }
+		function onCardOnAndroidActionBoardFlipped(
+			boardId: string,
+			cardId: string
+		) {
+			sendGameCommand(new FlipCardOnAndroidActionBoardCommand(cardId));
+		}
 
-    function onCardPlaced(boardId: string, position: number){
-        const board = findBoardById(boardId);
-        const card = hand.value.find(x => x.id == selectedCard.value?.id);
-        if (card == null) return;
-        board.cards[position-1] = card;
-        hand.value.splice(hand.value.indexOf(card),1);
+		function onCardPlacedToOwnActionBoard(
+			color: ColorModel,
+			position: number
+		) {
+			sendGameCommand(new PlaceCardOnOwnActionBoardCommand(selectedCard.value.id, position));
+		}
 
-        selectedCard.value = null;
-        refresh();
-    }
+		function onCardPlacedToAndroidActionBoard(
+			color: ColorModel,
+			position: number
+		) {
+			sendGameCommand(new PlaceCardOnAndroidActionBoardCommand(selectedCard.value.id, position, color));
+		}
 
-    function onReturnSelectedCardToHand(){
-        if (selectedCard.value?.position != SelectedCardPositionModel.ActionBoard || selectedCard.value.boardId == null) return;
-        const board = findBoardById(selectedCard.value.boardId);
-        const card = board.cards.find(x => x?.id == selectedCard.value?.id);
-        if (card == null) return;
-        board.cards[board.cards.indexOf(card)] = null;
-        hand.value.push(card);
+		function onReturnSelectedCardToHand() {
+			if (
+				selectedCard.value?.position != SelectedCardPositionModel.ActionBoard ||
+				selectedCard.value.boardId == null
+			)
+				return;
+		}
 
-        selectedCard.value = null;
-        refresh();
-    }
+		const gameStarted = computed(() => gameState.value != null);
+		const hand = computed(() => gameState.value.privateGameState.hand);
+		const androids = computed(() => gameState.value.publicGameState.androids);
+		const ownPublicPlayerGameState = computed(() =>
+			gameState.value.publicGameState.playerGameStates.find(
+				(x) => x.color == gameState.value.privateGameState.ownColor
+			)
+		);
+		const otherPublicPlayerGameStates = computed(() =>
+			gameState.value.publicGameState.playerGameStates.filter(
+				(x) => x.color != gameState.value.privateGameState.ownColor
+			)
+		);
 
-    boards.value.push(new ActionBoardModel(Guid.create().toString(), Array(12).fill(null)));
-    boards.value.push(new ActionBoardModel(Guid.create().toString(), Array(12).fill(null)));
-    boards.value.push(new ActionBoardModel(Guid.create().toString(), Array(12).fill(null)));
-    boards.value.push(new ActionBoardModel(Guid.create().toString(), Array(12).fill(null)));
+		function startGame() {
+			socket.send('{"newTable":"spacealert"}');
+			socket.send('{"changePlayers":4}');
+			socket.send('{"ready":true}');
+		}
 
-    const json = `{"id": "42d2233f-2dff-42ed-9210-4ae29014663b", "actionHalf":{"type":"BEffect"},"movementHalf":{"type":"GravoliftMoveEffect"},"orientation":"ACTION"}`;
-    const json2 = `{"id": "1e4c4c77-d7c4-4215-9889-6e94929cfd09", "actionHalf":{"type":"BEffect"},"movementHalf":{"type":"BlueMoveEffect"},"orientation":"MOVEMENT"}`;
-    typesafeDeserialize(ActionCardModel, json)
-      .then(x => {
-        hand.value.push(x);
-      })
-      .then(() => {
-        typesafeDeserialize(ActionCardModel, json2).then(x => {
-          hand.value.push(x);
-          loaded.value = true;
-        });
-      })
-      .catch(e => {
-        // eslint-disable-next-line no-console
-        console.log(e);
-      });
-  
-  return{hand, boards, loaded, selectedCard, onCardInHandSelected, onCardInHandFlipped, onReturnSelectedCardToHand, onCardInActionBoardSelected, onCardInActionBoardFlipped, onCardPlaced }
-  }
-})
+		socket.onopen = function () {
+			console.log("Connected to WebSocket.");
+		};
+		socket.onmessage = function (msg) {
+			console.log(msg.data);
+			typesafeDeserialize(GameStateWithPrivateInfoModel, msg.data).then(
+				(x) => (gameState.value = x)
+			);
+		};
+		socket.onerror = function (msg) {
+			alert("Sorry but there was an error.\n\n" + msg);
+		};
+		socket.onclose = function () {
+			alert("Server offline.");
+		};
+
+		return {
+			gameStarted,
+			hand,
+			androids,
+			ownPublicPlayerGameState,
+			otherPublicPlayerGameStates,
+			selectedCard,
+			onCardInHandSelected,
+			onCardInHandFlipped,
+			onReturnSelectedCardToHand,
+			onCardOnActionBoardSelected,
+			onCardOnOwnActionBoardFlipped,
+			onCardOnAndroidActionBoardFlipped,
+			onCardPlacedToOwnActionBoard,
+			onCardPlacedToAndroidActionBoard,
+			startGame,
+		};
+	},
+});
 </script>
 
 <style scoped>
