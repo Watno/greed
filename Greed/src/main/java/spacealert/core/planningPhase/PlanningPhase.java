@@ -11,9 +11,10 @@ import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
+public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runnable {
     private final Map<IDecisionMaker, Player> players;
     private final List<Android> androids;
     private final Stack<ActionCard> deck;
@@ -25,6 +26,9 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
                 .limit(numberOfPlayers - decisionMakers.size())
                 .collect(Collectors.toList());
         deck = ActionCard.defaultDeck();
+        for (var player : players.values()) {
+            player.drawCards(drawCards(5));
+        }
     }
 
     @Override
@@ -33,6 +37,7 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
         broadcastGameState();
     }
 
+    @Override
     public void run() {
         broadcastGameState();
         var decisionMakerThreads = players.keySet().stream()
@@ -88,6 +93,14 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker {
                     new GameStateWithPrivateInfo(publicGameState, players.get(decisionMaker).toPrivateGameState())
             );
         }
+    }
+
+    private Collection<ActionCard> drawCards(int number) {
+        return IntStream.range(0, number).mapToObj(x -> drawCard()).collect(Collectors.toList());
+    }
+
+    private ActionCard drawCard() {
+        return deck.pop();
     }
 
 }

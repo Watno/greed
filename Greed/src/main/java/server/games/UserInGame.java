@@ -43,9 +43,9 @@ public class UserInGame implements IUserFromGamePerspective {
         waitAndThrowIfDisconnected();
         while(true) {
             try {
-                var toReturn = objectMapper.readValue(currentInput, requestedType);
+                var inputToProcess = currentInput;
                 currentInput = null;
-                return toReturn;
+                return objectMapper.readValue(inputToProcess, requestedType);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }

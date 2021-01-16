@@ -27,16 +27,14 @@ public class ExternalDecisionMaker implements IDecisionMaker {
 
     private void makeDecisionsForPlanningPhase(IPlanningPhaseExposedToDecisionMaker planningPhase) {
         try {
-            user.send("Start of planning phase");
             while (!Thread.currentThread().isInterrupted()) {
                 var command = user.awaitTypedInput(new TypeReference<IPlanningPhaseCommand>() {});
                 planningPhase.execute(this, command);
             }
         } catch (InterruptedException e) {
-            user.send("End of planning phase during wait");
+            //planning phase ended during wait
         } catch (DisconnectedException e) {
             System.out.println("disconnected");
         }
-        user.send("End of planning phase");
     }
 }
