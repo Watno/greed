@@ -24,7 +24,7 @@ export default defineComponent ({
     setup(props, {emit}){
 
       function selectCard(cardId: string) {
-        emit('select-card', props.board.id, cardId);
+        emit('select-card', cardId);
       } 
 
       function flipCard(cardId: string) {

@@ -1,4 +1,5 @@
 import { IsUUID, IsEnum } from "class-validator";
+import { ColorModel } from "./ColorModel";
 import { SelectedCardPositionModel } from './SelectedCardPositionModel';
 
 export default class SelectedCardModel{
@@ -8,12 +9,12 @@ export default class SelectedCardModel{
     @IsEnum(SelectedCardPositionModel)
     position: SelectedCardPositionModel
 
-    @IsUUID()
-    boardId: string | null
+    @IsEnum(ColorModel)
+    boardColor: ColorModel | null
 
-    constructor(id: string, position: SelectedCardPositionModel, boardId: string | null) {
+    constructor(id: string, position: SelectedCardPositionModel, boardColor: ColorModel | null) {
         this.id = id,
         this.position = position;
-        this.boardId = boardId;
+        this.boardColor = boardColor;
 	}
 }

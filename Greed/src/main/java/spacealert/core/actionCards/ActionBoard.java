@@ -21,9 +21,9 @@ public class ActionBoard {
 	private int lastExecutedTurn = 0;
 
 	public ActionBoard() {
-		cards = Stream.generate(Optional::<ActionCard>empty)
+		cards = Stream.<Optional<ActionCard>>generate(Optional::empty)
 				.limit(size)
-				.collect(Collectors.toCollection(ArrayList<Optional<ActionCard>>::new));
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public void place(int turn, ActionCard card) {
@@ -41,7 +41,7 @@ public class ActionBoard {
 	public Optional<ActionCard> returnCardById(UUID cardId) {
 		var card = findCardById(cardId);
 		if (card.isPresent()) {
-			cards.remove(card);
+			cards.set(cards.indexOf(card), Optional.empty());
 		}
 		return card;
 	}

@@ -6,6 +6,7 @@
 				@select-card="onCardSelected"
 				@flip-card="onCardFlipped"
 				@place-card="onCardPlaced"
+        :class="android.color"
 			/>
   </div>
 </template>

@@ -47,6 +47,7 @@ public class UserInGame implements IUserFromGamePerspective {
                 currentInput = null;
                 return objectMapper.readValue(inputToProcess, requestedType);
             } catch (JsonProcessingException e) {
+                connectionSender.send(e);
                 e.printStackTrace();
             }
         }

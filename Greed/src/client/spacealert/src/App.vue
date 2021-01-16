@@ -15,12 +15,14 @@
 				@select-card="onCardOnActionBoardSelected"
 				@flip-card="onCardOnOwnActionBoardFlipped"
 				@place-card="onCardPlacedToOwnActionBoard"
+				:class="ownPublicPlayerGameState.color"
 			/>
 			<PlayerArea
 				v-for="publicPlayerGameState in otherPublicPlayerGameStates"
 				:publicPlayerGameState="publicPlayerGameState"
 				:key="publicPlayerGameState.color"
 				:selectedCard="selectedCard"
+				:class="publicPlayerGameState.color"
 			/>
 			<Android
 				v-for="android in androids"
@@ -30,6 +32,7 @@
 				@select-card="onCardOnActionBoardSelected"
 				@flip-card="onCardOnAndroidActionBoardFlipped"
 				@place-card="onCardPlacedToAndroidActionBoard"
+				:class="android.color"
 			/>
 		</div>
 	</div>
@@ -37,18 +40,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import {
-	typesafeDeserialize,
-	typesafeDeserializeArray,
-} from "./typesafeDeserialize";
-import { Guid } from "guid-typescript";
+import { typesafeDeserialize } from "./typesafeDeserialize";
 import { getServerlocation } from "./serverlocation";
 
 import Hand from "./components/Hand.vue";
 import Android from "./components/Android.vue";
 import PlayerArea from "./components/PlayerArea.vue";
 
-import ActionCardModel from "./models/ActionCardModel";
 import GameStateWithPrivateInfoModel from "./models/GameStateWithPrivateInfoModel";
 import { ColorModel } from "./models/ColorModel";
 
@@ -67,8 +65,27 @@ export default defineComponent({
 	components: { Hand, Android, PlayerArea },
 	setup() {
 		const socket = new WebSocket(getServerlocation());
-		const gameState = ref(null as GameStateWithPrivateInfoModel);
+		const gameState = ref(null as GameStateWithPrivateInfoModel | null);
 		const selectedCard = ref(null as SelectedCardModel | null);
+
+		const gameStarted = computed(() => gameState.value != null);
+		const hand = computed(() => gameState.value?.privateGameState.hand);
+		const androids = computed(() => gameState.value?.publicGameState.androids);
+		const ownPublicPlayerGameState = computed(() =>
+			gameState.value?.publicGameState.playerGameStates.find(
+				(x) => x.color == gameState.value?.privateGameState.ownColor
+			)
+		);
+		const otherPublicPlayerGameStates = computed(() =>
+			gameState.value?.publicGameState.playerGameStates.filter(
+				(x) => x.color != gameState.value?.privateGameState.ownColor
+			)
+		);
+		const isSinglePlayer = computed(
+			() =>
+				gameState.value?.publicGameState.playerGameStates.length != null &&
+				gameState.value?.publicGameState.playerGameStates.length == 1
+		);
 
 		function sendGameCommand(object: object) {
 			console.log(object);
@@ -87,11 +104,14 @@ export default defineComponent({
 			);
 		}
 
-		function onCardOnActionBoardSelected(boardId: string, cardId: string) {
+		function onCardOnActionBoardSelected(
+			boardColor: ColorModel,
+			cardId: string
+		) {
 			selectedCard.value = new SelectedCardModel(
 				cardId,
 				SelectedCardPositionModel.ActionBoard,
-				boardId
+				boardColor
 			);
 		}
 
@@ -107,44 +127,62 @@ export default defineComponent({
 			boardId: string,
 			cardId: string
 		) {
-			sendGameCommand(new FlipCardOnAndroidActionBoardCommand(cardId));
+			if (isSinglePlayer.value) {
+				sendGameCommand(new FlipCardOnAndroidActionBoardCommand(cardId));
+			}
 		}
 
-		function onCardPlacedToOwnActionBoard(
-			color: ColorModel,
-			position: number
-		) {
-			sendGameCommand(new PlaceCardOnOwnActionBoardCommand(selectedCard.value.id, position));
+		function onCardPlacedToOwnActionBoard(color: ColorModel, position: number) {
+			if (selectedCard.value != null) {
+				sendGameCommand(
+					new PlaceCardOnOwnActionBoardCommand(selectedCard.value.id, position)
+				);
+			}
+			selectedCard.value = null;
 		}
 
 		function onCardPlacedToAndroidActionBoard(
 			color: ColorModel,
 			position: number
 		) {
-			sendGameCommand(new PlaceCardOnAndroidActionBoardCommand(selectedCard.value.id, position, color));
+			if (selectedCard.value != null) {
+				sendGameCommand(
+					new PlaceCardOnAndroidActionBoardCommand(
+						selectedCard.value.id,
+						position,
+						color
+					)
+				);
+			}
+
+			selectedCard.value = null;
 		}
 
 		function onReturnSelectedCardToHand() {
 			if (
+				selectedCard.value == null ||
 				selectedCard.value?.position != SelectedCardPositionModel.ActionBoard ||
-				selectedCard.value.boardId == null
-			)
+				selectedCard.value.boardColor == null
+			) {
 				return;
+			}
+			if (
+				selectedCard.value.boardColor ==
+				gameState.value?.privateGameState.ownColor
+			) {
+				sendGameCommand(
+					new RetrieveCardFromOwnActionBoardCommand(selectedCard.value.id)
+				);
+			} else if (isSinglePlayer.value) {
+				sendGameCommand(
+					new RetrieveCardFromAndroidActionBoardCommand(
+						selectedCard.value.id,
+						selectedCard.value.boardColor
+					)
+				);
+			}
+			selectedCard.value = null;
 		}
-
-		const gameStarted = computed(() => gameState.value != null);
-		const hand = computed(() => gameState.value.privateGameState.hand);
-		const androids = computed(() => gameState.value.publicGameState.androids);
-		const ownPublicPlayerGameState = computed(() =>
-			gameState.value.publicGameState.playerGameStates.find(
-				(x) => x.color == gameState.value.privateGameState.ownColor
-			)
-		);
-		const otherPublicPlayerGameStates = computed(() =>
-			gameState.value.publicGameState.playerGameStates.filter(
-				(x) => x.color != gameState.value.privateGameState.ownColor
-			)
-		);
 
 		function startGame() {
 			socket.send('{"newTable":"spacealert"}');
@@ -190,4 +228,24 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.RED {
+	border-style: solid;
+	border-color: red;
+}
+.BLUE {
+	border-style: solid;
+	border-color: blue;
+}
+.YELLOW {
+	border-style: solid;
+	border-color: yellow;
+}
+.GREEN {
+	border-style: solid;
+	border-color: green;
+}
+.PURPLE {
+	border-style: solid;
+	border-color: purple;
+}
 </style>

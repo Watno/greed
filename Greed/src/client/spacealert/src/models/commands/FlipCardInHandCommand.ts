@@ -1,7 +1,7 @@
 import { IsUUID } from "class-validator"
 
 export default class FlipCardInHandCommand {
-  type = ".FlipCardInHandCommand"
+  type = ".FlipCardInHandCommandaa"
 
   @IsUUID()
   cardId: string
