@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
 
+import java.util.Optional;
+
 public class SerializationExperimenting {
     @Test
     void actionCard() throws JsonProcessingException {
@@ -19,7 +21,7 @@ public class SerializationExperimenting {
     @Test
     void actionBoard() throws JsonProcessingException {
         var sut = new ActionBoard();
-        sut.place(1, ActionCard.defaultDeck().get(0));
+        sut.tryPlace(1, ActionCard.defaultDeck().get(0), Optional.empty());
         var serializer = new ObjectMapper();
         serializer.registerModule(new Jdk8Module());
         var json = serializer.writeValueAsString(sut);

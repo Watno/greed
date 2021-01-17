@@ -13,10 +13,7 @@ import spacealert.core.threats.implementations.external.*;
 import spacealert.core.threats.implementations.internal.*;
 import spacealert.core.threats.templates.Threat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -235,7 +232,7 @@ class GameTest {
                 .collect(Collectors.toList());
         int turn = 1;
         for (var card : cards) {
-            actionBoard.place(turn, card);
+            actionBoard.tryPlace(turn, card, Optional.empty());
             turn++;
         }
         return actionBoard;
@@ -249,7 +246,7 @@ class GameTest {
                 if (trueWithPercentage(50)) {
                     card.flip();
                 }
-                actionBoard.place(turn, card);
+                actionBoard.tryPlace(turn, card, Optional.empty());
             }
         }
         return actionBoard;

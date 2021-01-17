@@ -2,6 +2,7 @@ package spacealert.core.planningPhase;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.Color;
+import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
 
@@ -19,16 +20,16 @@ public class Android {
         this.actionBoard = new ActionBoard();
     }
 
-    public void flipCardOnActionBoard(UUID cardId) {
-        actionBoard.flipCardById(cardId);
+    public void flipCardOnActionBoard(UUID cardId, Phase phase) {
+        actionBoard.flipCardById(cardId, phase);
     }
 
-    public void placeCardOnActionBoard(ActionCard card, int position) {
-        actionBoard.place(position, card);
+    public boolean tryPlaceCardOnActionBoard(ActionCard card, int position, Optional<Phase> phase) {
+        return actionBoard.tryPlace(position, card, phase);
     }
 
-    public Optional<ActionCard> retrieveCardFromActionBoard(UUID cardId) {
-        return actionBoard.returnCardById(cardId);
+    public Optional<ActionCard> retrieveCardFromActionBoard(UUID cardId, Phase phase) {
+        return actionBoard.returnCardById(cardId, phase);
     }
 
     public boolean hasColor(Color color) {

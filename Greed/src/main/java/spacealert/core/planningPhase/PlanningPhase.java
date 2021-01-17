@@ -2,19 +2,22 @@ package spacealert.core.planningPhase;
 
 import spacealert.core.Color;
 import spacealert.core.IDecisionMaker;
+import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionCard;
 import spacealert.core.gamestates.GameStateWithPrivateInfo;
 import spacealert.core.gamestates.PublicGameState;
 import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
+import spacealert.core.planningPhase.eventSequences.EventExecutor;
+import spacealert.core.planningPhase.eventSequences.EventSequence;
+import spacealert.core.planningPhase.eventSequences.events.Notification;
 
 import java.util.*;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runnable {
+public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPlanningPhaseExposedToEvents, Runnable {
     private final Map<IDecisionMaker, Player> players;
     private final List<Android> androids;
     private final Stack<ActionCard> deck;
@@ -26,9 +29,7 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runn
                 .limit(numberOfPlayers - decisionMakers.size())
                 .collect(Collectors.toList());
         deck = ActionCard.defaultDeck();
-        for (var player : players.values()) {
-            player.drawCards(drawCards(5));
-        }
+
     }
 
     @Override
@@ -46,23 +47,22 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runn
         for (var thread : decisionMakerThreads) {
             thread.start();
         }
-        var timer = new ScheduledThreadPoolExecutor(1);
-        var finishTask = timer.schedule(() -> {
-            for (var thread : decisionMakerThreads) {
-                thread.interrupt();
-            }
-        }, 100, TimeUnit.SECONDS);
+        EventSequence eventSequence = null;
         try {
-            finishTask.get();
-        } catch (Exception e) {
+            new EventExecutor().run(eventSequence, this).get();
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+        for (var thread : decisionMakerThreads) {
+            thread.interrupt();
+        }
+
     }
 
-    public void flipCardOnAndroidActionBoard(UUID cardId) {
+    public void flipCardOnAndroidActionBoard(Player player, UUID cardId) {
         if (players.size() > 1) return; //Flipping on android boards is only allowed in solo mode;
         for (var android : androids) {
-            android.flipCardOnActionBoard(cardId);
+            player.flipCardOnAndroidActionBoard(android, cardId);
         }
     }
 
@@ -75,6 +75,10 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runn
         if (players.size() > 1) return; //Returning from android boards is only allowed in solo mode;
         getAndroidByColor(color)
                 .ifPresent(x -> player.retrieveCardFromAndroidActionBoard(x, cardId));
+    }
+
+    public Optional<Player> getPlayerByColor(Color color) {
+        return players.values().stream().filter(x -> x.hasColor(color)).findFirst();
     }
 
     private Optional<Android> getAndroidByColor(Color color) {
@@ -95,12 +99,62 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, Runn
         }
     }
 
-    private Collection<ActionCard> drawCards(int number) {
+    private Collection<ActionCard> takeCardsFromDeck(int number) {
         return IntStream.range(0, number).mapToObj(x -> drawCard()).collect(Collectors.toList());
     }
 
     private ActionCard drawCard() {
         return deck.pop();
+    }
+
+    @Override
+    public void notifyPlayers(Notification notification) {
+        for (var decisionMaker : players.keySet()) {
+            decisionMaker.sendNotification(notification);
+        }
+    }
+
+    @Override
+    public void dealCards() {
+        dealCards(1);
+    }
+
+    public void dealCards(int number) {
+        for (var player : players.values()) {
+            dealCardsTo(player, number);
+        }
+    }
+
+    private void dealCardsTo(Player player, int number) {
+        player.receiveCards(takeCardsFromDeck(number));
+    }
+
+    @Override
+    public void allowCardPassing() {
+        for (var player : players.values()) {
+            player.allowToPassACard();
+        }
+    }
+
+    @Override
+    public void disallowCardPassing() {
+        for (var player : players.values()) {
+            player.disallowToPassACard();
+        }
+    }
+
+    @Override
+    public void endPhase(Phase phase) {
+        for (var player : players.values()) {
+            player.endPhase(phase);
+        }
+    }
+
+    @Override
+    public void endPhaseFor(Player player, Phase phase) {
+        if (player.endPhase(phase)) {
+            dealCardsTo(player, 5);
+        }
     }
 
 }

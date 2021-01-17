@@ -1,6 +1,7 @@
 package spacealert.core.planningPhase;
 
 import spacealert.core.Color;
+import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
 import spacealert.core.gamestates.PrivateGameState;
@@ -15,6 +16,8 @@ public class Player {
     private final Color color;
     private final ArrayList<ActionCard> hand;
     private final ActionBoard actionBoard;
+    private boolean allowedToPassACard = false;
+    private Phase phase = Phase.ONE;
 
     public Player(Color color) {
         this.color = color;
@@ -22,13 +25,13 @@ public class Player {
         actionBoard = new ActionBoard();
     }
 
-    public void drawCard(ActionCard card) {
+    public void receiveCard(ActionCard card) {
         hand.add(card);
     }
 
-    public void drawCards(Collection<ActionCard> cards) {
+    public void receiveCards(Collection<ActionCard> cards) {
         for (var card : cards) {
-            drawCard(card);
+            receiveCard(card);
         }
     }
 
@@ -37,7 +40,11 @@ public class Player {
     }
 
     public void flipCardOnActionBoard(UUID cardId) {
-        actionBoard.flipCardById(cardId);
+        actionBoard.flipCardById(cardId, phase);
+    }
+
+    public void flipCardOnAndroidActionBoard(Android android, UUID cardId) {
+        android.flipCardOnActionBoard(cardId, phase);
     }
 
     public void placeCardOnOwnActionBoard(UUID cardId, int position) {
@@ -45,23 +52,56 @@ public class Player {
     }
 
     public void placeCardOnActionBoard(ActionBoard actionBoard, UUID cardId, int position) {
-        removeCardFromHand(cardId)
-                .ifPresent(card -> actionBoard.place(position, card));
+        findCardInHand(cardId)
+                .ifPresent(card -> {
+                    if (actionBoard.tryPlace(position, card, Optional.of(phase))) {
+                        removeCardFromHand(cardId);
+                    }
+                });
     }
 
     public void placeCardOnAndroidActionBoard(Android android, UUID cardId, int position) {
-        removeCardFromHand(cardId)
-                .ifPresent(card -> android.placeCardOnActionBoard(card, position));
+        findCardInHand(cardId)
+                .ifPresent(card -> {
+                    if (android.tryPlaceCardOnActionBoard(card, position, Optional.of(phase))) {
+                        removeCardFromHand(cardId);
+                    }
+                });
     }
 
     public void retrieveCardFromAndroidActionBoard(Android android, UUID cardId) {
-        android.retrieveCardFromActionBoard(cardId)
+        android.retrieveCardFromActionBoard(cardId, phase)
                 .ifPresent(hand::add);
     }
 
     public void retrieveCardFromActionBoard(UUID cardId) {
-        actionBoard.returnCardById(cardId)
+        actionBoard.returnCardById(cardId, phase)
                 .ifPresent(hand::add);
+    }
+
+    public void allowToPassACard() {
+        allowedToPassACard = true;
+    }
+
+    public void disallowToPassACard() {
+        allowedToPassACard = false;
+    }
+
+    public void passCardTo(Player receivingPlayer, UUID cardId) {
+        if (!allowedToPassACard) return;
+        removeCardFromHand(cardId).ifPresent(x -> {
+            receivingPlayer.receiveCard(x);
+            disallowToPassACard();
+        });
+    }
+
+    public boolean endPhase(Phase phase) {
+        if (this.phase == phase && phase != Phase.THREE) {
+            this.phase = phase.next();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private Optional<ActionCard> removeCardFromHand(UUID cardId) {
@@ -80,6 +120,10 @@ public class Player {
 
     public PrivateGameState toPrivateGameState() {
         return new PrivateGameState(color, hand);
+    }
+
+    public boolean hasColor(Color color) {
+        return this.color == color;
     }
 
 }
