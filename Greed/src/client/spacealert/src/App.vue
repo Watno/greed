@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button v-if="!gameStarted" @click="startGame">Start</button>
+		<Lobby v-if="!gameStarted && lobby != null" :lobby="lobby" />
 		<div v-if="gameStarted">
 			<Hand
 				:cards="hand"
@@ -39,10 +39,12 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-prototype-builtins */
 import { computed, defineComponent, ref } from "vue";
 import { typesafeDeserialize } from "./typesafeDeserialize";
-import { getServerlocation } from "./serverlocation";
+import { sendGameCommand, setOnMessageCallback, startGame } from "./websocket";
 
+import Lobby from "./components/Lobby.vue";
 import Hand from "./components/Hand.vue";
 import Android from "./components/Android.vue";
 import PlayerArea from "./components/PlayerArea.vue";
@@ -60,11 +62,13 @@ import PlaceCardOnOwnActionBoardCommand from "./models/commands/PlaceCardOnOwnAc
 import PlaceCardOnAndroidActionBoardCommand from "./models/commands/PlaceCardOnAndroidActionBoardCommand";
 import RetrieveCardFromOwnActionBoardCommand from "./models/commands/RetrieveCardFromOwnActionBoardCommand";
 import RetrieveCardFromAndroidActionBoardCommand from "./models/commands/RetrieveCardFromAndroidActionBoardCommand";
+import LobbyModel from "./models/lobby/LobbyModel";
 
 export default defineComponent({
-	components: { Hand, Android, PlayerArea },
+	components: { Hand, Android, PlayerArea, Lobby },
 	setup() {
-		const socket = new WebSocket(getServerlocation());
+		const lobby = ref(null as LobbyModel | null);
+
 		const gameState = ref(null as GameStateWithPrivateInfoModel | null);
 		const selectedCard = ref(null as SelectedCardModel | null);
 
@@ -86,15 +90,6 @@ export default defineComponent({
 				gameState.value?.publicGameState.playerGameStates.length != null &&
 				gameState.value?.publicGameState.playerGameStates.length == 1
 		);
-
-		function sendGameCommand(object: object) {
-			console.log(object);
-			socket.send(
-				JSON.stringify({
-					gamecommand: object,
-				})
-			);
-		}
 
 		function onCardInHandSelected(id: string) {
 			selectedCard.value = new SelectedCardModel(
@@ -184,27 +179,23 @@ export default defineComponent({
 			selectedCard.value = null;
 		}
 
-		function startGame() {
-			socket.send('{"newTable":"spacealert"}');
-			socket.send('{"changePlayers":4}');
-			socket.send('{"ready":true}');
+		function deserializeLobby(json: string) {
+			typesafeDeserialize(LobbyModel, json).then((x) => (lobby.value = x));
 		}
 
-		socket.onopen = function () {
-			console.log("Connected to WebSocket.");
-		};
-		socket.onmessage = function (msg) {
-			console.log(msg.data);
-			typesafeDeserialize(GameStateWithPrivateInfoModel, msg.data).then(
-				(x) => (gameState.value = x)
-			);
-		};
-		socket.onerror = function (msg) {
-			alert("Sorry but there was an error.\n\n" + msg);
-		};
-		socket.onclose = function () {
-			alert("Server offline.");
-		};
+		function deserializeGameState(json: string) {
+			typesafeDeserialize(GameStateWithPrivateInfoModel, json).then((x) => (gameState.value = x));
+		}
+
+		setOnMessageCallback(function (msg) {
+			const json = msg.data;
+			if (JSON.parse(json).hasOwnProperty("tables")){
+				deserializeLobby(json);
+			}
+			if (JSON.parse(json).hasOwnProperty("publicGameState")){
+				deserializeGameState(json);
+			}
+		});
 
 		return {
 			gameStarted,
@@ -222,6 +213,7 @@ export default defineComponent({
 			onCardPlacedToOwnActionBoard,
 			onCardPlacedToAndroidActionBoard,
 			startGame,
+			lobby,
 		};
 	},
 });

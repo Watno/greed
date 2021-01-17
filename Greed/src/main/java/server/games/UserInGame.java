@@ -40,18 +40,19 @@ public class UserInGame implements IUserFromGamePerspective {
 
     @Override
     public synchronized <T> T awaitTypedInput(TypeReference<T> requestedType) throws InterruptedException, DisconnectedException {
-        waitAndThrowIfDisconnected();
         while(true) {
             try {
+                waitAndThrowIfDisconnected();
                 var inputToProcess = currentInput;
                 currentInput = null;
                 return objectMapper.readValue(inputToProcess, requestedType);
             } catch (JsonProcessingException e) {
-                connectionSender.send(e);
+                connectionSender.send(e.toString());
                 e.printStackTrace();
             }
         }
     }
+
 
     @Override
     public void allowReturnToLobby() {

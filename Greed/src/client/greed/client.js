@@ -217,7 +217,18 @@ function changeName() {
 		return;
 	}
 	document.getElementById('newName').value = "";
-	sendLobbyCommand('{"namechange":"' + name + '"}');
+	sendLobbyCommand(function changeName() {
+                     	var name = document.getElementById('newName').value;
+                     	if (!name.trim() || name == "") {
+                     		showMessage('Name must not be empty.');
+                     		return;
+                     	}
+                     	document.getElementById('newName').value = "";
+                     	sendLobbyCommand('{"namechange":"' + name + '"}');
+                     	nameSelected = true;
+                     	document.getElementById('lobby').hidden = false;
+                     	document.getElementById('initial').hidden = true;
+                     });
 	nameSelected = true;
 	document.getElementById('lobby').hidden = false;
 	document.getElementById('initial').hidden = true;

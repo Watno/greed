@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsEnum, IsDefined, IsNumber, IsInt } from "class-validator";
+import { IsEnum, IsDefined, IsInt } from "class-validator";
 import ActionBoardModel from "./ActionBoardModel";
 import { ColorModel } from './ColorModel';
 

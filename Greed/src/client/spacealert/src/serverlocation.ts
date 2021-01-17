@@ -3,5 +3,5 @@
  */
 
 export function getServerlocation(): string {
-    return 'ws://localhost:8081/spacealert'
+    return 'ws://35.192.32.198:8081/spacealert'
 }
