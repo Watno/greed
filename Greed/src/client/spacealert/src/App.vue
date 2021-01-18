@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<!-- <button @click="play()">Play</button>
+		<button @click="communicationsDown()">Comms down</button>
+		<button @click="communicationsRestored()">Comms restored</button> -->
 		<Lobby v-if="!gameStarted && lobby != null" :lobby="lobby" />
 		<div v-if="gameStarted">
 			<Hand
@@ -55,6 +58,8 @@ import { ColorModel } from "./models/ColorModel";
 import SelectedCardModel from "./models/SelectedCardModel";
 import { SelectedCardPositionModel } from "./models/SelectedCardPositionModel";
 
+import Notification from "./models/events/Notification";
+
 import FlipCardInHandCommand from "./models/commands/FlipCardInHandCommand";
 import FlipCardOnOwnActionBoardCommand from "./models/commands/FlipCardOnOwnActionBoardCommand";
 import FlipCardOnAndroidActionBoardCommand from "./models/commands/FlipCardOnAndroidActionBoardCommand";
@@ -63,11 +68,14 @@ import PlaceCardOnAndroidActionBoardCommand from "./models/commands/PlaceCardOnA
 import RetrieveCardFromOwnActionBoardCommand from "./models/commands/RetrieveCardFromOwnActionBoardCommand";
 import RetrieveCardFromAndroidActionBoardCommand from "./models/commands/RetrieveCardFromAndroidActionBoardCommand";
 import LobbyModel from "./models/lobby/LobbyModel";
+import AudioPlayer from "./AudioPlayer";
 
 export default defineComponent({
 	components: { Hand, Android, PlayerArea, Lobby },
 	setup() {
 		const lobby = ref(null as LobbyModel | null);
+
+		const audioPlayer = new AudioPlayer();
 
 		const gameState = ref(null as GameStateWithPrivateInfoModel | null);
 		const selectedCard = ref(null as SelectedCardModel | null);
@@ -184,19 +192,42 @@ export default defineComponent({
 		}
 
 		function deserializeGameState(json: string) {
-			typesafeDeserialize(GameStateWithPrivateInfoModel, json).then((x) => (gameState.value = x));
+			typesafeDeserialize(GameStateWithPrivateInfoModel, json).then(
+				(x) => (gameState.value = x)
+			);
+		}
+		function deserializeNotification(json: string) {
+			typesafeDeserialize(Notification, json).then((x) =>
+				x.playAudio(audioPlayer)
+			);
 		}
 
 		setOnMessageCallback(function (msg) {
 			const json = msg.data;
-			if (JSON.parse(json).hasOwnProperty("tables")){
+			if (JSON.parse(json).hasOwnProperty("tables")) {
 				deserializeLobby(json);
 			}
-			if (JSON.parse(json).hasOwnProperty("publicGameState")){
+			if (JSON.parse(json).hasOwnProperty("publicGameState")) {
 				deserializeGameState(json);
+			}
+			if (JSON.parse(json).hasOwnProperty("event")) {
+				deserializeNotification(json);
 			}
 		});
 
+		// function play(){
+		// 	audioPlayer.start();
+		// 	audioPlayer.playInSequence(["alert.mp3", "begin_first_phase.mp3"]);
+		// }
+
+		// function communicationsDown(){
+		// 	audioPlayer.play("communications_down.mp3")
+		// 	.then(() => audioPlayer.playInLoop("white_noise.ogg"));
+		// }
+
+		// function communicationsRestored(){
+		// 	audioPlayer.play("communications_restored.mp3");
+		// }
 		return {
 			gameStarted,
 			hand,
@@ -214,6 +245,9 @@ export default defineComponent({
 			onCardPlacedToAndroidActionBoard,
 			startGame,
 			lobby,
+			// play,
+			// communicationsDown,
+			// communicationsRestored
 		};
 	},
 });

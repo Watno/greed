@@ -21,8 +21,8 @@ export default defineComponent({
     }
   },
   setup(props, {emit}) {
-    const movementHalfImage = computed(() => `./${props.card.movementHalf.type}.png`);
-    const actionHalfImage = computed(() => `./${props.card.actionHalf.type}.png`);
+    const movementHalfImage = computed(() => `./images/actioneffects/${props.card.movementHalf.type}.png`);
+    const actionHalfImage = computed(() => `./images/actioneffects/${props.card.actionHalf.type}.png`);
 
     const flipped = computed(() => props.card.orientation == CardOrientationModel.MOVEMENT) ;
     const flip = () => emit('flip', props.card.id);
