@@ -4,9 +4,11 @@ import spacealert.core.Phase;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
 
 public interface IPlanningPhaseExposedToEvents {
+    void broadcastGameState();
+
     void notifyPlayers(Notification notification);
 
-    void dealCards();
+    void dealCards(int number);
 
     void allowCardPassing();
 

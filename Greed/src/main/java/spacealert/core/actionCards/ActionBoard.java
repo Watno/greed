@@ -75,7 +75,7 @@ public class ActionBoard {
 	private Optional<ActionCard> findCardById(UUID cardId, Optional<Phase> phase) {
 		var availableCards = getAvailableIndices(phase);
 		return cards
-				.subList(availableCards.lowerEndpoint(), availableCards.upperEndpoint())
+				.subList(availableCards.lowerEndpoint(), availableCards.upperEndpoint() + 1)
 				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)

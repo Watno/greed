@@ -1,10 +1,7 @@
-package spacealert.core.planningPhase.eventSequences.events.templates;
+package spacealert.core.planningPhase.eventSequences.events;
 
 import spacealert.core.planningPhase.IPlanningPhaseExposedToEvents;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
-import spacealert.core.planningPhase.eventSequences.events.IEvent;
-import spacealert.core.planningPhase.eventSequences.events.Notification;
-import spacealert.core.planningPhase.eventSequences.events.NotificationType;
 
 import java.time.Duration;
 
@@ -22,6 +19,8 @@ public abstract class AbstractEvent implements IEvent {
 
     private void trigger(IPlanningPhaseExposedToEvents planningPhase) {
         planningPhase.notifyPlayers(new Notification(NotificationType.TRIGGERED, this));
+        onTriggered(planningPhase);
+        planningPhase.broadcastGameState();
     }
 
     protected void onTriggered(IPlanningPhaseExposedToEvents planningPhase) {

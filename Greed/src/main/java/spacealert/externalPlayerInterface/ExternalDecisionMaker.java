@@ -7,6 +7,7 @@ import spacealert.core.IDecisionMaker;
 import spacealert.core.gamestates.GameStateWithPrivateInfo;
 import spacealert.core.planningPhase.IPlanningPhaseExposedToDecisionMaker;
 import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
+import spacealert.core.planningPhase.eventSequences.events.Notification;
 
 public class ExternalDecisionMaker implements IDecisionMaker {
     private final IUserFromGamePerspective user;
@@ -23,6 +24,11 @@ public class ExternalDecisionMaker implements IDecisionMaker {
     @Override
     public void sendGameState(GameStateWithPrivateInfo gameState) {
         user.send(gameState);
+    }
+
+    @Override
+    public void sendNotification(Notification notification) {
+        user.send(notification);
     }
 
     private void makeDecisionsForPlanningPhase(IPlanningPhaseExposedToDecisionMaker planningPhase) {

@@ -10,6 +10,8 @@ import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
 import spacealert.core.planningPhase.eventSequences.EventSequence;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
+import spacealert.core.planningPhase.eventSequences.premades.Mission1;
+import spacealert.core.planningPhase.eventSequences.threatProviders.RandomThreatProvider;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -47,7 +49,7 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         for (var thread : decisionMakerThreads) {
             thread.start();
         }
-        EventSequence eventSequence = null;
+        EventSequence eventSequence = new Mission1(new RandomThreatProvider());
         try {
             new EventExecutor().run(eventSequence, this).get();
         } catch (InterruptedException | ExecutionException e) {
@@ -85,7 +87,8 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         return androids.stream().filter(x -> x.hasColor(color)).findFirst();
     }
 
-    private void broadcastGameState() {
+    @Override
+    public void broadcastGameState() {
         var publicGameState =
                 new PublicGameState(
                         players.values().stream()
@@ -115,10 +118,6 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
     }
 
     @Override
-    public void dealCards() {
-        dealCards(1);
-    }
-
     public void dealCards(int number) {
         for (var player : players.values()) {
             dealCardsTo(player, number);

@@ -1,15 +1,17 @@
 package spacealert.core.threats.templates;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import spacealert.core.Game;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.Trajectory;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, property = "type")
 public abstract class Threat {
     protected int speed;
     protected int maximumHitPoints;
-    private int pointsForSurviving;
-    private int pointsForDestroying;
+    private final int pointsForSurviving;
+    private final int pointsForDestroying;
 
     protected Threat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying) {
         this.speed = speed;

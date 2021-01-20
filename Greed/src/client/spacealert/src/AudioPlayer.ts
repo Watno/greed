@@ -3,11 +3,11 @@ export default class AudioPlayer {
     private started = false;
 
     public start() {
-        if (!this.started){
+        if (!this.started) {
             this.playBackground();
             this.started = true;
         }
-        
+
     }
 
     public end() {
@@ -26,8 +26,9 @@ export default class AudioPlayer {
         this.playBackground();
     }
 
-    public playInLoop(audiofile: string): Promise<void> {
-        return this.playInternal(audiofile, true);
+    public async playThenLoop(audiofile: string, audioFileToLoop: string) {
+        await this.playInternal(audiofile, false)
+        this.playInternal(audioFileToLoop, true);
     }
 
     private playInternal(audiofile: string, inLoop: boolean): Promise<void> {
@@ -35,6 +36,7 @@ export default class AudioPlayer {
         this.currentlyPlayingAudio = new Audio("./audio/" + audiofile);
         this.currentlyPlayingAudio.loop = inLoop;
         this.currentlyPlayingAudio.play();
+        this.currentlyPlayingAudio.onerror = x => console.warn(x);
         return new Promise((resolve, reject) => {
             this.currentlyPlayingAudio!.onended = () => resolve();
             this.currentlyPlayingAudio!.onabort = () => reject();
@@ -42,6 +44,6 @@ export default class AudioPlayer {
     }
 
     private playBackground() {
-        this.playInLoop("red_alert_1.mp3");
+        this.playInternal("red_alert_1.mp3", true);
     }
 } 

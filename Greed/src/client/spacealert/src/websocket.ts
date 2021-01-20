@@ -1,6 +1,4 @@
-import { getServerlocation } from "./serverlocation";
-
-const socket = new WebSocket(getServerlocation());
+const socket = new WebSocket(process.env.VUE_APP_WEBSOCKET_URL);
 socket.onopen = function () {
     console.log("Connected to WebSocket.");
 };

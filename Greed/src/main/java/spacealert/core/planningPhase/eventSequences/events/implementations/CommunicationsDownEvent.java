@@ -1,6 +1,6 @@
-package spacealert.core.planningPhase.eventSequences.events.manifestations;
+package spacealert.core.planningPhase.eventSequences.events.implementations;
 
-import spacealert.core.planningPhase.eventSequences.events.templates.AbstractOngoingEvent;
+import spacealert.core.planningPhase.eventSequences.events.AbstractOngoingEvent;
 
 public class CommunicationsDownEvent extends AbstractOngoingEvent {
     public CommunicationsDownEvent(long triggerTimeMinutes, long triggerTimeSeconds, long durationSeconds) {

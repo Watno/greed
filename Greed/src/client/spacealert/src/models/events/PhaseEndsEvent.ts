@@ -4,7 +4,7 @@ import Event from "./Event";
 import AudioPlayer from "@/AudioPlayer";
 
 export default class PhaseEndsEvent extends Event {
-    @IsEnum(() => Phase)
+    @IsEnum(Phase)
     private phase: Phase
 
     constructor(phase: Phase) {
@@ -13,14 +13,15 @@ export default class PhaseEndsEvent extends Event {
     }
 
     public playWhenHappensInAMinute(player: AudioPlayer): void {
-        player.play(this.getPhaseString + "ends_in_1_minute.mp3")
+        player.play(this.getPhaseString() + "_ends_in_1_minute.mp3")
     }
     public playWhenHappensInTwentySeconds(player: AudioPlayer): void {
-        player.play(this.getPhaseString + "ends_in_20_seconds.mp3");
+        player.play(this.getPhaseString() + "_ends_in_20_seconds.mp3");
     }
     public playWhenTriggered(player: AudioPlayer): void {
-        player.play(this.getPhaseString + "ends.mp3")
-            .then(() => this.playNextPhaseStarts(player));
+        player.play(this.getPhaseString() + "_ends.mp3")
+            .then(() => this.playNextPhaseStarts(player))
+            .then(() => { if (this.phase == Phase.THREE) { player.end() } });
     }
 
     playNextPhaseStarts(player: AudioPlayer): void {

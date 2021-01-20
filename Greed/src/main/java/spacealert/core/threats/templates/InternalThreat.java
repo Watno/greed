@@ -1,5 +1,6 @@
 package spacealert.core.threats.templates;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import spacealert.core.Button;
 import spacealert.core.Game;
 import spacealert.core.GameLost;
@@ -12,8 +13,9 @@ import spacealert.core.threats.Trajectory;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, property = "type")
 public abstract class InternalThreat extends Threat {
-    private List<Position> spawnPositions;
+    private final List<Position> spawnPositions;
 
     protected InternalThreat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying, List<Position> spawnPositions) {
         super(speed, hitPoints, pointsForSurviving, pointsForDestroying);

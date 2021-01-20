@@ -1,9 +1,7 @@
-package spacealert.core.planningPhase.eventSequences.events.templates;
+package spacealert.core.planningPhase.eventSequences.events;
 
 import spacealert.core.planningPhase.IPlanningPhaseExposedToEvents;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
-import spacealert.core.planningPhase.eventSequences.events.Notification;
-import spacealert.core.planningPhase.eventSequences.events.NotificationType;
 
 import java.time.Duration;
 
@@ -25,6 +23,7 @@ public abstract class AbstractOngoingEvent extends AbstractEvent {
     private void end(IPlanningPhaseExposedToEvents planningPhase) {
         planningPhase.notifyPlayers(new Notification(NotificationType.ENDED, this));
         onEnded(planningPhase);
+        planningPhase.broadcastGameState();
     }
 
     protected void onEnded(IPlanningPhaseExposedToEvents planningPhase) {

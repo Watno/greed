@@ -1,12 +1,12 @@
-package spacealert.core.planningPhase.eventSequences.events.manifestations;
+package spacealert.core.planningPhase.eventSequences.events.implementations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.Phase;
 import spacealert.core.planningPhase.IPlanningPhaseExposedToEvents;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
+import spacealert.core.planningPhase.eventSequences.events.AbstractEvent;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
 import spacealert.core.planningPhase.eventSequences.events.NotificationType;
-import spacealert.core.planningPhase.eventSequences.events.templates.AbstractEvent;
 
 import java.time.Duration;
 
