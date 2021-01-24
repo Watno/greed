@@ -10,8 +10,8 @@ import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
-import spacealert.core.threats.implementations.external.*;
-import spacealert.core.threats.implementations.internal.*;
+import spacealert.core.planningPhase.eventSequences.threatProviders.RandomThreatProvider;
+import spacealert.core.planningPhase.eventSequences.threatProviders.ThreatLevel;
 import spacealert.core.threats.templates.Threat;
 
 import java.util.*;
@@ -25,7 +25,7 @@ class BoardStateTest {
 
     private static final Random random = new Random();
 
-    @RepeatedTest(100000)
+    @RepeatedTest(10000)
     void randomGameSmokeTest() {
         var deck = ActionCard.defaultDeck();
         var actionBoards = IntStream.range(0, 5)
@@ -182,42 +182,27 @@ class BoardStateTest {
 
 
     private List<List<Threat>> getRandomThreatList() {
-        var allThreats = new ArrayList<>(List.of(
-                new Amoeba(getRandomZone()),
-                new ArmoredGrappler(getRandomZone()),
-                new CryoshieldFighter(getRandomZone()),
-                new Destroyer(getRandomZone()),
-                new EnergyCloud(getRandomZone()),
-                new Fighter(getRandomZone()),
-                new Gunship(getRandomZone()),
-                new Meteoroid(getRandomZone()),
-                new PulseBall(getRandomZone()),
-                new StealthFighter(getRandomZone()),
-                new Asteroid(getRandomZone()),
-                new CryoshieldFrigate(getRandomZone()),
-                new Frigate(getRandomZone()),
-                new InterstellarOctopus(getRandomZone()),
-                new LeviathanTanker(getRandomZone()),
-                new Maelstrom(getRandomZone()),
-                new ManOfWar(getRandomZone()),
-                new PulseSatellite(getRandomZone()),
-                new HackedShieldsRed(),
-                new HackedShieldsBlue(),
-                new SaboteurBlue(),
-                new SaboteurRed(),
-                new SkirmishersBlue(),
-                new SkirmishersRed(),
-                new UnstableWarheads(),
-                new Alien(),
-                new BattlebotUprising(),
-                new CommandosBlue(),
-                new CommandosRed(),
-                new CrossedWires(),
-                new Fissure()
-        ));
-        Collections.shuffle(allThreats, random);
+        var provider = new RandomThreatProvider(List.of(ThreatLevel.WHITE, ThreatLevel.YELLOW, ThreatLevel.RED), List.of(ThreatLevel.WHITE, ThreatLevel.YELLOW, ThreatLevel.RED));
 
-        return allThreats.stream().limit(8).map(List::of).collect(Collectors.toList());
+        return Stream.generate(() -> getThreatFromProvider(provider)).limit(8)
+                .map(List::of).collect(Collectors.toList());
+    }
+
+    private Threat getThreatFromProvider(RandomThreatProvider provider) {
+        try {
+            if (trueWithPercentage(25)) {
+                return provider.provideExternalThreat(false).apply(getRandomZone());
+            }
+            if (trueWithPercentage(33)) {
+                return provider.provideExternalThreat(true).apply(getRandomZone());
+            }
+            if (trueWithPercentage(50)) {
+                return provider.provideInternalThreat(false).get();
+            }
+            return provider.provideInternalThreat(true).get();
+        } catch (EmptyStackException e) {
+            return getThreatFromProvider(provider);
+        }
     }
 
     private Zone getRandomZone() {

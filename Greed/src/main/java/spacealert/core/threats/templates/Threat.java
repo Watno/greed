@@ -130,4 +130,8 @@ public abstract class Threat {
     public int getPointsForDestroying() {
         return pointsForDestroying;
     }
+
+    protected int getDamageTaken() {
+        return maximumHitPoints - currentHitPoints;
+    }
 }

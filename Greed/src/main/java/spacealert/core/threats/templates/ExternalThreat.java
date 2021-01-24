@@ -21,7 +21,7 @@ public abstract class ExternalThreat extends Threat {
 
     protected Zone zone;
 
-    private int assignedDamage = 0;
+    protected int assignedDamage = 0;
 
     @Override
     Trajectory getTrajectory(BoardState boardState) {
@@ -44,13 +44,13 @@ public abstract class ExternalThreat extends Threat {
     @Override
     public GameLost resolveDamage(BoardState boardState) {
         var unblockedDamage = assignedDamage - getEffectiveShieldPoints();
-        var gameLost = takeDamage(boardState, unblockedDamage);
-        resetAfterDamageResolution();
-        return gameLost;
+        return takeDamage(boardState, unblockedDamage)
+                .then(resetAfterDamageResolution(boardState));
     }
 
-    protected void resetAfterDamageResolution() {
+    protected GameLost resetAfterDamageResolution(BoardState boardState) {
         assignedDamage = 0;
+        return GameLost.FALSE;
     }
 
     protected int getEffectiveShieldPoints() {

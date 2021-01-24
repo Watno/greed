@@ -1,8 +1,12 @@
 package spacealert.core.planningPhase.eventSequences.threatProviders;
 
 import spacealert.core.boardElements.positions.Zone;
-import spacealert.core.threats.implementations.external.*;
-import spacealert.core.threats.implementations.internal.*;
+import spacealert.core.threats.implementations.external.nonserious.white.*;
+import spacealert.core.threats.implementations.external.nonserious.yellow.*;
+import spacealert.core.threats.implementations.external.serious.white.*;
+import spacealert.core.threats.implementations.external.serious.yellow.*;
+import spacealert.core.threats.implementations.internal.nonserious.white.*;
+import spacealert.core.threats.implementations.internal.serious.white.*;
 import spacealert.core.threats.templates.ExternalThreat;
 import spacealert.core.threats.templates.InternalThreat;
 
@@ -45,9 +49,14 @@ public class RandomThreatProvider implements IThreatProvider {
             internalThreats.add(UnstableWarheads::new);
         }
 
-        //noinspection StatementWithEmptyBody
         if (levelsForNormalThreats.contains(ThreatLevel.YELLOW)) {
-            //TODO
+            externalThreats.add(Jellyfish::new);
+            externalThreats.add(Kamikaze::new);
+            externalThreats.add(MinorAsteroid::new);
+            externalThreats.add(PhantomFighter::new);
+            externalThreats.add(Swarm::new);
+
+            //TODO internal, todos
         }
 
         if (levelsForSeriousThreats.contains(ThreatLevel.WHITE)) {
@@ -67,9 +76,14 @@ public class RandomThreatProvider implements IThreatProvider {
             seriousInternalThreats.add(BattlebotUprising::new);
         }
 
-        //noinspection StatementWithEmptyBody
         if (levelsForSeriousThreats.contains(ThreatLevel.YELLOW)) {
-            //TODO
+            seriousExternalThreats.add(Juggernaut::new);
+            seriousExternalThreats.add(MajorAsteroid::new);
+            seriousExternalThreats.add(NebulaCrab::new);
+            seriousExternalThreats.add(Nemesis::new);
+            seriousExternalThreats.add(PsionicSatellite::new);
+
+            //TODO internal, todos
         }
 
         Collections.shuffle(externalThreats);
