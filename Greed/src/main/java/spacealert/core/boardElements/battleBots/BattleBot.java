@@ -14,4 +14,8 @@ public class BattleBot {
     public void disable() {
         active = false;
     }
+
+    public int score() {
+        return active ? 0 : -1;
+    }
 }

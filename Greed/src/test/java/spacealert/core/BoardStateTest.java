@@ -1,5 +1,6 @@
 package spacealert.core;
 
+import com.google.common.collect.Streams;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import spacealert.core.actionCards.ActionBoard;
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GameTest {
+class BoardStateTest {
 
     private static final Random random = new Random();
 
@@ -30,12 +31,155 @@ class GameTest {
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
 
-        var game = new Game(actionBoards, getRandomThreatList());
+        var game = new BoardState(toCrewMembers(actionBoards));
 
-        var missionStepSequence = new DefaultMissionStepSequence();
+        var missionStepSequence = new DefaultMissionStepSequence(getRandomThreatList());
 
         missionStepSequence.execute(game);
     }
+
+    @Test
+    void pushA_ShouldKillTestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        missionStepSequence.execute(game);
+
+        assertEquals(1, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void pushAFourTimes_ShouldKill3TestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        missionStepSequence.execute(game);
+
+        assertEquals(3, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat() {
+        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect(), new GravoliftMoveEffect(), new BEffect(), new GravoliftMoveEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        missionStepSequence.execute(game);
+
+        assertEquals(5, game.getDestroyedThreats().size());
+    }
+
+    @Test
+    void moveRedThenC_thenBattlebot_ShouldEndInSpace() {
+        var actionBoard = createActionBoard(List.of(
+                new RedMoveEffect(), new GravoliftMoveEffect(), new CEffect(),
+                new GravoliftMoveEffect(), new CEffect(), new AttackWithBattleBotEffect(),
+                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect(),
+                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
+
+        missionStepSequence.execute(game);
+
+        var crewMember = game.getCrewMembers().iterator().next();
+
+        assertEquals(game.getSpace(), crewMember.getLocation());
+    }
+
+
+    @Test
+    void gravoliftMove_ShouldMoveToLowerWhite() {
+        var actionBoard = createActionBoard(List.of(new GravoliftMoveEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
+
+        missionStepSequence.execute(game);
+
+        var crewMember = game.getCrewMembers().iterator().next();
+
+        assertEquals(game.getStation(new Position(Deck.LOWER, Zone.WHITE)), crewMember.getLocation());
+    }
+
+    @Test
+    void clockwiseRoundtrip_ShouldMoveToUpperWhite() {
+        var actionBoard = createActionBoard(
+                List.of(
+                        new BlueMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new RedMoveEffect(),
+                        new RedMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new BlueMoveEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
+
+        missionStepSequence.execute(game);
+
+        var crewMember = game.getCrewMembers().iterator().next();
+
+
+        assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
+    }
+
+    @Test
+    void clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite() {
+        var actionBoard = createActionBoard(
+                List.of(
+                        new BlueMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new RedMoveEffect(),
+                        new RedMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new BlueMoveEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
+
+        missionStepSequence.execute(game);
+
+        for (var crewMember : game.getCrewMembers()) {
+            assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
+        }
+    }
+
+    @Test
+    void counterClockwiseRoundtrip_ShouldMoveToUpperWhite() {
+        var actionBoard = createActionBoard(
+                List.of(
+                        new RedMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new BlueMoveEffect(),
+                        new BlueMoveEffect(),
+                        new GravoliftMoveEffect(),
+                        new RedMoveEffect()));
+
+        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+
+        var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
+
+        missionStepSequence.execute(game);
+
+        var crewMember = game.getCrewMembers().iterator().next();
+
+
+        assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
+    }
+
 
     private List<List<Threat>> getRandomThreatList() {
         var allThreats = new ArrayList<>(List.of(
@@ -81,150 +225,6 @@ class GameTest {
         return Zone.values()[index];
     }
 
-
-    @Test
-    void pushA_ShouldKillTestThreat() {
-        var actionBoard = createActionBoard(List.of(new AEffect()));
-
-        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        assertEquals(1, game.getDestroyedThreats().size());
-    }
-
-    @Test
-    void pushAFourTimes_ShouldKill3TestThreat() {
-        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect()));
-
-        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        assertEquals(3, game.getDestroyedThreats().size());
-    }
-
-    @Test
-    void pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat() {
-        var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect(), new GravoliftMoveEffect(), new BEffect(), new GravoliftMoveEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect()));
-
-        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        assertEquals(5, game.getDestroyedThreats().size());
-    }
-
-    @Test
-    void moveRedThenC_thenBattlebot_ShouldEndInSpace() {
-        var actionBoard = createActionBoard(List.of(
-                new RedMoveEffect(), new GravoliftMoveEffect(), new CEffect(),
-                new GravoliftMoveEffect(), new CEffect(), new AttackWithBattleBotEffect(),
-                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect(),
-                new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect()));
-
-        var game = new Game(List.of(actionBoard), Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        var crewMember = game.getCrewMembers().iterator().next();
-
-        assertEquals(game.getSpace(), crewMember.getLocation());
-    }
-
-
-    @Test
-    void gravoliftMove_ShouldMoveToLowerWhite() {
-        var actionBoard = createActionBoard(List.of(new GravoliftMoveEffect()));
-
-        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        var crewMember = game.getCrewMembers().iterator().next();
-
-        assertEquals(game.getStation(new Position(Deck.LOWER, Zone.WHITE)), crewMember.getLocation());
-    }
-
-    @Test
-    void clockwiseRoundtrip_ShouldMoveToUpperWhite() {
-        var actionBoard = createActionBoard(
-                List.of(
-                        new BlueMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new RedMoveEffect(),
-                        new RedMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new BlueMoveEffect()));
-
-        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        var crewMember = game.getCrewMembers().iterator().next();
-
-
-        assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
-    }
-
-    @Test
-    void clockwiseRoundtrips_TwoInParalell_ShouldMoveToUpperWhite() {
-        var actionBoard = createActionBoard(
-                List.of(
-                        new BlueMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new RedMoveEffect(),
-                        new RedMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new BlueMoveEffect()));
-
-        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        for (var crewMember : game.getCrewMembers()) {
-            assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
-        }
-    }
-
-    @Test
-    void counterClockwiseRoundtrip_ShouldMoveToUpperWhite() {
-        var actionBoard = createActionBoard(
-                List.of(
-                        new RedMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new BlueMoveEffect(),
-                        new BlueMoveEffect(),
-                        new GravoliftMoveEffect(),
-                        new RedMoveEffect()));
-
-        var game = new Game(List.of(actionBoard), Collections.nCopies(12, new ArrayList<>()));
-
-        var missionStepSequence = new DefaultMissionStepSequence();
-
-        missionStepSequence.execute(game);
-
-        var crewMember = game.getCrewMembers().iterator().next();
-
-
-        assertEquals(game.getStation(new Position(Deck.UPPER, Zone.WHITE)), crewMember.getLocation());
-    }
-
-
     private ActionBoard createActionBoard(List<ICardEffect> effects) {
         var actionBoard = new ActionBoard();
         var cards = effects.stream()
@@ -250,6 +250,13 @@ class GameTest {
             }
         }
         return actionBoard;
+    }
+
+    private Collection<CrewMember> toCrewMembers(Collection<ActionBoard> actionBoards) {
+        return Streams.zip(actionBoards.stream(),
+                Arrays.stream(Color.values()),
+                CrewMember::new)
+                .collect(Collectors.toList());
     }
 
     private Boolean trueWithPercentage(int percentage) {

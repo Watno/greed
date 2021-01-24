@@ -1,8 +1,8 @@
 package spacealert.core.threats.implementations.internal;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
@@ -21,28 +21,28 @@ public class CommandosBlue extends Intruder {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        moveInDirection(game, Direction.GRAVOLIFT);
+    protected GameLost doXAction(BoardState boardState) {
+        moveInDirection(boardState, Direction.GRAVOLIFT);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         if (currentHitPoints != maximumHitPoints) {
-            moveInDirection(game, Direction.RED);
+            moveInDirection(boardState, Direction.RED);
         } else {
-            return damage(game, 2);
+            return damage(boardState, 2);
         }
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        var gameLost = damage(game, 4);
+    protected GameLost doZAction(BoardState boardState) {
+        var gameLost = damage(boardState, 4);
         if (gameLost == GameLost.TRUE) return GameLost.TRUE;
 
         locations.stream().flatMap(x -> x.getCrewMembers().stream())
-                .forEach(ICrewMember::becomeKnockedOut);
+                .forEach(ICrewMemberFromBoardStatePerspective::becomeKnockedOut);
         return GameLost.FALSE;
     }
 }

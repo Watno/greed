@@ -10,4 +10,8 @@ public class BattleBotStorage {
         battleBot = Optional.empty();
         return result;
     }
+
+    public int score() {
+        return battleBot.map(BattleBot::score).orElse(0);
+    }
 }

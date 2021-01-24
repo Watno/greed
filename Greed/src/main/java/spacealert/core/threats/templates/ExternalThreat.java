@@ -1,7 +1,7 @@
 package spacealert.core.threats.templates;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.positions.Zone;
@@ -24,8 +24,8 @@ public abstract class ExternalThreat extends Threat {
     private int assignedDamage = 0;
 
     @Override
-    Trajectory getTrajectory(Game game) {
-        return game.getTrajectory(zone);
+    Trajectory getTrajectory(BoardState boardState) {
+        return boardState.getTrajectory(zone);
     }
 
     public boolean canBeTargetedBy(DamageSource damageSource) {
@@ -37,14 +37,14 @@ public abstract class ExternalThreat extends Threat {
     }
 
     @Override
-    public void assignDamageTo(Game game, int damage, DamageSource source) {
+    public void assignDamageTo(BoardState boardState, int damage, DamageSource source) {
         assignedDamage += damage;
     }
 
     @Override
-    public GameLost resolveDamage(Game game) {
+    public GameLost resolveDamage(BoardState boardState) {
         var unblockedDamage = assignedDamage - getEffectiveShieldPoints();
-        var gameLost = takeDamage(game, unblockedDamage);
+        var gameLost = takeDamage(boardState, unblockedDamage);
         resetAfterDamageResolution();
         return gameLost;
     }
@@ -57,18 +57,18 @@ public abstract class ExternalThreat extends Threat {
         return shieldPoints;
     }
 
-    protected GameLost attack(Game game, int amount) {
-        return attack(game, zone, amount);
+    protected GameLost attack(BoardState boardState, int amount) {
+        return attack(boardState, zone, amount);
     }
 
-    protected GameLost attack(Game game, Zone targetedZone, int amount) {
-        var modifiedDamage = game.applyShieldsToDamage(targetedZone, amount);
-        return game.damage(targetedZone, modifiedDamage);
+    protected GameLost attack(BoardState boardState, Zone targetedZone, int amount) {
+        var modifiedDamage = boardState.applyShieldsToDamage(targetedZone, amount);
+        return boardState.damage(targetedZone, modifiedDamage);
     }
 
-    protected GameLost attack(Game game, List<Zone> targetedZones, int amount) {
+    protected GameLost attack(BoardState boardState, List<Zone> targetedZones, int amount) {
         for (var targetedZone : targetedZones) {
-            var gameLost = attack(game, targetedZone, amount);
+            var gameLost = attack(boardState, targetedZone, amount);
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
         return GameLost.FALSE;

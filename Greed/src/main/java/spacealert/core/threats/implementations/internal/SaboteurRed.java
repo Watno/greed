@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.internal;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.energyBuckets.reactors.Reactor;
 import spacealert.core.boardElements.positions.Deck;
@@ -17,20 +17,20 @@ public class SaboteurRed extends Intruder {
 
 
     @Override
-    protected GameLost doXAction(Game game) {
-        moveInDirection(game, Direction.RED);
+    protected GameLost doXAction(BoardState boardState) {
+        moveInDirection(boardState, Direction.RED);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         for (var location : this.locations) {
             var energyTaken = location.getZone()
-                    .map(game::getReactor)
+                    .map(boardState::getReactor)
                     .map(Reactor::tryWithdrawOneEnergy)
                     .orElse(false);
             if (!energyTaken) {
-                var gameLost = damage(game, 1);
+                var gameLost = damage(boardState, 1);
                 if (gameLost == GameLost.TRUE) return GameLost.TRUE;
             }
         }
@@ -38,7 +38,7 @@ public class SaboteurRed extends Intruder {
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return damage(game, 2);
+    protected GameLost doZAction(BoardState boardState) {
+        return damage(boardState, 2);
     }
 }

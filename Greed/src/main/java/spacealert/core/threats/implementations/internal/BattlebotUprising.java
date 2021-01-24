@@ -1,9 +1,9 @@
 package spacealert.core.threats.implementations.internal;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
 import spacealert.core.GameLost;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.locations.Location;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
@@ -19,36 +19,36 @@ public class BattlebotUprising extends Malfunction {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        game.getCrewMembers().stream().filter(ICrewMember::hasActiveBattlebot)
-                .forEach(ICrewMember::becomeKnockedOut);
+    protected GameLost doXAction(BoardState boardState) {
+        boardState.getCrewMembers().stream().filter(ICrewMemberFromBoardStatePerspective::hasActiveBattlebot)
+                .forEach(ICrewMemberFromBoardStatePerspective::becomeKnockedOut);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         locations.stream().flatMap(x -> x.getCrewMembers().stream())
-                .forEach(ICrewMember::becomeKnockedOut);
+                .forEach(ICrewMemberFromBoardStatePerspective::becomeKnockedOut);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
+    protected GameLost doZAction(BoardState boardState) {
         //noinspection OptionalGetWithoutIsPresent
-        game.getCrewMembers().stream().filter(x -> !x.getLocation().getPosition()
+        boardState.getCrewMembers().stream().filter(x -> !x.getLocation().getPosition()
                 .get().equals(new Position(Deck.UPPER, Zone.WHITE)))
-                .forEach(ICrewMember::becomeKnockedOut);
+                .forEach(ICrewMemberFromBoardStatePerspective::becomeKnockedOut);
         return GameLost.FALSE;
     }
 
     HashSet<Location> pressedLocations = new HashSet<>();
 
     @Override
-    public void interceptButtonPress(Game game, Location location) {
-        super.interceptButtonPress(game, location);
+    public void interceptButtonPress(BoardState boardState, Location location) {
+        super.interceptButtonPress(boardState, location);
         var added = pressedLocations.add(location);
         if (added && pressedLocations.equals(new HashSet<>(locations))) {
-            takeDamage(game, 1); //should actually happen at end of Player Actions
+            takeDamage(boardState, 1); //should actually happen at end of Player Actions
         }
 
     }

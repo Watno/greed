@@ -4,8 +4,12 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 import spacealert.core.threats.templates.InternalThreat;
 
-public interface IThreatProvider {
-    ExternalThreat provideExternalThreat(boolean serious, Zone zone);
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-    InternalThreat proviceInternalThreat(boolean serious);
+public interface IThreatProvider {
+
+    Function<Zone, ExternalThreat> provideExternalThreat(boolean serious);
+
+    Supplier<InternalThreat> provideInternalThreat(boolean serious);
 }

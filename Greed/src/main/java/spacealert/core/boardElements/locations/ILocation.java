@@ -1,8 +1,8 @@
 package spacealert.core.boardElements.locations;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.InternalThreat;
@@ -12,13 +12,13 @@ import java.util.Optional;
 
 public interface ILocation {
 
-    Collection<ICrewMember> getCrewMembers();
+    Collection<ICrewMemberFromBoardStatePerspective> getCrewMembers();
 
     Optional<Position> getPosition();
 
-    void addCrewMember(ICrewMember crewMember);
+    void addCrewMember(ICrewMemberFromBoardStatePerspective crewMember);
 
-    void removeCrewMember(ICrewMember crewMember);
+    void removeCrewMember(ICrewMemberFromBoardStatePerspective crewMember);
 
     void addInternalThreat(InternalThreat threat);
 
@@ -28,7 +28,7 @@ public interface ILocation {
 
     Optional<Zone> getZone();
 
-    void executeButton(Game game, ICrewMember crewMember, Button button);
+    void executeButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember, Button button);
 
     boolean isSpace();
 }

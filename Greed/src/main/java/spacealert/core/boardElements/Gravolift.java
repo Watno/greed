@@ -1,6 +1,6 @@
 package spacealert.core.boardElements;
 
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 
 public class Gravolift implements IDamageable {
     private boolean isDamaged = false;
@@ -10,7 +10,7 @@ public class Gravolift implements IDamageable {
         return isDamaged || wasUsed;
     }
 
-    public void getUsedBy(ICrewMember crewMember) {
+    public void getUsedBy(ICrewMemberFromBoardStatePerspective crewMember) {
         if (causesDelay()) {
             crewMember.delay();
         }

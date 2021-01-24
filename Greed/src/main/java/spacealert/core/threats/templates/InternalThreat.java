@@ -1,10 +1,10 @@
 package spacealert.core.threats.templates;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
 import spacealert.core.GameLost;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.locations.ILocation;
 import spacealert.core.boardElements.locations.Location;
 import spacealert.core.boardElements.positions.Position;
@@ -30,22 +30,22 @@ public abstract class InternalThreat extends Threat {
     private boolean survived = false;
 
     @Override
-    public GameLost spawn(Game game, int spawnTurn) {
-        locations = spawnPositions.stream().map(game::getStation).collect(Collectors.toList());
+    public GameLost spawn(BoardState boardState, int spawnTurn) {
+        locations = spawnPositions.stream().map(boardState::getStation).collect(Collectors.toList());
         for (var location : locations) {
             location.addInternalThreat(this);
         }
-        return super.spawn(game, spawnTurn);
+        return super.spawn(boardState, spawnTurn);
     }
 
     @Override
-    Trajectory getTrajectory(Game game) {
-        return game.getInternalTrajectory();
+    Trajectory getTrajectory(BoardState boardState) {
+        return boardState.getInternalTrajectory();
     }
 
     @Override
-    protected GameLost becomeDestroyed(Game game) {
-        var gameLost = super.becomeDestroyed(game);
+    protected GameLost becomeDestroyed(BoardState boardState) {
+        var gameLost = super.becomeDestroyed(boardState);
         removeFromLocations();
         return gameLost;
     }
@@ -60,16 +60,16 @@ public abstract class InternalThreat extends Threat {
         return false;
     }
 
-    public void interceptButtonPress(Game game, Location location) {
-        if (!survived) takeDamage(game, 1);
+    public void interceptButtonPress(BoardState boardState, Location location) {
+        if (!survived) takeDamage(boardState, 1);
     }
 
     public boolean canBeTargetedByBattlebot() {
         return false;
     }
 
-    public void getAttackedByBattlebot(Game game, ICrewMember crewMember) {
-        takeDamage(game, 1);
+    public void getAttackedByBattlebot(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
+        takeDamage(boardState, 1);
     }
 
     public boolean returnsFire() {
@@ -77,8 +77,8 @@ public abstract class InternalThreat extends Threat {
     }
 
     @Override
-    protected void becomeSurvived(Game game) {
-        super.becomeSurvived(game);
+    protected void becomeSurvived(BoardState boardState) {
+        super.becomeSurvived(boardState);
         survived = true;
     }
 
@@ -86,9 +86,9 @@ public abstract class InternalThreat extends Threat {
         return survived;
     }
 
-    protected GameLost damage(Game game, int amount) {
+    protected GameLost damage(BoardState boardState, int amount) {
         for (var location : locations) {
-            var gameLost = location.getZone().map(x -> game.damage(x, amount)).orElse(GameLost.FALSE);
+            var gameLost = location.getZone().map(x -> boardState.damage(x, amount)).orElse(GameLost.FALSE);
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
         return GameLost.FALSE;

@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.locations;
 
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
@@ -14,15 +14,15 @@ public class LowerWhiteStation extends Location {
     }
 
     @Override
-    protected void executeBButton(Game game, ICrewMember crewMember) {
+    protected void executeBButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
         if (availableFuelCapsules > 0) {
-            game.getReactor(Zone.WHITE).loadToFull();
+            boardState.getReactor(Zone.WHITE).loadToFull();
             availableFuelCapsules--;
         }
     }
 
     @Override
-    protected void executeCButton(Game game, ICrewMember crewMember) {
-        game.addVisualConfirmation();
+    protected void executeCButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
+        boardState.addVisualConfirmation();
     }
 }

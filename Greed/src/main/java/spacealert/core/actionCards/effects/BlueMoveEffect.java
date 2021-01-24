@@ -1,13 +1,13 @@
 package spacealert.core.actionCards.effects;
 
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Direction;
 
 public class BlueMoveEffect extends CardEffect {
 
-    protected void executeEffect(ICrewMember crewmember, Game game) {
-        crewmember.moveInDirection(game, Direction.BLUE);
+    protected void executeEffect(ICrewMemberFromBoardStatePerspective crewmember, BoardState boardState) {
+        crewmember.moveInDirection(boardState, Direction.BLUE);
     }
 
 }

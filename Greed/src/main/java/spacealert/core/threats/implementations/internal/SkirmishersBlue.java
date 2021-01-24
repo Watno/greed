@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.internal;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
@@ -20,19 +20,19 @@ public class SkirmishersBlue extends Intruder {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        moveInDirection(game, Direction.RED);
+    protected GameLost doXAction(BoardState boardState) {
+        moveInDirection(boardState, Direction.RED);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
-        moveInDirection(game, Direction.GRAVOLIFT);
+    protected GameLost doYAction(BoardState boardState) {
+        moveInDirection(boardState, Direction.GRAVOLIFT);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return damage(game, 3);
+    protected GameLost doZAction(BoardState boardState) {
+        return damage(boardState, 3);
     }
 }

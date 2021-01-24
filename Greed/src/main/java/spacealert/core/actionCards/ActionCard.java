@@ -1,8 +1,8 @@
 package spacealert.core.actionCards;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.actionCards.effects.*;
 import spacealert.core.boardElements.positions.Direction;
 
@@ -54,21 +54,16 @@ public class ActionCard {
     }
 
     private static Supplier<ICardEffect> getMoveFromDirection(Direction direction) {
-        switch (direction) {
-            case GRAVOLIFT:
-                return GravoliftMoveEffect::new;
-            case BLUE:
-                return BlueMoveEffect::new;
-            case RED:
-                return RedMoveEffect::new;
-            default:
-                throw new IllegalStateException("Unexpected value: " + direction);
-        }
+        return switch (direction) {
+            case GRAVOLIFT -> GravoliftMoveEffect::new;
+            case BLUE -> BlueMoveEffect::new;
+            case RED -> RedMoveEffect::new;
+        };
     }
 
-    public void execute(ICrewMember crewMember, Game game) {
+    public void execute(ICrewMemberFromBoardStatePerspective crewMember, BoardState boardState) {
         var activeHalf = getActiveHalf();
-        activeHalf.execute(crewMember, game);
+        activeHalf.execute(crewMember, boardState);
     }
 
     public void flip() {
@@ -76,13 +71,9 @@ public class ActionCard {
     }
 
     private ICardEffect getActiveHalf() {
-        switch (orientation) {
-            case ACTION:
-                return actionHalf;
-            case MOVEMENT:
-                return movementHalf;
-            default:
-                throw new IllegalArgumentException();
-        }
+        return switch (orientation) {
+            case ACTION -> actionHalf;
+            case MOVEMENT -> movementHalf;
+        };
     }
 }

@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.external;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.damageSources.Rocket;
@@ -13,24 +13,24 @@ public class InterstellarOctopus extends ExternalThreat {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         if (currentHitPoints != maximumHitPoints) {
-            return attack(game, Zone.all, 1);
+            return attack(boardState, Zone.all, 1);
         }
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         if (currentHitPoints != maximumHitPoints) {
-            return attack(game, Zone.all, 2);
+            return attack(boardState, Zone.all, 2);
         }
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return attack(game, 2 * currentHitPoints);
+    protected GameLost doZAction(BoardState boardState) {
+        return attack(boardState, 2 * currentHitPoints);
     }
 
     @Override

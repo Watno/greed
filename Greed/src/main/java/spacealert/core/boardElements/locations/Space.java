@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.locations;
 
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.damageSources.Interceptors;
 
 import java.util.Optional;
@@ -19,12 +19,12 @@ public class Space extends Location {
     }
 
     @Override
-    protected void executeBButton(Game game, ICrewMember crewMember) {
+    protected void executeBButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
 
     }
 
     @Override
-    protected void executeCButton(Game game, ICrewMember crewMember) {
+    protected void executeCButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
 
     }
 

@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.internal;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.damageSources.Interceptors;
@@ -25,38 +25,38 @@ public class Fissure extends InternalThreat {
     }
 
     @Override
-    public void assignDamageTo(Game game, int damage, DamageSource source) {
-        takeDamage(game, 1);
+    public void assignDamageTo(BoardState boardState, int damage, DamageSource source) {
+        takeDamage(boardState, 1);
     }
 
     private Optional<FissureXEffect> triggeredXEffect = Optional.empty();
     private Optional<FissureYEffect> triggeredYEffect = Optional.empty();
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         //noinspection OptionalGetWithoutIsPresent
         triggeredXEffect = Optional.of(new FissureXEffect(locations.get(0).getZone().get()));
-        game.attach(triggeredXEffect.get());
+        boardState.attach(triggeredXEffect.get());
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         triggeredXEffect.ifPresent(TriggeredEffect::remove);
         if (triggeredYEffect.isEmpty()) {
             triggeredYEffect = Optional.of(new FissureYEffect());
-            game.attach(triggeredYEffect.get());
+            boardState.attach(triggeredYEffect.get());
         }
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
+    protected GameLost doZAction(BoardState boardState) {
         return GameLost.TRUE;
     }
 
     @Override
-    protected GameLost onDestroyed(Game game) {
+    protected GameLost onDestroyed(BoardState boardState) {
         triggeredXEffect.ifPresent(TriggeredEffect::remove);
         triggeredYEffect.ifPresent(TriggeredEffect::remove);
         return GameLost.FALSE;

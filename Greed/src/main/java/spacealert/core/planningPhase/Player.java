@@ -1,6 +1,7 @@
 package spacealert.core.planningPhase;
 
 import spacealert.core.Color;
+import spacealert.core.CrewMember;
 import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
@@ -12,17 +13,14 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Player {
-    private final Color color;
+public class Player extends CrewMember {
     private final ArrayList<ActionCard> hand;
-    private final ActionBoard actionBoard;
     private boolean isAllowedToPassACard = false;
     private Phase phase = Phase.ONE;
 
     public Player(Color color) {
-        this.color = color;
+        super(new ActionBoard(), color);
         hand = new ArrayList<>();
-        actionBoard = new ActionBoard();
     }
 
     public void receiveCard(ActionCard card) {

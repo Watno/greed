@@ -1,6 +1,6 @@
 package spacealert.core.missionSteps;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
 public class ComputerMaintenanceCheckStep implements IMissionStep {
@@ -9,9 +9,9 @@ public class ComputerMaintenanceCheckStep implements IMissionStep {
     }
 
     @Override
-    public GameLost execute(Game game) {
-        if (!game.mouseJuggled()) {
-            game.delayAllCrewMembers();
+    public GameLost execute(BoardState boardState) {
+        if (!boardState.mouseJuggled()) {
+            boardState.delayAllCrewMembers();
         }
         return GameLost.FALSE;
     }

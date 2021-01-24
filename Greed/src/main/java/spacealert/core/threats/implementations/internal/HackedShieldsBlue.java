@@ -1,7 +1,7 @@
 package spacealert.core.threats.implementations.internal;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.energyBuckets.EnergyBucket;
 import spacealert.core.boardElements.positions.Deck;
@@ -15,23 +15,23 @@ public class HackedShieldsBlue extends Malfunction {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         for (var location : this.locations) {
             location.getZone()
-                    .map(game::getShield)
+                    .map(boardState::getShield)
                     .ifPresent(EnergyBucket::drain);
         }
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
-        game.getReactor(Zone.BLUE).drain();
+    protected GameLost doYAction(BoardState boardState) {
+        boardState.getReactor(Zone.BLUE).drain();
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return damage(game, 2);
+    protected GameLost doZAction(BoardState boardState) {
+        return damage(boardState, 2);
     }
 }

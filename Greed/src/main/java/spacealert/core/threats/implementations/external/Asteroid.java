@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.external;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.damageSources.Rocket;
@@ -15,20 +15,20 @@ public class Asteroid extends ExternalThreat {
     private int passedXAndYSquares = 0;
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         passedXAndYSquares++;
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         passedXAndYSquares++;
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return attack(game, currentHitPoints);
+    protected GameLost doZAction(BoardState boardState) {
+        return attack(boardState, currentHitPoints);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Asteroid extends ExternalThreat {
     }
 
     @Override
-    protected GameLost onDestroyed(Game game) {
-        return attack(game, passedXAndYSquares * 2);
+    protected GameLost onDestroyed(BoardState boardState) {
+        return attack(boardState, passedXAndYSquares * 2);
     }
 }

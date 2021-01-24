@@ -1,7 +1,7 @@
 package spacealert.core.threats.implementations.internal;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
@@ -14,23 +14,23 @@ public class CrossedWires extends Malfunction {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        game.getShield(Zone.WHITE).chargeFrom(game.getReactor(Zone.WHITE));
-        var drainedEnergy = game.getReactor(Zone.WHITE).drain();
-        return game.damage(Zone.WHITE, drainedEnergy);
+    protected GameLost doXAction(BoardState boardState) {
+        boardState.getShield(Zone.WHITE).chargeFrom(boardState.getReactor(Zone.WHITE));
+        var drainedEnergy = boardState.getReactor(Zone.WHITE).drain();
+        return boardState.damage(Zone.WHITE, drainedEnergy);
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
-        var drainedEnergy = game.getShield(Zone.WHITE).drain();
-        return game.damage(Zone.WHITE, drainedEnergy);
+    protected GameLost doYAction(BoardState boardState) {
+        var drainedEnergy = boardState.getShield(Zone.WHITE).drain();
+        return boardState.damage(Zone.WHITE, drainedEnergy);
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
+    protected GameLost doZAction(BoardState boardState) {
         for (var zone : Zone.values()) {
-            var drainedEnergy = game.getReactor(zone).drain();
-            var gameLost = game.damage(zone, drainedEnergy);
+            var drainedEnergy = boardState.getReactor(zone).drain();
+            var gameLost = boardState.damage(zone, drainedEnergy);
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
         return GameLost.FALSE;

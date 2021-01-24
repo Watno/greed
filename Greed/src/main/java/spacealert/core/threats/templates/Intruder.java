@@ -1,6 +1,6 @@
 package spacealert.core.threats.templates;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
 
@@ -20,9 +20,9 @@ public abstract class Intruder extends InternalThreat {
         return true;
     }
 
-    public void moveInDirection(Game game, Direction direction) {
+    public void moveInDirection(BoardState boardState, Direction direction) {
         for (var location : locations) {
-            var newLocation = game.getAdjacentInDirection(location, direction);
+            var newLocation = boardState.getAdjacentInDirection(location, direction);
             if (newLocation.isPresent()) {
                 location.removeInternalThreat(this);
                 newLocation.get().addInternalThreat(this);

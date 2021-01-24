@@ -5,26 +5,35 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.planningPhase.eventSequences.events.AbstractEvent;
 import spacealert.core.planningPhase.eventSequences.threatProviders.IThreatProvider;
 import spacealert.core.threats.templates.ExternalThreat;
+import spacealert.core.threats.templates.Threat;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class ExternalThreatAppearsEvent extends AbstractEvent {
     @JsonProperty
     private final int turn;
-
     @JsonProperty
     private final boolean seriousity;
-
     @JsonProperty
     private final Zone zone;
-
     @JsonProperty
     private final ExternalThreat threat;
+
+    private final Supplier<ExternalThreat> threatSupplier;
 
     public ExternalThreatAppearsEvent(long triggerTimeMinutes, long triggerTimeSeconds, int turn, boolean seriousity, Zone zone, IThreatProvider threatProvider) {
         super(triggerTimeMinutes, triggerTimeSeconds);
         this.turn = turn;
         this.seriousity = seriousity;
         this.zone = zone;
-        this.threat = threatProvider.provideExternalThreat(seriousity, zone);
+        this.threatSupplier = () -> threatProvider.provideExternalThreat(seriousity).apply(zone);
+        this.threat = threatSupplier.get();
+    }
+
+    @Override
+    public void contributeToThreatsBySpawn(List<List<Threat>> threatsBySpawn) {
+        threatsBySpawn.get(turn - 1).add(threatSupplier.get());
     }
 
 }

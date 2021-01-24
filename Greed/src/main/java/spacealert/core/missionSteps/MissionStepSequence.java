@@ -1,23 +1,26 @@
 package spacealert.core.missionSteps;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
 import java.util.List;
 
 public class MissionStepSequence {
-    private List<IMissionStep> missionSteps;
+    private final List<IMissionStep> missionSteps;
 
     protected MissionStepSequence(List<IMissionStep> missionSteps) {
-        super();
         this.missionSteps = missionSteps;
     }
 
-    public GameLost execute(Game game) {
+    public GameLost execute(BoardState boardState) {
         for (IMissionStep phase : missionSteps) {
-            var gameLost = phase.execute(game);
-            if (gameLost == GameLost.TRUE) return GameLost.TRUE;
+            var gameLost = phase.execute(boardState);
+            if (gameLost == GameLost.TRUE) {
+                System.out.println("Game was lost");
+                return GameLost.TRUE;
+            }
         }
+        System.out.println("Game was won with score " + boardState.score() + ".");
         return GameLost.FALSE;
     }
 }

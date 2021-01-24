@@ -1,5 +1,6 @@
 package spacealert.core;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.boardElements.battleBots.BattleBot;
 import spacealert.core.boardElements.battleBots.BattleBotStorage;
@@ -9,82 +10,100 @@ import spacealert.core.boardElements.positions.Zone;
 
 import java.util.Optional;
 
-public class CrewMember implements ICrewMember {
-	private ActionBoard actionBoard;
-	private ILocation location;
-	private Optional<BattleBot> battleBot = Optional.empty();
-	private boolean knockedOut = false;
+public class CrewMember implements ICrewMemberFromBoardStatePerspective {
+    @JsonProperty
+    protected final ActionBoard actionBoard;
+    @JsonProperty
+    protected final Color color;
+    @JsonProperty
+    private Optional<BattleBot> battleBot = Optional.empty();
+    @JsonProperty
+    private boolean knockedOut = false;
+    private ILocation location;
 
 
-	CrewMember(ILocation location, ActionBoard actionBoard) {
-		this.location = location;
-		this.actionBoard = actionBoard;
-	}
+    protected CrewMember(ActionBoard actionBoard, Color color) {
+        this.actionBoard = actionBoard;
+        this.color = color;
+    }
 
-	@Override
-	public void executeAction(int turn, Game game) {
-		if (!knockedOut) actionBoard.execute(turn, this, game);
-	}
+    public boolean hasColor(Color color) {
+        return this.color == color;
+    }
 
-	@Override
-	public void delay() {
-		actionBoard.delay();
-	}
+    @Override
+    public void executeAction(int turn, BoardState boardState) {
+        if (!knockedOut) actionBoard.execute(turn, this, boardState);
+    }
 
-	@Override
-	public void moveTo(ILocation newLocation) {
-		location.removeCrewMember(this);
-		newLocation.addCrewMember(this);
-		location = newLocation;
-	}
+    @Override
+    public void delay() {
+        actionBoard.delay();
+    }
 
-	@Override
-	public void moveInDirection(Game game, Direction direction) {
-		var newLocation = game.getAdjacentInDirection(location, direction);
-		newLocation.ifPresent(this::moveTo);
-	}
+    @Override
+    public void moveTo(ILocation newLocation) {
+        if (location != null) {
+            //might be null during initialization
+            location.removeCrewMember(this);
+        }
+        newLocation.addCrewMember(this);
+        location = newLocation;
+    }
 
-	@Override
-	public ILocation getLocation() {
-		return location;
-	}
+    @Override
+    public void moveInDirection(BoardState boardState, Direction direction) {
+        var newLocation = boardState.getAdjacentInDirection(location, direction);
+        newLocation.ifPresent(this::moveTo);
+    }
 
-	@Override
-	public Optional<Zone> getZone(){
-		return location.getZone();
-	}
+    @Override
+    public ILocation getLocation() {
+        return location;
+    }
 
-	@Override
-	public void executeButton(Game game, Button button) {
-		location.executeButton(game, this, button);
-	}
+    @Override
+    public Optional<Zone> getZone() {
+        return location.getZone();
+    }
 
-	@Override
-	public boolean isInSpace() {
-		return location.isSpace();
-	}
+    @Override
+    public void executeButton(BoardState boardState, Button button) {
+        location.executeButton(boardState, this, button);
+    }
 
-	@Override
-	public void useBattleBotStorage(BattleBotStorage battleBotStorage) {
-		if (battleBot.isEmpty()) {
-			battleBot = battleBotStorage.tryTakeBattleBotFrom();
-		} else {
-			battleBot.get().activate();
-		}
-	}
+    @Override
+    public boolean isInSpace() {
+        return location.isSpace();
+    }
 
-	@Override
-	public boolean hasActiveBattlebot() {
-		return battleBot.map(BattleBot::isActive).orElse(false);
-	}
+    @Override
+    public void useBattleBotStorage(BattleBotStorage battleBotStorage) {
+        if (battleBot.isEmpty()) {
+            battleBot = battleBotStorage.tryTakeBattleBotFrom();
+        } else {
+            battleBot.get().activate();
+        }
+    }
 
-	@Override
-	public void disableBattleBot() {
-		battleBot.ifPresent(BattleBot::disable);
-	}
+    @Override
+    public boolean hasActiveBattlebot() {
+        return battleBot.map(BattleBot::isActive).orElse(false);
+    }
 
-	@Override
-	public void becomeKnockedOut() {
-		knockedOut = true;
-	}
+    @Override
+    public void disableBattleBot() {
+        battleBot.ifPresent(BattleBot::disable);
+    }
+
+    @Override
+    public void becomeKnockedOut() {
+        knockedOut = true;
+    }
+
+    @Override
+    public int score() {
+        return battleBot.map(BattleBot::score).orElse(0)
+                + (knockedOut ? -1 : 0);
+    }
 }

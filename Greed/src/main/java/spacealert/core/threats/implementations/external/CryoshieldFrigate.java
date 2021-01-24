@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.external;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.boardElements.positions.Zone;
@@ -12,18 +12,18 @@ public class CryoshieldFrigate extends ExternalThreat {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        return attack(game, 2);
+    protected GameLost doXAction(BoardState boardState) {
+        return attack(boardState, 2);
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
-        return attack(game, 3);
+    protected GameLost doYAction(BoardState boardState) {
+        return attack(boardState, 3);
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return attack(game, 4);
+    protected GameLost doZAction(BoardState boardState) {
+        return attack(boardState, 4);
     }
 
     @Override
@@ -34,9 +34,9 @@ public class CryoshieldFrigate extends ExternalThreat {
     private boolean hitOnPreviousTurn = false;
 
     @Override
-    public GameLost resolveDamage(Game game) {
+    public GameLost resolveDamage(BoardState boardState) {
         if (hitOnPreviousTurn) {
-            return super.resolveDamage(game);
+            return super.resolveDamage(boardState);
         } else {
             hitOnPreviousTurn = true;
             resetAfterDamageResolution();

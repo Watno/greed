@@ -1,7 +1,7 @@
 package spacealert.core.actionCards.effects;
 
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.threats.templates.InternalThreat;
 import spacealert.core.threats.templates.Threat;
 
@@ -14,13 +14,13 @@ public class AttackWithBattleBotEffect extends CardEffect {
     }
 
     @Override
-    protected void executeEffect(ICrewMember crewMember, Game game) {
+    protected void executeEffect(ICrewMemberFromBoardStatePerspective crewMember, BoardState boardState) {
         if (crewMember.hasActiveBattlebot()) {
             var target = crewMember.getLocation().getInternalThreats().stream()
                     .filter(InternalThreat::canBeTargetedByBattlebot)
                     .min(Comparator.comparing(Threat::getSpawnTurn));
 
-            target.ifPresent(x -> x.getAttackedByBattlebot(game, crewMember));
+            target.ifPresent(x -> x.getAttackedByBattlebot(boardState, crewMember));
 
             if (target.map(InternalThreat::returnsFire).orElse(false)) {
                 crewMember.disableBattleBot();

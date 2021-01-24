@@ -1,18 +1,18 @@
 package spacealert.core.missionSteps;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
 public class StartTurnStep implements IMissionStep {
-    private int turn;
+    private final int turn;
 
     StartTurnStep(int turn) {
         this.turn = turn;
     }
 
     @Override
-    public GameLost execute(Game game) {
-        game.startTurn(turn);
+    public GameLost execute(BoardState boardState) {
+        boardState.startTurn(turn);
 
         return GameLost.FALSE;
     }

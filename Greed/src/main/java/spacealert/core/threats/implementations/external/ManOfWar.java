@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.external;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
@@ -11,19 +11,19 @@ public class ManOfWar extends ExternalThreat {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         speed++;
-        return attack(game, 2);
+        return attack(boardState, 2);
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         shieldPoints++;
-        return attack(game, 3);
+        return attack(boardState, 3);
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return attack(game, 5);
+    protected GameLost doZAction(BoardState boardState) {
+        return attack(boardState, 5);
     }
 }

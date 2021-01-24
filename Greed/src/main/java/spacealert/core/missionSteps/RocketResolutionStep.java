@@ -1,18 +1,18 @@
 package spacealert.core.missionSteps;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
-public class RocketResolutionStep implements IMissionStep{
+public class RocketResolutionStep implements IMissionStep {
 
-	@Override
-	public GameLost execute(Game game) {
-        var rocket = game.getCurrentTurnRocket();
-        var threats = game.getActiveThreats();
+    @Override
+    public GameLost execute(BoardState boardState) {
+        var rocket = boardState.getCurrentTurnRocket();
+        var threats = boardState.getActiveThreats();
 
-        rocket.ifPresent(x -> x.assignDamage(threats, game));
+        rocket.ifPresent(x -> x.assignDamage(threats, boardState));
         for (var threat : threats) {
-            var gameLost = threat.resolveDamage(game);
+            var gameLost = threat.resolveDamage(boardState);
             if (gameLost == GameLost.TRUE) return GameLost.TRUE;
         }
         return GameLost.FALSE;

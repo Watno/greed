@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 import server.MockConnectionSender;
 import server.connections.serialization.ObjectMapperProvider;
 import server.games.UserInGame;
-import spacealert.core.planningPhase.PlanningPhase;
+import spacealert.core.Game;
 import spacealert.core.planningPhase.commands.actionCards.FlipCardInHandCommand;
+import spacealert.core.planningPhase.eventSequences.premades.Mission1;
+import spacealert.core.planningPhase.eventSequences.threatProviders.RandomThreatProvider;
+import spacealert.core.planningPhase.eventSequences.threatProviders.ThreatLevel;
 import spacealert.externalPlayerInterface.ExternalDecisionMaker;
 
 import java.io.BufferedReader;
@@ -19,9 +22,8 @@ public class TestWithExternalPlayerInterface {
     public void test() {
         var userInGame = new UserInGame(new MockConnectionSender(), "Test");
         new Thread(() -> doInputs(userInGame)).start();
-        var planningPhase = new PlanningPhase(Arrays.asList(new ExternalDecisionMaker(userInGame)), 4);
-        planningPhase.run();
-
+        var game = new Game(Arrays.asList(new ExternalDecisionMaker(userInGame)), 4, new Mission1(new RandomThreatProvider(Arrays.asList(ThreatLevel.WHITE), Arrays.asList(ThreatLevel.WHITE))));
+        game.run();
     }
 
     public void inputFromConsole(UserInGame userInGame){

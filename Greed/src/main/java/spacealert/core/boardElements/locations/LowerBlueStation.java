@@ -1,7 +1,7 @@
 package spacealert.core.boardElements.locations;
 
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
@@ -12,12 +12,12 @@ public class LowerBlueStation extends Location {
     }
 
     @Override
-    protected void executeBButton(Game game, ICrewMember crewMember) {
-        game.getReactor(Zone.BLUE).chargeFrom(game.getReactor(Zone.WHITE));
+    protected void executeBButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
+        boardState.getReactor(Zone.BLUE).chargeFrom(boardState.getReactor(Zone.WHITE));
     }
 
     @Override
-    protected void executeCButton(Game game, ICrewMember crewMember) {
-        game.tryLaunchRocket();
+    protected void executeCButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
+        boardState.tryLaunchRocket();
     }
 }

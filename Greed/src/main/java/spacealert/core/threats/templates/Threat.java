@@ -1,7 +1,7 @@
 package spacealert.core.threats.templates;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.Trajectory;
@@ -28,31 +28,31 @@ public abstract class Threat {
     private int squareOnTrajectory;
 
 
-    public GameLost advance(Game game) {
+    public GameLost advance(BoardState boardState) {
         var originalSquare = squareOnTrajectory;
         squareOnTrajectory = Math.max(originalSquare - speed, 1);
-        for (var action : getTrajectory(game).getActionsBetween(originalSquare, squareOnTrajectory)) {
+        for (var action : getTrajectory(boardState).getActionsBetween(originalSquare, squareOnTrajectory)) {
             switch (action) {
                 case X:
-                    var lostByAction = doXAction(game);
+                    var lostByAction = doXAction(boardState);
                     if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
                     break;
                 case Y:
-                    lostByAction = doYAction(game);
+                    lostByAction = doYAction(boardState);
                     if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
                     break;
                 case Z:
-                    lostByAction = doZAction(game);
+                    lostByAction = doZAction(boardState);
                     if (lostByAction == GameLost.TRUE) return GameLost.TRUE;
-                    becomeSurvived(game);
+                    becomeSurvived(boardState);
                     break;
             }
         }
         return GameLost.FALSE;
     }
 
-    protected void becomeSurvived(Game game) {
-        game.recordAsSurvived(this);
+    protected void becomeSurvived(BoardState boardState) {
+        boardState.recordAsSurvived(this);
     }
 
     public int getSquareOnTrajectory() {
@@ -69,42 +69,42 @@ public abstract class Threat {
         return 1;
     }
 
-    public GameLost spawn(Game game, int turn) {
-        squareOnTrajectory = getTrajectory(game).getStartingPosition();
+    public GameLost spawn(BoardState boardState, int turn) {
+        squareOnTrajectory = getTrajectory(boardState).getStartingPosition();
         spawnTurn = turn;
-        onSpawn(game);
+        onSpawn(boardState);
         if (currentHitPoints == 0) {
-            return becomeDestroyed(game);
+            return becomeDestroyed(boardState);
         }
         return GameLost.FALSE;
     }
 
-    protected void onSpawn(Game game) {
+    protected void onSpawn(BoardState boardState) {
 
     }
 
-    abstract Trajectory getTrajectory(Game game);
+    abstract Trajectory getTrajectory(BoardState boardState);
 
-    protected abstract GameLost doXAction(Game game);
+    protected abstract GameLost doXAction(BoardState boardState);
 
-    protected abstract GameLost doYAction(Game game);
+    protected abstract GameLost doYAction(BoardState boardState);
 
-    protected abstract GameLost doZAction(Game game);
+    protected abstract GameLost doZAction(BoardState boardState);
 
-    public GameLost takeDamage(Game game, int damage) {
+    public GameLost takeDamage(BoardState boardState, int damage) {
         if (damage > 0) {
             currentHitPoints -= damage;
         }
-        if (currentHitPoints <= 0) return becomeDestroyed(game);
+        if (currentHitPoints <= 0) return becomeDestroyed(boardState);
         else return GameLost.FALSE;
     }
 
-    protected GameLost becomeDestroyed(Game game) {
-        game.recordAsDestroyed(this);
-        return onDestroyed(game);
+    protected GameLost becomeDestroyed(BoardState boardState) {
+        boardState.recordAsDestroyed(this);
+        return onDestroyed(boardState);
     }
 
-    protected GameLost onDestroyed(Game game) {
+    protected GameLost onDestroyed(BoardState boardState) {
         return GameLost.FALSE;
     }
 
@@ -112,14 +112,22 @@ public abstract class Threat {
         return false;
     }
 
-    public void assignDamageTo(Game game, int damage, DamageSource source) {
+    public void assignDamageTo(BoardState boardState, int damage, DamageSource source) {
     }
 
     protected void heal(int amount) {
         currentHitPoints = Math.min(currentHitPoints + amount, maximumHitPoints);
     }
 
-    public GameLost resolveDamage(Game game) {
+    public GameLost resolveDamage(BoardState boardState) {
         return GameLost.FALSE;
+    }
+
+    public int getPointsForSurviving() {
+        return pointsForSurviving;
+    }
+
+    public int getPointsForDestroying() {
+        return pointsForDestroying;
     }
 }

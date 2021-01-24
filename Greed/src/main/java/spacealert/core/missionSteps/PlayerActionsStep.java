@@ -1,11 +1,11 @@
 package spacealert.core.missionSteps;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 
 public class PlayerActionsStep implements IMissionStep {
-    private int turn;
+    private final int turn;
 
     PlayerActionsStep(int turn) {
         super();
@@ -13,11 +13,11 @@ public class PlayerActionsStep implements IMissionStep {
     }
 
     @Override
-    public GameLost execute(Game game) {
-        for (ICrewMember crewMember : game.getCrewMembers()) {
-            crewMember.executeAction(turn, game);
+    public GameLost execute(BoardState boardState) {
+        for (ICrewMemberFromBoardStatePerspective crewMember : boardState.getCrewMembers()) {
+            crewMember.executeAction(turn, boardState);
         }
-        game.resetAtEndOfActionPhase();
+        boardState.resetAtEndOfActionPhase();
 
         return GameLost.FALSE;
     }

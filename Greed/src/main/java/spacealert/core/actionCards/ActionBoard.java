@@ -2,8 +2,8 @@ package spacealert.core.actionCards;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Range;
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.BoardState;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.Phase;
 
 import java.util.ArrayList;
@@ -49,10 +49,10 @@ public class ActionBoard {
 		return card;
 	}
 
-	public void execute(int turnToExecute, ICrewMember crewMember, Game game) {
+	public void execute(int turnToExecute, ICrewMemberFromBoardStatePerspective crewMember, BoardState boardState) {
 		int index = turnToExecute - 1;
 		lastExecutedTurn = turnToExecute;
-		cards.get(index).ifPresent(x -> x.execute(crewMember, game));
+		cards.get(index).ifPresent(x -> x.execute(crewMember, boardState));
 	}
 
 	public void delay() {

@@ -7,21 +7,21 @@ import spacealert.core.boardElements.positions.Zone;
 
 import java.util.Optional;
 
-public interface ICrewMember {
+public interface ICrewMemberFromBoardStatePerspective {
 
-    void executeAction(int turn, Game game);
+    void executeAction(int turn, BoardState boardState);
 
-	void delay();
+    void delay();
 
     void moveTo(ILocation newLocation);
 
-    void moveInDirection(Game game, Direction direction);
+    void moveInDirection(BoardState boardState, Direction direction);
 
-	ILocation getLocation();
+    ILocation getLocation();
 
     Optional<Zone> getZone();
 
-    void executeButton(Game game, Button button);
+    void executeButton(BoardState boardState, Button button);
 
     boolean isInSpace();
 
@@ -32,4 +32,6 @@ public interface ICrewMember {
     void disableBattleBot();
 
     void becomeKnockedOut();
+
+    int score();
 }

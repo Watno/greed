@@ -1,6 +1,6 @@
 package spacealert.core.threats.implementations.external;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
@@ -11,18 +11,18 @@ public class ArmoredGrappler extends ExternalThreat {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
-        return attack(game, 1);
+    protected GameLost doXAction(BoardState boardState) {
+        return attack(boardState, 1);
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         heal(1);
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return attack(game, 4);
+    protected GameLost doZAction(BoardState boardState) {
+        return attack(boardState, 4);
     }
 }

@@ -14,6 +14,7 @@ public class ObjectMapperProvider {
             mapper.registerModule(new Jdk8Module());
             mapper.registerModule(new ParameterNamesModule());
             mapper.configure(MapperFeature.AUTO_DETECT_GETTERS, false);
+            mapper.configure(MapperFeature.AUTO_DETECT_IS_GETTERS, false);
         }
         return mapper;
     }

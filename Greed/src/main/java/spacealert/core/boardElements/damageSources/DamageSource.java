@@ -1,6 +1,6 @@
 package spacealert.core.boardElements.damageSources;
 
-import spacealert.core.Game;
+import spacealert.core.BoardState;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.ExternalThreat;
 import spacealert.core.threats.templates.Threat;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public abstract class DamageSource {
 
-    public abstract void assignDamage(List<Threat> externalThreats, Game game);
+    public abstract void assignDamage(List<Threat> externalThreats, BoardState boardState);
 
     protected List<? extends Threat> getPossibleTargets(List<Threat> threats, List<Integer> ranges, List<Zone> zones) {
 

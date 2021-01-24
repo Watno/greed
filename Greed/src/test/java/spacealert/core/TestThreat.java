@@ -9,17 +9,17 @@ public class TestThreat extends ExternalThreat {
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
+    protected GameLost doZAction(BoardState boardState) {
         return GameLost.FALSE;
     }
 }

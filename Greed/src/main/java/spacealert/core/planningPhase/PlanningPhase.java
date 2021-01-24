@@ -10,28 +10,21 @@ import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
 import spacealert.core.planningPhase.eventSequences.EventSequence;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
-import spacealert.core.planningPhase.eventSequences.premades.Mission1;
-import spacealert.core.planningPhase.eventSequences.threatProviders.RandomThreatProvider;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPlanningPhaseExposedToEvents, Runnable {
+public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPlanningPhaseExposedToEvents {
     private final Map<IDecisionMaker, Player> players;
     private final List<Android> androids;
     private final Stack<ActionCard> deck;
 
-    public PlanningPhase(Collection<IDecisionMaker> decisionMakers, int numberOfPlayers) {
-        var availableColors = new ArrayDeque<>(Arrays.asList(Color.values()));
-        players = decisionMakers.stream().collect(Collectors.toMap(x -> x, x -> new Player(availableColors.remove())));
-        androids = Stream.generate(() -> new Android(availableColors.remove()))
-                .limit(numberOfPlayers - decisionMakers.size())
-                .collect(Collectors.toList());
+    public PlanningPhase(Map<IDecisionMaker, Player> players, List<Android> androids) {
+        this.players = players;
+        this.androids = androids;
         deck = ActionCard.defaultDeck();
-
     }
 
     @Override
@@ -40,8 +33,7 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         broadcastGameState();
     }
 
-    @Override
-    public void run() {
+    public void run(EventSequence eventSequence) {
         broadcastGameState();
         var decisionMakerThreads = players.keySet().stream()
                 .map(x -> new Thread(x.allowMakingDecisionsForPlanningPhase(this), "DecisionMaker"))
@@ -49,7 +41,6 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         for (var thread : decisionMakerThreads) {
             thread.start();
         }
-        EventSequence eventSequence = new Mission1(new RandomThreatProvider());
         try {
             new EventExecutor().run(eventSequence, this).get();
         } catch (InterruptedException | ExecutionException e) {
@@ -58,7 +49,6 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         for (var thread : decisionMakerThreads) {
             thread.interrupt();
         }
-
     }
 
     public void flipCardOnAndroidActionBoard(Player player, UUID cardId) {

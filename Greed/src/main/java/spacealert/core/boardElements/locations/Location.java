@@ -1,8 +1,8 @@
 package spacealert.core.boardElements.locations;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
-import spacealert.core.ICrewMember;
+import spacealert.core.ICrewMemberFromBoardStatePerspective;
 import spacealert.core.boardElements.positions.Position;
 import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.threats.templates.InternalThreat;
@@ -14,9 +14,9 @@ import java.util.Comparator;
 import java.util.Optional;
 
 public abstract class Location implements ILocation {
-    private Collection<ICrewMember> crewMembers = new ArrayList<>();
-    private Collection<InternalThreat> internalThreats = new ArrayList<>();
-    private Optional<Position> position;
+    private final Collection<ICrewMemberFromBoardStatePerspective> crewMembers = new ArrayList<>();
+    private final Collection<InternalThreat> internalThreats = new ArrayList<>();
+    private final Optional<Position> position;
 
     Location(Position position) {
         this(Optional.of(position));
@@ -32,7 +32,7 @@ public abstract class Location implements ILocation {
     }
 
     @Override
-    public Collection<ICrewMember> getCrewMembers() {
+    public Collection<ICrewMemberFromBoardStatePerspective> getCrewMembers() {
         return crewMembers;
     }
 
@@ -42,12 +42,12 @@ public abstract class Location implements ILocation {
     }
 
     @Override
-    public void addCrewMember(ICrewMember crewMember) {
+    public void addCrewMember(ICrewMemberFromBoardStatePerspective crewMember) {
         crewMembers.add(crewMember);
     }
 
     @Override
-    public void removeCrewMember(ICrewMember crewMember) {
+    public void removeCrewMember(ICrewMemberFromBoardStatePerspective crewMember) {
         var wasPresent = crewMembers.remove(crewMember);
         if (!wasPresent) {
             throw new IllegalStateException("expected CrewMember is not here.");
@@ -78,42 +78,36 @@ public abstract class Location implements ILocation {
     }
 
     @Override
-    public void executeButton(Game game, ICrewMember crewMember, Button button) {
+    public void executeButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember, Button button) {
         if (internalThreats.stream().anyMatch(x -> x.interceptsButton(button))) {
             internalThreats.stream()
                     .filter(x -> x.interceptsButton(button))
                     .filter(InternalThreat::isSurvived)
                     .min(Comparator.comparing(Threat::getSpawnTurn))
-                    .ifPresent(x -> x.interceptButtonPress(game, this));
+                    .ifPresent(x -> x.interceptButtonPress(boardState, this));
         } else if (!isSpace()) {
             switch (button) {
-                case A:
-                    executeAButton(game, crewMember);
-                    break;
-                case B:
-                    executeBButton(game, crewMember);
-                    break;
-                case C:
-                    executeCButton(game, crewMember);
-                    break;
+                case A -> executeAButton(boardState, crewMember);
+                case B -> executeBButton(boardState, crewMember);
+                case C -> executeCButton(boardState, crewMember);
             }
         }
     }
 
-    private void executeAButton(Game game, ICrewMember crewMember) {
+    private void executeAButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember) {
         //noinspection OptionalGetWithoutIsPresent checked in calling method
         var actualPosition = this.position.get();
-        var cannon = game.getCannon(actualPosition);
+        var cannon = boardState.getCannon(actualPosition);
         if (!cannon.usesEnergy()) {
             cannon.charge();
         } else {
-            if (game.getReactor(actualPosition.getZone()).tryWithdrawOneEnergy()) {
+            if (boardState.getReactor(actualPosition.getZone()).tryWithdrawOneEnergy()) {
                 cannon.charge();
             }
         }
     }
 
-    protected abstract void executeBButton(Game game, ICrewMember crewMember);
+    protected abstract void executeBButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember);
 
-    protected abstract void executeCButton(Game game, ICrewMember crewMember);
+    protected abstract void executeCButton(BoardState boardState, ICrewMemberFromBoardStatePerspective crewMember);
 }

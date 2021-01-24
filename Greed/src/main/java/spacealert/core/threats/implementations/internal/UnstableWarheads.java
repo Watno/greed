@@ -1,7 +1,7 @@
 package spacealert.core.threats.implementations.internal;
 
+import spacealert.core.BoardState;
 import spacealert.core.Button;
-import spacealert.core.Game;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Position;
@@ -15,22 +15,22 @@ public class UnstableWarheads extends Malfunction {
     }
 
     @Override
-    protected void onSpawn(Game game) {
-        currentHitPoints = game.getAvailableRockets().size();
+    protected void onSpawn(BoardState boardState) {
+        currentHitPoints = boardState.getAvailableRockets().size();
     }
 
     @Override
-    protected GameLost doXAction(Game game) {
+    protected GameLost doXAction(BoardState boardState) {
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doYAction(Game game) {
+    protected GameLost doYAction(BoardState boardState) {
         return GameLost.FALSE;
     }
 
     @Override
-    protected GameLost doZAction(Game game) {
-        return damage(game, 3 * currentHitPoints);
+    protected GameLost doZAction(BoardState boardState) {
+        return damage(boardState, 3 * currentHitPoints);
     }
 }
