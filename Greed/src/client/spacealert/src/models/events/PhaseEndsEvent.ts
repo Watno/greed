@@ -18,18 +18,11 @@ export default class PhaseEndsEvent extends Event {
     public playWhenHappensInTwentySeconds(player: AudioPlayer): void {
         player.play(this.getPhaseString() + "_ends_in_20_seconds.mp3");
     }
-    public playWhenTriggered(player: AudioPlayer): void {
-        player.play(this.getPhaseString() + "_ends.mp3")
-            .then(() => this.playNextPhaseStarts(player))
-            .then(() => { if (this.phase == Phase.THREE) { player.end() } });
-    }
-
-    playNextPhaseStarts(player: AudioPlayer): void {
-        if (this.phase == Phase.ONE) {
-            player.play("second_phase_begins.mp3");
-        }
-        if (this.phase == Phase.TWO) {
-            player.play("third_phase_begins.mp3");
+    public playWhenCountdownStarts(player: AudioPlayer): void {
+        switch (this.phase as Phase) {
+            case Phase.ONE: player.playInSequence([this.getPhaseString() + "_ends.mp3", this.getNextPhaseString() + "_begins.mp3"]); break;
+            case Phase.TWO: player.playInSequence([this.getPhaseString() + "_ends.mp3", this.getNextPhaseString() + "_begins.mp3"]); break;
+            case Phase.THREE: player.playThenEnd(this.getPhaseString() + "_ends.mp3")
         }
     }
 
@@ -40,4 +33,13 @@ export default class PhaseEndsEvent extends Event {
             case Phase.THREE: return "operation"
         }
     }
+
+    getNextPhaseString(): string {
+        switch (this.phase as Phase) {
+            case Phase.ONE: return "second_phase"
+            case Phase.TWO: return "third_phase"
+            case Phase.THREE: throw "No next phase"
+        }
+    }
+
 }

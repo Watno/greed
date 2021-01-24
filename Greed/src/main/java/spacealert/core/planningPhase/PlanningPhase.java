@@ -145,7 +145,7 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
     @Override
     public void endPhase(Phase phase) {
         for (var player : players.values()) {
-            player.endPhase(phase);
+            endPhaseFor(player, phase);
         }
     }
 

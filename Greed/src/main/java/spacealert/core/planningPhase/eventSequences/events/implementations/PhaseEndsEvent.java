@@ -23,6 +23,7 @@ public class PhaseEndsEvent extends AbstractEvent {
     public void addToSchedule(EventExecutor eventExecutor, IPlanningPhaseExposedToEvents planningPhase) {
         eventExecutor.schedule(triggerTime.minus(Duration.ofMinutes(1)), () -> notifyPlayers(NotificationType.HAPPENSINAMINUTE, planningPhase));
         eventExecutor.schedule(triggerTime.minus(Duration.ofSeconds(20)), () -> notifyPlayers(NotificationType.HAPPENSINTWENTYSECONDS, planningPhase));
+        eventExecutor.schedule(triggerTime.minus(Duration.ofSeconds(7)), () -> notifyPlayers(NotificationType.COUNTDOWNSTARTS, planningPhase));
         super.addToSchedule(eventExecutor, planningPhase);
     }
 

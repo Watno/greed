@@ -10,10 +10,6 @@ export default class AudioPlayer {
 
     }
 
-    public end() {
-        this.currentlyPlayingAudio?.pause();
-    }
-
     public async playInSequence(audiofiles: string[]): Promise<void> {
         for (const file of audiofiles) {
             await this.playInternal(file, false);
@@ -31,6 +27,11 @@ export default class AudioPlayer {
         this.playInternal(audioFileToLoop, true);
     }
 
+    public async playThenEnd(audiofile: string) {
+        await this.playInternal(audiofile, false);
+        this.end();
+    }
+
     private playInternal(audiofile: string, inLoop: boolean): Promise<void> {
         this.currentlyPlayingAudio?.pause();
         this.currentlyPlayingAudio = new Audio("./audio/" + audiofile);
@@ -45,5 +46,9 @@ export default class AudioPlayer {
 
     private playBackground() {
         this.playInternal("red_alert_1.mp3", true);
+    }
+
+    private end() {
+        this.currentlyPlayingAudio?.pause();
     }
 } 

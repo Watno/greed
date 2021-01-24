@@ -8,6 +8,7 @@ export default abstract class Event {
             case NotificationType.ENDED: this.playWhenEnded(player); break;
             case NotificationType.HAPPENSINAMINUTE: this.playWhenHappensInAMinute(player); break;
             case NotificationType.HAPPENSINTWENTYSECONDS: this.playWhenHappensInTwentySeconds(player); break;
+            case NotificationType.COUNTDOWNSTARTS: this.playWhenCountdownStarts(player); break;
         }
     }
 
@@ -24,6 +25,10 @@ export default abstract class Event {
     }
 
     protected playWhenHappensInTwentySeconds(player: AudioPlayer): void {
+        // override if necessary
+    }
+
+    protected playWhenCountdownStarts(player: AudioPlayer): void {
         // override if necessary
     }
 }

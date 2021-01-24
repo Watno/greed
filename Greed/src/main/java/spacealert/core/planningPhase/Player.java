@@ -16,7 +16,7 @@ public class Player {
     private final Color color;
     private final ArrayList<ActionCard> hand;
     private final ActionBoard actionBoard;
-    private boolean allowedToPassACard = false;
+    private boolean isAllowedToPassACard = false;
     private Phase phase = Phase.ONE;
 
     public Player(Color color) {
@@ -80,15 +80,15 @@ public class Player {
     }
 
     public void allowToPassACard() {
-        allowedToPassACard = true;
+        isAllowedToPassACard = true;
     }
 
     public void disallowToPassACard() {
-        allowedToPassACard = false;
+        isAllowedToPassACard = false;
     }
 
     public void passCardTo(Player receivingPlayer, UUID cardId) {
-        if (!allowedToPassACard) return;
+        if (!isAllowedToPassACard) return;
         removeCardFromHand(cardId).ifPresent(x -> {
             receivingPlayer.receiveCard(x);
             disallowToPassACard();
@@ -115,7 +115,7 @@ public class Player {
     }
 
     public PublicPlayerGameState toPublicPlayerGameState() {
-        return new PublicPlayerGameState(color, actionBoard, hand.size());
+        return new PublicPlayerGameState(color, actionBoard, hand.size(), isAllowedToPassACard);
     }
 
     public PrivateGameState toPrivateGameState() {
