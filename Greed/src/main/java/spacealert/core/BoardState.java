@@ -1,5 +1,6 @@
 package spacealert.core;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.boardElements.Gravolift;
 import spacealert.core.boardElements.IDamageable;
 import spacealert.core.boardElements.Structure;
@@ -30,33 +31,50 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BoardState implements ICanHaveTriggeredEffectsAttached {
-    private Collection<ICrewMemberFromBoardStatePerspective> crewMembers;
+    private final Collection<ICrewMemberFromBoardStatePerspective> crewMembers;
+    @JsonProperty
     private final StationLayout stationLayout;
+    @JsonProperty
     private final Map<Zone, Gravolift> gravolifts;
+    @JsonProperty
     private final Map<Zone, Reactor> reactors;
+    @JsonProperty
     private final Map<Zone, Shield> shields;
+    @JsonProperty
     private final Map<Position, Cannon> cannons;
+    @JsonProperty
     private final Map<Zone, Trajectory> trajectories;
-    private final Map<Zone, List<IDamageable>> damagetokens;
+    @JsonProperty
     private final Trajectory internalTrajectory;
+    @JsonProperty
+    private final Map<Zone, List<IDamageable>> damagetokens;
+    @JsonProperty
     private final Space space;
+    @JsonProperty
     private final ArrayList<Rocket> availableRockets = new ArrayList<>(List.of(new Rocket(), new Rocket(), new Rocket()));
+    @JsonProperty
+    private Optional<Rocket> nextTurnRocket = Optional.empty();
+    @JsonProperty
+    private Optional<Rocket> thisTurnRocket = Optional.empty();
 
+    @JsonProperty
     private final ArrayList<Threat> activeThreats = new ArrayList<>();
+    @JsonProperty
     private final ArrayList<Threat> destroyedThreats = new ArrayList<>();
+    @JsonProperty
     private final ArrayList<Threat> survivedThreats = new ArrayList<>();
 
+    @JsonProperty
     private final Set<Integer> mouseJuggles = new HashSet<>();
     private int currentTurnVisualConfirmations = 0;
+    @JsonProperty
     private final List<Integer> visualConfirmations = Stream.generate(() -> 0).limit(3).collect(Collectors.toList());
     private int currentTurn;
     private int currentPhase;
-    private Optional<Rocket> nextTurnRocket = Optional.empty();
-    private Optional<Rocket> thisTurnRocket = Optional.empty();
 
     private final Random random = new Random();
 
-    public BoardState() {
+    public BoardState(Collection<CrewMember> crewMembers) {
         gravolifts = Map.of(
                 Zone.RED, new Gravolift(),
                 Zone.WHITE, new Gravolift(),
@@ -94,6 +112,12 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
         );
 
         internalTrajectory = allTrajectories.remove(0);
+
+        this.crewMembers = new ArrayList<>(crewMembers);
+
+        for (var crewMember : crewMembers) {
+            crewMember.moveTo(stationLayout.getStation(new Position(Deck.UPPER, Zone.WHITE)));
+        }
     }
 
     private List<IDamageable> getDamagetokens(Zone zone) {
@@ -107,17 +131,6 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
 
         return tokens;
     }
-
-    public BoardState(Collection<CrewMember> crewMembers) {
-        this();
-
-        this.crewMembers = new ArrayList<>(crewMembers);
-
-        for (var crewMember : crewMembers) {
-            crewMember.moveTo(stationLayout.getStation(new Position(Deck.UPPER, Zone.WHITE)));
-        }
-    }
-
 
     public Collection<ICrewMemberFromBoardStatePerspective> getCrewMembers() {
         return crewMembers;

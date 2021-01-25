@@ -3,10 +3,10 @@ package spacealert.core.missionSteps;
 import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
-public class RocketResolutionStep implements IMissionStep {
+public class RocketResolutionStep extends MissionStep {
 
     @Override
-    public GameLost execute(BoardState boardState) {
+    public GameLost doExecutionRules(BoardState boardState) {
         var rocket = boardState.getCurrentTurnRocket();
         var threats = boardState.getActiveThreats();
 

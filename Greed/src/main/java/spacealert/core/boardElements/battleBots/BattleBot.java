@@ -1,6 +1,9 @@
 package spacealert.core.boardElements.battleBots;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class BattleBot {
+    @JsonProperty
     private boolean active = true;
 
     public void activate() {

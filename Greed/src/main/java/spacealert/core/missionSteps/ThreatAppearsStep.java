@@ -7,7 +7,7 @@ import spacealert.core.threats.templates.Threat;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ThreatAppearsStep implements IMissionStep {
+public class ThreatAppearsStep extends MissionStep {
     private final ArrayList<Threat> threats;
 
     protected ThreatAppearsStep(Collection<Threat> threats) {
@@ -16,7 +16,7 @@ public class ThreatAppearsStep implements IMissionStep {
     }
 
     @Override
-    public GameLost execute(BoardState boardState) {
+    public GameLost doExecutionRules(BoardState boardState) {
         return boardState.spawnThreats(threats);
     }
 

@@ -84,7 +84,9 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
                         players.values().stream()
                                 .map(Player::toPublicPlayerGameState)
                                 .collect(Collectors.toList()),
-                        androids);
+                        androids.stream()
+                                .map(Android::toPublicAndroidGameState)
+                                .collect(Collectors.toList()));
         for (var decisionMaker : players.keySet()) {
             decisionMaker.sendGameState(
                     new GameStateWithPrivateInfo(publicGameState, players.get(decisionMaker).toPrivateGameState())

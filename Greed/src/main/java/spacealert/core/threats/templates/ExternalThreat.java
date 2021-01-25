@@ -1,5 +1,6 @@
 package spacealert.core.threats.templates;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import spacealert.core.BoardState;
 import spacealert.core.GameLost;
@@ -9,8 +10,9 @@ import spacealert.core.threats.Trajectory;
 
 import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class ExternalThreat extends Threat {
+    @JsonProperty
     protected int shieldPoints;
 
     protected ExternalThreat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying, int shieldPoints, Zone zone) {
@@ -19,6 +21,7 @@ public abstract class ExternalThreat extends Threat {
         this.zone = zone;
     }
 
+    @JsonProperty
     protected Zone zone;
 
     protected int assignedDamage = 0;

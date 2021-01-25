@@ -11,8 +11,8 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
         super(createMissionSteps(threatsBySpawn));
     }
 
-    private static List<IMissionStep> createMissionSteps(List<List<Threat>> threatsBySpawn) {
-        List<IMissionStep> steps = new ArrayList<>();
+    private static List<MissionStep> createMissionSteps(List<List<Threat>> threatsBySpawn) {
+        List<MissionStep> steps = new ArrayList<>();
 
         steps.add(new StartPhaseStep(1));
         steps.addAll(createTurn(1, true, threatsBySpawn));
@@ -42,8 +42,8 @@ public class DefaultMissionStepSequence extends MissionStepSequence {
     }
 
 
-    private static List<IMissionStep> createTurn(int turn, boolean threatAppears, List<List<Threat>> threatsBySpawn) {
-        var result = new ArrayList<IMissionStep>();
+    private static List<MissionStep> createTurn(int turn, boolean threatAppears, List<List<Threat>> threatsBySpawn) {
+        var result = new ArrayList<MissionStep>();
 
         result.add(new StartTurnStep(turn));
         if (threatAppears) result.add(new ThreatAppearsStep(threatsBySpawn.get(turn - 1)));

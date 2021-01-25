@@ -1,10 +1,14 @@
 package spacealert.core.threats;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.*;
 
 public class Trajectory {
-    private Map<Integer, Action> actionSpaces;
-    private int length;
+    @JsonProperty
+    private final Map<Integer, Action> actionSpaces;
+    @JsonProperty
+    private final int length;
 
     private Trajectory(int length, int positionOfX, List<Integer> positionsOfY) {
         actionSpaces = new HashMap<>();

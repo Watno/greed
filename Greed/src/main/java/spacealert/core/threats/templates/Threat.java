@@ -1,16 +1,21 @@
 package spacealert.core.threats.templates;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.boardElements.damageSources.DamageSource;
 import spacealert.core.threats.Trajectory;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class Threat {
+    @JsonProperty
     protected int speed;
+    @JsonProperty
     protected int maximumHitPoints;
+    @JsonProperty
     private final int pointsForSurviving;
+    @JsonProperty
     private final int pointsForDestroying;
 
     protected Threat(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying) {
@@ -22,9 +27,12 @@ public abstract class Threat {
 
     }
 
+    @JsonProperty
     protected int currentHitPoints;
 
+    @JsonProperty
     private int spawnTurn;
+    @JsonProperty
     private int squareOnTrajectory;
 
 
@@ -79,9 +87,7 @@ public abstract class Threat {
         return GameLost.FALSE;
     }
 
-    protected void onSpawn(BoardState boardState) {
-
-    }
+    protected void onSpawn(BoardState boardState) {}
 
     abstract Trajectory getTrajectory(BoardState boardState);
 

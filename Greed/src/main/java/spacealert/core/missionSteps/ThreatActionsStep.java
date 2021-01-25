@@ -3,10 +3,10 @@ package spacealert.core.missionSteps;
 import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 
-public class ThreatActionsStep implements IMissionStep {
+public class ThreatActionsStep extends MissionStep {
 
     @Override
-    public GameLost execute(BoardState boardState) {
+    public GameLost doExecutionRules(BoardState boardState) {
 
         for (var threat : boardState.getActiveThreats()) {
             var lostByThreat = threat.advance(boardState);

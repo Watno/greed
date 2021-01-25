@@ -5,6 +5,7 @@ import spacealert.core.CrewMember;
 import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionBoard;
 import spacealert.core.actionCards.ActionCard;
+import spacealert.core.gamestates.PublicAndroidGameState;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -25,5 +26,9 @@ public class Android extends CrewMember {
 
     public Optional<ActionCard> retrieveCardFromActionBoard(UUID cardId, Phase phase) {
         return actionBoard.returnCardById(cardId, phase);
+    }
+
+    public PublicAndroidGameState toPublicAndroidGameState() {
+        return new PublicAndroidGameState(color, actionBoard);
     }
 }

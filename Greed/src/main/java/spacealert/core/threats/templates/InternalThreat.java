@@ -13,7 +13,7 @@ import spacealert.core.threats.Trajectory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class InternalThreat extends Threat {
     private final List<Position> spawnPositions;
 

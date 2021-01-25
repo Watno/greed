@@ -1,12 +1,14 @@
 package spacealert.core.threats.templates;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.Button;
 import spacealert.core.boardElements.positions.Position;
 
 import java.util.List;
 
 public abstract class Malfunction extends InternalThreat {
-    private Button affectedButton;
+    @JsonProperty
+    private final Button affectedButton;
 
     protected Malfunction(int speed, int hitPoints, int pointsForSurviving, int pointsForDestroying, List<Position> spawnPositions, Button affectedButton) {
         super(speed, hitPoints, pointsForSurviving, pointsForDestroying, spawnPositions);

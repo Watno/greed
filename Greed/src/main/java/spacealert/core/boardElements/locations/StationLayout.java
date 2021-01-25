@@ -1,5 +1,6 @@
 package spacealert.core.boardElements.locations;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.boardElements.positions.Deck;
 import spacealert.core.boardElements.positions.Direction;
 import spacealert.core.boardElements.positions.Position;
@@ -9,7 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class StationLayout {
-    private Map<Position, ILocation> stations;
+    @JsonProperty
+    private final Map<Position, ILocation> stations;
 
     public StationLayout() {
         stations = Map.of(

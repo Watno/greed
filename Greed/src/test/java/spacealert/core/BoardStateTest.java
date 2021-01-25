@@ -25,8 +25,12 @@ class BoardStateTest {
 
     private static final Random random = new Random();
 
-    @RepeatedTest(10000)
+    @RepeatedTest(100000)
     void randomGameSmokeTest() {
+        runRandomGame();
+    }
+
+    public BoardState runRandomGame() {
         var deck = ActionCard.defaultDeck();
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
@@ -36,6 +40,7 @@ class BoardStateTest {
         var missionStepSequence = new DefaultMissionStepSequence(getRandomThreatList());
 
         missionStepSequence.execute(game);
+        return game;
     }
 
     @Test

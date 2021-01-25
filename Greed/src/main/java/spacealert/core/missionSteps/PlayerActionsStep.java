@@ -1,10 +1,12 @@
 package spacealert.core.missionSteps;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.BoardState;
 import spacealert.core.GameLost;
 import spacealert.core.ICrewMemberFromBoardStatePerspective;
 
-public class PlayerActionsStep implements IMissionStep {
+public class PlayerActionsStep extends MissionStep {
+    @JsonProperty
     private final int turn;
 
     PlayerActionsStep(int turn) {
@@ -13,7 +15,7 @@ public class PlayerActionsStep implements IMissionStep {
     }
 
     @Override
-    public GameLost execute(BoardState boardState) {
+    public GameLost doExecutionRules(BoardState boardState) {
         for (ICrewMemberFromBoardStatePerspective crewMember : boardState.getCrewMembers()) {
             crewMember.executeAction(turn, boardState);
         }

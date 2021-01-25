@@ -1,8 +1,10 @@
 package spacealert.core.boardElements;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.ICrewMemberFromBoardStatePerspective;
 
 public class Gravolift implements IDamageable {
+    @JsonProperty
     private boolean isDamaged = false;
     private boolean wasUsed = false;
 

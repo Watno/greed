@@ -1,27 +1,31 @@
 package spacealert.core.boardElements.positions;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 import java.util.Optional;
 
 public class Position {
-    private Deck deck;
-    private Zone zone;
+    @JsonProperty
+    private final Deck deck;
+    @JsonProperty
+    private final Zone zone;
 
     public Position(Deck deck, Zone zone) {
         this.deck = deck;
         this.zone = zone;
     }
 
-    public Optional<Position> getAdjacent(Direction direction){
+    public Optional<Position> getAdjacent(Direction direction) {
         Deck newDeck = deck;
         Zone newZone = zone;
-        switch (direction){
+        switch (direction) {
 
             case GRAVOLIFT:
                 newDeck = deck.otherDeck();
                 break;
             case BLUE:
-                switch (zone){
+                switch (zone) {
 
                     case RED:
                         newZone = Zone.WHITE;
@@ -71,5 +75,10 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(deck, zone);
+    }
+
+    @Override
+    public String toString() {
+        return deck.toString() + zone.toString();
     }
 }

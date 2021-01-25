@@ -11,7 +11,6 @@ import spacealert.core.boardElements.positions.Zone;
 import java.util.Optional;
 
 public class CrewMember implements ICrewMemberFromBoardStatePerspective {
-    @JsonProperty
     protected final ActionBoard actionBoard;
     @JsonProperty
     protected final Color color;

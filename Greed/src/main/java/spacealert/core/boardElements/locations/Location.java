@@ -1,5 +1,6 @@
 package spacealert.core.boardElements.locations;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import spacealert.core.BoardState;
 import spacealert.core.Button;
 import spacealert.core.ICrewMemberFromBoardStatePerspective;
@@ -14,7 +15,9 @@ import java.util.Comparator;
 import java.util.Optional;
 
 public abstract class Location implements ILocation {
+    @JsonProperty
     private final Collection<ICrewMemberFromBoardStatePerspective> crewMembers = new ArrayList<>();
+    @JsonProperty
     private final Collection<InternalThreat> internalThreats = new ArrayList<>();
     private final Optional<Position> position;
 
