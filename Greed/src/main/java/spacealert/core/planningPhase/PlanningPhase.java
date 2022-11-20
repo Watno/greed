@@ -4,26 +4,36 @@ import spacealert.core.Color;
 import spacealert.core.IDecisionMaker;
 import spacealert.core.Phase;
 import spacealert.core.actionCards.ActionCard;
+import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.gamestates.GameStateWithPrivateInfo;
 import spacealert.core.gamestates.PublicGameState;
 import spacealert.core.planningPhase.commands.actionCards.IPlanningPhaseCommand;
 import spacealert.core.planningPhase.eventSequences.EventExecutor;
 import spacealert.core.planningPhase.eventSequences.EventSequence;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
+import spacealert.core.threats.Trajectory;
+import spacealert.core.threats.templates.Threat;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPlanningPhaseExposedToEvents {
     private final Map<IDecisionMaker, Player> players;
     private final List<Android> androids;
     private final Stack<ActionCard> deck;
+    private final List<List<Threat>> threatsBySpawn = Stream.<List<Threat>>generate(ArrayList::new).limit(8).collect(Collectors.toList());
+    private final Map<Zone, Trajectory> trajectories;
+    private final Trajectory internalTrajectory;
 
-    public PlanningPhase(Map<IDecisionMaker, Player> players, List<Android> androids) {
+
+    public PlanningPhase(Map<IDecisionMaker, Player> players, List<Android> androids, Map<Zone, Trajectory> trajectories, Trajectory internalTrajectory) {
         this.players = players;
         this.androids = androids;
+        this.trajectories = trajectories;
+        this.internalTrajectory = internalTrajectory;
         deck = ActionCard.defaultDeck();
     }
 
@@ -86,7 +96,10 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
                                 .collect(Collectors.toList()),
                         androids.stream()
                                 .map(Android::toPublicAndroidGameState)
-                                .collect(Collectors.toList()));
+                                .collect(Collectors.toList()),
+                        threatsBySpawn,
+                        trajectories,
+                        internalTrajectory);
         for (var decisionMaker : players.keySet()) {
             decisionMaker.sendGameState(
                     new GameStateWithPrivateInfo(publicGameState, players.get(decisionMaker).toPrivateGameState())
@@ -139,6 +152,11 @@ public class PlanningPhase implements IPlanningPhaseExposedToDecisionMaker, IPla
         for (var player : players.values()) {
             endPhaseFor(player, phase);
         }
+    }
+
+    @Override
+    public void addThreat(int turn, Threat threat) {
+        threatsBySpawn.get(turn - 1).add(threat);
     }
 
     @Override

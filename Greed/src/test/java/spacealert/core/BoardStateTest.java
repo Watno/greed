@@ -12,6 +12,7 @@ import spacealert.core.boardElements.positions.Zone;
 import spacealert.core.missionSteps.DefaultMissionStepSequence;
 import spacealert.core.planningPhase.eventSequences.threatProviders.RandomThreatProvider;
 import spacealert.core.planningPhase.eventSequences.threatProviders.ThreatLevel;
+import spacealert.core.threats.Trajectory;
 import spacealert.core.threats.templates.Threat;
 
 import java.util.*;
@@ -35,7 +36,7 @@ class BoardStateTest {
         var actionBoards = IntStream.range(0, 5)
                 .mapToObj(x -> createRandomActionBoard(deck)).collect(Collectors.toList());
 
-        var game = new BoardState(toCrewMembers(actionBoards));
+        BoardState game = createBoardState(actionBoards);
 
         var missionStepSequence = new DefaultMissionStepSequence(getRandomThreatList());
 
@@ -43,11 +44,12 @@ class BoardStateTest {
         return game;
     }
 
+
     @Test
     void pushA_ShouldKillTestThreat() {
         var actionBoard = createActionBoard(List.of(new AEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
 
@@ -60,7 +62,7 @@ class BoardStateTest {
     void pushAFourTimes_ShouldKill3TestThreat() {
         var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
 
@@ -73,7 +75,7 @@ class BoardStateTest {
     void pushAFourTimes_Reload_PushAMore_ShouldKill5TestThreat() {
         var actionBoard = createActionBoard(List.of(new AEffect(), new AEffect(), new AEffect(), new AEffect(), new GravoliftMoveEffect(), new BEffect(), new GravoliftMoveEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect(), new AEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
 
@@ -90,7 +92,7 @@ class BoardStateTest {
                 new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect(),
                 new AttackWithBattleBotEffect(), new AttackWithBattleBotEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Stream.generate(() -> List.<Threat>of(new TestThreat())).limit(12).collect(Collectors.toList()));
 
@@ -106,7 +108,7 @@ class BoardStateTest {
     void gravoliftMove_ShouldMoveToLowerWhite() {
         var actionBoard = createActionBoard(List.of(new GravoliftMoveEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
 
@@ -128,7 +130,7 @@ class BoardStateTest {
                         new GravoliftMoveEffect(),
                         new BlueMoveEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
 
@@ -151,7 +153,7 @@ class BoardStateTest {
                         new GravoliftMoveEffect(),
                         new BlueMoveEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
 
@@ -173,7 +175,7 @@ class BoardStateTest {
                         new GravoliftMoveEffect(),
                         new RedMoveEffect()));
 
-        var game = new BoardState(toCrewMembers(List.of(actionBoard)));
+        var game = createBoardState(List.of(actionBoard));
 
         var missionStepSequence = new DefaultMissionStepSequence(Collections.nCopies(12, new ArrayList<>()));
 
@@ -244,12 +246,26 @@ class BoardStateTest {
 
     private Collection<CrewMember> toCrewMembers(Collection<ActionBoard> actionBoards) {
         return Streams.zip(actionBoards.stream(),
-                Arrays.stream(Color.values()),
-                CrewMember::new)
+                        Arrays.stream(Color.values()),
+                        CrewMember::new)
                 .collect(Collectors.toList());
     }
 
     private Boolean trueWithPercentage(int percentage) {
         return random.nextDouble() < (percentage / (double) 100);
+    }
+
+
+    private BoardState createBoardState(Collection<ActionBoard> actionBoards) {
+        var allTrajectories = Trajectory.all();
+        var trajectories = Map.of(
+                Zone.RED, allTrajectories.remove(0),
+                Zone.WHITE, allTrajectories.remove(0),
+                Zone.BLUE, allTrajectories.remove(0)
+        );
+
+        var internalTrajectory = allTrajectories.remove(0);
+
+        return new BoardState(toCrewMembers(actionBoards), trajectories, internalTrajectory);
     }
 }

@@ -2,6 +2,7 @@ package spacealert.core.planningPhase;
 
 import spacealert.core.Phase;
 import spacealert.core.planningPhase.eventSequences.events.Notification;
+import spacealert.core.threats.templates.Threat;
 
 public interface IPlanningPhaseExposedToEvents {
     void broadcastGameState();
@@ -15,4 +16,6 @@ public interface IPlanningPhaseExposedToEvents {
     void disallowCardPassing();
 
     void endPhase(Phase phase);
+
+    void addThreat(int turn, Threat threat);
 }

@@ -47,7 +47,7 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
     @JsonProperty
     private final Trajectory internalTrajectory;
     @JsonProperty
-    private final Map<Zone, List<IDamageable>> damagetokens;
+    private final Map<Zone, List<IDamageable>> damageTokens;
     @JsonProperty
     private final Space space;
     @JsonProperty
@@ -74,7 +74,9 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
 
     private final Random random = new Random();
 
-    public BoardState(Collection<CrewMember> crewMembers) {
+    public BoardState(Collection<CrewMember> crewMembers, Map<Zone, Trajectory> trajectories, Trajectory internalTrajectory) {
+        this.trajectories = trajectories;
+        this.internalTrajectory = internalTrajectory;
         gravolifts = Map.of(
                 Zone.RED, new Gravolift(),
                 Zone.WHITE, new Gravolift(),
@@ -99,19 +101,10 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
                 new Position(Deck.LOWER, Zone.BLUE), new LightCannon(Zone.BLUE)
         );
 
-        damagetokens = Arrays.stream(Zone.values()).collect(Collectors.toMap(x -> x, this::getDamagetokens));
+        damageTokens = Arrays.stream(Zone.values()).collect(Collectors.toMap(x -> x, this::getDamagetokens));
 
         space = new Space();
         stationLayout = new StationLayout();
-
-        var allTrajectories = Trajectory.all();
-        trajectories = Map.of(
-                Zone.RED, allTrajectories.remove(0),
-                Zone.WHITE, allTrajectories.remove(0),
-                Zone.BLUE, allTrajectories.remove(0)
-        );
-
-        internalTrajectory = allTrajectories.remove(0);
 
         this.crewMembers = new ArrayList<>(crewMembers);
 
@@ -214,12 +207,9 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
         return List.copyOf(availableRockets);
     }
 
-    public boolean tryLaunchRocket() {
+    public void tryLaunchRocket() {
         if (!availableRockets.isEmpty() && nextTurnRocket.isEmpty()) {
             nextTurnRocket = Optional.of(availableRockets.remove(0));
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -275,7 +265,7 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
     }
 
     private GameLost damage(Zone zone) {
-        var availableDamageTokens = damagetokens.get(zone);
+        var availableDamageTokens = damageTokens.get(zone);
         if (availableDamageTokens.isEmpty()) return GameLost.TRUE;
         var index = random.nextInt(availableDamageTokens.size());
         var randomDamageToken = availableDamageTokens.remove(index);
@@ -300,7 +290,7 @@ public class BoardState implements ICanHaveTriggeredEffectsAttached {
     }
 
     private int scoreDamageTokens() {
-        var damagePerZone = damagetokens.values().stream().mapToInt(x -> 6 - x.size()).boxed().collect(Collectors.toList());
+        var damagePerZone = damageTokens.values().stream().mapToInt(x -> 6 - x.size()).boxed().collect(Collectors.toList());
         return -(damagePerZone.stream().mapToInt(x -> x).max().orElse(0) + damagePerZone.stream().mapToInt(x -> x).sum());
     }
 
