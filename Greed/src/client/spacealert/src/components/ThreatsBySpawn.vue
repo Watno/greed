@@ -1,69 +1,44 @@
 <template>
-  <div v-bind:class="['card', { flipped: flipped }, {selected: selected}]" @click="select" @contextmenu.prevent="flip">
-    <img :src="actionHalfImage" />
-    <img :src="movementHalfImage" class="bottom" />
+  <div class="threatsBySpawn">
+      <div v-for="(threatsBySpecificSpawn, key) in threatsBySpawn" :key="key">
+        <div v-if="threatsBySpecificSpawn.length" class="threatContainer">
+          <Threat v-for="(threat, innerKey) in threatsBySpecificSpawn" :key="innerKey" :threat="threat" :spawnTime="key"></Threat>
+        </div>
+      </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from "vue";
-import ActionCardModel from "../models/ActionCardModel";
-import {CardOrientationModel} from "../models/CardOrientationModel";
-import SelectedCardModel from '../models/SelectedCardModel';
+import ThreatModel from "@/models/ThreatModel";
+import {defineComponent, PropType} from "vue";
+import Threat from "./Threat.vue";
+
 export default defineComponent({
-  props: {
-    card:{
-      type: ActionCardModel,
+  components: { Threat }, 
+   props: {
+    threatsBySpawn:{
+      type: Array as PropType<Array<Array<ThreatModel>>>,
       required: true
     },
-    selectedCard:{
-      type: SelectedCardModel,
-    }
-  },
-  setup(props, {emit}) {
-    const movementHalfImage = computed(() => `./images/actioneffects/${props.card.movementHalf.type}.png`);
-    const actionHalfImage = computed(() => `./images/actioneffects/${props.card.actionHalf.type}.png`);
-
-    const flipped = computed(() => props.card.orientation == CardOrientationModel.MOVEMENT) ;
-    const flip = () => emit('flip', props.card.id);
-
-    const selected = computed(() => {
-      if (props.selectedCard == null){
-        return false;
-      }
-      return props.selectedCard.id == props.card.id;
-    });
-    const select = () => emit('select', props.card.id);
-    return {movementHalfImage, actionHalfImage, flipped, flip, selected, select};
   }
 });
 
 </script>
 
 <style scoped>
-.card {
-  width: 50px;
-  height:100px;
-  display: inline-block;
-  border:2px;
-  border-style:solid;
-  border-color: transparent;
+.threatContainer{
+  display: content;
 }
 
-.flipped {
-  transform: rotate(180deg);
-}
-.bottom {
-  transform: rotate(180deg);
-}
-.selected {
-  border-color:red;
-  border-style:solid;
-}
-
-img {
-  display: block;
-  width: 50px;
-  height: 50px;
+.threatsBySpawn{
+  display: flex;
 }
 </style>
+
+<!--
+
+@ValidateNested()
+trajectories: Map<ZoneModel,TrajectoryModel>;
+
+@ValidateNested()
+internalTrajectory: TrajectoryModel; -->

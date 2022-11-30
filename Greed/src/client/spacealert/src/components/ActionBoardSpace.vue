@@ -44,11 +44,11 @@ export default defineComponent({
 
 <style scoped>
 .space {
-  width: 54px;
-  height: 104px;
+  width: 3.2em;
+  height: 6.2em;
   display: inline-block;
-  border:2px;
-  margin:2px;
+  border: 0.1em;
+  margin: 0.1em;
   border-color:black;
   border-style:solid;
 }
@@ -56,7 +56,7 @@ export default defineComponent({
 .position {
     height: 100%;
     width: 100%;
-    font-size:50px;
+    font-size: 3em;
     display: flex;
     justify-content: center;
     align-items: center;

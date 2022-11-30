@@ -1,8 +1,5 @@
 <template>
 	<div>
-		<!-- <button @click="play()">Play</button>
-		<button @click="communicationsDown()">Comms down</button>
-		<button @click="communicationsRestored()">Comms restored</button> -->
 		<Lobby v-if="!gameStarted && lobby != null" :lobby="lobby" />
 		<div v-if="gameStarted">
 			<Hand
@@ -12,32 +9,43 @@
 				@flip-card="onCardInHandFlipped"
 				@return-selected-card="onReturnSelectedCardToHand"
 			/>
-			<PlayerArea
-				:publicPlayerGameState="ownPublicPlayerGameState"
-				:selectedCard="selectedCard"
-				@select-card="onCardOnActionBoardSelected"
-				@flip-card="onCardOnOwnActionBoardFlipped"
-				@place-card="onCardPlacedToOwnActionBoard"
-				:class="ownPublicPlayerGameState.color"
-			/>
-			<PlayerArea
-				v-for="publicPlayerGameState in otherPublicPlayerGameStates"
-				:publicPlayerGameState="publicPlayerGameState"
-				:key="publicPlayerGameState.color"
-				:selectedCard="selectedCard"
-				:class="publicPlayerGameState.color"
-			/>
-			<Android
-				v-for="android in androids"
-				:android="android"
-				:key="android.color"
-				:selectedCard="selectedCard"
-				@select-card="onCardOnActionBoardSelected"
-				@flip-card="onCardOnAndroidActionBoardFlipped"
-				@place-card="onCardPlacedToAndroidActionBoard"
-				:class="android.color"
-			/>
+			<div class="middle-row">
+				<div class="playerBoardContainer">
+					<PlayerArea
+						:publicPlayerGameState="ownPublicPlayerGameState"
+						:selectedCard="selectedCard"
+						@select-card="onCardOnActionBoardSelected"
+						@flip-card="onCardOnOwnActionBoardFlipped"
+						@place-card="onCardPlacedToOwnActionBoard"
+						:class="ownPublicPlayerGameState.color"
+					/>
+					<PlayerArea
+						v-for="publicPlayerGameState in otherPublicPlayerGameStates"
+						:publicPlayerGameState="publicPlayerGameState"
+						:key="publicPlayerGameState.color"
+						:selectedCard="selectedCard"
+						:class="publicPlayerGameState.color"
+					/>
+					<Android
+						v-for="android in androids"
+						:android="android"
+						:key="android.color"
+						:selectedCard="selectedCard"
+						@select-card="onCardOnActionBoardSelected"
+						@flip-card="onCardOnAndroidActionBoardFlipped"
+						@place-card="onCardPlacedToAndroidActionBoard"
+						:class="android.color"
+					/>
+				</div>
+				<Trajectory :trajectory="redTrajectory" :zone="'RED'"></Trajectory>
+				<Trajectory :trajectory="whiteTrajectory" :zone="'WHITE'"></Trajectory>
+				<Trajectory :trajectory="blueTrajectory" :zone="'BLUE'"></Trajectory>
+				<Trajectory :trajectory="internalTrajectory"></Trajectory>
+				<img :src="'./images/board.jpg'" class="board" />
+			</div>
+			<ThreatsBySpawn :threatsBySpawn="threatsBySpawn" />
 		</div>
+		<div v-if="gameOver" style="white-space: pre-wrap">{{JSON.stringify(JSON.parse(result),null,4)}}</div>
 	</div>
 </template>
 
@@ -51,6 +59,8 @@ import Lobby from "./components/Lobby.vue";
 import Hand from "./components/Hand.vue";
 import Android from "./components/Android.vue";
 import PlayerArea from "./components/PlayerArea.vue";
+import ThreatsBySpawn from "./components/ThreatsBySpawn.vue";
+import Trajectory from "./components/Trajectory.vue";
 
 import GameStateWithPrivateInfoModel from "./models/GameStateWithPrivateInfoModel";
 import { ColorModel } from "./models/ColorModel";
@@ -69,9 +79,10 @@ import RetrieveCardFromOwnActionBoardCommand from "./models/commands/RetrieveCar
 import RetrieveCardFromAndroidActionBoardCommand from "./models/commands/RetrieveCardFromAndroidActionBoardCommand";
 import LobbyModel from "./models/lobby/LobbyModel";
 import AudioPlayer from "./AudioPlayer";
+import { ZoneModel } from "./models/ZoneModel";
 
 export default defineComponent({
-	components: { Hand, Android, PlayerArea, Lobby },
+	components: { Hand, Android, PlayerArea, ThreatsBySpawn, Lobby, Trajectory },
 	setup() {
 		const lobby = ref(null as LobbyModel | null);
 
@@ -79,10 +90,17 @@ export default defineComponent({
 
 		const gameState = ref(null as GameStateWithPrivateInfoModel | null);
 		const selectedCard = ref(null as SelectedCardModel | null);
+		const result = ref("");
 
 		const gameStarted = computed(() => gameState.value != null);
+		const gameOver = computed(() => result.value != "");
 		const hand = computed(() => gameState.value?.privateGameState.hand);
 		const androids = computed(() => gameState.value?.publicGameState.androids);
+		const threatsBySpawn = computed(() => gameState.value?.publicGameState.threatsBySpawn);
+		const blueTrajectory = computed(() => gameState.value?.publicGameState.trajectories[ZoneModel.BLUE]);
+		const whiteTrajectory = computed(() => gameState.value?.publicGameState.trajectories[ZoneModel.WHITE]);
+		const redTrajectory = computed(() => gameState.value?.publicGameState.trajectories[ZoneModel.RED]);
+		const internalTrajectory = computed(() => gameState.value?.publicGameState.internalTrajectory);
 		const ownPublicPlayerGameState = computed(() =>
 			gameState.value?.publicGameState.playerGameStates.find(
 				(x) => x.color == gameState.value?.privateGameState.ownColor
@@ -201,6 +219,9 @@ export default defineComponent({
 				x.playAudio(audioPlayer)
 			);
 		}
+		function showResult(json: string) {
+			result.value = json;
+		}
 
 		setOnMessageCallback(function (msg) {
 			const json = msg.data;
@@ -213,25 +234,21 @@ export default defineComponent({
 			if (JSON.parse(json).hasOwnProperty("event")) {
 				deserializeNotification(json);
 			}
+			if (JSON.parse(json).hasOwnProperty("won")) {
+				showResult(json);
+			}
 		});
 
-		// function play(){
-		// 	audioPlayer.start();
-		// 	audioPlayer.playInSequence(["alert.mp3", "begin_first_phase.mp3"]);
-		// }
-
-		// function communicationsDown(){
-		// 	audioPlayer.play("communications_down.mp3")
-		// 	.then(() => audioPlayer.playInLoop("white_noise.ogg"));
-		// }
-
-		// function communicationsRestored(){
-		// 	audioPlayer.play("communications_restored.mp3");
-		// }
 		return {
 			gameStarted,
+			gameOver,
 			hand,
 			androids,
+			threatsBySpawn,
+			blueTrajectory,
+			whiteTrajectory,
+			redTrajectory,
+			internalTrajectory,
 			ownPublicPlayerGameState,
 			otherPublicPlayerGameStates,
 			selectedCard,
@@ -245,15 +262,19 @@ export default defineComponent({
 			onCardPlacedToAndroidActionBoard,
 			startGame,
 			lobby,
-			// play,
-			// communicationsDown,
-			// communicationsRestored
+			result
 		};
 	},
 });
 </script>
 
 <style scoped>
+.playerBoardContainer {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+
 .RED {
 	border-style: solid;
 	border-color: red;
@@ -273,5 +294,15 @@ export default defineComponent({
 .PURPLE {
 	border-style: solid;
 	border-color: purple;
+}
+
+.middle-row{
+	display: flex;
+	width: fit-content;
+}
+
+img.board{
+	height: 25em;
+	width: auto;
 }
 </style>

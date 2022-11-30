@@ -46,18 +46,16 @@ export default defineComponent({
 
 <style scoped>
 .returnToHand {
-  width: 50px;
-  height: 100px;
-  display: inline-block;
-  border:2px;
-  border-color:black;
-  border-style:dotted;
+    width: 3em;
+    height: 6em;
+    display: inline-block;
+    border: 0.1em;
+    border-color:black;
+    border-style:dotted;
 }
 
 .returnToHandText {
-    height: 100%;
-    width: 100%;
-    font-size:15px;
+    font-size: 0.9em;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -66,6 +64,6 @@ export default defineComponent({
 
 div{
     display: flex;
-    height:104px
+    height: 6.2em
 }
 </style>

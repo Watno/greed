@@ -42,10 +42,10 @@ export default defineComponent({
 
 <style scoped>
 .card {
-  width: 50px;
-  height:100px;
+  width: 3em;
+  height: 6em;
   display: inline-block;
-  border:2px;
+  border: 0.1em;
   border-style:solid;
   border-color: transparent;
 }
@@ -63,7 +63,7 @@ export default defineComponent({
 
 img {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 3em;
+  height: 3em;
 }
 </style>

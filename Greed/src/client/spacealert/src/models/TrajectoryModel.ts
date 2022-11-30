@@ -1,7 +1,7 @@
-export default class ThreatCardModel {
-    type: string;
+export default class TrajectoryModel {
+    name: string;
 
-    constructor(type: string) {
-        this.type = type;
+    constructor(name: string) {
+        this.name = name;
     }
 }

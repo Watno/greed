@@ -39,6 +39,10 @@ public class Game implements Runnable {
 
         new PlanningPhase(players, androids, trajectories, internalTrajectory).run(eventSequence);
         var boardState = new BoardState(Stream.concat(players.values().stream(), androids.stream()).collect(Collectors.toList()), trajectories, internalTrajectory);
-        eventSequence.toMissionStepSequence().execute(boardState);
+        var result = eventSequence.toMissionStepSequence().execute(boardState);
+
+        for (var decisionMaker : players.keySet()) {
+            decisionMaker.sendResult(new GameResult(result, boardState));
+        }
     }
 }

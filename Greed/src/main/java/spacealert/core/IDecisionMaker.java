@@ -10,4 +10,6 @@ public interface IDecisionMaker {
     void sendGameState(GameStateWithPrivateInfo gameState);
 
     void sendNotification(Notification notification);
+
+    void sendResult(GameResult result);
 }

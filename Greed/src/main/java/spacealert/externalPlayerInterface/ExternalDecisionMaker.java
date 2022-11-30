@@ -3,6 +3,7 @@ package spacealert.externalPlayerInterface;
 import com.fasterxml.jackson.core.type.TypeReference;
 import server.games.DisconnectedException;
 import server.games.IUserFromGamePerspective;
+import spacealert.core.GameResult;
 import spacealert.core.IDecisionMaker;
 import spacealert.core.gamestates.GameStateWithPrivateInfo;
 import spacealert.core.planningPhase.IPlanningPhaseExposedToDecisionMaker;
@@ -29,6 +30,11 @@ public class ExternalDecisionMaker implements IDecisionMaker {
     @Override
     public void sendNotification(Notification notification) {
         user.send(notification);
+    }
+
+    @Override
+    public void sendResult(GameResult result) {
+        user.send(result);
     }
 
     private void makeDecisionsForPlanningPhase(IPlanningPhaseExposedToDecisionMaker planningPhase) {

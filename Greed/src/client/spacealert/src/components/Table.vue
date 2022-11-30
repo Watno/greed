@@ -55,5 +55,6 @@ export default defineComponent({
 div{
     display: flex;
 	margin: auto;
+	gap: 1em;
 }
 </style>

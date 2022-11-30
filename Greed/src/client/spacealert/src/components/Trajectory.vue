@@ -1,13 +1,12 @@
 <template>
   <div class="trajectoryContainer">
-    <span>{{zone? "ZONE "+ zone: "INTERNAL"}}</span>
     <img :src="imagePath" />
+    <span>{{zone? zone: "INTERNAL"}}</span>
   </div>
 </template>
 
 <script lang="ts">
 import TrajectoryModel from "@/models/TrajectoryModel";
-import { ZoneModel } from "@/models/ZoneModel";
 import {defineComponent, computed} from "vue";
 
 export default defineComponent({
@@ -17,7 +16,7 @@ export default defineComponent({
       required: true
     },
     zone:{
-      type: ZoneModel,
+      required: false
     }
   },
   setup(props) {
@@ -36,7 +35,11 @@ export default defineComponent({
 }
 
 img{
-  height: 10em;
+  height: 25em;
   width: auto;
+}
+
+span{
+  text-align: center;
 }
 </style>

@@ -1,7 +1,5 @@
-export enum ColorModel {
+export enum ZoneModel {
   RED = "RED",
-  BLUE = "BLUE",
-  GREEN = "GREEN",
-  YELLOW = "YELLOW",
-  PURPLE = "PURPLE"
+  WHITE = "WHITE",
+  BLUE = "BLUE"
 }
